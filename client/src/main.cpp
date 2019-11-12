@@ -3,23 +3,13 @@
 //
 
 #include <iostream>
-#include <SFML/Graphics.hpp>
-using namespace std;
+#include "client/src/core/WindowManager/WindowManager.hpp"
 
 int main(int argc, char* argv[]) {
 
-  // Code adapted from the SFML 2 "Window" example.
+    auto game = new RType::WindowManager("test Window");
 
-  cout << "Version " << 1 << "." << 0 << endl;
-
-  sf::Window App(sf::VideoMode(800, 600), "myproject");
-
-  while (App.isOpen()) {
-    sf::Event Event;
-    while (App.pollEvent(Event)) {
-      if (Event.type == sf::Event::Closed)
-	App.close();
-    }
-    App.display();
-  }
+    game->init();
+    int exitStatus = game->run();
+    return exitStatus;
 }

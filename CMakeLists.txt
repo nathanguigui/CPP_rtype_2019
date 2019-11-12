@@ -18,9 +18,11 @@ include_directories(
 
 set(CLIENT_SRC
         client/src/main.cpp
-        )
+        client/src/core/WindowManager/WindowManager.cpp client/src/core/WindowManager/WindowManager.hpp client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp client/src/core/CoreObject/CoreObject.cpp client/src/core/CoreObject/CoreObject.hpp)
 
-set(CLIENT_HEADERS)
+set(CLIENT_HEADERS
+        client/includes/core/game/game.hpp
+        )
 
 include_directories("${PROJECT_BINARY_DIR}")
 
