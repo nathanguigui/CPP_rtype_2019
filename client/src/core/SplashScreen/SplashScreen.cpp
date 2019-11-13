@@ -23,7 +23,6 @@ void RType::SplashScreen::run() {
     }
     if (this->_clock->getElapsedTime().asSeconds() < 3) {
         this->_currentFrame += 1;
-        _app->clear();
         _app->draw(_splash);
     }
 }
