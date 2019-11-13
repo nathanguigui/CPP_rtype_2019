@@ -15,12 +15,14 @@ namespace RType {
         void run();
         ~SplashScreen();
 
+
     private:
+        sf::Sprite _splash;
+        sf::Texture *_currentTexture;
         sf::RenderWindow *_app;
         bool _done;
         int _currentFrame;
         int _lastFrame;
-        sf::Texture *_currentTexture;
         WindowState *_windowState;
     };
 }

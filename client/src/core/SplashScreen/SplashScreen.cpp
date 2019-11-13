@@ -10,6 +10,7 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app): _app(app) {
     this->_lastFrame = 300;
     this->_currentFrame = 0;
     this->_done = false;
+    this->_splash.setTexture(*this->_currentTexture);
 }
 
 void RType::SplashScreen::run() {
@@ -17,6 +18,8 @@ void RType::SplashScreen::run() {
         this->_done = true;
     if (!this->_done) {
         this->_currentFrame += 1;
+        _app->clear();
+        _app->draw(_splash);
     }
 }
 
