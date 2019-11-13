@@ -10,6 +10,8 @@ namespace RType {
     using namespace RType;
 
     enum WindowMode {
+        UNDEFINED,
+        IN_LAUNCH,
         IN_MENU,
         IN_GAME
     };
@@ -17,6 +19,8 @@ namespace RType {
     class WindowState {
     public:
         explicit WindowState(sf::RenderWindow *app);
+
+        void initState();
 
         virtual ~WindowState();
 
@@ -28,7 +32,7 @@ namespace RType {
 
         void setFirstLoadDone(bool firstLoadDone);
 
-        bool isLoading1() const;
+        bool isLoading() const;
 
         void setIsLoading(bool isLoading);
 

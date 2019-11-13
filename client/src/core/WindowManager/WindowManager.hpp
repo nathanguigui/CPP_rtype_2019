@@ -25,6 +25,10 @@ namespace RType {
 
     private:
         void gameLoop();
+        void display();
+        void displayInLaunch();
+        void displayInMenu();
+        void displayInGame();
         const std::string &_name;
         sf::RenderWindow *_app{};
         WindowState *_state{};
