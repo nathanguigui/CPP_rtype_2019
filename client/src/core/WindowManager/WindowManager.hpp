@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "client/src/core/core.hpp"
 #include "client/src/core/Event/Event.hpp"
+#include "client/src/core/WindowState/WindowState.hpp"
 
 namespace RType {
     using namespace RType;
@@ -18,9 +19,11 @@ namespace RType {
         ~WindowManager();
 
     private:
-        sf::Window *_app;
+        void gameLoop();
         const std::string &_name;
-        Event *_eventManager;
+        sf::Window *_app{};
+        WindowState *_state{};
+        Event *_eventManager{};
     };
 }
 

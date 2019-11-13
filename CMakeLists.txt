@@ -44,7 +44,12 @@ include_directories(
 
 set(CLIENT_SRC
         client/src/main.cpp
-        client/src/core/WindowManager/WindowManager.cpp client/src/core/WindowManager/WindowManager.hpp client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp client/src/core/CoreObject/CoreObject.cpp client/src/core/CoreObject/CoreObject.hpp)
+        client/src/core/WindowManager/WindowManager.cpp
+        client/src/core/WindowManager/WindowManager.hpp
+        client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
+        client/src/core/SplashScreen/SplashScreen.cpp
+        client/src/core/SplashScreen/SplashScreen.hpp
+        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp)
 
 set(CLIENT_HEADERS
         client/includes/core/game/game.hpp
