@@ -14,11 +14,14 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
 }
 
 void RType::SplashScreen::run() {
-    if (this->_currentFrame == this->_lastFrame || this->_clock.getElapsedTime().asSeconds() == 3)
+    if (this->_currentFrame == 0) {
+        this->_clock = new sf::Clock();
+    } if (this->_clock->getElapsedTime().asSeconds() > 3) {
         this->_done = true;
         this->_windowState->setSplashDone(true);
         this->_windowState->setIsLoading(true);
-    if (!this->_done || this->_clock.getElapsedTime().asSeconds() < 3) {
+    }
+    if (this->_clock->getElapsedTime().asSeconds() < 3) {
         this->_currentFrame += 1;
         _app->clear();
         _app->draw(_splash);
