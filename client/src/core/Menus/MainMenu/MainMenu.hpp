@@ -20,6 +20,7 @@ namespace RType {
         void handleUp() override;
         void handleDown() override;
         void handleEnter() override;
+        void draw();
 
     private:
         sf::RenderWindow *_app;

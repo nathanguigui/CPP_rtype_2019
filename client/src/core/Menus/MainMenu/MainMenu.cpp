@@ -34,3 +34,6 @@ void RType::MainMenu::handleDown() {
 void RType::MainMenu::handleEnter() {
 
 }
+
+void RType::MainMenu::draw() {
+}
