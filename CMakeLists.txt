@@ -62,7 +62,7 @@ target_link_libraries(rtype_client ${CONAN_LIBS})
 
 
 set(SERVER_SRC
-        server/src/main.cpp server/src/main.cpp)
+        server/src/main.cpp server/src/main.cpp server/src/Server.cpp server/src/Server.h server/src/ServerManager.cpp server/src/ServerManager.h)
 set (SERVER_HEADERS
         server/src/main.hpp)
 add_executable(rtype_server ${SERVER_SRC})
