@@ -59,3 +59,11 @@ include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable(rtype_client ${CLIENT_SRC})
 target_link_libraries(rtype_client ${CONAN_LIBS})
+
+
+set(SERVER_SRC
+        server/src/main.cpp server/src/main.cpp)
+set (SERVER_HEADERS
+        server/src/main.hpp)
+add_executable(rtype_server ${SERVER_SRC})
+target_link_libraries(rtype_server ${CONAN_LIBS})
