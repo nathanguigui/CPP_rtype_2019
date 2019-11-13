@@ -13,13 +13,13 @@ namespace RType {
 
     class Event {
     public:
-        Event(WindowManager *parent, sf::Window *app);
+        Event(WindowManager *parent, sf::RenderWindow *app);
         ~Event();
         void manageEvent();
 
     private:
         WindowManager *_parent;
-        sf::Window *_app;
+        sf::RenderWindow *_app;
     };
 }
 

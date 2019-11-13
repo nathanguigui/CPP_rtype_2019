@@ -4,11 +4,19 @@
 
 #ifndef CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #define CPP_RTYPE_2019_SPLASHSCREEN_HPP
+#include <SFML/Graphics.hpp>
 
+namespace RType {
+    class SplashScreen {
+    public:
+        explicit SplashScreen(sf::RenderWindow *app);
+        void run();
+        ~SplashScreen();
 
-class SplashScreen {
-
-};
+    private:
+        sf::RenderWindow *_app;
+    };
+}
 
 
 #endif //CPP_RTYPE_2019_SPLASHSCREEN_HPP

@@ -49,11 +49,8 @@ set(CLIENT_SRC
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
         client/src/core/SplashScreen/SplashScreen.cpp
         client/src/core/SplashScreen/SplashScreen.hpp
-        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp)
+        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp)
 
-set(CLIENT_HEADERS
-        client/includes/core/game/game.hpp
-        )
 
 include_directories("${PROJECT_BINARY_DIR}")
 
