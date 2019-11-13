@@ -11,6 +11,7 @@
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Settings/Settings.hpp"
+#include "client/src/core/SplashScreen/SplashScreen.hpp"
 
 namespace RType {
     using namespace RType;
@@ -29,6 +30,7 @@ namespace RType {
         WindowState *_state{};
         Event *_eventManager{};
         Settings *_settings{};
+        SplashScreen *_splashScreen{};
     };
 }
 

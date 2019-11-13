@@ -5,8 +5,10 @@
 #ifndef CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #define CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #include <SFML/Graphics.hpp>
+#include "client/src/core/WindowState/WindowState.hpp"
 
 namespace RType {
+    using namespace RType;
     class SplashScreen {
     public:
         explicit SplashScreen(sf::RenderWindow *app);
@@ -15,6 +17,11 @@ namespace RType {
 
     private:
         sf::RenderWindow *_app;
+        bool _done;
+        int _currentFrame;
+        int _lastFrame;
+        sf::Texture *_currentTexture;
+        WindowState *_windowState;
     };
 }
 

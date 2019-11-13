@@ -20,6 +20,7 @@ void RType::WindowManager::init() {
     this->_state = new WindowState(this->_app);
     this->_eventManager = new Event(this, this->_app);
     this->_settings = new Settings();
+    this->_splashScreen = new SplashScreen(this->_app);
 }
 
 void RType::WindowManager::gameLoop() {
