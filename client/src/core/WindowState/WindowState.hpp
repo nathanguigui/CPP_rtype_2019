@@ -46,6 +46,7 @@ namespace RType {
         bool firstLoadDone;
         bool loading;
         WindowMode windowMode;
+        bool isRunning;
     };
 }
 

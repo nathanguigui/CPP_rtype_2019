@@ -25,7 +25,7 @@ void RType::WindowManager::init() {
     this->_eventManager = new Event(this, this->_app, this->_state);
     this->_settings = new Settings(this->_state);
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
-    this->_mainMenu = new MainMenu(this->_app);
+    this->_mainMenu = new MainMenu(this->_app, nullptr);
 }
 
 void RType::WindowManager::gameLoop() {

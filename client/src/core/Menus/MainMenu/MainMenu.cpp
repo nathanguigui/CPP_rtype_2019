@@ -4,7 +4,7 @@
 
 #include "MainMenu.hpp"
 
-RType::MainMenu::MainMenu(sf::RenderWindow *app): _app(app) {
+RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state) : _app(app), _state(state) {
     this->_itemStatus = MAIN_MENU_JOIN_GAME;
     this->_backgroundTexture = new sf::Texture();
     this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
@@ -16,6 +16,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app): _app(app) {
     this->_newText = new sf::Text("CREATE A GAME", *this->_font);
     this->_quitText = new sf::Text("QUIT", *this->_font);
     this->initGUI();
+    this->keyReleased = true;
 }
 
 RType::MainMenu::~MainMenu() {
@@ -32,25 +33,54 @@ void RType::MainMenu::handleRight() {
 }
 
 void RType::MainMenu::handleUp() {
-    switch (this->_itemStatus) {
-        case MAIN_MENU_NEW_GAME:
-            break;
-        case MAIN_MENU_JOIN_GAME:
-            break;
-        case MAIN_MENU_QUIT_GAME:
-            break;
+    if (this->keyReleased) {
+        switch (this->_itemStatus) {
+            case MAIN_MENU_NEW_GAME:
+                break;
+            case MAIN_MENU_JOIN_GAME:
+                this->_itemStatus = MAIN_MENU_NEW_GAME;
+                this->updateState();
+                break;
+            case MAIN_MENU_QUIT_GAME:
+                this->_itemStatus = MAIN_MENU_JOIN_GAME;
+                this->updateState();
+                break;
+        }
+        this->keyReleased = false;
     }
-    std::cout << "click up";
 
 }
 
 void RType::MainMenu::handleDown() {
-    std::cout << "click down";
+    if (this->keyReleased) {
+        switch (this->_itemStatus) {
+            case MAIN_MENU_NEW_GAME:
+                this->_itemStatus = MAIN_MENU_JOIN_GAME;
+                this->updateState();
+                break;
+            case MAIN_MENU_JOIN_GAME:
+                this->_itemStatus = MAIN_MENU_QUIT_GAME;
+                this->updateState();
+                break;
+            case MAIN_MENU_QUIT_GAME:
+                break;
+        }
+        this->keyReleased = false;
+    }
 
 }
 
 void RType::MainMenu::handleEnter() {
-
+    if (this->keyReleased) {
+        switch (this->_itemStatus) {
+            case MAIN_MENU_NEW_GAME:
+                break;
+            case MAIN_MENU_JOIN_GAME:
+                break;
+            case MAIN_MENU_QUIT_GAME:
+                exit(0);
+        }
+    }
 }
 
 void RType::MainMenu::draw() {
@@ -82,10 +112,15 @@ void RType::MainMenu::updateState() {
 
 void RType::MainMenu::initGUI() {
     auto screenSize = this->_app->getSize();
+    this->updateState();
     this->_newText->setPosition(centerX(screenSize, this->_newText->getGlobalBounds().width, this->_newText->getPosition()));
     this->_newText->setPosition(linePos(screenSize, this->_newText->getGlobalBounds().height, this->_newText->getPosition(), 3, 1));
     this->_joinText->setPosition(centerX(screenSize, this->_joinText->getGlobalBounds().width, this->_joinText->getPosition()));
     this->_joinText->setPosition(linePos(screenSize, this->_joinText->getGlobalBounds().height, this->_joinText->getPosition(), 3, 2));
     this->_quitText->setPosition(centerX(screenSize, this->_quitText->getGlobalBounds().width, this->_quitText->getPosition()));
     this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 3, 3));
+}
+
+void RType::MainMenu::handleKeyReleased() {
+    this->keyReleased = true;
 }

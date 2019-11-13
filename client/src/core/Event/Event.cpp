@@ -29,6 +29,8 @@ void RType::Event::manageGameEvent(sf::Event &evt) {
 }
 
 void RType::Event::manageMenuEvent(sf::Event &evt) {
+    if (evt.type == sf::Event::EventType::KeyReleased)
+        for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleKeyReleased();
     switch (evt.key.code) {
         case sf::Keyboard::Left :
             for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleLeft();

@@ -14,6 +14,7 @@ namespace RType {
         virtual void handleLeft() = 0;
         virtual void handleRight() = 0;
         virtual void handleEnter() = 0;
+        virtual void handleKeyReleased() = 0;
 
     private:
     };
