@@ -4,7 +4,7 @@
 
 #include "WindowState.hpp"
 
-RType::WindowState::WindowState(sf::Window *app) : _app(app) {}
+RType::WindowState::WindowState(sf::RenderWindow *app) : _app(app) {}
 
 bool RType::WindowState::isSplashDone() const {
     return splashDone;

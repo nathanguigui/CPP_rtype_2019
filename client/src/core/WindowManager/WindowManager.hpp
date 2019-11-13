@@ -5,15 +5,19 @@
 #ifndef CPP_RTYPE_2019_WINDOWMANAGER_HPP
 #define CPP_RTYPE_2019_WINDOWMANAGER_HPP
 #include <SFML/Graphics.hpp>
+
+#include <iostream>
 #include "client/src/core/core.hpp"
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
+#include "client/src/core/Settings/Settings.hpp"
 
 namespace RType {
     using namespace RType;
     class WindowManager {
     public:
         explicit WindowManager(const std::string &name);
+        void processParams(int ac, char **av);
         void init();
         int run();
         ~WindowManager();
@@ -21,9 +25,10 @@ namespace RType {
     private:
         void gameLoop();
         const std::string &_name;
-        sf::Window *_app{};
+        sf::RenderWindow *_app{};
         WindowState *_state{};
         Event *_eventManager{};
+        Settings *_settings{};
     };
 }
 

@@ -16,9 +16,10 @@ int RType::WindowManager::run() {
 
 void RType::WindowManager::init() {
     auto videoMode = sf::VideoMode(800, 600);
-    this->_app = new sf::Window(videoMode, "R-Type");
+    this->_app = new sf::RenderWindow(videoMode, "R-Type");
     this->_state = new WindowState(this->_app);
     this->_eventManager = new Event(this, this->_app);
+    this->_settings = new Settings();
 }
 
 void RType::WindowManager::gameLoop() {
@@ -26,4 +27,9 @@ void RType::WindowManager::gameLoop() {
         _eventManager->manageEvent();
         _app->display();
     }
+}
+
+void RType::WindowManager::processParams(int ac, char **av) {
+    std::cout << "check arg count and type then throw error if need";
+    this->init();
 }

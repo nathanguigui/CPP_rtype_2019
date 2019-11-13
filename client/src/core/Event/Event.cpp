@@ -4,7 +4,7 @@
 
 #include "Event.hpp"
 
-RType::Event::Event(WindowManager *parent, sf::Window *app) : _parent(parent), _app(app) {
+RType::Event::Event(WindowManager *parent, sf::RenderWindow *app) : _parent(parent), _app(app) {
 
 }
 

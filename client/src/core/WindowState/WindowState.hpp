@@ -16,7 +16,7 @@ namespace RType {
 
     class WindowState {
     public:
-        explicit WindowState(sf::Window *app);
+        explicit WindowState(sf::RenderWindow *app);
 
         virtual ~WindowState();
 
@@ -37,7 +37,7 @@ namespace RType {
         void setWindowMode(WindowMode windowMode);
 
     private:
-        sf::Window *_app;
+        sf::RenderWindow *_app;
         bool splashDone;
         bool firstLoadDone;
         bool loading;

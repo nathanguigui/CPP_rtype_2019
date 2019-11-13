@@ -9,7 +9,7 @@ int main(int argc, char* argv[]) {
 
     auto game = new RType::WindowManager("test Window");
 
-    game->init();
+    game->processParams(argc, argv);
     int exitStatus = game->run();
     return exitStatus;
 }
