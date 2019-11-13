@@ -6,11 +6,13 @@
 #define CPP_RTYPE_2019_SETTINGS_HPP
 
 #include <string>
+#include "client/src/core/WindowState/WindowState.hpp"
 
 namespace RType {
+    using namespace RType;
     class Settings {
     public:
-        Settings();
+        Settings(WindowState *state);
         virtual ~Settings();
 
         int getServerPort() const;
@@ -24,6 +26,7 @@ namespace RType {
     private:
         int serverPort{};
         std::string serverIp;
+        WindowState *_windowState;
     };
 }
 

@@ -4,7 +4,7 @@
 
 #include "SplashScreen.hpp"
 
-RType::SplashScreen::SplashScreen(sf::RenderWindow *app): _app(app) {
+RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _app(app), _windowState(state) {
     this->_currentTexture = new sf::Texture();
     this->_currentTexture->loadFromFile("assets/SplashScreen/background.png");
     this->_lastFrame = 300;

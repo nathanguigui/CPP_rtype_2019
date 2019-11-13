@@ -11,7 +11,7 @@ namespace RType {
     using namespace RType;
     class SplashScreen {
     public:
-        explicit SplashScreen(sf::RenderWindow *app);
+        SplashScreen(sf::RenderWindow *app, WindowState *state);
         void run();
         ~SplashScreen();
 
