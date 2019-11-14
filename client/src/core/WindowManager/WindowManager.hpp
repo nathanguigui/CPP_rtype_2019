@@ -13,6 +13,7 @@
 #include "client/src/core/Settings/Settings.hpp"
 #include "client/src/core/SplashScreen/SplashScreen.hpp"
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
+#include "client/src/core/SceneManager/SceneManager.hpp"
 
 namespace RType {
     using namespace RType;
@@ -37,6 +38,7 @@ namespace RType {
         Settings *_settings{};
         SplashScreen *_splashScreen{};
         MainMenu *_mainMenu{};
+        SceneManager *_sceneManager{};
     };
 }
 

@@ -10,6 +10,7 @@ namespace RType {
     class SceneObject {
     public:
         virtual void draw() = 0;
+        virtual void destroy() = 0;
     };
 }
 
