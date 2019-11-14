@@ -7,12 +7,13 @@
 #include <SFML/Graphics.hpp>
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
+#include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
     using namespace RType;
     class WindowManager;
 
-    class Event {
+    class Event: public CoreObject {
     public:
         Event(WindowManager *parent, sf::RenderWindow *app, WindowState *state);
         void addEventableObject(EventableObject *eventableObject);

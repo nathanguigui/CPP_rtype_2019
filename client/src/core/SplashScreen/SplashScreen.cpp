@@ -6,11 +6,12 @@
 
 RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _app(app), _windowState(state) {
     this->_currentTexture = new sf::Texture();
-    this->_currentTexture->loadFromFile("assets/SplashScreen/background.png");
+    this->_currentTexture->loadFromFile("assets/SplashScreen/background.jpg");
     this->_lastFrame = 100000;
     this->_currentFrame = 0;
     this->_done = false;
     this->_splash.setTexture(*this->_currentTexture);
+    this->_splash.setScale(2, 1);
 }
 
 void RType::SplashScreen::run() {

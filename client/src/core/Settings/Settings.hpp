@@ -7,10 +7,11 @@
 
 #include <string>
 #include "client/src/core/WindowState/WindowState.hpp"
+#include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
     using namespace RType;
-    class Settings {
+    class Settings: public CoreObject {
     public:
         Settings(WindowState *state);
         virtual ~Settings();

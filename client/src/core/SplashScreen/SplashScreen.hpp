@@ -6,10 +6,11 @@
 #define CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #include <SFML/Graphics.hpp>
 #include "client/src/core/WindowState/WindowState.hpp"
+#include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
     using namespace RType;
-    class SplashScreen {
+    class SplashScreen: public CoreObject {
     public:
         SplashScreen(sf::RenderWindow *app, WindowState *state);
         void run();

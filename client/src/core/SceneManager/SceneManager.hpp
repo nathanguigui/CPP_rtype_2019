@@ -9,10 +9,11 @@
 #include <SFML/Graphics.hpp>
 #include "client/src/core/Scene/Scene.hpp"
 #include "client/src/core/Event/Event.hpp"
+#include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
     using namespace RType;
-    class SceneManager {
+    class SceneManager: public CoreObject {
     public:
         SceneManager(sf::RenderWindow *app, Event *eventManager);
 

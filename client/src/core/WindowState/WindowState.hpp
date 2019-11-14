@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_2019_WINDOWSTATE_HPP
 #define CPP_RTYPE_2019_WINDOWSTATE_HPP
 #include <SFML/Graphics.hpp>
+#include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
     using namespace RType;
@@ -16,7 +17,7 @@ namespace RType {
         IN_GAME
     };
 
-    class WindowState {
+    class WindowState: public CoreObject {
     public:
         explicit WindowState(sf::RenderWindow *app);
 
