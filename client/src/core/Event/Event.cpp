@@ -2,6 +2,7 @@
 // Created by guigui on 11/12/19.
 //
 
+#include <iostream>
 #include "Event.hpp"
 
 RType::Event::Event(WindowManager *parent, sf::RenderWindow *app, WindowState *state) : _parent(parent), _app(app), _windowState(state) {
@@ -25,10 +26,22 @@ void RType::Event::manageEvent() {
 }
 
 void RType::Event::manageGameEvent(sf::Event &evt) {
-
+    this->manageDefaultEvent(evt);
 }
 
 void RType::Event::manageMenuEvent(sf::Event &evt) {
+    this->manageDefaultEvent(evt);
+}
+
+void RType::Event::addEventableObject(RType::EventableObject *eventableObject) {
+    this->_eventableObjects.push_back(eventableObject);
+}
+
+void RType::Event::clearEventableObject() {
+    this->_eventableObjects.clear();
+}
+
+void RType::Event::manageDefaultEvent(sf::Event &evt) {
     if (evt.type == sf::Event::EventType::KeyReleased)
         for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleKeyReleased();
     switch (evt.key.code) {
@@ -48,12 +61,4 @@ void RType::Event::manageMenuEvent(sf::Event &evt) {
             for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleEnter();
             break;
     }
-}
-
-void RType::Event::addEventableObject(RType::EventableObject *eventableObject) {
-    this->_eventableObjects.push_back(eventableObject);
-}
-
-void RType::Event::clearEventableObject() {
-    this->_eventableObjects.clear();
 }

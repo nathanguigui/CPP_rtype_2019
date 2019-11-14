@@ -24,12 +24,9 @@ RType::MainMenu::~MainMenu() {
 }
 
 void RType::MainMenu::handleLeft() {
-    std::cout << "click left";
 }
 
 void RType::MainMenu::handleRight() {
-    std::cout << "click right";
-
 }
 
 void RType::MainMenu::handleUp() {

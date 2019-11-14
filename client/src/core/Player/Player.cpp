@@ -9,24 +9,27 @@ RType::Player::Player(sf::RenderWindow *app, RType::Player::SkinColours color) :
     this->_texture = new sf::Texture();
     this->_texture->loadFromFile("assets/Player/texture.gif");
     this->_sprite = new sf::Sprite(*this->_texture, Player::getSkinRect(PLAYER_PINK, PLAYER_NORMAL));
+    this->_sprite->scale(3, 3);
 }
 
 RType::Player::~Player() = default;
 
 void RType::Player::handleLeft() {
-
+    this->_sprite->move(-20, 0);
 }
 
 void RType::Player::handleRight() {
-
+    this->_sprite->move(20, 0);
 }
 
 void RType::Player::handleUp() {
-
+    this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_UP));
+    this->_sprite->move(0, -20);
 }
 
 void RType::Player::handleDown() {
-
+    this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_DOWN));
+    this->_sprite->move(0, 20);
 }
 
 void RType::Player::handleEnter() {
@@ -34,7 +37,7 @@ void RType::Player::handleEnter() {
 }
 
 void RType::Player::handleKeyReleased() {
-
+    this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_NORMAL));
 }
 
 void RType::Player::destroy() {

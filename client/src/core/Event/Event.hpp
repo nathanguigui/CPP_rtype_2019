@@ -21,6 +21,7 @@ namespace RType {
         void manageEvent();
 
     private:
+        void manageDefaultEvent(sf::Event &evt);
         void manageGameEvent(sf::Event &evt);
         void manageMenuEvent(sf::Event &evt);
         WindowManager *_parent;

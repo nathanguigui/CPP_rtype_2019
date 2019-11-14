@@ -37,6 +37,7 @@ void RType::WindowManager::init() {
 
 void RType::WindowManager::gameLoop() {
     while (_app->isOpen()) {
+        this->_app->clear();
         _eventManager->manageEvent();
         this->display();
     }
