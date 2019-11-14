@@ -11,6 +11,8 @@
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Settings/Settings.hpp"
+#include "client/src/core/SplashScreen/SplashScreen.hpp"
+#include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 
 namespace RType {
     using namespace RType;
@@ -24,11 +26,17 @@ namespace RType {
 
     private:
         void gameLoop();
+        void display();
+        void displayInLaunch();
+        void displayInMenu();
+        void displayInGame();
         const std::string &_name;
         sf::RenderWindow *_app{};
         WindowState *_state{};
         Event *_eventManager{};
         Settings *_settings{};
+        SplashScreen *_splashScreen{};
+        MainMenu *_mainMenu{};
     };
 }
 

@@ -22,7 +22,7 @@ void RType::WindowState::setFirstLoadDone(bool firstLoadDone) {
     WindowState::firstLoadDone = firstLoadDone;
 }
 
-bool RType::WindowState::isLoading1() const {
+bool RType::WindowState::isLoading() const {
     return loading;
 }
 
@@ -36,6 +36,13 @@ RType::WindowMode RType::WindowState::getWindowMode() const {
 
 void RType::WindowState::setWindowMode(RType::WindowMode windowMode) {
     WindowState::windowMode = windowMode;
+}
+
+void RType::WindowState::initState() {
+    this->splashDone = false;
+    this->firstLoadDone = false;
+    this->loading = false;
+    this->windowMode = IN_LAUNCH;
 }
 
 RType::WindowState::~WindowState() = default;

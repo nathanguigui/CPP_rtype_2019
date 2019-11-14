@@ -4,7 +4,9 @@
 
 #include "Settings.hpp"
 
-RType::Settings::Settings() = default;
+RType::Settings::Settings(WindowState *state): _windowState(state) {
+
+}
 
 RType::Settings::~Settings() = default;
 

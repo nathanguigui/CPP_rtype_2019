@@ -9,6 +9,8 @@ INCLUDE_DIRECTORIES(${CONAN_INCLUDE_DIRS})
 include(${CMAKE_SOURCE_DIR}/build/conanbuildinfo.cmake)
 INCLUDE_DIRECTORIES(${CONAN_INCLUDE_DIRS})
 
+file(COPY client/src/assets DESTINATION ${CMAKE_BINARY_DIR}/bin)
+
 if ( MSVC )
     string(REPLACE "/MD" "/MT" CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG}")
     set(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG})
@@ -49,7 +51,7 @@ set(CLIENT_SRC
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
         client/src/core/SplashScreen/SplashScreen.cpp
         client/src/core/SplashScreen/SplashScreen.hpp
-        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp)
+        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp client/src/core/EventableObject/EventableObject.hpp client/src/core/Menus/MainMenu/MainMenu.cpp client/src/core/Menus/MainMenu/MainMenu.hpp client/src/core/Scene/Scene.cpp client/src/core/Scene/Scene.hpp client/src/core/SceneObject/SceneObject.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")
