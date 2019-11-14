@@ -11,14 +11,6 @@
 namespace RType {
     class EventableSceneObject: public SceneObject, public EventableObject {
     public:
-        EventableSceneObject();
-        ~EventableSceneObject();
-        void handleLeft() override;
-        void handleRight() override;
-        void handleUp() override;
-        void handleDown() override;
-        void handleEnter() override;
-        void handleKeyReleased() override;
     };
 }
 

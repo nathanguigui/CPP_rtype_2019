@@ -74,6 +74,7 @@ void RType::MainMenu::handleEnter() {
     if (this->keyReleased) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
+                this->_state->setWindowMode(IN_GAME);
                 break;
             case MAIN_MENU_JOIN_GAME:
                 break;

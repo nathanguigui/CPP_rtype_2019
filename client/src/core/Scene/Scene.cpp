@@ -11,12 +11,12 @@ RType::Scene::Scene(sf::RenderWindow *app): _app(app) {
 RType::Scene::~Scene() = default;
 
 void RType::Scene::draw() {
-    for (auto & _object : this->_objects)
+    for (auto & _object : this->_sceneObjects)
         _object->draw();
 }
 
 void RType::Scene::addSceneObject(SceneObject *object) {
-    this->_objects.push_back(object);
+    this->_sceneObjects.push_back(object);
 }
 
 void RType::Scene::handleLeft() {
@@ -49,5 +49,13 @@ void RType::Scene::addEventableSceneObject(RType::EventableSceneObject *eventabl
 
 void RType::Scene::destroy() {
     for (auto & _eventableObject : this->_eventableObjects) _eventableObject->destroy();
-    for (auto & _object : this->_objects) _object->destroy();
+    for (auto & _object : this->_sceneObjects) _object->destroy();
+}
+
+void RType::Scene::addPlayer(RType::Player::SkinColours skinColours) {
+    if (this->_player)
+        return;
+    this->_player = new Player(this->_app, skinColours);
+    this->addEventableSceneObject((EventableSceneObject*)this->_player);
+    this->addSceneObject((SceneObject*)this->_player);
 }

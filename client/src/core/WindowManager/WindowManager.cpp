@@ -27,6 +27,12 @@ void RType::WindowManager::init() {
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_mainMenu = new MainMenu(this->_app, this->_state);
     this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
+
+    //network need
+    auto scene1 = new Scene(this->_app);
+    scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
+    auto sceneName = new std::string("scene1");
+    this->_sceneManager->addSetCurrentScene(sceneName, scene1, true);
 }
 
 void RType::WindowManager::gameLoop() {
@@ -74,5 +80,5 @@ void RType::WindowManager::displayInMenu() {
 }
 
 void RType::WindowManager::displayInGame() {
-
+    this->_sceneManager->drawCurrentScene();
 }

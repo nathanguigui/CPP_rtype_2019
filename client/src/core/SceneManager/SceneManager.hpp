@@ -20,6 +20,8 @@ namespace RType {
 
         virtual ~SceneManager();
 
+        void drawCurrentScene();
+
         void addSetCurrentScene(std::string *currentScene, Scene *scene, bool thiefEvent);
 
     private:

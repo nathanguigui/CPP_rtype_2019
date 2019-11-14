@@ -24,3 +24,7 @@ void RType::SceneManager::addSetCurrentScene(std::string *currentScene, Scene *s
 RType::SceneManager::~SceneManager() {
 
 }
+
+void RType::SceneManager::drawCurrentScene() {
+    this->_scenes[*this->_currentScene]->draw();
+}
