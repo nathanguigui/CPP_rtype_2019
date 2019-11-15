@@ -27,6 +27,7 @@ void RType::WindowManager::init() {
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_mainMenu = new MainMenu(this->_app, this->_state, nullptr);
     this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
+    this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
 
     //network need
     auto scene1 = new Scene(this->_app);
@@ -70,10 +71,11 @@ void RType::WindowManager::displayInLaunch() {
     if (!this->_state->isSplashDone())
         this->_splashScreen->run();
     else if (this->_state->isLoading()) {
-        std::cout << "put loading screen here";
-        this->_state->setWindowMode(IN_MENU);
+        if (!_loadingScreen->isLaunched())
+            this->_loadingScreen->launch();
+        else
+            this->_loadingScreen->check();
     }
-        //this._loading.run();
 }
 
 void RType::WindowManager::displayInMenu() {

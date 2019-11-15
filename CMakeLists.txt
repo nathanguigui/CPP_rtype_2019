@@ -76,7 +76,18 @@ set(CLIENT_SRC
         client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.cpp
         client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp
         client/src/core/PowerManager/PowerManager.cpp
-        client/src/core/PowerManager/PowerManager.hpp client/src/core/Power/PowerEnum.hpp client/src/core/Scene/IScene.hpp client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h)
+        client/src/core/PowerManager/PowerManager.hpp
+        client/src/core/Power/PowerEnum.hpp
+        client/src/core/Scene/IScene.hpp
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
+        client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp
+        client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h
+        client/src/core/PowerManager/PowerManager.hpp
+        client/src/core/Power/PowerEnum.hpp
+        client/src/core/Scene/IScene.hpp
+        client/src/core/Loading/Loading.cpp
+        client/src/core/Loading/Loading.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")
