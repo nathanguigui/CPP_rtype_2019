@@ -24,7 +24,10 @@ namespace RType {
         void addPowerUp(PowerUp *powerUp);
 
         /// Start Telling to shoot
-        void initiateShoot(const sf::Vector2f &shootFrom);
+        void initiateShoot();
+
+        /// Shoot witch charged clock
+        void handleKeyReleased(const sf::Vector2f &shootFrom);
 
     private:
 
@@ -35,6 +38,8 @@ namespace RType {
         std::vector<PowerUp*> _powerUps;
         PowerEnum::PowerDirection _direction;
         IScene *_parentScene;
+        sf::Clock *_shootRateClock;
+        bool _chargingShoot = false;
     };
 }
 

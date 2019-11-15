@@ -44,21 +44,23 @@ void RType::Event::clearEventableObject() {
 void RType::Event::manageDefaultEvent(sf::Event &evt) {
     if (evt.type == sf::Event::EventType::KeyReleased)
         for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleKeyReleased();
-    switch (evt.key.code) {
-        case sf::Keyboard::Left :
-            for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleLeft();
-            break;
-        case sf::Keyboard::Right :
-            for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleRight();
-            break;
-        case sf::Keyboard::Up :
-            for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleUp();
-            break;
-        case sf::Keyboard::Down :
-            for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleDown();
-            break;
-        case sf::Keyboard::Enter :
-            for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleEnter();
-            break;
+    if (evt.type == sf::Event::KeyPressed) {
+        switch (evt.key.code) {
+            case sf::Keyboard::Left :
+                for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleLeft();
+                break;
+            case sf::Keyboard::Right :
+                for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleRight();
+                break;
+            case sf::Keyboard::Up :
+                for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleUp();
+                break;
+            case sf::Keyboard::Down :
+                for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleDown();
+                break;
+            case sf::Keyboard::Enter :
+                for (auto & _eventableObject : this->_eventableObjects) _eventableObject->handleEnter();
+                break;
+        }
     }
 }

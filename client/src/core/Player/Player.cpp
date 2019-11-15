@@ -44,10 +44,11 @@ void RType::Player::handleDown() {
 
 void RType::Player::handleEnter() {
     std::cout << "shoot initiated";
-    this->_powerManager->initiateShoot(this->_sprite->getPosition());
+    this->_powerManager->initiateShoot();
 }
 
 void RType::Player::handleKeyReleased() {
+    this->_powerManager->handleKeyReleased(this->_sprite->getPosition());
     this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_NORMAL));
 }
 
