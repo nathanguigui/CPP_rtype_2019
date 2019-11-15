@@ -14,6 +14,7 @@
 #include "client/src/core/SplashScreen/SplashScreen.hpp"
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/SceneManager/SceneManager.hpp"
+#include "client/src/core/Loading/Loading.hpp"
 
 namespace RType {
     using namespace RType;
@@ -39,6 +40,7 @@ namespace RType {
         SplashScreen *_splashScreen{};
         MainMenu *_mainMenu{};
         SceneManager *_sceneManager{};
+        Loading *_loadingScreen;
     };
 }
 
