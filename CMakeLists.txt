@@ -49,6 +49,8 @@ set(CLIENT_SRC
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
         client/src/core/SplashScreen/SplashScreen.cpp
         client/src/core/SplashScreen/SplashScreen.hpp
+        client/src/core/Logger/Logger.cpp
+        client/src/core/Logger/Logger.h
         client/src/core/WindowState/WindowState.cpp
         client/src/core/WindowState/WindowState.hpp
         client/src/core/Settings/Settings.cpp
