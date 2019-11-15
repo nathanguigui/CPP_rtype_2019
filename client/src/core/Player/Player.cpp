@@ -10,7 +10,14 @@ RType::Player::Player(sf::RenderWindow *app, RType::Player::SkinColours color) :
     this->_texture->loadFromFile("assets/Player/texture.gif");
     this->_sprite = new sf::Sprite(*this->_texture, Player::getSkinRect(PLAYER_PINK, PLAYER_NORMAL));
     this->_sprite->scale(3, 3);
+    this->initPlayer();
 }
+
+void RType::Player::initPlayer() {
+    this->_powerManager = new PowerManager(this->_app, PowerEnum::PowerDirection::RIGHT);
+    auto defaultPower = new DefaultPowerUp(this->_app);
+}
+
 
 RType::Player::~Player() = default;
 

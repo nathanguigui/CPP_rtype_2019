@@ -10,4 +10,9 @@ enum {
     RTYPE_defaultError = 84,
 };
 
+namespace {
+    const double NETWORK_TICK_SEC = 1.0;
+    const double GRAPHICAL_TICK_SEC = 0.25;
+}
+
 #endif //CPP_RTYPE_2019_CORE_HPP

@@ -7,6 +7,8 @@
 
 #include <SFML/Graphics.hpp>
 #include "client/src/core/EventableSceneObject/EventableSceneObject.hpp"
+#include "client/src/core/PowerManager/PowerManager.hpp"
+#include "client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp"
 
 namespace RType{
     using namespace RType;
@@ -30,6 +32,8 @@ namespace RType{
         };
         explicit Player(sf::RenderWindow *app, RType::Player::SkinColours color);
         virtual ~Player();
+
+
         void handleLeft() override;
         void handleRight() override;
         void handleUp() override;
@@ -42,6 +46,7 @@ namespace RType{
         sf::Vector2f getPosition() override;
 
     private:
+        void initPlayer();
         enum SkinSize {
             HEIGHT = 17,
             WIDTH = 33
@@ -53,6 +58,7 @@ namespace RType{
         sf::Sprite *_sprite;
         sf::Texture *_texture;
         SkinColours _color;
+        PowerManager *_powerManager{};
     };
 }
 
