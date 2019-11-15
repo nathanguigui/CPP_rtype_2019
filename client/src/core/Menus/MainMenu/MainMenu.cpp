@@ -11,7 +11,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, Event *even
     this->_backgroundSprite = new sf::Sprite();
     this->_backgroundSprite->setTexture(*this->_backgroundTexture);
     this->_font = new sf::Font();
-    this->_font->loadFromFile("assets/fonts/default.ttf");
+    this->_font->loadFromFile("assets/fonts/ka.ttf");
     this->_joinText = new sf::Text("JOIN GAME", *this->_font);
     this->_newText = new sf::Text("CREATE A GAME", *this->_font);
     this->_quitText = new sf::Text("QUIT", *this->_font);

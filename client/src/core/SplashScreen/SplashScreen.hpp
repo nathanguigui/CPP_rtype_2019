@@ -18,9 +18,13 @@ namespace RType {
 
 
     private:
-        sf::Sprite _splash;
-        sf::Texture *_currentTexture;
+        sf::Sprite *_splash;
+        sf::Sprite *_background;
+        sf::IntRect *_rectSourceSprite;
+        sf::Texture *_splashTexture;
+        sf::Texture *_backgroundTexture;
         sf::Clock *_clock;
+        sf::Clock *_splashClock;
         sf::RenderWindow *_app;
         bool _done;
         int _currentFrame;
