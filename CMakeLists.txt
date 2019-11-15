@@ -49,7 +49,7 @@ set(CLIENT_SRC
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
         client/src/core/SplashScreen/SplashScreen.cpp
         client/src/core/SplashScreen/SplashScreen.hpp
-        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp client/src/core/EventableObject/EventableObject.hpp client/src/core/Menus/MainMenu/MainMenu.cpp client/src/core/Menus/MainMenu/MainMenu.hpp client/src/core/Scene/Scene.cpp client/src/core/Scene/Scene.hpp client/src/core/SceneObject/SceneObject.hpp client/src/core/Gui/Tools.cpp client/src/core/Gui/Tools.hpp client/src/core/EventableSceneObject/EventableSceneObject.cpp client/src/core/EventableSceneObject/EventableSceneObject.hpp client/src/core/SceneManager/SceneManager.cpp client/src/core/SceneManager/SceneManager.hpp)
+        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp client/src/core/EventableObject/EventableObject.hpp client/src/core/Menus/MainMenu/MainMenu.cpp client/src/core/Menus/MainMenu/MainMenu.hpp client/src/core/Scene/Scene.cpp client/src/core/Scene/Scene.hpp client/src/core/SceneObject/SceneObject.hpp client/src/core/Gui/Tools.cpp client/src/core/Gui/Tools.hpp client/src/core/EventableSceneObject/EventableSceneObject.cpp client/src/core/EventableSceneObject/EventableSceneObject.hpp client/src/core/SceneManager/SceneManager.cpp client/src/core/SceneManager/SceneManager.hpp client/src/core/Logger/Logger.cpp client/src/core/Logger/Logger.h)
 
 
 include_directories("${PROJECT_BINARY_DIR}")
