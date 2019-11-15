@@ -32,13 +32,13 @@ void RType::SplashScreen::run() {
         this->_splashClock = new sf::Clock();
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() > 20) {
+    if (this->_clock->getElapsedTime().asSeconds() > 5) {
         this->_done = true;
         this->_windowState->setSplashDone(true);
         this->_windowState->setIsLoading(true);
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() < 20) {
+    if (this->_clock->getElapsedTime().asSeconds() < 5) {
         if (this->_splashClock->getElapsedTime().asSeconds() > 0.1f) {
 
             if (this->_rectSourceSprite->left == 1920 && this->_rectSourceSprite->top == 0) {
