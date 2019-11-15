@@ -5,10 +5,21 @@
 #ifndef CPP_RTYPE_2019_SIMPLEKILL_H
 #define CPP_RTYPE_2019_SIMPLEKILL_H
 
+#include <SFML/Graphics.hpp>
 
-class SimpleKill {
+namespace RType {
+    using namespace RType;
+    class SimpleKill {
+    public:
+        SimpleKill();
+        ~SimpleKill();
+        sf::IntRect run(int);
 
-};
+    private:
+        sf::IntRect *_rectSourceSprite;
+        sf::Texture *_killTexture;
+    };
+}
 
 
 #endif //CPP_RTYPE_2019_SIMPLEKILL_H

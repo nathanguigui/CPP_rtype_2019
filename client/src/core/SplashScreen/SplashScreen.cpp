@@ -11,7 +11,7 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_splash = new sf::Sprite();
     this->_background = new sf::Sprite();
     this->_rectSourceSprite = new sf::IntRect(0,0,128,127);
-    this->_splashTexture->loadFromFile("assets/SplashScreen/coin.png");
+    this->_splashTexture->loadFromFile("assets/bullets/r-typesheet1.gif");
     this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
     this->_lastFrame = 100000;
     this->_currentFrame = 0;
