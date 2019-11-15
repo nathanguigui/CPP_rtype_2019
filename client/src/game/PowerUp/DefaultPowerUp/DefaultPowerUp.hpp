@@ -15,10 +15,17 @@ namespace RType {
 
         sf::IntRect &getSkinRect() override;
         sf::Texture *getTexture() override;
+        bool isAnimable() override;
+
+        PowerEnum::PowerSpeed getSpeed() override;
+
+        void setSpeed(PowerEnum::PowerSpeed speed);
 
     private:
         sf::RenderWindow *_app;
         sf::Texture *_texture;
+        bool _animable;
+        PowerEnum::PowerSpeed _speed;
     };
 }
 

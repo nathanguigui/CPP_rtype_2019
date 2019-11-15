@@ -49,7 +49,32 @@ set(CLIENT_SRC
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
         client/src/core/SplashScreen/SplashScreen.cpp
         client/src/core/SplashScreen/SplashScreen.hpp
-        client/src/core/WindowState/WindowState.cpp client/src/core/WindowState/WindowState.hpp client/src/core/Settings/Settings.cpp client/src/core/Settings/Settings.hpp client/src/core/EventableObject/EventableObject.hpp client/src/core/Menus/MainMenu/MainMenu.cpp client/src/core/Menus/MainMenu/MainMenu.hpp client/src/core/Scene/Scene.cpp client/src/core/Scene/Scene.hpp client/src/core/SceneObject/SceneObject.hpp client/src/core/Gui/Tools.cpp client/src/core/Gui/Tools.hpp client/src/core/EventableSceneObject/EventableSceneObject.cpp client/src/core/EventableSceneObject/EventableSceneObject.hpp client/src/core/SceneManager/SceneManager.cpp client/src/core/SceneManager/SceneManager.hpp)
+        client/src/core/WindowState/WindowState.cpp
+        client/src/core/WindowState/WindowState.hpp
+        client/src/core/Settings/Settings.cpp
+        client/src/core/Settings/Settings.hpp
+        client/src/core/EventableObject/EventableObject.hpp
+        client/src/core/Menus/MainMenu/MainMenu.cpp
+        client/src/core/Menus/MainMenu/MainMenu.hpp
+        client/src/core/Scene/Scene.cpp
+        client/src/core/Scene/Scene.hpp
+        client/src/core/SceneObject/SceneObject.hpp
+        client/src/core/Gui/Tools.cpp
+        client/src/core/Gui/Tools.hpp
+        client/src/core/EventableSceneObject/EventableSceneObject.cpp
+        client/src/core/EventableSceneObject/EventableSceneObject.hpp
+        client/src/core/SceneManager/SceneManager.cpp
+        client/src/core/SceneManager/SceneManager.hpp
+        client/src/core/Player/Player.cpp
+        client/src/core/Player/Player.hpp
+        client/src/core/CoreObject/CoreObject.hpp
+        client/src/core/Power/Power.cpp
+        client/src/core/Power/Power.hpp
+        client/src/core/PowerUp/PowerUp.hpp
+        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.cpp
+        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp
+        client/src/core/PowerManager/PowerManager.cpp
+        client/src/core/PowerManager/PowerManager.hpp client/src/core/Power/PowerEnum.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")
