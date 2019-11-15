@@ -9,10 +9,11 @@
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/EventableSceneObject/EventableSceneObject.hpp"
 #include "client/src/core/Player/Player.hpp"
+#include "IScene.hpp"
 
 namespace RType {
     using namespace RType;
-    class Scene: EventableObject {
+    class Scene: public IScene, public EventableObject {
     public:
         explicit Scene(sf::RenderWindow *app);
         virtual ~Scene();
@@ -44,12 +45,12 @@ namespace RType {
         /// Add player to drawable & eventable list
         void addPlayer(RType::Player::SkinColours skinColours);
 
-    private:
         /// Add object to the list of rendered object
         void addSceneObject(SceneObject *object);
 
         /// Add object to get event from Scene
         void addEventableSceneObject(EventableSceneObject *eventableSceneObject);
+    private:
 
         /// App window
         sf::RenderWindow *_app;

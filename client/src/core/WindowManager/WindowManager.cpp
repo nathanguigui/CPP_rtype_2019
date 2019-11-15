@@ -25,7 +25,7 @@ void RType::WindowManager::init() {
     this->_eventManager = new Event(this, this->_app, this->_state);
     this->_settings = new Settings(this->_state);
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
-    this->_mainMenu = new MainMenu(this->_app, this->_state);
+    this->_mainMenu = new MainMenu(this->_app, this->_state, nullptr);
     this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
 
     //network need
@@ -36,6 +36,7 @@ void RType::WindowManager::init() {
 }
 
 void RType::WindowManager::gameLoop() {
+    this->_eventManager->addEventableObject((EventableObject*)this->_mainMenu);
     while (_app->isOpen()) {
         this->_app->clear();
         _eventManager->manageEvent();
@@ -71,7 +72,6 @@ void RType::WindowManager::displayInLaunch() {
     else if (this->_state->isLoading()) {
         std::cout << "put loading screen here";
         this->_state->setWindowMode(IN_MENU);
-        this->_eventManager->addEventableObject((EventableObject*)this->_mainMenu);
     }
         //this._loading.run();
 }

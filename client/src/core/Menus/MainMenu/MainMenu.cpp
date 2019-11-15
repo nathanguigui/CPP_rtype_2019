@@ -4,7 +4,7 @@
 
 #include "MainMenu.hpp"
 
-RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state) : _app(app), _state(state) {
+RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, Event *event) : _app(app), _state(state), _event(event) {
     this->_itemStatus = MAIN_MENU_JOIN_GAME;
     this->_backgroundTexture = new sf::Texture();
     this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
@@ -30,7 +30,7 @@ void RType::MainMenu::handleRight() {
 }
 
 void RType::MainMenu::handleUp() {
-    if (this->keyReleased) {
+    if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
                 break;
@@ -49,7 +49,7 @@ void RType::MainMenu::handleUp() {
 }
 
 void RType::MainMenu::handleDown() {
-    if (this->keyReleased) {
+    if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
                 this->_itemStatus = MAIN_MENU_JOIN_GAME;
@@ -68,10 +68,11 @@ void RType::MainMenu::handleDown() {
 }
 
 void RType::MainMenu::handleEnter() {
-    if (this->keyReleased) {
+    if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
                 this->_state->setWindowMode(IN_GAME);
+                this->_disabled = true;
                 break;
             case MAIN_MENU_JOIN_GAME:
                 break;

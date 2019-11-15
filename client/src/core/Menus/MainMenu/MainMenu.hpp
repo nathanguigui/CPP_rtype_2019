@@ -10,6 +10,7 @@
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
+#include "client/src/core/Event/Event.hpp"
 
 namespace RType {
     using namespace RType;
@@ -20,7 +21,7 @@ namespace RType {
     };
     class MainMenu : EventableObject {
     public:
-        explicit MainMenu(sf::RenderWindow *app, WindowState *state);
+        MainMenu(sf::RenderWindow *app, WindowState *state, Event *event);
         virtual ~MainMenu();
         void handleLeft() override;
         void handleRight() override;
@@ -42,7 +43,9 @@ namespace RType {
         sf::Text *_quitText;
         MainMenuItemStatus _itemStatus;
         bool keyReleased;
+        bool _disabled = false;
         WindowState *_state;
+        Event *_event;
     };
 }
 

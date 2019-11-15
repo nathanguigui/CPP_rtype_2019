@@ -5,7 +5,8 @@
 #include "PowerManager.hpp"
 #include "client/src/core/Power/PowerEnum.hpp"
 
-RType::PowerManager::PowerManager(sf::RenderWindow *app, PowerEnum::PowerDirection direction) : _app(app), _direction(direction) {
+RType::PowerManager::PowerManager(sf::RenderWindow *app, PowerEnum::PowerDirection direction, IScene *parentScene)
+        : _app(app), _direction(direction), _parentScene(parentScene) {
 
 }
 
@@ -15,14 +16,17 @@ void RType::PowerManager::addPowerUp(PowerUp *powerUp) {
     this->_powerUps.push_back(powerUp);
 }
 
-void RType::PowerManager::initiateShoot() {
+void RType::PowerManager::initiateShoot(const sf::Vector2f &shootFrom) {
     for (auto & _powerUp : this->_powerUps)
-        this->shoot(_powerUp);
-
+        this->shoot(_powerUp, shootFrom);
 }
 
-void RType::PowerManager::shoot(RType::PowerUp *powerUp) {
+void RType::PowerManager::shoot(PowerUp *powerUp, const sf::Vector2f &shootFrom) {
     auto bullet = new Power(this->_app, powerUp);
     bullet->setDirection(this->_direction);
     bullet->setSpeed(powerUp->getSpeed());
+    bullet->setPosition(shootFrom);
+    bullet->start();
+    _parentScene->addSceneObject((SceneObject*)bullet);
+    _bulletsDrawn.push_back(bullet);
 }
