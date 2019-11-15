@@ -55,7 +55,7 @@ void RType::Scene::destroy() {
 void RType::Scene::addPlayer(RType::Player::SkinColours skinColours) {
     if (this->_player)
         return;
-    this->_player = new Player(this->_app, skinColours);
+    this->_player = new Player(this->_app, this, skinColours);
     this->addEventableSceneObject((EventableSceneObject*)this->_player);
     this->addSceneObject((SceneObject*)this->_player);
 }

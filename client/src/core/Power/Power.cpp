@@ -19,6 +19,7 @@ void RType::Power::draw() {
             this->_sprite->setTextureRect(this->_powerUp->getSkinRect());
         this->move();
     }
+    this->_app->draw(*this->_sprite);
 }
 
 void RType::Power::destroy() {
@@ -96,4 +97,5 @@ void RType::Power::setSpeed(RType::PowerEnum::PowerSpeed speed) {
 void RType::Power::start() {
     this->_moveClock->restart();
     this->_sprite->setTextureRect(this->_powerUp->getSkinRect());
+    this->draw();
 }

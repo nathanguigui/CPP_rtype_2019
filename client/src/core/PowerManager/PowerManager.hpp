@@ -9,27 +9,32 @@
 #include "client/src/core/Power/Power.hpp"
 #include "client/src/core/PowerUp/PowerUp.hpp"
 #include "client/src/core/Power/PowerEnum.hpp"
+#include "client/src/core/Scene/IScene.hpp"
 
 namespace RType {
     using namespace RType;
     class PowerManager {
     public:
-        void addPowerUp(PowerUp *powerUp);
+
+        PowerManager(sf::RenderWindow *app, PowerEnum::PowerDirection direction, IScene *parentScene);
 
         virtual ~PowerManager();
 
-        PowerManager(sf::RenderWindow *app, PowerEnum::PowerDirection direction);
+        /// Add power up to be manager here
+        void addPowerUp(PowerUp *powerUp);
 
-        void initiateShoot();
+        /// Start Telling to shoot
+        void initiateShoot(const sf::Vector2f &shootFrom);
 
     private:
 
-        void shoot(PowerUp *powerUp);
+        void shoot(PowerUp *powerUp, const sf::Vector2f &shootFrom);
 
         sf::RenderWindow *_app;
         std::vector<Power*> _bulletsDrawn;
         std::vector<PowerUp*> _powerUps;
         PowerEnum::PowerDirection _direction;
+        IScene *_parentScene;
     };
 }
 

@@ -5,17 +5,20 @@
 #include <iostream>
 #include "Player.hpp"
 
-RType::Player::Player(sf::RenderWindow *app, RType::Player::SkinColours color) : _app(app), _color(color) {
+RType::Player::Player(sf::RenderWindow *app, IScene *parentScene, RType::Player::SkinColours color)
+        : _app(app), _parentScene(parentScene), _color(color) {
     this->_texture = new sf::Texture();
     this->_texture->loadFromFile("assets/Player/texture.gif");
-    this->_sprite = new sf::Sprite(*this->_texture, Player::getSkinRect(PLAYER_PINK, PLAYER_NORMAL));
+    this->_sprite = new sf::Sprite(*this->_texture, Player::getSkinRect(color, PLAYER_NORMAL));
     this->_sprite->scale(3, 3);
     this->initPlayer();
 }
 
 void RType::Player::initPlayer() {
-    this->_powerManager = new PowerManager(this->_app, PowerEnum::PowerDirection::RIGHT);
+    this->_powerManager = new PowerManager(this->_app, PowerEnum::PowerDirection::RIGHT, this->_parentScene);
     auto defaultPower = new DefaultPowerUp(this->_app);
+    this->_powerManager->addPowerUp(defaultPower);
+
 }
 
 
@@ -40,7 +43,8 @@ void RType::Player::handleDown() {
 }
 
 void RType::Player::handleEnter() {
-
+    std::cout << "shoot initiated";
+    this->_powerManager->initiateShoot(this->_sprite->getPosition());
 }
 
 void RType::Player::handleKeyReleased() {

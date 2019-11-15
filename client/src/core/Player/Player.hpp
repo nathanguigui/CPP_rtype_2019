@@ -9,6 +9,7 @@
 #include "client/src/core/EventableSceneObject/EventableSceneObject.hpp"
 #include "client/src/core/PowerManager/PowerManager.hpp"
 #include "client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp"
+#include "client/src/core/Scene/IScene.hpp"
 
 namespace RType{
     using namespace RType;
@@ -30,7 +31,7 @@ namespace RType{
             PLAYER_UP,
             PLAYER_MAX_UP
         };
-        explicit Player(sf::RenderWindow *app, RType::Player::SkinColours color);
+        explicit Player(sf::RenderWindow *app, IScene *parentScene, RType::Player::SkinColours color);
         virtual ~Player();
 
 
@@ -59,6 +60,7 @@ namespace RType{
         sf::Texture *_texture;
         SkinColours _color;
         PowerManager *_powerManager{};
+        IScene *_parentScene;
     };
 }
 

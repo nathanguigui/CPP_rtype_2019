@@ -396,7 +396,7 @@ DISTRIBUTE_GROUP_DOC   = NO
 
 # If one adds a struct or class to a group and this option is enabled, then also
 # any nested class or struct is added to the same group. By default this option
-# is disabled and one has to add nested compounds explicitly via \ingroup.
+# is _disabled and one has to add nested compounds explicitly via \ingroup.
 # The default value is: NO.
 
 GROUP_NESTED_COMPOUNDS = NO
@@ -434,7 +434,7 @@ INLINE_SIMPLE_STRUCTS  = NO
 # When TYPEDEF_HIDES_STRUCT tag is enabled, a typedef of a struct, union, or
 # enum is documented as struct, union, or enum with the name of the typedef. So
 # typedef struct TypeS {} TypeT, will appear in the documentation as a struct
-# with name TypeT. When disabled the typedef will appear as a member of a file,
+# with name TypeT. When _disabled the typedef will appear as a member of a file,
 # namespace, or class. And the struct will be named TypeS. This can typically be
 # useful for C code in case the coding convention dictates that all compound
 # types are typedef'ed and only the typedef is referenced, never the tag name.
@@ -775,7 +775,7 @@ WARNINGS               = YES
 
 # If the WARN_IF_UNDOCUMENTED tag is set to YES then doxygen will generate
 # warnings for undocumented members. If EXTRACT_ALL is set to YES then this flag
-# will automatically be disabled.
+# will automatically be _disabled.
 # The default value is: YES.
 
 WARN_IF_UNDOCUMENTED   = YES
@@ -792,7 +792,7 @@ WARN_IF_DOC_ERROR      = YES
 # are documented, but have no documentation for their parameters or return
 # value. If set to NO, doxygen will only warn about wrong or incomplete
 # parameter documentation, but not about the absence of documentation. If
-# EXTRACT_ALL is set to YES then this flag will automatically be disabled.
+# EXTRACT_ALL is set to YES then this flag will automatically be _disabled.
 # The default value is: NO.
 
 WARN_NO_PARAMDOC       = NO
@@ -1267,7 +1267,7 @@ HTML_TIMESTAMP         = NO
 
 # If the HTML_DYNAMIC_MENUS tag is set to YES then the generated HTML
 # documentation will contain a main index with vertical navigation menus that
-# are dynamically created via Javascript. If disabled, the navigation index will
+# are dynamically created via Javascript. If _disabled, the navigation index will
 # consists of multiple levels of tabs that are statically embedded in every HTML
 # page. Disable this option to support browsers that do not have Javascript,
 # like the Qt help browser.
@@ -1610,7 +1610,7 @@ MATHJAX_CODEFILE       =
 # the HTML output. The underlying search engine uses javascript and DHTML and
 # should work on any modern browser. Note that when using HTML help
 # (GENERATE_HTMLHELP), Qt help (GENERATE_QHP), or docsets (GENERATE_DOCSET)
-# there is already a search function so this one should typically be disabled.
+# there is already a search function so this one should typically be _disabled.
 # For large projects the javascript based search engine can be slow, then
 # enabling SERVER_BASED_SEARCH may provide a better solution. It is possible to
 # search using the keyboard; to jump to the search box use <access key> + S
@@ -1630,7 +1630,7 @@ SEARCHENGINE           = YES
 # When the SERVER_BASED_SEARCH tag is enabled the search engine will be
 # implemented using a web server instead of a web client using Javascript. There
 # are two flavors of web server based searching depending on the EXTERNAL_SEARCH
-# setting. When disabled, doxygen will generate a PHP script for searching and
+# setting. When _disabled, doxygen will generate a PHP script for searching and
 # an index file used by the script. When EXTERNAL_SEARCH is enabled the indexing
 # and searching needs to be provided by external tools. See the section
 # "External Indexing and Searching" for details.
@@ -2235,7 +2235,7 @@ EXTERNAL_PAGES         = YES
 # If the CLASS_DIAGRAMS tag is set to YES, doxygen will generate a class diagram
 # (in HTML and LaTeX) for classes with base or super classes. Setting the tag to
 # NO turns the diagrams off. Note that this option also works with HAVE_DOT
-# disabled, but it is recommended to install and use dot, since it yields more
+# _disabled, but it is recommended to install and use dot, since it yields more
 # powerful graphs.
 # The default value is: YES.
 
@@ -2503,7 +2503,7 @@ DOT_GRAPH_MAX_NODES    = 50
 MAX_DOT_GRAPH_DEPTH    = 0
 
 # Set the DOT_TRANSPARENT tag to YES to generate images with a transparent
-# background. This is disabled by default, because dot on Windows does not seem
+# background. This is _disabled by default, because dot on Windows does not seem
 # to support this out of the box.
 #
 # Warning: Depending on the platform used, enabling this option may lead to
@@ -2517,7 +2517,7 @@ DOT_TRANSPARENT        = NO
 # Set the DOT_MULTI_TARGETS tag to YES to allow dot to generate multiple output
 # files in one run (i.e. multiple -o and -T options on the command line). This
 # makes dot run faster, but since only newer versions of dot (>1.8.10) support
-# this, this feature is disabled by default.
+# this, this feature is _disabled by default.
 # The default value is: NO.
 # This tag requires that the tag HAVE_DOT is set to YES.
 
