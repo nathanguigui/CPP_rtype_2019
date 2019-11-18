@@ -1,6 +1,6 @@
 [requires]
 sfml/2.5.1@bincrafters/stable
-boost/1.69.0@bincrafters/stable
+boost_base/1.69.0@bincrafters/stable
 
 
 [options]
