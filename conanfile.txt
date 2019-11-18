@@ -10,4 +10,4 @@ sfml:audio=False
 sfml:network=False
 
 [generators]
-cmake
+cmake_paths
