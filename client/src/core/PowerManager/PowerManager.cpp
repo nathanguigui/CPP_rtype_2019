@@ -27,7 +27,7 @@ void RType::PowerManager::initiateShoot() {
 void RType::PowerManager::shoot(PowerUp *powerUp, const sf::Vector2f &shootFrom) {
     auto bullet = new Power(this->_app, powerUp);
     bullet->setDirection(this->_direction);
-    bullet->setSpeed(powerUp->getSpeed());w
+    bullet->setSpeed(powerUp->getSpeed());
     bullet->setPosition(shootFrom);
     bullet->start();
     _parentScene->addSceneObject((SceneObject*)bullet);
