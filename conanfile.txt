@@ -1,6 +1,7 @@
 [requires]
 sfml/2.5.1@bincrafters/stable
-boost/1.69.0@conan/stable
+Boost/1.69.0@bincrafters/stable
+
 
 [options]
 sfml:graphics=True
