@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.1.0)
 
 project(CPP_rtype_2019)
 
-include(${CMAKE_SOURCE_DIR}build/conanbuildinfo.cmake)
+include(${CMAKE_SOURCE_DIR}/build/conanbuildinfo.cmake)
 conan_basic_setup()
 INCLUDE_DIRECTORIES(${CONAN_INCLUDE_DIRS})
 
