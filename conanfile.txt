@@ -6,8 +6,8 @@ boost_base/1.69.0@bincrafters/stable
 [options]
 sfml:graphics=True
 sfml:window=True
-sfml:audio=False
-sfml:network=False
+sfml:audio=True
+sfml:network=True
 
 [generators]
 cmake_paths
