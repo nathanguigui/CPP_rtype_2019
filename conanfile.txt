@@ -11,3 +11,5 @@ sfml:network=False
 
 [generators]
 cmake_paths
+cmake
+txt
