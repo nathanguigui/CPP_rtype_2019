@@ -6,7 +6,7 @@ include(${CMAKE_SOURCE_DIR}/build/conanbuildinfo.cmake)
 conan_basic_setup()
 INCLUDE_DIRECTORIES(${CONAN_INCLUDE_DIRS})
 
-include(${CMAKE_SOURCE_DIR}build/conanbuildinfo.cmake)
+include(${CMAKE_SOURCE_DIR}/build/conanbuildinfo.cmake)
 INCLUDE_DIRECTORIES(${CONAN_INCLUDE_DIRS})
 
 if ( MSVC )
