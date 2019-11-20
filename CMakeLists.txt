@@ -41,6 +41,7 @@ include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
+     
 
 set(CLIENT_SRC
         client/src/main.cpp
@@ -93,6 +94,7 @@ set(CLIENT_SRC
 include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable(rtype_client ${CLIENT_SRC})
+file(COPY ./client/src/assets/ DESTINATION ${CMAKE_BINARY_DIR})
 target_link_libraries(rtype_client ${CONAN_LIBS})
 
 

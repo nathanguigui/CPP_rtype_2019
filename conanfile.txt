@@ -4,9 +4,7 @@ boost_base/1.69.0@bincrafters/stable
 
 
 [options]
-sfml:shared=False
 sfml:graphics=True
-sfml:fPIC=True
 sfml:window=True
 sfml:audio=True
 sfml:network=True
