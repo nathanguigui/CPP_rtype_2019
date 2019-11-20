@@ -4,7 +4,7 @@ boost_base/1.69.0@bincrafters/stable
 
 
 [options]
-sfml:shared=True
+sfml:shared=False
 sfml:graphics=True
 sfml:window=True
 sfml:audio=True
@@ -15,7 +15,3 @@ cmake_paths
 cmake
 cmake_find_package
 txt
-
-[imports]
-bin, *.dll -> ./bin
-lib, *.dylib -> ./bin
