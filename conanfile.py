@@ -5,7 +5,7 @@ class CPP_rtype(ConanFile):
    name = "client"
    version = "0.1"
    settings = "os_build", "compiler", "build_type", "arch"
-   requires = "sfml/2.5.1@bincrafters/stable"# comma-separated list of requirements
+   requires = "sfml/2.5.1@bincrafters/stable", "boost_base/1.69.0@bincrafters/stable" # comma-separated list of requirements
    generators = "cmake", "cmake_paths", "txt", "cmake_find_package"
    exports_sources = ['CMakeLists.txt', '0001-find-libraries.patch']
 #
