@@ -1,5 +1,5 @@
 [requires]
-sfml/2.5.0@bincrafters/stable
+sfml/2.5.1@bincrafters/stable
 boost_base/1.69.0@bincrafters/stable
 
 
