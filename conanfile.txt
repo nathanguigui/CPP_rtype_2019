@@ -15,3 +15,7 @@ cmake_paths
 cmake
 cmake_find_package
 txt
+
+[imports]
+bin, *.dll -> ./bin
+lib, *.dylib -> ./bin
