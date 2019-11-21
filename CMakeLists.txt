@@ -103,8 +103,8 @@ target_link_libraries(rtype_client ${CONAN_LIBS})
 
 
 set(SERVER_SRC
-        server/src/main.cpp server/src/main.cpp)
+        server/src/main.cpp server/src/Server_TCP.cpp server/src/connection_manager.cpp server/src/connection_handler_TCP.cpp)
 set (SERVER_HEADERS
-        server/src/main.hpp)
+        server/src/connection_handler_TCP.hpp server/src/Server_TCP.hpp)
 add_executable(rtype_server ${SERVER_SRC})
 target_link_libraries(rtype_server ${CONAN_LIBS})
