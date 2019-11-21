@@ -13,11 +13,13 @@ namespace RType {
     public:
         SimpleBullet();
         ~SimpleBullet();
-        sf::IntRect run(int);
+        sf::IntRect run();
+        sf::Texture getTexture();
 
     private:
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_bulletTexture;
+        int step;
     };
 }
 

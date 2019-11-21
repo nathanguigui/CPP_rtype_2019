@@ -13,9 +13,10 @@ namespace RType {
     public:
         SimpleKill();
         ~SimpleKill();
-        sf::IntRect run(int);
+        sf::IntRect run();
 
     private:
+        int step;
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_killTexture;
     };
