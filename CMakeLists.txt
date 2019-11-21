@@ -94,7 +94,11 @@ set(CLIENT_SRC
 include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable(rtype_client ${CLIENT_SRC})
-file(COPY ./client/src/assets/ DESTINATION ${CMAKE_BINARY_DIR})
+add_custom_target(copy-files ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/client/src/assets/
+        ${CMAKE_BINARY_DIR}/assets/
+)
 target_link_libraries(rtype_client ${CONAN_LIBS})
 
 
