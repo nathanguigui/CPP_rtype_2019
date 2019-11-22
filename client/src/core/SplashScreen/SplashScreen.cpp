@@ -18,12 +18,17 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_done = false;
     this->_background->setTexture(*this->_backgroundTexture);
     this->_splash->setTexture(*this->_splashTexture);
+    this->boum = new SimpleExplosion();
     this->kill = new SimpleKill();
+    this->touch = new SuperTouch();
+    this->simpleTouch = new SimpleTouch();
+
     this->bullet = new SimpleBullet();
     this->master = new MasterBullet();
     this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
+    this->bomb = new SimpleBomb();
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
 }
 
@@ -36,7 +41,7 @@ void RType::SplashScreen::run() {
     if (this->_currentFrame == 0) {
         this->_clock = new sf::Clock();
         this->_splashClock = new sf::Clock();
-        this->_splash->setTextureRect(this->super2->run());
+        this->_splash->setTextureRect(this->simpleTouch->run());
     }
 
     if (this->_clock->getElapsedTime().asSeconds() > 5) {
@@ -48,7 +53,7 @@ void RType::SplashScreen::run() {
     if (this->_clock->getElapsedTime().asSeconds() < 5) {
         if (this->_splashClock->getElapsedTime().asSeconds() > 0.1f)
         {
-            this->_splash->setTextureRect(this->super2->run());
+            this->_splash->setTextureRect(this->simpleTouch->run());
             this->_splashClock->restart();
         }
         _app->draw(*this->_background);

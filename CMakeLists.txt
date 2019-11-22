@@ -80,10 +80,16 @@ set(CLIENT_SRC
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
-        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp
-        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h
+        client/src/game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.cpp
+        client/src/game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.h
+        client/src/game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.cpp
+        client/src/game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.h
+        client/src/game/Bullets/BulletTouch/SuperTouch/SuperTouch.cpp
+        client/src/game/Bullets/BulletTouch/SuperTouch/SuperTouch.h
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
         client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.cpp
         client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h
         client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.cpp
@@ -92,6 +98,8 @@ set(CLIENT_SRC
         client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.h
         client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.cpp
         client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
+        client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.cpp
+        client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h
 
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
