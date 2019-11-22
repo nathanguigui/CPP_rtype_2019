@@ -7,8 +7,15 @@
 #include <SFML/Graphics.hpp>
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
+
 #include "../../game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h"
+#include "../../game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h"
+#include "../../game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.h"
+#include "../../game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.h"
+#include "../../game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h"
+
 #include "../../game/Bullets/BulletTouch/SimpleKill/SimpleKill.h"
+
 
 namespace RType {
     using namespace RType;
@@ -20,8 +27,13 @@ namespace RType {
 
 
     private:
+        RType::SuperBullet1 *super1;
+        RType::SuperBullet2 *super2;
+
+        RType::SuperBullet3 *super3;
         RType::SimpleBullet *bullet;
         RType::SimpleKill *kill;
+        RType::MasterBullet *master;
         sf::Sprite *_splash;
         sf::Sprite *_background;
         sf::IntRect *_rectSourceSprite;

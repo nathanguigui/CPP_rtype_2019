@@ -84,6 +84,15 @@ set(CLIENT_SRC
         client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.h
+        client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.cpp
+        client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
+
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
