@@ -35,7 +35,7 @@ if ( MSVC )
     #set(CMAKE_C_FLAGS_RELWITHDEBINFO ${CMAKE_C_FLAGS_RELWITHDEBINFO})
 endif ( MSVC )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio -lpthread -lboost_system")
 
 include_directories(
     ${CMAKE_CURRENT_BINARY_DIR}
@@ -80,10 +80,27 @@ set(CLIENT_SRC
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
-        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp
-        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h
+        client/src/game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.cpp
+        client/src/game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.h
+        client/src/game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.cpp
+        client/src/game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.h
+        client/src/game/Bullets/BulletTouch/SuperTouch/SuperTouch.cpp
+        client/src/game/Bullets/BulletTouch/SuperTouch/SuperTouch.h
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.cpp
+        client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.h
+        client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.cpp
+        client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.h
+        client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.cpp
+        client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
+        client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.cpp
+        client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h
+
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
@@ -94,13 +111,17 @@ set(CLIENT_SRC
 include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable(rtype_client ${CLIENT_SRC})
-file(COPY ./client/src/assets/ DESTINATION ${CMAKE_BINARY_DIR})
+add_custom_target(copy-files ALL
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/client/src/assets/
+        ${CMAKE_BINARY_DIR}/assets/
+)
 target_link_libraries(rtype_client ${CONAN_LIBS})
 
 
 set(SERVER_SRC
-        server/src/main.cpp server/src/main.cpp)
+        server/src/main.cpp server/src/Server_TCP.cpp server/src/connection_manager.cpp server/src/connection_handler_TCP.cpp)
 set (SERVER_HEADERS
-        server/src/main.hpp)
+        server/src/connection_handler_TCP.hpp server/src/Server_TCP.hpp)
 add_executable(rtype_server ${SERVER_SRC})
 target_link_libraries(rtype_server ${CONAN_LIBS})

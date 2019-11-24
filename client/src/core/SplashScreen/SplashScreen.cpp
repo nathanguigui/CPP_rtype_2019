@@ -10,7 +10,7 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_backgroundTexture = new sf::Texture();
     this->_splash = new sf::Sprite();
     this->_background = new sf::Sprite();
-    this->_rectSourceSprite = new sf::IntRect(0,0,128,127);
+    //this->_rectSourceSprite = new sf::IntRect(0,0,128,127);
     this->_splashTexture->loadFromFile("assets/bullets/r-typesheet1.gif");
     this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
     this->_lastFrame = 100000;
@@ -18,7 +18,18 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_done = false;
     this->_background->setTexture(*this->_backgroundTexture);
     this->_splash->setTexture(*this->_splashTexture);
-    this->_splash->setTextureRect(*this->_rectSourceSprite);
+    this->boum = new SimpleExplosion();
+    this->kill = new SimpleKill();
+    this->touch = new SuperTouch();
+    this->simpleTouch = new SimpleTouch();
+
+    this->bullet = new SimpleBullet();
+    this->master = new MasterBullet();
+    this->super1 = new SuperBullet1();
+    this->super2 = new SuperBullet2();
+    this->super3 = new SuperBullet3();
+    this->bomb = new SimpleBomb();
+    //this->_splash->setTextureRect(*this->_rectSourceSprite);
 }
 
 void RType::SplashScreen::run() {
@@ -30,6 +41,7 @@ void RType::SplashScreen::run() {
     if (this->_currentFrame == 0) {
         this->_clock = new sf::Clock();
         this->_splashClock = new sf::Clock();
+        this->_splash->setTextureRect(this->simpleTouch->run());
     }
 
     if (this->_clock->getElapsedTime().asSeconds() > 5) {
@@ -39,20 +51,9 @@ void RType::SplashScreen::run() {
     }
 
     if (this->_clock->getElapsedTime().asSeconds() < 5) {
-        if (this->_splashClock->getElapsedTime().asSeconds() > 0.1f) {
-
-            if (this->_rectSourceSprite->left == 1920 && this->_rectSourceSprite->top == 0) {
-                this->_rectSourceSprite->left = 0;
-                this->_rectSourceSprite->top = 127;
-            }
-            else if (this->_rectSourceSprite->left == 512 && this->_rectSourceSprite->top == 127) {
-                this->_rectSourceSprite->left = 0;
-                this->_rectSourceSprite->top = 0;
-            }
-            else
-                this->_rectSourceSprite->left += 128;
-
-            this->_splash->setTextureRect(*this->_rectSourceSprite);
+        if (this->_splashClock->getElapsedTime().asSeconds() > 0.1f)
+        {
+            this->_splash->setTextureRect(this->simpleTouch->run());
             this->_splashClock->restart();
         }
         _app->draw(*this->_background);

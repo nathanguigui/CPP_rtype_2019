@@ -2,17 +2,17 @@
 // Created by luc4s.p on 11/15/19.
 //
 
-#ifndef CPP_RTYPE_2019_SIMPLEBULLET_H
-#define CPP_RTYPE_2019_SIMPLEBULLET_H
+#ifndef CPP_RTYPE_2019_SUPERBULLET3_H
+#define CPP_RTYPE_2019_SUPERBULLET3_H
 
 #include <SFML/Graphics.hpp>
 
 namespace RType {
     using namespace RType;
-    class SimpleBullet {
+    class SuperBullet3 {
     public:
-        SimpleBullet();
-        ~SimpleBullet();
+        SuperBullet3();
+        ~SuperBullet3();
         sf::IntRect run();
         sf::Texture getTexture();
 
