@@ -46,7 +46,11 @@ void RType::WindowManager::gameLoop() {
 }
 
 void RType::WindowManager::processParams(int ac, char **av) {
-    std::cout << "check arg count and type then throw error if need";
+    if (ac < 3)
+        throw Exception("Not enough arguments", STARTUP);
+    this->checkIp(av[1]);
+    this->checkPort(av[2]);
+    this->checkUsername(av[3]);
     this->init();
 }
 
@@ -84,4 +88,29 @@ void RType::WindowManager::displayInMenu() {
 
 void RType::WindowManager::displayInGame() {
     this->_sceneManager->drawCurrentScene();
+}
+
+void RType::WindowManager::checkIp(char *ip) {
+    std::vector<std::string> result;
+    boost::split(result, ip, boost::is_any_of("."));
+    if (result.size() != 4)
+        throw Exception("invalid ip", STARTUP);
+    for (auto &i : result)
+        if (!std::all_of(i.begin(), i.end(), ::isdigit) || i.empty())
+            throw Exception("invalid ip", STARTUP);
+    this->_serverIp = new std::string(ip);
+}
+
+void RType::WindowManager::checkPort(char *port) {
+    auto tmp = std::string(port);
+    if (!std::all_of(tmp.begin(), tmp.end(), ::isdigit))
+        throw Exception("invalid port", STARTUP);
+    this->_serverPort = (unsigned short) strtoul(port, nullptr, 0);
+}
+
+void RType::WindowManager::checkUsername(char *username) {
+    auto tmp = std::string(username);
+    if (tmp.find_first_not_of("poiuytrezamlkjhgfdsqnbvcxwPOIUYTREZAMLKJHGFDSQNBVCXW0987654321") != std::string::npos)
+        throw Exception("invalid username", STARTUP);
+    this->_playerName = new std::string(username);
 }

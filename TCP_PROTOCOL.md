@@ -157,6 +157,8 @@ Server will send only one time a game this response.
 
 
 
+<br><br>
+
 ## Level Infos Management <a name="level_management"></a>
 
 ### Map Shape: <a name="level_map_shape"></a>
@@ -178,3 +180,6 @@ Update Map Position.
 ```
     LEVEL MAP POSITION [POS_X];
 ```
+
+
+<br>
