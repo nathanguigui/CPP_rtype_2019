@@ -120,8 +120,8 @@ target_link_libraries(rtype_client ${CONAN_LIBS})
 
 
 set(SERVER_SRC
-        server/src/main.cpp server/src/Server_TCP.cpp server/src/connection_manager.cpp server/src/connection_handler_TCP.cpp)
+        server/src/main.cpp server/src/Server_TCP.cpp server/src/connection_manager.cpp server/src/connection_handler_TCP.cpp server/src/Game/Game.cpp server/src/Map/Map.cpp server/src/Player/Player.cpp)
 set (SERVER_HEADERS
-        server/src/connection_handler_TCP.hpp server/src/Server_TCP.hpp)
+        server/src/connection_handler_TCP.hpp server/src/Server_TCP.hpp server/src/Game/Game.hpp server/src/Map/Map.hpp server/src/Player/Player.hpp server/src/Bullet/Bullet.hpp server/src/Utils/Utils.hpp)
 add_executable(rtype_server ${SERVER_SRC})
 target_link_libraries(rtype_server ${CONAN_LIBS})
