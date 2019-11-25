@@ -34,6 +34,7 @@ return the Lobby code.
 
 ```
     LOBBY CREATE;
+    €
 ```
 
 #### Response from server:
@@ -45,6 +46,7 @@ Tell to the client action succeed or not with additional infos.
 Succeed:
 ```
     LOBBY CREATE SUCCEED [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby
 
@@ -53,6 +55,7 @@ Where \[CODE\] is replaced with the unique code of the Lobby
 Failed:
 ```
     LOBBY CREATE FAILED;
+    €
 ```
 
 <br>
@@ -65,6 +68,7 @@ Ask server to join Lobby with code.
 
 ```
     LOBBY JOIN [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby
 
@@ -77,6 +81,7 @@ Tell to the client action succeed or not.
 Succeed:
 ```
     LOBBY JOIN SUCCEED;
+    €
 ```
 
 <br>
@@ -84,6 +89,7 @@ Succeed:
 Failed:
 ```
     LOBBY JOIN FAILED;
+    €
 ```
 
 
@@ -97,6 +103,7 @@ Ask for server to send updated Lobby infos.
 
 ```
     LOBBY INFO [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby.
 
@@ -108,6 +115,7 @@ Tell to client the updated Lobby infos.
     LOBBY INFO [CODE] [PLAYER_COUNT];
     LOBBY PLAYERS;
     [PLAYER_NAME] [PLAYER_READY_STATUS];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby,
 
@@ -123,6 +131,7 @@ Ask for server to set player ready in the Lobby.
 
 ```
     LOBBY READY [CODE] [PLAYER_NAME];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby, and
 
@@ -144,6 +153,7 @@ lobby, otherwise nothing append.
 
 ```
     LOBBY START [CODE];
+    €
 ```
 
 #### Response from server:
@@ -153,6 +163,7 @@ Server will send only one time a game this response.
 
 ```
     LOBBY START;
+    €
 ```
 
 
@@ -169,6 +180,7 @@ Update Map Shape.
 
 ```
     LEVEL MAP SHAPE [MAP_ID];
+    €
 ```
 
 ### Map Position: <a name="level_map_position"></a>
@@ -179,6 +191,7 @@ Update Map Position.
 
 ```
     LEVEL MAP POSITION [POS_X];
+    €
 ```
 
 
