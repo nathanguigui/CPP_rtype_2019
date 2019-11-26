@@ -10,7 +10,7 @@ RType::Player::Player(sf::RenderWindow *app, IScene *parentScene, RType::Player:
     this->_texture = new sf::Texture();
     this->_texture->loadFromFile("assets/Player/texture.gif");
     this->_sprite = new sf::Sprite(*this->_texture, Player::getSkinRect(color, PLAYER_NORMAL));
-    this->_sprite->scale(3, 3);
+    this->_sprite->scale(1.5151515151, 1.470588235);
     this->initPlayer();
 }
 
@@ -20,7 +20,6 @@ void RType::Player::initPlayer() {
     this->_powerManager->addPowerUp(defaultPower);
 
 }
-
 
 RType::Player::~Player() = default;
 

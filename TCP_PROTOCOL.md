@@ -2,29 +2,30 @@
 
 ## Table of contents
 
-- Lobby Management
-  - Create Lobby
+- [Lobby Management](#lobby_management)
+  - [Create Lobby](#lobby_create)
     - Create Lobby Request `TODO SERVER` `TODO CLIENT`
     - Create Lobby Response `TODO SERVER` `TODO CLIENT`
-  - Join Lobby
+  - [Join Lobby](#lobby_join)
     - Join Lobby Request `TODO SERVER` `TODO CLIENT`
     - Join Lobby Response `TODO SERVER` `TODO CLIENT`
-  - Info Lobby
+  - [Info Lobby](#lobby_info)
     - Info Lobby Request `TODO SERVER` `TODO CLIENT`
     - Info Lobby Response `TODO SERVER` `TODO CLIENT`
-  - Set the player ready `TODO SERVER` `TODO CLIENT`
-  - Start the game
+  - [Set the player ready](#lobby_ready) `TODO SERVER` `TODO CLIENT`
+  - [Start the game](#lobby_start)
     - Start the game Request `TODO SERVER` `TODO CLIENT`
     - Start the game Response `TODO SERVER` `TODO CLIENT`
-- Level Infos Management
-  - Map Shape update `TODO SERVER` `TODO CLIENT`
+- [Level Infos Management](#level_management)
+  - [Map Shape update](#level_map_shape) `TODO SERVER` `TODO CLIENT`
+  - [Map Position update](#level_map_position) `TODO SERVER` `TODO CLIENT`
 
 
-## Lobby Management
+## Lobby Management <a name="lobby_management"></a>
 
 <br>
 
-### Create Lobby:
+### Create Lobby: <a name="lobby_create"></a>
 
 #### Request from client:
 
@@ -33,6 +34,7 @@ return the Lobby code.
 
 ```
     LOBBY CREATE;
+    €
 ```
 
 #### Response from server:
@@ -44,6 +46,7 @@ Tell to the client action succeed or not with additional infos.
 Succeed:
 ```
     LOBBY CREATE SUCCEED [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby
 
@@ -52,11 +55,12 @@ Where \[CODE\] is replaced with the unique code of the Lobby
 Failed:
 ```
     LOBBY CREATE FAILED;
+    €
 ```
 
 <br>
 
-### Join Lobby:
+### Join Lobby: <a name="lobby_join"></a>
 
 #### Request from the client:
 
@@ -64,6 +68,7 @@ Ask server to join Lobby with code.
 
 ```
     LOBBY JOIN [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby
 
@@ -76,6 +81,7 @@ Tell to the client action succeed or not.
 Succeed:
 ```
     LOBBY JOIN SUCCEED;
+    €
 ```
 
 <br>
@@ -83,12 +89,13 @@ Succeed:
 Failed:
 ```
     LOBBY JOIN FAILED;
+    €
 ```
 
 
 <br>
 
-### Info Lobby:
+### Info Lobby: <a name="lobby_info"></a>
 
 #### Request from the client:
 
@@ -96,6 +103,7 @@ Ask for server to send updated Lobby infos.
 
 ```
     LOBBY INFO [CODE];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby.
 
@@ -107,6 +115,7 @@ Tell to client the updated Lobby infos.
     LOBBY INFO [CODE] [PLAYER_COUNT];
     LOBBY PLAYERS;
     [PLAYER_NAME] [PLAYER_READY_STATUS];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby,
 
@@ -116,12 +125,13 @@ Where \[CODE\] is replaced with the unique code of the Lobby,
 
 <br>
 
-### Set player ready:
+### Set player ready: <a name="lobby_ready"></a>
 
 Ask for server to set player ready in the Lobby.
 
 ```
     LOBBY READY [CODE] [PLAYER_NAME];
+    €
 ```
 Where \[CODE\] is replaced with the unique code of the Lobby, and
 
@@ -133,7 +143,7 @@ Server will send to each client an Info Response.
 
 <br>
 
-### Start the game:
+### Start the game: <a name="lobby_start"></a>
 
 #### Request from the client:
 
@@ -143,6 +153,7 @@ lobby, otherwise nothing append.
 
 ```
     LOBBY START [CODE];
+    €
 ```
 
 #### Response from server:
@@ -152,23 +163,36 @@ Server will send only one time a game this response.
 
 ```
     LOBBY START;
+    €
 ```
 
 
 
-## Level Infos Management
+<br><br>
 
-### Map Shape:
+## Level Infos Management <a name="level_management"></a>
+
+### Map Shape: <a name="level_map_shape"></a>
 
 #### Response from the server:
 
 Update Map Shape.
 
 ```
-    LEVEL MAP UPDATE;
-    ------------------;
-    ------------------;
-    ------MAP------;
-    ------------------;
-    ------------------;
+    LEVEL MAP SHAPE [MAP_ID];
+    €
 ```
+
+### Map Position: <a name="level_map_position"></a>
+
+#### Response from the server:
+
+Update Map Position.
+
+```
+    LEVEL MAP POSITION [POS_X];
+    €
+```
+
+
+<br>

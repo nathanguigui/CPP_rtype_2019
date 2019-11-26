@@ -15,6 +15,11 @@
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/SceneManager/SceneManager.hpp"
 #include "client/src/core/Loading/Loading.hpp"
+#include "client/src/core/Exception/Exception.hpp"
+#include <boost/algorithm/string.hpp>
+#include <client/src/core/TcpNetwork/TcpNetwork.hpp>
+#include <client/src/core/Menus/JoinLobby/JoinLobby.hpp>
+#include "client/src/core/MenuManager/MenuManager.hpp"
 
 namespace RType {
     using namespace RType;
@@ -27,20 +32,50 @@ namespace RType {
         ~WindowManager();
 
     private:
+        /// Classic Game Loop
         void gameLoop();
+
+        /// Call the good display fc
         void display();
+
+        /// Display elements in launch
         void displayInLaunch();
+
+        /// Display elements in menu
         void displayInMenu();
+
+        /// Display elements in game
         void displayInGame();
+
+        /// Name of window
         const std::string &_name;
+
+        /// SFML Window
         sf::RenderWindow *_app{};
+
+        /// Window State
         WindowState *_state{};
+
+        /// Window Event Manager
         Event *_eventManager{};
+
+        /// Window Settings
         Settings *_settings{};
+
+        /// Window SplashScreen
         SplashScreen *_splashScreen{};
-        MainMenu *_mainMenu{};
+
+        /// Scene Manager
         SceneManager *_sceneManager{};
-        Loading *_loadingScreen;
+
+        /// Loading Scene
+        Loading *_loadingScreen{};
+
+        /// Tcp Network for lobby
+        TcpNetwork *_tcpNetwork{};
+
+        /// Menu Manager
+        MenuManager *_menuManager{};
     };
 }
 

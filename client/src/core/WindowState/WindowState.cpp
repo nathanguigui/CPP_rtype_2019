@@ -45,4 +45,12 @@ void RType::WindowState::initState() {
     this->windowMode = IN_LAUNCH;
 }
 
+RType::MenuType RType::WindowState::getMenuType() const {
+    return menuType;
+}
+
+void RType::WindowState::setMenuType(RType::MenuType menuType) {
+    WindowState::menuType = menuType;
+}
+
 RType::WindowState::~WindowState() = default;

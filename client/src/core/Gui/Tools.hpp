@@ -11,6 +11,7 @@ namespace RType {
     sf::Vector2f centerX(sf::Vector2u screenSize, int width, sf::Vector2<float> initialPos);
     sf::Vector2f centerY(sf::Vector2u screenSize, int height, sf::Vector2f initialPos);
     sf::Vector2f linePos(sf::Vector2u screenSize, int height, sf::Vector2<float> initialPos, int factor, int pos);
+    sf::Vector2f colPos(sf::Vector2u screenSize, int width, sf::Vector2<float> initialPos, int factor, int pos);
 }
 
 #endif //CPP_RTYPE_2019_TOOLS_HPP

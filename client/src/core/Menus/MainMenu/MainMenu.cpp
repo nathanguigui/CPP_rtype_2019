@@ -4,7 +4,8 @@
 
 #include "MainMenu.hpp"
 
-RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, Event *event) : _app(app), _state(state), _event(event) {
+RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent) :
+            _app(app), _state(state), _parent(parent) {
     this->_itemStatus = MAIN_MENU_JOIN_GAME;
     this->_backgroundTexture = new sf::Texture();
     this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
@@ -19,9 +20,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, Event *even
     this->keyReleased = true;
 }
 
-RType::MainMenu::~MainMenu() {
-
-}
+RType::MainMenu::~MainMenu() = default;
 
 void RType::MainMenu::handleLeft() {
 }
@@ -71,10 +70,12 @@ void RType::MainMenu::handleEnter() {
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
+                //this->_parent->switchMenu()
                 this->_state->setWindowMode(IN_GAME);
                 this->_disabled = true;
                 break;
             case MAIN_MENU_JOIN_GAME:
+                this->_parent->switchMenu(MENU_JOIN_LOBBY);
                 break;
             case MAIN_MENU_QUIT_GAME:
                 exit(0);
@@ -122,4 +123,8 @@ void RType::MainMenu::initGUI() {
 
 void RType::MainMenu::handleKeyReleased() {
     this->keyReleased = true;
+}
+
+void RType::MainMenu::handleText(sf::Event &evt) {
+
 }

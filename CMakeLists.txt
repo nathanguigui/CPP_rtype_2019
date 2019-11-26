@@ -100,12 +100,11 @@ set(CLIENT_SRC
         client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.cpp
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h
-
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
         client/src/core/Loading/Loading.cpp
-        client/src/core/Loading/Loading.hpp)
+        client/src/core/Loading/Loading.hpp client/src/core/Exception/Exception.cpp client/src/core/Exception/Exception.hpp client/src/core/TcpNetwork/TcpNetwork.cpp client/src/core/TcpNetwork/TcpNetwork.hpp client/src/core/Menus/IMenu/IMenu.hpp client/src/core/Menus/JoinLobby/JoinLobby.cpp client/src/core/Menus/JoinLobby/JoinLobby.hpp client/src/core/MenuManager/MenuManager.cpp client/src/core/MenuManager/MenuManager.hpp client/src/core/MenuManager/IMenuManager.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")

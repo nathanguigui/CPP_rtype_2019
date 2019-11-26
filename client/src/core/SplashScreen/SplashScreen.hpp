@@ -43,6 +43,7 @@ namespace RType {
         RType::SuperTouch *touch;
         RType::SimpleTouch *simpleTouch;
 
+
         sf::Sprite *_splash;
         sf::Sprite *_background;
         sf::IntRect *_rectSourceSprite;

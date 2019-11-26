@@ -17,6 +17,12 @@ namespace RType {
         IN_GAME
     };
 
+    enum MenuType {
+        MENU_MAIN_MENU,
+        MENU_LOBBY_MENU,
+        MENU_JOIN_LOBBY
+    };
+
     class WindowState: public CoreObject {
     public:
         explicit WindowState(sf::RenderWindow *app);
@@ -41,13 +47,18 @@ namespace RType {
 
         void setWindowMode(WindowMode windowMode);
 
+        MenuType getMenuType() const;
+
+        void setMenuType(MenuType menuType);
+
     private:
         sf::RenderWindow *_app;
-        bool splashDone;
-        bool firstLoadDone;
-        bool loading;
-        WindowMode windowMode;
-        bool isRunning;
+        bool splashDone = false;
+        bool firstLoadDone = false;
+        bool loading = false;
+        WindowMode windowMode{};
+        MenuType menuType{};
+        bool isRunning{};
     };
 }
 
