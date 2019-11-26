@@ -3,23 +3,23 @@
 //
 
 #include "Map.hpp"
-
+//Distance d'affichage
 Map::Map(int level): level_(level) {
     if (level == 1) {
         size_ = 100;
-        height_ = 20;
-        speed_ = 1;
+        height_ = 24;
+        speed_ = 1000;
         currentAction_ = 0;
         for (int i = 0; i < 100; i++) {
             collideBot_.push_back(0);
             collideTop_.push_back(0);
         }
-        actionList_.emplace_back("35;ADD;MONSTER;3");
-        actionList_.emplace_back("35;ADD;MONSTER;1");
-        actionList_.emplace_back("50;ADD;MONSTER;2");
-        actionList_.emplace_back("65;ADD;MONSTER;4");
-        actionList_.emplace_back("80;ADD;MONSTER;6");
-        actionList_.emplace_back("90;ADD;MONSTER;1");
+        actionList_.emplace_back("35;ADD;bédodo;3");
+        actionList_.emplace_back("35;ADD;bédodo;1");
+        actionList_.emplace_back("50;ADD;bédodo;2");
+        actionList_.emplace_back("65;ADD;bédodo;4");
+        actionList_.emplace_back("80;ADD;bédodo;6");
+        actionList_.emplace_back("90;ADD;bédodo;1");
         actionList_.emplace_back("100;END");
     }
 }
@@ -34,7 +34,7 @@ int Map::getSize() const {
     return size_;
 }
 
-int Map::getSpeed() const {
+float Map::getSpeed() const {
     return speed_;
 }
 

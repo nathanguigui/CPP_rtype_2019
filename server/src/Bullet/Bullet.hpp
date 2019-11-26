@@ -5,9 +5,9 @@
 #ifndef CPP_RTYPE_2019_BULLET_HPP
 #define CPP_RTYPE_2019_BULLET_HPP
 
-#include "../Entity/Entity.hpp"
+#include "../Utils/Utils.hpp"
 
-class Bullet : public Entity {
+class Bullet {
 
 };
 

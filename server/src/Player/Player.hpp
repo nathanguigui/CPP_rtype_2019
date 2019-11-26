@@ -5,9 +5,6 @@
 #ifndef CPP_RTYPE_2019_PLAYER_HPP
 #define CPP_RTYPE_2019_PLAYER_HPP
 
-#include <vector>
-#include <string>
-#include <iostream>
 #include "../Utils/Utils.hpp"
 
 class Player {
@@ -15,10 +12,12 @@ public:
     explicit Player(std::string pseudo, std::string color);
     ~Player();
 
+    void move(std::string direction);
+
     const std::string &getPseudo() const;
     const std::string &getColor() const;
     const std::string &getUuid() const;
-    const std::string &getMove() const;
+    const bool &getMove() const;
     PlayerState getPlayerState() const;
     float getLife() const;
     float getShotSpeed() const;
@@ -28,7 +27,7 @@ public:
     void setPseudo(const std::string &pseudo);
     void setColor(const std::string &color);
     void setUuid(const std::string &uuid);
-    void setMove(const std::string &move);
+    void setMove(const bool &move);
     void setPlayerState(PlayerState playerState);
     void setLife(float life);
     void setShotSpeed(float shotSpeed);
@@ -40,13 +39,15 @@ private:
     std::string pseudo_;
     std::string color_;
     std::string UUID_;
-    std::string move_; //variable à changer pour bouger
+    bool move_; //variable à changer pour bouger
+    Direction direction_;
     PlayerState playerState_;
     float life_;
     float shotSpeed_;
     Point<float> pos_;
     Point<float> size_;
-    Point<float> speed_;
+    Point<float> speed_; // ???
+    float lastShot_;
     RocketType rocketType_;
 };
 

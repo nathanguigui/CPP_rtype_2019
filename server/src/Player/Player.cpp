@@ -9,10 +9,11 @@ Player::Player(std::string pseudo, std::string color): pseudo_(pseudo), color_(c
     life_ = 100.0;
     UUID_ = pseudo_ + color_;
     pos_ = {0, 0};
-    size_ = {1,1};
-    speed_ = {1, 0};
+    size_ = {2, 1};
+    speed_ = {1, 0}; //????
     playerState_ = ALIVE;
-    shotSpeed_ = 0.5;
+    shotSpeed_ = 500;
+    lastShot_ = 0;
     rocketType_ = NORMAL;
 }
 
@@ -32,7 +33,7 @@ const std::string &Player::getUuid() const {
     return UUID_;
 }
 
-const std::string &Player::getMove() const {
+const bool &Player::getMove() const {
     return move_;
 }
 
@@ -72,7 +73,7 @@ void Player::setUuid(const std::string &uuid) {
     UUID_ = uuid;
 }
 
-void Player::setMove(const std::string &move) {
+void Player::setMove(const bool &move) {
     move_ = move;
 }
 
@@ -90,6 +91,7 @@ void Player::setShotSpeed(float shotSpeed) {
 
 void Player::setPos(const Point<float> &pos) {
     pos_ = pos;
+    std::cout << UUID_ << " at x = " << pos_.x << " and y = " << pos_.y << std::endl;
 }
 
 void Player::setSize(const Point<float> &size) {
@@ -98,4 +100,11 @@ void Player::setSize(const Point<float> &size) {
 
 void Player::setSpeed(const Point<float> &speed) {
     speed_ = speed;
+}
+
+void Player::move(std::string direction) {
+    if (direction == "NORTH") {
+        std::cout << direction << std::endl;
+    }
+
 }

@@ -5,6 +5,11 @@
 #ifndef CPP_RTYPE_2019_UTILS_HPP
 #define CPP_RTYPE_2019_UTILS_HPP
 
+#include <vector>
+#include <string>
+#include <iostream>
+#include <boost/algorithm/string.hpp>
+#include <cstdlib>
 
 template <typename T>
 struct Point {
@@ -47,6 +52,12 @@ enum RocketType {
     NORMAL,
 };
 
+enum Direction {
+    SOUTH,
+    NORTH,
+    EAST,
+    WEST
+};
 enum MonsterType {
 
 };

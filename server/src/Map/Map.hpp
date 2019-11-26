@@ -5,8 +5,7 @@
 #ifndef CPP_RTYPE_2019_MAP_HPP
 #define CPP_RTYPE_2019_MAP_HPP
 
-#include <vector>
-#include <string>
+#include "../Utils/Utils.hpp"
 
 class Map {
 public:
@@ -15,7 +14,7 @@ public:
 
     int getSize() const;
     int getHeight() const;
-    int getSpeed() const;
+    float getSpeed() const;
     int getLevel() const;
     int getCollideTop(int x) const;
     int getCollideBot(int x) const;
@@ -24,7 +23,7 @@ public:
 private:
     int size_;
     int height_;
-    int speed_;
+    float speed_;
     int level_;
     int currentAction_;
 
