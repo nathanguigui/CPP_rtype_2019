@@ -100,7 +100,6 @@ set(CLIENT_SRC
         client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.cpp
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h
-
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp

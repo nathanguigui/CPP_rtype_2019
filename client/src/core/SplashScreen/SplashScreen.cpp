@@ -11,8 +11,8 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_splash = new sf::Sprite();
     this->_background = new sf::Sprite();
     //this->_rectSourceSprite = new sf::IntRect(0,0,128,127);
-    this->_splashTexture->loadFromFile("assets/bullets/r-typesheet1.gif");
-    this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
+    this->_splashTexture->loadFromFile("assets/MainMenu/logo.png");
+    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
     this->_lastFrame = 100000;
     this->_currentFrame = 0;
     this->_done = false;
@@ -29,6 +29,8 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
+
+    this->title = new SplashTitle();
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
 }
 
@@ -41,7 +43,7 @@ void RType::SplashScreen::run() {
     if (this->_currentFrame == 0) {
         this->_clock = new sf::Clock();
         this->_splashClock = new sf::Clock();
-        this->_splash->setTextureRect(this->simpleTouch->run());
+        //this->_splash->setTextureRect(this->boum->run());
     }
 
     if (this->_clock->getElapsedTime().asSeconds() > 5) {
@@ -50,10 +52,11 @@ void RType::SplashScreen::run() {
         this->_windowState->setIsLoading(true);
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() < 5) {
-        if (this->_splashClock->getElapsedTime().asSeconds() > 0.1f)
+    if (this->_clock->getElapsedTime().asSeconds() < 4) {
+        if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
         {
-            this->_splash->setTextureRect(this->simpleTouch->run());
+            //this->_splash->setTextureRect(this->boum->run());
+            this->_splash->scale(1.003f, 1.003f);
             this->_splashClock->restart();
         }
         _app->draw(*this->_background);
