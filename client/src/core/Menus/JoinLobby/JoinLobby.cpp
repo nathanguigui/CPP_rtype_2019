@@ -15,7 +15,6 @@ RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IM
     this->_font->loadFromFile("assets/fonts/ka.ttf");
     this->_joinText = new sf::Text("JOIN GAME", *this->_font);
     this->_quitText = new sf::Text("QUIT", *this->_font);
-    this->_string = new sf::String();
     this->_textField = new sf::Text("Enter player name", *this->_font);
     this->initGUI();
     this->keyReleased = true;
@@ -32,6 +31,8 @@ void RType::JoinLobby::initGUI() {
     this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 5, 5));
     this->_joinText->setPosition(colPos(screenSize, this->_joinText->getGlobalBounds().width, this->_joinText->getPosition(), 3, 3));
     this->_joinText->setPosition(linePos(screenSize, this->_joinText->getGlobalBounds().height, this->_joinText->getPosition(), 5, 5));
+    this->_textField->setPosition(centerX(screenSize, this->_textField->getGlobalBounds().width, this->_textField->getPosition()));
+    this->_textField->setPosition(centerY(screenSize, this->_textField->getGlobalBounds().height, this->_textField->getPosition()));
 }
 
 void RType::JoinLobby::updateState() {
@@ -103,8 +104,16 @@ void RType::JoinLobby::draw() {
     this->_app->draw(*this->_backgroundSprite);
     this->_app->draw(*this->_joinText);
     this->_app->draw(*this->_quitText);
+    this->_app->draw(*this->_textField);
 }
 
 void RType::JoinLobby::handleText(sf::Event &evt) {
-
+    if(evt.text.unicode == '\b' && this->_string.getSize())
+        this->_string.erase(this->_string.getSize()-1,1);
+    else if (evt.text.unicode < 128)
+        this->_string += evt.text.unicode;
+    this->_textField->setString(this->_string);
+    auto screenSize = this->_app->getSize();
+    this->_textField->setPosition(centerX(screenSize, this->_textField->getGlobalBounds().width, this->_textField->getPosition()));
+    this->_textField->setPosition(centerY(screenSize, this->_textField->getGlobalBounds().height, this->_textField->getPosition()));
 }

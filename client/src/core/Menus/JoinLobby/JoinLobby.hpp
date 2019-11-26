@@ -68,7 +68,7 @@ namespace RType {
         sf::Text *_textField;
 
         /// String of text
-        sf::String *_string;
+        sf::String _string;
 
         bool keyReleased;
 
