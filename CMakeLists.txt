@@ -105,7 +105,7 @@ set(CLIENT_SRC
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
         client/src/core/Loading/Loading.cpp
-        client/src/core/Loading/Loading.hpp client/src/core/Exception/Exception.cpp client/src/core/Exception/Exception.hpp)
+        client/src/core/Loading/Loading.hpp client/src/core/Exception/Exception.cpp client/src/core/Exception/Exception.hpp client/src/core/TcpNetwork/TcpNetwork.cpp client/src/core/TcpNetwork/TcpNetwork.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")

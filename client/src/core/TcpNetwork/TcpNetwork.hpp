@@ -5,10 +5,52 @@
 #ifndef CPP_RTYPE_2019_TCPNETWORK_HPP
 #define CPP_RTYPE_2019_TCPNETWORK_HPP
 
+#include <SFML/Network.hpp>
+#include <SFML/Graphics.hpp>
+#include <sstream>
+#include "client/src/core/Exception/Exception.hpp"
+#include "client/src/core/WindowState/WindowState.hpp"
 
-class TcpNetwork {
+namespace RType {
+    using namespace RType;
 
-};
+    class TcpNetwork {
+    public:
+        /// Default ctor
+        TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort);
+
+        /// Default dtor
+        virtual ~TcpNetwork();
+
+        /// Connect SFML socket to destination
+        void connect();
+
+        /// Create a Lobby
+        void createLobby();
+
+    private:
+        /// Send Data to socket
+        void sendData(const std::string& data);
+
+        /// SFML app
+        sf::RenderWindow *_app;
+
+        /// Window State
+        WindowState *_state;
+
+        /// Destination IP
+        std::string *_destIp;
+
+        /// Destination Port
+        const unsigned short _destPort;
+
+        /// SFML Tcp socket
+        sf::TcpSocket *_tcpSocket;
+
+        /// SFML socket status
+        sf::Socket::Status _status{};
+    };
+}
 
 
 #endif //CPP_RTYPE_2019_TCPNETWORK_HPP

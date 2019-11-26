@@ -29,7 +29,6 @@ void RType::WindowManager::init() {
     this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
     this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
 
-    //network need
     auto scene1 = new Scene(this->_app);
     scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
     auto sceneName = new std::string("scene1");
@@ -46,12 +45,15 @@ void RType::WindowManager::gameLoop() {
 }
 
 void RType::WindowManager::processParams(int ac, char **av) {
+    this->init();
     if (ac < 3)
         throw Exception("Not enough arguments", STARTUP);
-    this->checkIp(av[1]);
-    this->checkPort(av[2]);
-    this->checkUsername(av[3]);
-    this->init();
+    this->_settings->checkIp(av[1]);
+    this->_settings->checkPort(av[2]);
+    this->_settings->checkUsername(av[3]);
+    this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), this->_settings->getLobbyServerPort());
+    // TODO check if debug
+        this->_settings->debugArgs();
 }
 
 void RType::WindowManager::display() {
@@ -75,9 +77,10 @@ void RType::WindowManager::displayInLaunch() {
     if (!this->_state->isSplashDone())
         this->_splashScreen->run();
     else if (this->_state->isLoading()) {
-        if (!_loadingScreen->isLaunched())
+        if (!_loadingScreen->isLaunched()) {
             this->_loadingScreen->launch();
-        else
+            this->_tcpNetwork->connect();
+        } else
             this->_loadingScreen->check();
     }
 }
@@ -88,29 +91,4 @@ void RType::WindowManager::displayInMenu() {
 
 void RType::WindowManager::displayInGame() {
     this->_sceneManager->drawCurrentScene();
-}
-
-void RType::WindowManager::checkIp(char *ip) {
-    std::vector<std::string> result;
-    boost::split(result, ip, boost::is_any_of("."));
-    if (result.size() != 4)
-        throw Exception("invalid ip", STARTUP);
-    for (auto &i : result)
-        if (!std::all_of(i.begin(), i.end(), ::isdigit) || i.empty())
-            throw Exception("invalid ip", STARTUP);
-    this->_serverIp = new std::string(ip);
-}
-
-void RType::WindowManager::checkPort(char *port) {
-    auto tmp = std::string(port);
-    if (!std::all_of(tmp.begin(), tmp.end(), ::isdigit))
-        throw Exception("invalid port", STARTUP);
-    this->_serverPort = (unsigned short) strtoul(port, nullptr, 0);
-}
-
-void RType::WindowManager::checkUsername(char *username) {
-    auto tmp = std::string(username);
-    if (tmp.find_first_not_of("poiuytrezamlkjhgfdsqnbvcxwPOIUYTREZAMLKJHGFDSQNBVCXW0987654321") != std::string::npos)
-        throw Exception("invalid username", STARTUP);
-    this->_playerName = new std::string(username);
 }

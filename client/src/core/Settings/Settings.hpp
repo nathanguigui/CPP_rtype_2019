@@ -8,6 +8,10 @@
 #include <string>
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
+#include <client/src/core/Exception/Exception.hpp>
+#include <boost/algorithm/string/classification.hpp>
+#include <boost/algorithm/string/split.hpp>
+#include <iostream>
 
 namespace RType {
     using namespace RType;
@@ -16,17 +20,34 @@ namespace RType {
         Settings(WindowState *state);
         virtual ~Settings();
 
-        int getServerPort() const;
+        /// Check ip args validity
+        void checkIp(char *ip);
 
-        void setServerPort(int serverPort);
+        /// Check port args validity
+        void checkPort(char *port);
 
-        const std::string &getServerIp() const;
+        /// Check username args validity
+        void checkUsername(char *username);
 
-        void setServerIp(const std::string &serverIp);
+        /// Debug processed args
+        void debugArgs();
+
+        std::string *getPlayerName() const;
+
+        std::string *getLobbyServerIp() const;
+
+        unsigned short getLobbyServerPort() const;
 
     private:
-        int serverPort{};
-        std::string serverIp;
+        /// Lobby player username
+        std::string *_playerName;
+
+        /// Lobby server Ip
+        std::string *_lobbyServerIp;
+
+        /// Lobby server Port
+        unsigned short _lobbyServerPort{};
+
         WindowState *_windowState;
     };
 }

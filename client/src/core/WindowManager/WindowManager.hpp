@@ -17,6 +17,7 @@
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include <boost/algorithm/string.hpp>
+#include <client/src/core/TcpNetwork/TcpNetwork.hpp>
 
 namespace RType {
     using namespace RType;
@@ -29,41 +30,50 @@ namespace RType {
         ~WindowManager();
 
     private:
+        /// Classic Game Loop
         void gameLoop();
+
+        /// Call the good display fc
         void display();
+
+        /// Display elements in launch
         void displayInLaunch();
+
+        /// Display elements in menu
         void displayInMenu();
+
+        /// Display elements in game
         void displayInGame();
-
-        /// Check ip args validity
-        void checkIp(char *ip);
-
-        /// Check port args validity
-        void checkPort(char *port);
-
-        /// Check username args validity
-        void checkUsername(char *username);
 
         /// Name of window
         const std::string &_name;
 
-        /// Lobby player username
-        std::string *_playerName;
-
-        /// Lobby server Ip
-        std::string *_serverIp;
-
-        /// Lobby server Port
-        unsigned short _serverPort{};
-
+        /// SFML Window
         sf::RenderWindow *_app{};
+
+        /// Window State
         WindowState *_state{};
+
+        /// Window Event Manager
         Event *_eventManager{};
+
+        /// Window Settings
         Settings *_settings{};
+
+        /// Window SplashScreen
         SplashScreen *_splashScreen{};
+
+        /// Main Menu
         MainMenu *_mainMenu{};
+
+        /// Scene Manager
         SceneManager *_sceneManager{};
-        Loading *_loadingScreen;
+
+        /// Loading Scene
+        Loading *_loadingScreen{};
+
+        /// Tcp Network for lobby
+        TcpNetwork *_tcpNetwork{};
     };
 }
 
