@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/Gui/Tools.hpp"
@@ -22,7 +23,7 @@ namespace RType {
     };
     class MainMenu : IMenu {
     public:
-        MainMenu(sf::RenderWindow *app, WindowState *state);
+        MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent);
         virtual ~MainMenu();
         void handleLeft() override;
         void handleRight() override;
@@ -47,6 +48,7 @@ namespace RType {
         bool keyReleased;
         bool _disabled = false;
         WindowState *_state;
+        IMenuManager *_parent;
     };
 }
 

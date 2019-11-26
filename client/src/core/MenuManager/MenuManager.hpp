@@ -8,9 +8,10 @@
 
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/Menus/JoinLobby/JoinLobby.hpp"
+#include "IMenuManager.hpp"
 
 namespace RType {
-    class MenuManager {
+    class MenuManager : public IMenuManager {
     public:
         /// Default ctor
         MenuManager(WindowState *state, Event *event, sf::RenderWindow *app);
@@ -22,7 +23,7 @@ namespace RType {
         void draw();
 
         /// Switch menu
-        void switchMenu(MenuType menuType);
+        void switchMenu(MenuType menuType) override;
     private:
         MainMenu *_mainMenu;
         JoinLobby *_joinLobby;

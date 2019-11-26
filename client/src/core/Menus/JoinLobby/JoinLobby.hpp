@@ -6,6 +6,7 @@
 #define CPP_RTYPE_2019_JOINLOBBY_HPP
 
 #include <SFML/Graphics.hpp>
+#include <client/src/core/MenuManager/IMenuManager.hpp>
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Gui/Tools.hpp"
@@ -22,7 +23,7 @@ namespace RType {
     public:
 
         /// Default ctor
-        JoinLobby(sf::RenderWindow *app, WindowState *state);
+        JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IMenuManager *parent);
 
         /// Default dtor
         virtual ~JoinLobby();
@@ -73,6 +74,9 @@ namespace RType {
 
         /// Window state
         WindowState *_state;
+
+        /// Parent Menu Manager
+        IMenuManager *_parent;
     };
 }
 

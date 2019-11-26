@@ -7,8 +7,8 @@
 RType::MenuManager::MenuManager(RType::WindowState *state, RType::Event *event, sf::RenderWindow *app) : _state(state),
                                                                                                          _event(event),
                                                                                                          _app(app) {
-    this->_mainMenu = new MainMenu(this->_app, this->_state);
-    this->_joinLobby = new JoinLobby(this->_app, this->_state);
+    this->_mainMenu = new MainMenu(this->_app, this->_state, this);
+    this->_joinLobby = new JoinLobby(this->_app, this->_state, this);
 }
 
 RType::MenuManager::~MenuManager() = default;
