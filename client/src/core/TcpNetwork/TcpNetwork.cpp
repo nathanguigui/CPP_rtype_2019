@@ -4,9 +4,9 @@
 
 #include "TcpNetwork.hpp"
 
-RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp,
-                              unsigned short destPort)
-        : _app(app), _state(state), _destIp(destIp), _destPort(destPort) {
+RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
+                              Loading *loading)
+        : _app(app), _state(state), _destIp(destIp), _destPort(destPort), _loadingScreen(loading) {
     this->_tcpSocket = new sf::TcpSocket();
 }
 
@@ -15,7 +15,9 @@ void RType::TcpNetwork::connect() {
     this->_status = this->_tcpSocket->connect(destIp, this->_destPort);
     if (this->_status != sf::Socket::Done)
         throw Exception("cannot connect to tcp server", ExceptionType::NETWORK);
-    this->createLobby();
+    if (DEBUG_RTYPE)
+        std::cout << "Tcp network connected to lobby server";
+    this->_loadingScreen->stop();
 }
 
 void RType::TcpNetwork::createLobby() {

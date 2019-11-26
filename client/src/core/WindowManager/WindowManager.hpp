@@ -18,6 +18,8 @@
 #include "client/src/core/Exception/Exception.hpp"
 #include <boost/algorithm/string.hpp>
 #include <client/src/core/TcpNetwork/TcpNetwork.hpp>
+#include <client/src/core/Menus/JoinLobby/JoinLobby.hpp>
+#include "client/src/core/MenuManager/MenuManager.hpp"
 
 namespace RType {
     using namespace RType;
@@ -63,9 +65,6 @@ namespace RType {
         /// Window SplashScreen
         SplashScreen *_splashScreen{};
 
-        /// Main Menu
-        MainMenu *_mainMenu{};
-
         /// Scene Manager
         SceneManager *_sceneManager{};
 
@@ -74,6 +73,9 @@ namespace RType {
 
         /// Tcp Network for lobby
         TcpNetwork *_tcpNetwork{};
+
+        /// Menu Manager
+        MenuManager *_menuManager{};
     };
 }
 

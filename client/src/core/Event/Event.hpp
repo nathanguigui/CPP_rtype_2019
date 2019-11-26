@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_2019_EVENT_HPP
 #define CPP_RTYPE_2019_EVENT_HPP
 #include <SFML/Graphics.hpp>
+#include <client/src/core/Menus/IMenu/IMenu.hpp>
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
@@ -21,6 +22,10 @@ namespace RType {
         ~Event();
         void manageEvent();
 
+        void setCurrentMenu(IMenu *currentMenu);
+
+        void removeCurrentMenu();
+
     private:
         void manageDefaultEvent(sf::Event &evt);
         void manageGameEvent(sf::Event &evt);
@@ -29,6 +34,7 @@ namespace RType {
         sf::RenderWindow *_app;
         WindowState *_windowState;
         std::vector<EventableObject*> _eventableObjects;
+        IMenu *_currentMenu = nullptr;
     };
 }
 

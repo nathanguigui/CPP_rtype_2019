@@ -20,14 +20,16 @@ int RType::WindowManager::run() {
 
 void RType::WindowManager::init() {
     auto videoMode = sf::VideoMode(800, 600);
+    /// Create app, state, event, sceneManager & settings
     this->_app = new sf::RenderWindow(videoMode, "R-Type");
     this->_state = new WindowState(this->_app);
     this->_eventManager = new Event(this, this->_app, this->_state);
     this->_settings = new Settings(this->_state);
-    this->_splashScreen = new SplashScreen(this->_app, this->_state);
-    this->_mainMenu = new MainMenu(this->_app, this->_state, nullptr);
     this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
+    /// Create splash, loading, & menu manager
+    this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
+    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app);
 
     auto scene1 = new Scene(this->_app);
     scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
@@ -36,7 +38,7 @@ void RType::WindowManager::init() {
 }
 
 void RType::WindowManager::gameLoop() {
-    this->_eventManager->addEventableObject((EventableObject*)this->_mainMenu);
+    this->_menuManager->switchMenu(MENU_MAIN_MENU);
     while (_app->isOpen()) {
         this->_app->clear();
         _eventManager->manageEvent();
@@ -51,8 +53,9 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkIp(av[1]);
     this->_settings->checkPort(av[2]);
     this->_settings->checkUsername(av[3]);
-    this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), this->_settings->getLobbyServerPort());
-    // TODO check if debug
+    this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
+                                       this->_settings->getLobbyServerPort(), this->_loadingScreen);
+    if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }
 
@@ -86,7 +89,7 @@ void RType::WindowManager::displayInLaunch() {
 }
 
 void RType::WindowManager::displayInMenu() {
-    this->_mainMenu->draw();
+    this->_menuManager->draw();
 }
 
 void RType::WindowManager::displayInGame() {

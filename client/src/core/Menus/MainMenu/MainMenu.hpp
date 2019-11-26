@@ -7,6 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
@@ -19,9 +20,9 @@ namespace RType {
         MAIN_MENU_JOIN_GAME,
         MAIN_MENU_QUIT_GAME
     };
-    class MainMenu : EventableObject {
+    class MainMenu : IMenu {
     public:
-        MainMenu(sf::RenderWindow *app, WindowState *state, Event *event);
+        MainMenu(sf::RenderWindow *app, WindowState *state);
         virtual ~MainMenu();
         void handleLeft() override;
         void handleRight() override;
@@ -29,7 +30,8 @@ namespace RType {
         void handleDown() override;
         void handleEnter() override;
         void handleKeyReleased() override;
-        void draw();
+        void draw() override;
+        void handleText(sf::Event &evt) override;
 
     private:
         void updateState();
@@ -45,7 +47,6 @@ namespace RType {
         bool keyReleased;
         bool _disabled = false;
         WindowState *_state;
-        Event *_event;
     };
 }
 

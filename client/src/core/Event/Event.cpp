@@ -9,9 +9,7 @@ RType::Event::Event(WindowManager *parent, sf::RenderWindow *app, WindowState *s
 
 }
 
-RType::Event::~Event() {
-
-}
+RType::Event::~Event() = default;
 
 void RType::Event::manageEvent() {
     sf::Event evt;
@@ -30,7 +28,31 @@ void RType::Event::manageGameEvent(sf::Event &evt) {
 }
 
 void RType::Event::manageMenuEvent(sf::Event &evt) {
-    this->manageDefaultEvent(evt);
+    if (this->_currentMenu == nullptr)
+        return;
+    if (evt.type == sf::Event::EventType::TextEntered)
+        this->_currentMenu->handleText(evt);
+    if (evt.type == sf::Event::EventType::KeyReleased)
+        this->_currentMenu->handleKeyReleased();
+    if (evt.type == sf::Event::KeyPressed) {
+        switch (evt.key.code) {
+            case sf::Keyboard::Left :
+                this->_currentMenu->handleLeft();
+                break;
+            case sf::Keyboard::Right :
+                this->_currentMenu->handleRight();
+                break;
+            case sf::Keyboard::Up :
+                this->_currentMenu->handleUp();
+                break;
+            case sf::Keyboard::Down :
+                this->_currentMenu->handleDown();
+                break;
+            case sf::Keyboard::Enter :
+                this->_currentMenu->handleEnter();
+                break;
+        }
+    }
 }
 
 void RType::Event::addEventableObject(RType::EventableObject *eventableObject) {
@@ -63,4 +85,12 @@ void RType::Event::manageDefaultEvent(sf::Event &evt) {
                 break;
         }
     }
+}
+
+void RType::Event::setCurrentMenu(RType::IMenu *currentMenu) {
+    _currentMenu = currentMenu;
+}
+
+void RType::Event::removeCurrentMenu() {
+    _currentMenu = nullptr;
 }

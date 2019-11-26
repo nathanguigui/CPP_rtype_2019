@@ -8,8 +8,11 @@
 #include <SFML/Network.hpp>
 #include <SFML/Graphics.hpp>
 #include <sstream>
+#include <iostream>
+#include "client/src/core/core.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
+#include "client/src/core/Loading/Loading.hpp"
 
 namespace RType {
     using namespace RType;
@@ -17,7 +20,8 @@ namespace RType {
     class TcpNetwork {
     public:
         /// Default ctor
-        TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort);
+        TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
+                   Loading *loading);
 
         /// Default dtor
         virtual ~TcpNetwork();
@@ -49,6 +53,9 @@ namespace RType {
 
         /// SFML socket status
         sf::Socket::Status _status{};
+
+        /// Loading Screen
+        Loading *_loadingScreen;
     };
 }
 
