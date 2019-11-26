@@ -30,7 +30,6 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
 
-    this->title = new SplashTitle();
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
 }
 

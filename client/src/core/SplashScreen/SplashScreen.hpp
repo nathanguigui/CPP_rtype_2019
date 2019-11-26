@@ -20,8 +20,6 @@
 #include "../../game/Bullets/BulletTouch/SuperTouch/SuperTouch.h"
 #include "../../game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.h"
 
-#include "../../game/SplashTitle/SplashTitle.h"
-
 
 namespace RType {
     using namespace RType;
@@ -45,7 +43,6 @@ namespace RType {
         RType::SuperTouch *touch;
         RType::SimpleTouch *simpleTouch;
 
-        RType::SplashTitle *title;
 
         sf::Sprite *_splash;
         sf::Sprite *_background;
