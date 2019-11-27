@@ -74,9 +74,9 @@ void RType::MainMenu::handleEnter() {
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
-                //this->_parent->switchMenu()
-                this->_state->setWindowMode(IN_GAME);
-                this->_disabled = true;
+                this->_parent->sendTcpCommand(TcpNetwork::Commands::CREATE_LOBBY);
+                //this->_state->setWindowMode(IN_GAME);
+                //this->_disabled = true;
                 break;
             case MAIN_MENU_JOIN_GAME:
                 this->_parent->switchMenu(MENU_JOIN_LOBBY);

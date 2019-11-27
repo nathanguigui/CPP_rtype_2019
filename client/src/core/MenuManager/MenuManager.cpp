@@ -4,9 +4,9 @@
 
 #include "MenuManager.hpp"
 
-RType::MenuManager::MenuManager(RType::WindowState *state, RType::Event *event, sf::RenderWindow *app) : _state(state),
-                                                                                                         _event(event),
-                                                                                                         _app(app) {
+RType::MenuManager::MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,
+                                Settings *settings)
+        : _state(state), _event(event), _app(app), _network(network) {
     this->_mainMenu = new MainMenu(this->_app, this->_state, this);
     this->_joinLobby = new JoinLobby(this->_app, this->_state, this);
 }
@@ -38,4 +38,26 @@ void RType::MenuManager::switchMenu(RType::MenuType menuType) {
             break;
     }
     this->_state->setMenuType(menuType);
+}
+
+void RType::MenuManager::sendTcpCommand(RType::TcpNetwork::Commands commands) {
+    switch (commands) {
+        case TcpNetwork::CREATE_LOBBY:
+            this->_network->createLobby();
+            break;
+        case TcpNetwork::JOIN_LOBBY:
+            if (this->_settings->getLobbyCode() != nullptr)
+                this->_network->joinLobby(this->_settings->getLobbyCode(), this->_settings->getPlayerName());
+            break;
+        case TcpNetwork::READY_LOBBY:
+            break;
+        case TcpNetwork::INFO_LOBBY:
+            break;
+        case TcpNetwork::START_LOBBY:
+            break;
+    }
+}
+
+void RType::MenuManager::setLobbyCode(std::string *code) {
+    this->_settings->setLobbyCode(code);
 }

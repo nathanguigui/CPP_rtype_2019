@@ -88,6 +88,11 @@ void RType::JoinLobby::handleEnter() {
     if (this->keyReleased) {
         switch (this->_lobbyStatus) {
             case JOIN_LOBBY_JOIN:
+                if (this->_textField->getString().getSize() > 0) {
+                    auto code = this->_string.toAnsiString();
+                    this->_parent->setLobbyCode(&code);
+                    this->_parent->sendTcpCommand(TcpNetwork::Commands::JOIN_LOBBY);
+                }
                 break;
             case JOIN_LOBBY_EXIT:
                 this->_parent->switchMenu(MENU_MAIN_MENU);

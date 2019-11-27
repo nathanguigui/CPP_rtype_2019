@@ -14,6 +14,6 @@ const char *RType::Exception::what() const noexcept {
 }
 
 void RType::Exception::printHelp() {
-    std::cout << "RTYPE:\r\n\t./rtype_client [SERVER_IP] [SERVER_PORT] [USERNAME]\r\n\r\n\t[SERVER_IP] => ex:\"196.168.1.17\"";
-    std::cout << "\r\n\t[SERVER_PORT] => ex:\"8080\"\r\n\t[USERNAME] => only alpha-numeric chars\r\n";
+    std::cout << "RTYPE:\r\n\t./rtype_client SERVER_IP SERVER_PORT USERNAME\r\n\r\n\tSERVER_IP => ex:\"196.168.1.17\"";
+    std::cout << "\r\n\tSERVER_PORT => ex:\"8080\"\r\n\tUSERNAME => only alpha-numeric chars\r\n";
 }

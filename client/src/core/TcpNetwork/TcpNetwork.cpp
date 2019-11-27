@@ -32,4 +32,30 @@ void RType::TcpNetwork::sendData(const std::string& data) {
     this->_tcpSocket->send(tmp);
 }
 
+void RType::TcpNetwork::joinLobby(std::string *code, std::string *playerName) {
+    auto ss = std::stringstream();
+    ss << "LOBBY JOIN " << *code << " " << *playerName << ";\n€\n";
+    this->sendData(ss.str());
+}
+
+void RType::TcpNetwork::lobbyReady(std::string code, std::string playerName) {
+    auto ss = std::stringstream();
+    ss << "LOBBY READY " << code << " " << playerName << ";\n€\n";
+    this->sendData(ss.str());
+
+}
+
+void RType::TcpNetwork::lobbyInfo(std::string code) {
+    auto ss = std::stringstream();
+    ss << "LOBBY INFO " << code << ";\n€\n";
+    this->sendData(ss.str());
+
+}
+
+void RType::TcpNetwork::lobbyStart(std::string code) {
+    auto ss = std::stringstream();
+    ss << "LOBBY START " << code << ";\n€\n";
+    this->sendData(ss.str());
+}
+
 RType::TcpNetwork::~TcpNetwork() = default;

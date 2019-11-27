@@ -29,7 +29,6 @@ void RType::WindowManager::init() {
     /// Create splash, loading, & menu manager
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
-    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app);
 
     auto scene1 = new Scene(this->_app);
     scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
@@ -55,6 +54,7 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkUsername(av[3]);
     this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
                                        this->_settings->getLobbyServerPort(), this->_loadingScreen);
+    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork, this->_settings);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }
