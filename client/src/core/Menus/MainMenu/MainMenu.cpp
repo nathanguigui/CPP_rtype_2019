@@ -18,6 +18,8 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManage
     this->_quitText = new sf::Text("QUIT", *this->_font);
     this->initGUI();
     this->keyReleased = true;
+    this->_sound = new MenuSelectSound();
+    this->_quitsound = new QuitSound();
 }
 
 RType::MainMenu::~MainMenu() = default;
@@ -29,6 +31,7 @@ void RType::MainMenu::handleRight() {
 }
 
 void RType::MainMenu::handleUp() {
+    this->_sound->run();
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
@@ -48,6 +51,7 @@ void RType::MainMenu::handleUp() {
 }
 
 void RType::MainMenu::handleDown() {
+    this->_sound->run();
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
@@ -78,6 +82,8 @@ void RType::MainMenu::handleEnter() {
                 this->_parent->switchMenu(MENU_JOIN_LOBBY);
                 break;
             case MAIN_MENU_QUIT_GAME:
+                this->_quitsound->run();
+                sleep(3);
                 exit(0);
         }
     }

@@ -7,12 +7,15 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+#include <unistd.h>
 #include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Event/Event.hpp"
+#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
+#include "client/src/core/Sounds/QuitSound/QuitSound.h"
 
 namespace RType {
     using namespace RType;
@@ -37,6 +40,8 @@ namespace RType {
     private:
         void updateState();
         void initGUI();
+        MenuSelectSound *_sound;
+        QuitSound *_quitsound;
         sf::RenderWindow *_app;
         sf::Texture *_backgroundTexture;
         sf::Sprite *_backgroundSprite;
