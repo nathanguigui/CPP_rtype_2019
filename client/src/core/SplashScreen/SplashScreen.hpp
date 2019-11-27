@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #define CPP_RTYPE_2019_SPLASHSCREEN_HPP
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
 
@@ -43,6 +44,8 @@ namespace RType {
         RType::SuperTouch *touch;
         RType::SimpleTouch *simpleTouch;
 
+        sf::SoundBuffer _buffer;
+        sf::Sound _sound;
 
         sf::Sprite *_splash;
         sf::Sprite *_background;

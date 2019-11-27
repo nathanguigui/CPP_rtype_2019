@@ -31,6 +31,10 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->bomb = new SimpleBomb();
 
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
+
+    this->_buffer.loadFromFile("assets/music/splashscreen.wav");    
+    this->_sound.setBuffer(this->_buffer);
+    this->_sound.play();
 }
 
 void RType::SplashScreen::run() {
@@ -38,6 +42,7 @@ void RType::SplashScreen::run() {
     auto screenSize = this->_app->getSize();
     this->_splash->setPosition(centerX(screenSize, this->_splash->getGlobalBounds().width, this->_splash->getPosition()));
     this->_splash->setPosition(centerY(screenSize, this->_splash->getGlobalBounds().height, this->_splash->getPosition()));
+
 
     if (this->_currentFrame == 0) {
         this->_clock = new sf::Clock();
@@ -61,6 +66,8 @@ void RType::SplashScreen::run() {
         _app->draw(*this->_background);
         _app->draw(*this->_splash);
         this->_currentFrame += 1;
+    } else if (this->_clock->getElapsedTime().asSeconds() >= 4) {
+        this->_sound.stop();
     }
 }
 
