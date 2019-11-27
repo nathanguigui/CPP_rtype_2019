@@ -67,10 +67,12 @@ Failed:
 Ask server to join Lobby with code.
 
 ```
-    LOBBY JOIN [CODE];
+    LOBBY JOIN [CODE] [PLAYER_NAME];
     €
 ```
-Where \[CODE\] is replaced with the unique code of the Lobby
+Where \[CODE\] is replaced with the unique code of the Lobby,
+
+\[PLAYER_COUNT\] is replaced by the number of player in the Lobby
 
 #### Response from the server:
 

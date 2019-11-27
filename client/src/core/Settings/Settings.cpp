@@ -5,7 +5,6 @@
 #include "Settings.hpp"
 
 RType::Settings::Settings(WindowState *state): _windowState(state) {
-
 }
 
 void RType::Settings::checkIp(char *ip) {
@@ -48,6 +47,14 @@ std::string *RType::Settings::getLobbyServerIp() const {
 
 unsigned short RType::Settings::getLobbyServerPort() const {
     return _lobbyServerPort;
+}
+
+std::string *RType::Settings::getLobbyCode() const {
+    return _lobbyCode;
+}
+
+void RType::Settings::setLobbyCode(std::string *lobbyCode) {
+    _lobbyCode = lobbyCode;
 }
 
 RType::Settings::~Settings() = default;

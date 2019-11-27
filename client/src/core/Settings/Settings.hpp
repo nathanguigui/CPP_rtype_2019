@@ -38,17 +38,25 @@ namespace RType {
 
         unsigned short getLobbyServerPort() const;
 
+        std::string *getLobbyCode() const;
+
+        void setLobbyCode(std::string *lobbyCode);
+
     private:
         /// Lobby player username
-        std::string *_playerName;
+        std::string *_playerName{};
 
         /// Lobby server Ip
-        std::string *_lobbyServerIp;
+        std::string *_lobbyServerIp{};
 
         /// Lobby server Port
         unsigned short _lobbyServerPort{};
 
+        /// Window State
         WindowState *_windowState;
+
+        /// Lobby Code
+        std::string *_lobbyCode{};
     };
 }
 

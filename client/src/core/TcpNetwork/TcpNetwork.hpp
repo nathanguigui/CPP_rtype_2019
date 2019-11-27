@@ -32,6 +32,27 @@ namespace RType {
         /// Create a Lobby
         void createLobby();
 
+        /// Join a Lobby
+        void joinLobby(std::string *code, std::string *playerName);
+
+        /// Set player ready
+        void lobbyReady(std::string code, std::string playerName);
+
+        /// Get Lobby infos
+        void lobbyInfo(std::string code);
+
+        /// Start Lobby
+        void lobbyStart(std::string code);
+
+        /// Enum for all tcp command
+        enum Commands {
+            CREATE_LOBBY,
+            JOIN_LOBBY,
+            READY_LOBBY,
+            INFO_LOBBY,
+            START_LOBBY
+        };
+
     private:
         /// Send Data to socket
         void sendData(const std::string& data);
