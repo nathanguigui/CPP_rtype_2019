@@ -77,6 +77,7 @@ namespace RType {
 
         /// Loading Screen
         Loading *_loadingScreen;
+
     };
 }
 

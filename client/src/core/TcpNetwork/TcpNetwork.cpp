@@ -8,6 +8,7 @@ RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, WindowState *state, std::st
                               Loading *loading)
         : _app(app), _state(state), _destIp(destIp), _destPort(destPort), _loadingScreen(loading) {
     this->_tcpSocket = new sf::TcpSocket();
+
 }
 
 void RType::TcpNetwork::connect() {
@@ -24,6 +25,14 @@ void RType::TcpNetwork::createLobby() {
     auto ss = std::stringstream();
     ss << "LOBBY CREATE;\n€\n";
     this->sendData(ss.str());
+    
+    char data[1000];
+    std::size_t recieved;
+    if (this->_tcpSocket->receive(data, 100, recieved) != sf::Socket::Done) {
+        std::cout << "error" << std::endl;
+    } else {
+        std::cout << data << std::endl;
+    }
 }
 
 void RType::TcpNetwork::sendData(const std::string& data) {
