@@ -63,7 +63,7 @@ namespace RType {
         std::string *_lobbyCode{};
 
         /// Sound volume
-        int _soundVolume;
+        int _soundVolume = 100;
     };
 }
 
