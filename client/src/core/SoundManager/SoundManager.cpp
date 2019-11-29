@@ -9,6 +9,8 @@ RType::SoundManager::SoundManager(Settings *settings) : _settings(settings) {
 }
 
 void RType::SoundManager::play(std::string type) {
+    this->setVol();
+
     if (type == "bubble") {
         this->_selected->run();
     }
