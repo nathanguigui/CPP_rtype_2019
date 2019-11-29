@@ -7,6 +7,7 @@
 
 
 #include <client/src/game/Menus/Lobby/Lobby.hpp>
+#include <client/src/core/LoadScreen/LoadScreen.hpp>
 #include "client/src/core/Settings/Settings.hpp"
 #include "client/src/game/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/game/Menus/JoinLobby/JoinLobby.hpp"
@@ -18,7 +19,8 @@ namespace RType {
     class MenuManager : public IMenuManager {
     public:
         /// Default ctor
-        MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network, Settings *settings);
+        MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,
+                    Settings *settings, LoadScreen *loadScreen);
 
         /// Default dtor
         virtual ~MenuManager();
@@ -62,6 +64,9 @@ namespace RType {
 
         /// Lobby Network
         TcpNetwork *_network;
+
+        /// Load Screen
+        LoadScreen *_loadScreen;
     };
 }
 

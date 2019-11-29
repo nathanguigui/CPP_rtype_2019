@@ -11,6 +11,7 @@
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
+#include <iostream>
 
 namespace RType {
     using namespace RType;

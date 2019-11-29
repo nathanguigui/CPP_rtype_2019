@@ -29,6 +29,7 @@ void RType::WindowManager::init() {
     /// Create splash, loading, & menu manager
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
+    this->_loadScreen = new LoadScreen(this->_app, this->_state);
 
     auto scene1 = new Scene(this->_app);
     scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
@@ -54,7 +55,9 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkUsername(av[3]);
     this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
                                        this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings);
-    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork, this->_settings);
+    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
+                                         this->_settings, this->_loadScreen);
+    this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }
@@ -89,7 +92,10 @@ void RType::WindowManager::displayInLaunch() {
 }
 
 void RType::WindowManager::displayInMenu() {
-    this->_menuManager->draw();
+    if (this->_state->isLoading())
+        this->_loadScreen->run();
+    else
+        this->_menuManager->draw();
 }
 
 void RType::WindowManager::displayInGame() {

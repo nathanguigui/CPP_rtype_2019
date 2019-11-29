@@ -5,8 +5,8 @@
 #include "MenuManager.hpp"
 
 RType::MenuManager::MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,
-                                Settings *settings)
-        : _state(state), _event(event), _app(app), _network(network), _settings(settings) {
+                                Settings *settings, LoadScreen *loadScreen)
+        : _state(state), _event(event), _app(app), _network(network), _settings(settings), _loadScreen(loadScreen) {
     this->_mainMenu = new MainMenu(this->_app, this->_state, this);
     this->_joinLobby = new JoinLobby(this->_app, this->_state, this);
     this->_lobbyMenu = new Lobby(this->_app, this->_state, this, this->_settings);
@@ -53,6 +53,7 @@ void RType::MenuManager::sendTcpCommand(RType::TcpNetwork::Commands commands) {
         case TcpNetwork::CREATE_LOBBY:
             this->_network->createLobby();
             this->_state->setIsLoading(true);
+            this->_loadScreen->run();
             this->_network->waitForPacket();
             this->_state->setIsLoading(false);
             break;

@@ -44,12 +44,6 @@ void RType::LoadScreen::run() {
     this->_splash->setPosition(centerY(screenSize, this->_splash->getGlobalBounds().height, this->_splash->getPosition()));
 
     this->_splash->setTextureRect(this->boum->run());
-
-    if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
-    {
-        this->_splash->setTextureRect(this->boum->run());
-        this->_splashClock->restart();
-    }
     _app->draw(*this->_background);
     _app->draw(*this->_splash);
 }

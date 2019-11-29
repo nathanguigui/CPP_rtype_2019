@@ -52,15 +52,15 @@ namespace RType {
 
         sf::Sprite *_splash;
         sf::Sprite *_background;
-        sf::IntRect *_rectSourceSprite;
+        sf::IntRect *_rectSourceSprite{};
         sf::Texture *_splashTexture;
         sf::Texture *_backgroundTexture;
-        sf::Clock *_clock;
-        sf::Clock *_splashClock;
+        sf::Clock *_clock{};
+        sf::Clock *_splashClock{};
         sf::RenderWindow *_app;
-        bool _done;
-        int _currentFrame;
-        int _lastFrame;
+        bool _done{};
+        int _currentFrame{};
+        int _lastFrame{};
         WindowState *_windowState;
     };
 }

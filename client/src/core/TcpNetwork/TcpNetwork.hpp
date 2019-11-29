@@ -14,11 +14,13 @@
 #include "client/src/core/Exception/Exception.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Loading/Loading.hpp"
+#include "client/src/core/MenuManager/IMenuManager.hpp"
+#include "client/src/core/TcpNetwork/ITcpNetwork.hpp"
 
 namespace RType {
     using namespace RType;
 
-    class TcpNetwork {
+    class TcpNetwork : public ITcpNetwork {
     public:
         /// Default ctor
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
@@ -48,14 +50,8 @@ namespace RType {
         /// Wait for packet and parse it
         void waitForPacket();
 
-        /// Enum for all tcp command
-        enum Commands {
-            CREATE_LOBBY,
-            JOIN_LOBBY,
-            READY_LOBBY,
-            INFO_LOBBY,
-            START_LOBBY
-        };
+        /// Set current menu manager to send callback
+        void setMenuManager(IMenuManager *menuManager);
 
     private:
         /// Send Data to socket
@@ -90,6 +86,9 @@ namespace RType {
 
         /// Settings
         Settings *_settings;
+
+        /// Window menu manager
+        IMenuManager *_menuManager = nullptr;
 
     };
 }

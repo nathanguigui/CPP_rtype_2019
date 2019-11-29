@@ -11,6 +11,7 @@
 #include <client/src/core/MenuManager/IMenuManager.hpp>
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include <client/src/core/Gui/Tools.hpp>
+#include "client/src/core/Settings/Settings.hpp"
 
 namespace RType {
     using namespace RType;

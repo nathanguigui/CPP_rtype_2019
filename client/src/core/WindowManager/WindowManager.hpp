@@ -20,6 +20,7 @@
 #include <client/src/core/TcpNetwork/TcpNetwork.hpp>
 #include <client/src/game/Menus/JoinLobby/JoinLobby.hpp>
 #include "client/src/core/MenuManager/MenuManager.hpp"
+#include "client/src/core/LoadScreen/LoadScreen.hpp"
 
 namespace RType {
     using namespace RType;
@@ -76,6 +77,9 @@ namespace RType {
 
         /// Menu Manager
         MenuManager *_menuManager{};
+
+        /// Load screen simple
+        LoadScreen *_loadScreen;
     };
 }
 

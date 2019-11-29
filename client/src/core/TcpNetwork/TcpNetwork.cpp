@@ -77,7 +77,8 @@ void RType::TcpNetwork::parsePacket(std::string command) {
             if (argv[2] == "SUCCEED" && argv.size() > 3) {
                 auto newCode = new::std::string(argv[3]);
                 this->_settings->setLobbyCode(newCode);
-                this->_state->setMenuType(MenuType::MENU_LOBBY_MENU);
+                if (this->_menuManager != nullptr)
+                    this->_menuManager->switchMenu(MenuType::MENU_LOBBY_MENU);
             }
         }
     }
@@ -96,6 +97,10 @@ void RType::TcpNetwork::parseMultiplePacket(char *packet, std::size_t packetSize
             this->parsePacket(packet_one);
         */
     }
+}
+
+void RType::TcpNetwork::setMenuManager(RType::IMenuManager *menuManager) {
+    _menuManager = menuManager;
 }
 
 RType::TcpNetwork::~TcpNetwork() = default;
