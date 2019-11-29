@@ -57,8 +57,8 @@ set(CLIENT_SRC
         client/src/core/Settings/Settings.cpp
         client/src/core/Settings/Settings.hpp
         client/src/core/EventableObject/EventableObject.hpp
-        client/src/core/Menus/MainMenu/MainMenu.cpp
-        client/src/core/Menus/MainMenu/MainMenu.hpp
+        client/src/game/Menus/MainMenu/MainMenu.cpp
+        client/src/game/Menus/MainMenu/MainMenu.hpp
         client/src/core/Scene/Scene.cpp
         client/src/core/Scene/Scene.hpp
         client/src/core/SceneObject/SceneObject.hpp
@@ -110,8 +110,8 @@ set(CLIENT_SRC
         client/src/core/TcpNetwork/TcpNetwork.cpp
         client/src/core/TcpNetwork/TcpNetwork.hpp
         client/src/core/Menus/IMenu/IMenu.hpp
-        client/src/core/Menus/JoinLobby/JoinLobby.cpp
-        client/src/core/Menus/JoinLobby/JoinLobby.hpp
+        client/src/game/Menus/JoinLobby/JoinLobby.cpp
+        client/src/game/Menus/JoinLobby/JoinLobby.hpp
         client/src/core/MenuManager/MenuManager.cpp
         client/src/core/MenuManager/MenuManager.hpp
         client/src/core/MenuManager/IMenuManager.hpp
@@ -122,8 +122,8 @@ set(CLIENT_SRC
         client/src/core/Sounds/MenuMusic/MenuMusic.cpp
         client/src/core/Sounds/MenuMusic/MenuMusic.h
         client/src/core/ITcpReceiver/ITcpReceiver.hpp
-        client/src/core/Menus/Lobby/Lobby.cpp
-        client/src/core/Menus/Lobby/Lobby.hpp
+        client/src/game/Menus/Lobby/Lobby.cpp
+        client/src/game/Menus/Lobby/Lobby.hpp
         client/src/game/enemies/LittleRed/LittleRed.cpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp

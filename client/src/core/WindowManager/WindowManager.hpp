@@ -12,13 +12,13 @@
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Settings/Settings.hpp"
 #include "client/src/core/SplashScreen/SplashScreen.hpp"
-#include "client/src/core/Menus/MainMenu/MainMenu.hpp"
+#include "client/src/game/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/SceneManager/SceneManager.hpp"
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include <boost/algorithm/string.hpp>
 #include <client/src/core/TcpNetwork/TcpNetwork.hpp>
-#include <client/src/core/Menus/JoinLobby/JoinLobby.hpp>
+#include <client/src/game/Menus/JoinLobby/JoinLobby.hpp>
 #include "client/src/core/MenuManager/MenuManager.hpp"
 
 namespace RType {
