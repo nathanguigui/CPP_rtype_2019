@@ -58,4 +58,12 @@ void RType::Settings::setLobbyCode(std::string *lobbyCode) {
     _lobbyCode = lobbyCode;
 }
 
+int RType::Settings::getSoundVolume() const {
+    return _soundVolume;
+}
+
+void RType::Settings::setSoundVolume(int soundVolume) {
+    _soundVolume = soundVolume;
+}
+
 RType::Settings::~Settings() = default;

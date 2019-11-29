@@ -42,6 +42,10 @@ namespace RType {
 
         void setLobbyCode(std::string *lobbyCode);
 
+        int getSoundVolume() const;
+
+        void setSoundVolume(int soundVolume);
+
     private:
         /// Lobby player username
         std::string *_playerName{};
@@ -57,6 +61,9 @@ namespace RType {
 
         /// Lobby Code
         std::string *_lobbyCode{};
+
+        /// Sound volume
+        int _soundVolume;
     };
 }
 
