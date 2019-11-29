@@ -104,11 +104,28 @@ set(CLIENT_SRC
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
         client/src/core/Loading/Loading.cpp
-        client/src/core/Loading/Loading.hpp client/src/core/Exception/Exception.cpp client/src/core/Exception/Exception.hpp client/src/core/TcpNetwork/TcpNetwork.cpp client/src/core/TcpNetwork/TcpNetwork.hpp client/src/core/Menus/IMenu/IMenu.hpp client/src/core/Menus/JoinLobby/JoinLobby.cpp client/src/core/Menus/JoinLobby/JoinLobby.hpp client/src/core/MenuManager/MenuManager.cpp client/src/core/MenuManager/MenuManager.hpp client/src/core/MenuManager/IMenuManager.hpp
+        client/src/core/Loading/Loading.hpp
+        client/src/core/Exception/Exception.cpp
+        client/src/core/Exception/Exception.hpp
+        client/src/core/TcpNetwork/TcpNetwork.cpp
+        client/src/core/TcpNetwork/TcpNetwork.hpp
+        client/src/core/Menus/IMenu/IMenu.hpp
+        client/src/core/Menus/JoinLobby/JoinLobby.cpp
+        client/src/core/Menus/JoinLobby/JoinLobby.hpp
+        client/src/core/MenuManager/MenuManager.cpp
+        client/src/core/MenuManager/MenuManager.hpp
+        client/src/core/MenuManager/IMenuManager.hpp
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.cpp
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h
         client/src/core/Sounds/QuitSound/QuitSound.cpp
-        client/src/core/Sounds/QuitSound/QuitSound.h client/src/core/ITcpReceiver/ITcpReceiver.hpp client/src/core/Menus/Lobby/Lobby.cpp client/src/core/Menus/Lobby/Lobby.hpp)
+        client/src/core/Sounds/QuitSound/QuitSound.h
+        client/src/core/ITcpReceiver/ITcpReceiver.hpp
+        client/src/core/Menus/Lobby/Lobby.cpp
+        client/src/core/Menus/Lobby/Lobby.hpp
+        client/src/game/enemies/LittleRed/LittleRed.cpp
+        client/src/game/enemies/LittleRed/LittleRed.h
+        client/src/game/AnimateSprite/AnimateSprite.cpp
+        client/src/game/AnimateSprite/AnimateSprite.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")
 
@@ -117,6 +134,9 @@ add_custom_target(copy-files ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/client/src/assets/
         ${CMAKE_BINARY_DIR}/assets/
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/build/bin/
+        ${CMAKE_BINARY_DIR}/
 )
 target_link_libraries(rtype_client ${CONAN_LIBS})
 
