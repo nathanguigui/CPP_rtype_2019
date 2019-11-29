@@ -6,15 +6,17 @@
 #define CPP_RTYPE_2019_MASTERBULLET_H
 
 #include <SFML/Graphics.hpp>
+#include "../../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class MasterBullet {
+    class MasterBullet : public ISprite {
     public:
         MasterBullet();
         ~MasterBullet();
         sf::IntRect run();
         sf::Texture getTexture();
+        std::string _texture = "assets/bullets/r-typesheet1.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;

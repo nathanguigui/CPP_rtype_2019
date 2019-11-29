@@ -6,15 +6,17 @@
 #define CPP_RTYPE_2019_SIMPLEBOMB_H
 
 #include <SFML/Graphics.hpp>
+#include "../../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class SimpleBomb {
+    class SimpleBomb : public ISprite {
     public:
         SimpleBomb();
         ~SimpleBomb();
         sf::IntRect run();
         sf::Texture getTexture();
+        std::string _texture = "assets/bullets/r-typesheet1.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;

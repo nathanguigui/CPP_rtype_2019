@@ -6,15 +6,17 @@
 #define CPP_RTYPE_2019_SUPERBULLET2_H
 
 #include <SFML/Graphics.hpp>
+#include "../../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class SuperBullet2 {
+    class SuperBullet2 : public ISprite {
     public:
         SuperBullet2();
         ~SuperBullet2();
         sf::IntRect run();
         sf::Texture getTexture();
+        std::string _texture = "assets/bullets/r-typesheet1.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;

@@ -33,11 +33,12 @@ namespace RType {
     class AnimateSprite: public CoreObject {
     public:
         AnimateSprite(sf::RenderWindow *app, WindowState *state);
-        void run();
+        void run(std::string type);
         ~AnimateSprite();
 
 
     private:
+
         RType::SuperBullet1 *super1;
         RType::SuperBullet2 *super2;
         RType::SuperBullet3 *super3;
@@ -57,16 +58,19 @@ namespace RType {
 
         sf::Sprite *_splash;
         sf::Sprite *_background;
+
         sf::IntRect *_rectSourceSprite;
+
         sf::Texture *_splashTexture;
         sf::Texture *_backgroundTexture;
+
         sf::Clock *_clock;
         sf::Clock *_splashClock;
+
         sf::RenderWindow *_app;
-        bool _done;
-        int _currentFrame;
-        int _lastFrame;
         WindowState *_windowState;
+
+        std::map<std::string, ISprite*> sprites;
     };
 }
 

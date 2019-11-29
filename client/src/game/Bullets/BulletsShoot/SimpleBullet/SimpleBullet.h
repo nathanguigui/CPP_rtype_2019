@@ -6,15 +6,17 @@
 #define CPP_RTYPE_2019_SIMPLEBULLET_H
 
 #include <SFML/Graphics.hpp>
+#include "../../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class SimpleBullet {
+    class SimpleBullet : public ISprite{
     public:
         SimpleBullet();
         ~SimpleBullet();
         sf::IntRect run();
         sf::Texture getTexture();
+        std::string _texture = "assets/bullets/r-typesheet1.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;
