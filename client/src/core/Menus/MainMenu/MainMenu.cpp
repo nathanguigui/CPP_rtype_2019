@@ -134,3 +134,6 @@ void RType::MainMenu::handleKeyReleased() {
 void RType::MainMenu::handleText(sf::Event &evt) {
 
 }
+
+void RType::MainMenu::packetReceived(RType::ITcpReceiver::PacketType type, std::string data) {
+}

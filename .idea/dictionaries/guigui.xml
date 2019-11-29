@@ -2,6 +2,8 @@
   <dictionary name="guigui">
     <words>
       <w>apropriate</w>
+      <w>guigui</w>
+      <w>sfml</w>
     </words>
   </dictionary>
 </component>

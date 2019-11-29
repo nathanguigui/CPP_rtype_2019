@@ -108,7 +108,7 @@ set(CLIENT_SRC
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.cpp
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h
         client/src/core/Sounds/QuitSound/QuitSound.cpp
-        client/src/core/Sounds/QuitSound/QuitSound.h)
+        client/src/core/Sounds/QuitSound/QuitSound.h client/src/core/ITcpReceiver/ITcpReceiver.hpp client/src/core/Menus/Lobby/Lobby.cpp client/src/core/Menus/Lobby/Lobby.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")
 

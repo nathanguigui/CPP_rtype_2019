@@ -5,6 +5,7 @@
 #include "Settings.hpp"
 
 RType::Settings::Settings(WindowState *state): _windowState(state) {
+    this->_lobbyCode = new std::string("");
 }
 
 void RType::Settings::checkIp(char *ip) {

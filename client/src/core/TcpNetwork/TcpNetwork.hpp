@@ -9,6 +9,7 @@
 #include <SFML/Graphics.hpp>
 #include <sstream>
 #include <iostream>
+#include <client/src/core/Settings/Settings.hpp>
 #include "client/src/core/core.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
@@ -21,7 +22,7 @@ namespace RType {
     public:
         /// Default ctor
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
-                   Loading *loading);
+                   Loading *loading, Settings *settings);
 
         /// Default dtor
         virtual ~TcpNetwork();
@@ -44,6 +45,9 @@ namespace RType {
         /// Start Lobby
         void lobbyStart(std::string code);
 
+        /// Wait for packet and parse it
+        void waitForPacket();
+
         /// Enum for all tcp command
         enum Commands {
             CREATE_LOBBY,
@@ -56,6 +60,12 @@ namespace RType {
     private:
         /// Send Data to socket
         void sendData(const std::string& data);
+
+        /// Parse multiple packet
+        void parseMultiplePacket(char *packet, std::size_t packetSize);
+
+        /// Parse received packet
+        void parsePacket(std::string command);
 
         /// SFML app
         sf::RenderWindow *_app;
@@ -77,6 +87,9 @@ namespace RType {
 
         /// Loading Screen
         Loading *_loadingScreen;
+
+        /// Settings
+        Settings *_settings;
 
     };
 }

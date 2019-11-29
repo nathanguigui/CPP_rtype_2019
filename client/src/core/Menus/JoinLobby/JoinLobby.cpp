@@ -90,8 +90,9 @@ void RType::JoinLobby::handleEnter() {
             case JOIN_LOBBY_JOIN:
                 if (this->_textField->getString().getSize() > 0) {
                     auto code = this->_string.toAnsiString();
-                    this->_parent->setLobbyCode(&code);
-                    this->_parent->sendTcpCommand(TcpNetwork::Commands::JOIN_LOBBY);
+                    std::cout << this->_string.toAnsiString();
+                    //this->_parent->setLobbyCode(&code);
+                    //this->_parent->sendTcpCommand(TcpNetwork::Commands::JOIN_LOBBY);
                 }
                 break;
             case JOIN_LOBBY_EXIT:
@@ -115,7 +116,7 @@ void RType::JoinLobby::draw() {
 void RType::JoinLobby::handleText(sf::Event &evt) {
     if(evt.text.unicode == '\b' && this->_string.getSize())
         this->_string.erase(this->_string.getSize()-1,1);
-    else if (evt.text.unicode < 128)
+    else if (evt.text.unicode < 123 && evt.text.unicode > 47)
         this->_string += evt.text.unicode;
     this->_textField->setString(this->_string);
     auto screenSize = this->_app->getSize();

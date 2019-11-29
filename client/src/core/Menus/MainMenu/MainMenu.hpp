@@ -16,6 +16,7 @@
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
 #include "client/src/core/Sounds/QuitSound/QuitSound.h"
+#include "client/src/core/ITcpReceiver/ITcpReceiver.hpp"
 
 namespace RType {
     using namespace RType;
@@ -24,7 +25,7 @@ namespace RType {
         MAIN_MENU_JOIN_GAME,
         MAIN_MENU_QUIT_GAME
     };
-    class MainMenu : IMenu {
+    class MainMenu : public IMenu, public ITcpReceiver {
     public:
         MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent);
         virtual ~MainMenu();
@@ -36,6 +37,7 @@ namespace RType {
         void handleKeyReleased() override;
         void draw() override;
         void handleText(sf::Event &evt) override;
+        void packetReceived(ITcpReceiver::PacketType type, std::string data) override;
 
     private:
         void updateState();

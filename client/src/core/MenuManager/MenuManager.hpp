@@ -6,6 +6,7 @@
 #define CPP_RTYPE_2019_MENUMANAGER_HPP
 
 
+#include <client/src/core/Menus/Lobby/Lobby.hpp>
 #include "client/src/core/Settings/Settings.hpp"
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/Menus/JoinLobby/JoinLobby.hpp"
@@ -39,6 +40,9 @@ namespace RType {
 
         /// Join game menu
         JoinLobby *_joinLobby;
+
+        /// Lobby menu
+        Lobby *_lobbyMenu;
 
         /// window State
         WindowState *_state;

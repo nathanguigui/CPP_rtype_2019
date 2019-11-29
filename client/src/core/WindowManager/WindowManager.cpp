@@ -53,7 +53,7 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkPort(av[2]);
     this->_settings->checkUsername(av[3]);
     this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
-                                       this->_settings->getLobbyServerPort(), this->_loadingScreen);
+                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings);
     this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork, this->_settings);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
