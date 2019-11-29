@@ -58,15 +58,17 @@ void RType::MenuManager::switchMenu(RType::MenuType menuType) {
 void RType::MenuManager::sendTcpCommand(RType::TcpNetwork::Commands commands) {
     switch (commands) {
         case TcpNetwork::CREATE_LOBBY:
-            this->_network->createLobby();
+            this->_network->createLobby(this->_settings->getPlayerName());
             this->_state->setIsLoading(true);
             this->_loadScreen->run();
             this->_network->waitForPacket();
             this->_state->setIsLoading(false);
             break;
         case TcpNetwork::JOIN_LOBBY:
-            if (this->_settings->getLobbyCode() != nullptr)
+            if (this->_settings->getLobbyCode() != nullptr) {
                 this->_network->joinLobby(this->_settings->getLobbyCode(), this->_settings->getPlayerName());
+                this->_network->waitForPacket();
+            }
             break;
         case TcpNetwork::READY_LOBBY:
             break;

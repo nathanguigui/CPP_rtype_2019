@@ -33,7 +33,7 @@ namespace RType {
         void connect();
 
         /// Create a Lobby
-        void createLobby();
+        void createLobby(std::string *playerName);
 
         /// Join a Lobby
         void joinLobby(std::string *code, std::string *playerName);

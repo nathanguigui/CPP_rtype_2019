@@ -17,8 +17,9 @@
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include <boost/algorithm/string.hpp>
-#include <client/src/core/TcpNetwork/TcpNetwork.hpp>
-#include <client/src/game/Menus/JoinLobby/JoinLobby.hpp>
+#include "client/src/core/TcpNetwork/TcpNetwork.hpp"
+#include "client/src/game/Menus/JoinLobby/JoinLobby.hpp"
+#include "client/src/core/Timer/Timer.hpp"
 #include "client/src/core/MenuManager/MenuManager.hpp"
 #include "client/src/core/LoadScreen/LoadScreen.hpp"
 
@@ -35,18 +36,6 @@ namespace RType {
     private:
         /// Classic Game Loop
         void gameLoop();
-
-        /// Call the good display fc
-        void display();
-
-        /// Display elements in launch
-        void displayInLaunch();
-
-        /// Display elements in menu
-        void displayInMenu();
-
-        /// Display elements in game
-        void displayInGame();
 
         /// Name of window
         const std::string &_name;
@@ -80,6 +69,9 @@ namespace RType {
 
         /// Load screen simple
         LoadScreen *_loadScreen;
+
+        /// Timer of the game
+        Timer *_gameTimer{};
     };
 }
 

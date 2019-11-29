@@ -39,11 +39,10 @@ void RType::WindowManager::init() {
 
 void RType::WindowManager::gameLoop() {
     this->_menuManager->switchMenu(MENU_MAIN_MENU);
-    while (_app->isOpen()) {
-        this->_app->clear();
-        _eventManager->manageEvent();
-        this->display();
-    }
+    this->_gameTimer = new Timer(this->_splashScreen, this->_tcpNetwork, this->_menuManager, this->_state,
+                                 this->_eventManager, this->_loadingScreen, this->_loadScreen, this->_app);
+    while (_app->isOpen())
+        this->_gameTimer->refresh();
 }
 
 void RType::WindowManager::processParams(int ac, char **av) {
@@ -62,42 +61,3 @@ void RType::WindowManager::processParams(int ac, char **av) {
         this->_settings->debugArgs();
 }
 
-void RType::WindowManager::display() {
-    switch (this->_state->getWindowMode()) {
-        case IN_LAUNCH:
-            this->displayInLaunch();
-            break;
-        case IN_MENU:
-            this->displayInMenu();
-            break;
-        case IN_GAME:
-            this->displayInGame();
-            break;
-        case UNDEFINED:
-            break;
-    }
-    _app->display();
-}
-
-void RType::WindowManager::displayInLaunch() {
-    if (!this->_state->isSplashDone())
-        this->_splashScreen->run();
-    else if (this->_state->isLoading()) {
-        if (!_loadingScreen->isLaunched()) {
-            this->_loadingScreen->launch();
-            this->_tcpNetwork->connect();
-        } else
-            this->_loadingScreen->check();
-    }
-}
-
-void RType::WindowManager::displayInMenu() {
-    if (this->_state->isLoading())
-        this->_loadScreen->run();
-    else
-        this->_menuManager->draw();
-}
-
-void RType::WindowManager::displayInGame() {
-    this->_sceneManager->drawCurrentScene();
-}

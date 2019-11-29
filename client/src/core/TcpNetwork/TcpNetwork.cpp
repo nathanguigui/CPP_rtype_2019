@@ -20,9 +20,9 @@ void RType::TcpNetwork::connect() {
     this->_loadingScreen->stop();
 }
 
-void RType::TcpNetwork::createLobby() {
+void RType::TcpNetwork::createLobby(std::string *playerName) {
     auto ss = std::stringstream();
-    ss << "LOBBY CREATE;\n€\n";
+    ss << "LOBBY CREATE " << *playerName << "\n€\n";
     this->sendData(ss.str());
 }
 
@@ -34,27 +34,27 @@ void RType::TcpNetwork::sendData(const std::string& data) {
 
 void RType::TcpNetwork::joinLobby(std::string *code, std::string *playerName) {
     auto ss = std::stringstream();
-    ss << "LOBBY JOIN " << *code << " " << *playerName << ";\n€\n";
+    ss << "LOBBY JOIN " << *code << " " << *playerName << "\n€\n";
     this->sendData(ss.str());
 }
 
 void RType::TcpNetwork::lobbyReady(std::string code, std::string playerName) {
     auto ss = std::stringstream();
-    ss << "LOBBY READY " << code << " " << playerName << ";\n€\n";
+    ss << "LOBBY READY " << code << " " << playerName << "\n€\n";
     this->sendData(ss.str());
 
 }
 
 void RType::TcpNetwork::lobbyInfo(std::string code) {
     auto ss = std::stringstream();
-    ss << "LOBBY INFO " << code << ";\n€\n";
+    ss << "LOBBY INFO " << code << "\n€\n";
     this->sendData(ss.str());
 
 }
 
 void RType::TcpNetwork::lobbyStart(std::string code) {
     auto ss = std::stringstream();
-    ss << "LOBBY START " << code << ";\n€\n";
+    ss << "LOBBY START " << code << "\n€\n";
     this->sendData(ss.str());
 }
 
@@ -77,6 +77,11 @@ void RType::TcpNetwork::parsePacket(std::string command) {
             if (argv[2] == "SUCCEED" && argv.size() > 3) {
                 auto newCode = new::std::string(argv[3]);
                 this->_settings->setLobbyCode(newCode);
+                if (this->_menuManager != nullptr)
+                    this->_menuManager->switchMenu(MenuType::MENU_LOBBY_MENU);
+            }
+        } if (argv[1] == "JOIN" && argv.size() > 2) {
+            if (argv[2] == "SUCCEED") {
                 if (this->_menuManager != nullptr)
                     this->_menuManager->switchMenu(MenuType::MENU_LOBBY_MENU);
             }
