@@ -122,8 +122,8 @@ add_custom_target(copy-files ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/client/src/assets/
         ${CMAKE_BINARY_DIR}/assets/
-        COMMAND ${CMAKE_COMMAND} -E copy
-        ${CMAKE_SOURCE_DIR}/build/bin/rtype_client
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/build/bin/
         ${CMAKE_BINARY_DIR}/
 )
 target_link_libraries(rtype_client ${CONAN_LIBS})
