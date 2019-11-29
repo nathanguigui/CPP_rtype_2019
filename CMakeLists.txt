@@ -124,6 +124,8 @@ set(CLIENT_SRC
         client/src/core/ITcpReceiver/ITcpReceiver.hpp
         client/src/game/Menus/Lobby/Lobby.cpp
         client/src/game/Menus/Lobby/Lobby.hpp
+        client/src/core/LoadScreen/LoadScreen.cpp
+        client/src/core/LoadScreen/LoadScreen.hpp
         client/src/game/enemies/LittleRed/LittleRed.cpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
