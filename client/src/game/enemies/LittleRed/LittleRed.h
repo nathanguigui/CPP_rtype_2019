@@ -6,15 +6,17 @@
 #define CPP_RTYPE_2019_LITTLERED_H
 
 #include <SFML/Graphics.hpp>
+#include "../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class LittleRed {
+    class LittleRed : public ISprite {
     public:
         LittleRed();
         ~LittleRed();
         sf::IntRect run();
         sf::Texture getTexture();
+        std::string _texture = "assets/bullets/r-typesheet5.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;

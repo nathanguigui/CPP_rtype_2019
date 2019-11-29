@@ -112,7 +112,8 @@ set(CLIENT_SRC
         client/src/game/enemies/LittleRed/LittleRed.cpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
-        client/src/game/AnimateSprite/AnimateSprite.hpp)
+        client/src/game/AnimateSprite/AnimateSprite.hpp
+        client/src/game/AnimateSprite/ISprite.hpp)
 
 
 include_directories("${PROJECT_BINARY_DIR}")

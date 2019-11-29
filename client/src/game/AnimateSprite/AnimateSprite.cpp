@@ -3,6 +3,7 @@
 //
 
 #include <client/src/core/Gui/Tools.hpp>
+#include "ISprite.hpp"
 
 #include "AnimateSprite.hpp"
 
@@ -10,69 +11,64 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     
     /// texture for sprite
     this->_splashTexture = new sf::Texture();
-    this->_backgroundTexture = new sf::Texture();
-    
-    /// sprites
+    /// sprite
     this->_splash = new sf::Sprite();
-    this->_background = new sf::Sprite();
 
-    /// touch and kill
+    /// sprites
     this->boum = new SimpleExplosion();
     this->kill = new SimpleKill();
-    this->touch = new SuperTouch();
     this->simpleTouch = new SimpleTouch();
-
-    /// enemies
-    this->redenemy = new LittleRed();
-
-    this->bullet = new SimpleBullet();
+    this->touch = new SuperTouch();
     this->master = new MasterBullet();
+    this->bullet = new SimpleBullet();
     this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
-    
-    this->_splashTexture->loadFromFile("assets/uncut_sprites/r-typesheet5.gif");
-    this->_lastFrame = 100000;
-    this->_currentFrame = 0;
-    this->_done = false;
-    this->_background->setTexture(*this->_backgroundTexture);
-    this->_splash->setTexture(*this->_splashTexture);
 
-    //this->_buffer.loadFromFile("assets/music/splashscreen.wav");    
-    //this->_sound.setBuffer(this->_buffer);
-    //this->_sound.play();
+    this->redenemy = new LittleRed();
+
+    /// touch and kill
+    this->sprites["SimpleExplosion"] = this->boum;
+    this->sprites["SimpleTouch"] = this->simpleTouch;
+    this->sprites["SuperTouch"] = this->touch;
+    this->sprites["SimpleBomb"] = this->bomb;
+
+    /// bullets
+    this->sprites["MasterBullet"] = this->master;
+    this->sprites["SimpleBullet"] = this->bullet;
+    this->sprites["SuperBullet1"] = this->super1;
+    this->sprites["SuperBullet2"] = this->super2;
+    this->sprites["SuperBullet3"] = this->super3;
+
+    /// enemies
+    this->sprites["LittleRed"] = this->redenemy;
+
 }
 
-void RType::AnimateSprite::run() {
+void RType::AnimateSprite::run(std::string type) {
 
     auto screenSize = this->_app->getSize();
     this->_splash->setPosition(centerX(screenSize, this->_splash->getGlobalBounds().width, this->_splash->getPosition()));
     this->_splash->setPosition(centerY(screenSize, this->_splash->getGlobalBounds().height, this->_splash->getPosition()));
 
-
-    if (this->_currentFrame == 0) {
-        this->_clock = new sf::Clock();
-        this->_splashClock = new sf::Clock();
-        this->_splash->setTextureRect(this->redenemy->run());
+    if (type == "MasterBullet" || type == "SimpleBullet" || type == "SuperBullet1") {
+        this->_buffer.loadFromFile("assets/music/tatata.wav");    
+        this->_sound.setBuffer(this->_buffer);
+        this->_sound.play();
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() > 7) {
-        this->_done = true;
-        this->_windowState->setSplashDone(true);
-        this->_windowState->setIsLoading(true);
-    }
+    this->_splashClock = new sf::Clock();
+    this->_splashTexture->loadFromFile(this->sprites[type]->_texture);
+    this->_splash->setTexture(*this->_splashTexture);
+    this->_splash->setTextureRect(this->sprites[type]->run());
 
-    if (this->_clock->getElapsedTime().asSeconds() < 10) {
-        if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
-        {
-            this->_splash->setTextureRect(this->redenemy->run());
-            this->_splashClock->restart();
-        }
-        _app->draw(*this->_background);
-        _app->draw(*this->_splash);
-        this->_currentFrame += 1;
+    if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
+    {
+        this->_splash->setTextureRect(this->sprites[type]->run());
+        this->_splashClock->restart();
     }
+    _app->draw(*this->_splash);
 }
 
 RType::AnimateSprite::~AnimateSprite() = default;
