@@ -8,7 +8,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManage
             _app(app), _state(state), _parent(parent) {
     this->_itemStatus = MAIN_MENU_JOIN_GAME;
     this->_backgroundTexture = new sf::Texture();
-    this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
+    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
     this->_backgroundSprite = new sf::Sprite();
     this->_backgroundSprite->setTexture(*this->_backgroundTexture);
     this->_font = new sf::Font();

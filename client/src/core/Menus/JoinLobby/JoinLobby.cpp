@@ -8,7 +8,7 @@ RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IM
         : _app(app), _state(state), _parent(parent) {
     this->_lobbyStatus = JOIN_LOBBY_JOIN;
     this->_backgroundTexture = new sf::Texture();
-    this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
+    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
     this->_backgroundSprite = new sf::Sprite();
     this->_backgroundSprite->setTexture(*this->_backgroundTexture);
     this->_font = new sf::Font();
@@ -18,6 +18,7 @@ RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IM
     this->_textField = new sf::Text("Enter player name", *this->_font);
     this->initGUI();
     this->keyReleased = true;
+    this->_sound = new MenuSelectSound();
 }
 
 RType::JoinLobby::~JoinLobby() {
@@ -49,6 +50,7 @@ void RType::JoinLobby::updateState() {
 }
 
 void RType::JoinLobby::handleLeft() {
+    this->_sound->run();
     if (this->keyReleased) {
         switch (this->_lobbyStatus) {
             case JOIN_LOBBY_JOIN:
@@ -63,6 +65,7 @@ void RType::JoinLobby::handleLeft() {
 }
 
 void RType::JoinLobby::handleRight() {
+    this->_sound->run();
     if (this->keyReleased) {
         switch (this->_lobbyStatus) {
             case JOIN_LOBBY_JOIN:

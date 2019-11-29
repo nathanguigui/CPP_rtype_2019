@@ -57,14 +57,11 @@ namespace RType {
         sf::Sound _sound;
 
         sf::Sprite *_splash;
-        sf::Sprite *_background;
 
         sf::IntRect *_rectSourceSprite;
 
         sf::Texture *_splashTexture;
-        sf::Texture *_backgroundTexture;
 
-        sf::Clock *_clock;
         sf::Clock *_splashClock;
 
         sf::RenderWindow *_app;
