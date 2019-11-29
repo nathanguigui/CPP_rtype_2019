@@ -7,7 +7,7 @@
 RType::Lobby::Lobby(sf::RenderWindow *app, WindowState *state, IMenuManager *parent, Settings *settings)
             : _app(app), _state(state), _parent(parent), _settings(settings) {
     this->_backgroundTexture = new sf::Texture();
-    this->_backgroundTexture->loadFromFile("assets/MainMenu/background.jpg");
+    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
     this->_backgroundSprite = new sf::Sprite();
     this->_backgroundSprite->setTexture(*this->_backgroundTexture);
     this->_font = new sf::Font();

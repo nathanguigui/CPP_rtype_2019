@@ -11,6 +11,7 @@
 #include "client/src/core/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/core/Menus/JoinLobby/JoinLobby.hpp"
 #include "client/src/core/TcpNetwork/TcpNetwork.hpp"
+#include "client/src/core/Sounds/MenuMusic/MenuMusic.h"
 #include "IMenuManager.hpp"
 
 namespace RType {
@@ -35,6 +36,9 @@ namespace RType {
         void setLobbyCode(std::string *code) override;
 
     private:
+        /// Background music
+        MenuMusic *_menumusic;
+
         /// Main menu
         MainMenu *_mainMenu;
 

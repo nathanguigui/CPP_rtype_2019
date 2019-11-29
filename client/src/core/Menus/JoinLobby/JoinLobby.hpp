@@ -10,6 +10,7 @@
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Gui/Tools.hpp"
+#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
 
 namespace RType {
     using namespace RType;
@@ -43,6 +44,9 @@ namespace RType {
         void draw() override;
         void handleText(sf::Event &evt) override;
     private:
+
+        MenuSelectSound *_sound;
+
         /// SFML Window
         sf::RenderWindow *_app;
 
