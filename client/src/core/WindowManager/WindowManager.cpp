@@ -40,7 +40,7 @@ void RType::WindowManager::init() {
 void RType::WindowManager::gameLoop() {
     this->_menuManager->switchMenu(MENU_MAIN_MENU);
     this->_gameTimer = new Timer(this->_splashScreen, this->_tcpNetwork, this->_menuManager, this->_state,
-                                 this->_eventManager, this->_loadingScreen, this->_loadScreen, this->_app);
+                                 this->_eventManager, this->_loadingScreen, this->_loadScreen, this->_app, nullptr);
     while (_app->isOpen())
         this->_gameTimer->refresh();
 }

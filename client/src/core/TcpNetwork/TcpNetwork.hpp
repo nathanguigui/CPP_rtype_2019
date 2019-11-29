@@ -48,7 +48,7 @@ namespace RType {
         void lobbyStart(std::string code);
 
         /// Wait for packet and parse it
-        void waitForPacket();
+        bool waitForPacket();
 
         /// Set current menu manager to send callback
         void setMenuManager(IMenuManager *menuManager);
@@ -80,6 +80,9 @@ namespace RType {
 
         /// SFML socket status
         sf::Socket::Status _status{};
+
+        /// SFML Socket selector
+        sf::SocketSelector *_selector;
 
         /// Loading Screen
         Loading *_loadingScreen;

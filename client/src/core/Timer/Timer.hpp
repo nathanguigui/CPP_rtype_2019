@@ -20,13 +20,23 @@ namespace RType {
     public:
         /// Default ctor
         Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuManager *menuManager, WindowState *state,
-              Event *eventManager, Loading *loadingScreen, LoadScreen *loadScreen, sf::RenderWindow *app);
+              Event *eventManager, Loading *loadingScreen, LoadScreen *loadScreen, sf::RenderWindow *app,
+              SceneManager *sceneManager);
 
         /// Default dtor
         virtual ~Timer();
 
         /// Try refresh
         void refresh();
+
+        /// Refresh Event
+        void refreshEvent();
+
+        /// Refresh graphical elements
+        void refreshGraphics();
+
+        /// Refresh network
+        void refreshNetwork();
 
     private:
 
@@ -38,10 +48,7 @@ namespace RType {
         };
 
         /// Check for FPS refresh
-        bool needRefresh(int FPS, TimersType type);
-
-        /// Refresh graphical elements
-        void refreshGraphics();
+        bool needRefresh(float FPS, TimersType type);
 
         /// Refresh SplashScreen
         void refreshSplashScreen();
@@ -51,9 +58,6 @@ namespace RType {
 
         /// Refresh Game
         void refreshGame();
-
-        /// Refresh Event
-        void refreshEvent();
 
         /// SplashScreen
         SplashScreen *_splashScreen;

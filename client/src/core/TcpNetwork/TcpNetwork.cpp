@@ -58,13 +58,22 @@ void RType::TcpNetwork::lobbyStart(std::string code) {
     this->sendData(ss.str());
 }
 
-void RType::TcpNetwork::waitForPacket() {
-    char data[1000];
-    std::size_t received;
-    if (this->_tcpSocket->receive(data, 100, received) != sf::Socket::Done)
-        std::cout << "error" << std::endl;
-    else
-        this->parseMultiplePacket(data, received);
+bool RType::TcpNetwork::waitForPacket() {
+    sf::SocketSelector aSelector;
+    aSelector.add(*this->_tcpSocket);
+    if (aSelector.wait(sf::milliseconds(32))) {
+        if (aSelector.isReady(*this->_tcpSocket)) {
+            std::cout << "packet received";
+            char data[1000];
+            std::size_t received;
+            if (this->_tcpSocket->receive(data, 100, received) != sf::Socket::Done)
+                std::cout << "error" << std::endl;
+            else
+                this->parseMultiplePacket(data, received);
+            return true;
+        }
+    } else
+        return false;
 }
 
 void RType::TcpNetwork::parsePacket(std::string command) {

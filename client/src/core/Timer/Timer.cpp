@@ -5,15 +5,16 @@
 #include "Timer.hpp"
 
 RType::Timer::Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuManager *menuManager, WindowState *state,
-                    Event *eventManager, Loading *loadingScreen, LoadScreen *loadScreen, sf::RenderWindow *app) : _splashScreen(
+                    Event *eventManager, Loading *loadingScreen, LoadScreen *loadScreen, sf::RenderWindow *app,
+                    SceneManager *sceneManager) : _splashScreen(
         splashScreen), _tcpNetwork(tcpNetwork), _menuManager(menuManager), _state(state), _eventManager(eventManager),
-                                                                                              _loadingScreen(
+                                                  _loadingScreen(
                                                                                                       loadingScreen),
-                                                                                              _loadScreen(loadScreen),
-                                                                                              _app(app) {
+                                                  _loadScreen(loadScreen),
+                                                  _app(app), _sceneManager(sceneManager) {
     this->_graphicsClock = new sf::Clock();
     this->_eventClock = new sf::Clock();
-    this->_eventClock = new sf::Clock();
+    this->_networkClock = new sf::Clock();
 }
 
 RType::Timer::~Timer() = default;
@@ -24,6 +25,8 @@ void RType::Timer::refresh() {
         this->refreshGraphics();
     if (needRefresh(120, TimersType::EVENTS))
         this->refreshEvent();
+    if (needRefresh(1, TimersType::NETWORK))
+        this->refreshNetwork();
 }
 
 void RType::Timer::refreshGraphics() {
@@ -73,7 +76,7 @@ void RType::Timer::refreshEvent() {
     this->_eventClock->restart();
 }
 
-bool RType::Timer::needRefresh(int FPS, TimersType type) {
+bool RType::Timer::needRefresh(float FPS, TimersType type) {
     float msWaitTime = 1000 / FPS;
     switch (type) {
         case NETWORK:
@@ -84,4 +87,10 @@ bool RType::Timer::needRefresh(int FPS, TimersType type) {
             return this->_eventClock->getElapsedTime().asMilliseconds() > msWaitTime;
     }
     return false;
+}
+
+void RType::Timer::refreshNetwork() {
+    this->_tcpNetwork->waitForPacket();
+    std::cout << "Network is refreshing\r\n";
+    this->_networkClock->restart();
 }
