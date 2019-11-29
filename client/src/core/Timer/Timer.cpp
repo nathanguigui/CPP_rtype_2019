@@ -11,18 +11,19 @@ RType::Timer::Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuMana
                                                                                                       loadingScreen),
                                                                                               _loadScreen(loadScreen),
                                                                                               _app(app) {
-    this->_clock = new sf::Clock();
-    this->_lastRefresh = this->_clock->getElapsedTime();
+    this->_graphicsClock = new sf::Clock();
+    this->_eventClock = new sf::Clock();
+    this->_eventClock = new sf::Clock();
 }
 
 RType::Timer::~Timer() = default;
 
 void RType::Timer::refresh() {
     /// 60 FPS refresh
-    if ((this->_clock->getElapsedTime().asMilliseconds() - this->_lastRefresh.asMilliseconds()) > 16) {
+    if (needRefresh(30, TimersType::GRAPHICS))
         this->refreshGraphics();
+    if (needRefresh(120, TimersType::EVENTS))
         this->refreshEvent();
-    }
 }
 
 void RType::Timer::refreshGraphics() {
@@ -41,6 +42,7 @@ void RType::Timer::refreshGraphics() {
             break;
     }
     _app->display();
+    this->_graphicsClock->restart();
 }
 
 void RType::Timer::refreshSplashScreen() {
@@ -68,4 +70,18 @@ void RType::Timer::refreshGame() {
 
 void RType::Timer::refreshEvent() {
     _eventManager->manageEvent();
+    this->_eventClock->restart();
+}
+
+bool RType::Timer::needRefresh(int FPS, TimersType type) {
+    float msWaitTime = 1000 / FPS;
+    switch (type) {
+        case NETWORK:
+            return this->_networkClock->getElapsedTime().asMilliseconds() > msWaitTime;
+        case GRAPHICS:
+            return this->_graphicsClock->getElapsedTime().asMilliseconds() > msWaitTime;
+        case EVENTS:
+            return this->_eventClock->getElapsedTime().asMilliseconds() > msWaitTime;
+    }
+    return false;
 }

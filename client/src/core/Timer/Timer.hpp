@@ -30,6 +30,16 @@ namespace RType {
 
     private:
 
+        /// Enum for all timers
+        enum TimersType {
+            NETWORK,
+            GRAPHICS,
+            EVENTS
+        };
+
+        /// Check for FPS refresh
+        bool needRefresh(int FPS, TimersType type);
+
         /// Refresh graphical elements
         void refreshGraphics();
 
@@ -72,11 +82,14 @@ namespace RType {
         /// SFML app
         sf::RenderWindow *_app;
 
-        /// SFML clock
-        sf::Clock *_clock;
+        /// SFML graphics clock
+        sf::Clock *_graphicsClock;
 
-        /// Last refresh
-        sf::Time _lastRefresh;
+        /// SFML network clock
+        sf::Clock *_networkClock;
+
+        /// SFML event clock
+        sf::Clock *_eventClock;
     };
 }
 
