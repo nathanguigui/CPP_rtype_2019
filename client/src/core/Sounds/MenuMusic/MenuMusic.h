@@ -15,12 +15,12 @@ namespace RType {
         ~MenuMusic();
         void run();
         void stop();
+        void setVol(int vol);
 
     private:
         sf::SoundBuffer _buffer;
         sf::Sound _sound;
         sf::Clock *_clock;
-
     };
 }
 

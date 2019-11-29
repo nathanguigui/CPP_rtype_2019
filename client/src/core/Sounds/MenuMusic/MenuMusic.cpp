@@ -17,3 +17,7 @@ void RType::MenuMusic::run() {
 void RType::MenuMusic::stop() {
     this->_sound.stop();
 }
+
+void RType::MenuMusic::setVol(int vol) {
+    this->_sound.setVolume(vol);
+}

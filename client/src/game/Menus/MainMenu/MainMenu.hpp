@@ -17,6 +17,7 @@
 #include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
 #include "client/src/core/Sounds/QuitSound/QuitSound.h"
 #include "client/src/core/ITcpReceiver/ITcpReceiver.hpp"
+#include "client/src/core/SoundManager/SoundManager.hpp"
 
 namespace RType {
     using namespace RType;
@@ -28,7 +29,7 @@ namespace RType {
     };
     class MainMenu : public IMenu, public ITcpReceiver {
     public:
-        MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent);
+        MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent, SoundManager *soundmanager);
         virtual ~MainMenu();
         void handleLeft() override;
         void handleRight() override;
@@ -62,6 +63,7 @@ namespace RType {
 
         /// Parent MenuManager
         IMenuManager *_parent;
+        SoundManager *_soundmanager;
     };
 }
 

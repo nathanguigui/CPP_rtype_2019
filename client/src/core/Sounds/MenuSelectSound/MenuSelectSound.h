@@ -6,6 +6,7 @@
 #define CPP_RTYPE_2019_MENUSELECTSOUND_H
 
 #include <SFML/Audio.hpp>
+#include "../../Settings/Settings.hpp"
 
 namespace RType {
     using namespace RType;
@@ -14,6 +15,7 @@ namespace RType {
         MenuSelectSound();
         ~MenuSelectSound();
         void run();
+        void setVol(int vol);
 
     private:
         sf::SoundBuffer _buffer;

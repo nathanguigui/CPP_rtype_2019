@@ -16,3 +16,7 @@ void RType::QuitSound::run() {
         this->_sound.stop();
     }
 }
+
+void RType::QuitSound::setVol(int vol) {
+    this->_sound.setVolume(vol);
+}

@@ -126,6 +126,8 @@ set(CLIENT_SRC
         client/src/game/Menus/Lobby/Lobby.hpp
         client/src/core/LoadScreen/LoadScreen.cpp
         client/src/core/LoadScreen/LoadScreen.hpp
+        client/src/core/SoundManager/SoundManager.cpp
+        client/src/core/SoundManager/SoundManager.hpp
         client/src/game/enemies/LittleRed/LittleRed.cpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
