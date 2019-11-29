@@ -91,7 +91,7 @@ void RType::TcpNetwork::parseMultiplePacket(char *packet, std::size_t packetSize
     if (response_arr.size() > 1) {
         this->parsePacket(response_arr[0]);
         /* TODO implement with real tcp
-        boost::split(packet_arr, response_arr[0], boost::is_any_of("\n€"));
+        boost::split(packet_arr, response_arr[0], boost::is_any_of("\r\n€"));
         for (const auto &packet_one : packet_arr)
             this->parsePacket(packet_one);
         */
