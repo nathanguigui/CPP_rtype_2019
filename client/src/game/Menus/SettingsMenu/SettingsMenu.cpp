@@ -15,8 +15,10 @@ RType::SettingsMenu::SettingsMenu(sf::RenderWindow *app, RType::IMenuManager *pa
     this->_font->loadFromFile("assets/fonts/ka.ttf");
     this->_quitText = new sf::Text("QUIT", *this->_font);
     this->_saveText = new sf::Text("SAVE", *this->_font);
-    for (auto &bar : this->_volumeBar)
+    for (auto &bar : this->_volumeBar) {
         bar = new sf::Text("I", *this->_font);
+        bar->setScale(0.4, 0.4);
+    }
     this->initGUI();
     this->keyReleased = true;
 }
@@ -32,7 +34,6 @@ void RType::SettingsMenu::initGUI() {
         this->_volumeBar[bar]->setPosition(centerY(screenSize, this->_volumeBar[bar]->getGlobalBounds().height, this->_volumeBar[bar]->getPosition()));
         this->_volumeBar[bar]->setPosition(colPos(screenSize, this->_volumeBar[bar]->getGlobalBounds().width, this->_volumeBar[bar]->getPosition(), 150, bar+25));
         this->_volumeBar[this->_volume]->setFillColor(sf::Color(sf::Color::White));
-        //this->_volumeBar[this->_volume]->setScale(0.1, 0.1);
     }
 }
 
@@ -64,12 +65,11 @@ void RType::SettingsMenu::handleLeft() {
                 this->_status = QUIT_BUTTON;
                 this->updateState();
                 break;
-            case VOLUME_BAR:
-                this->_volume = this->_volume != 1 ? this->_volume - 1 : this->_volume;
-                this->updateState();
-                break;
         }
         this->keyReleased = false;
+    } if (this->_status == VOLUME_BAR) {
+        this->_volume = this->_volume != 1 ? this->_volume - 1 : this->_volume;
+        this->updateState();
     }
 }
 
@@ -82,11 +82,11 @@ void RType::SettingsMenu::handleRight() {
                 break;
             case SAVE_BUTTON:
                 break;
-            case VOLUME_BAR:
-                this->_volume = this->_volume != 99 ? this->_volume + 1 : this->_volume;
-                this->updateState();
-                break;
         }
+        this->keyReleased = false;
+    } if (this->_status == VOLUME_BAR) {
+        this->_volume = this->_volume != 99 ? this->_volume + 1 : this->_volume;
+        this->updateState();
     }
 }
 

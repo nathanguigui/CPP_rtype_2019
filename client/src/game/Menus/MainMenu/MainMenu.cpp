@@ -104,6 +104,7 @@ void RType::MainMenu::draw() {
     this->_app->draw(*this->_backgroundSprite);
     this->_app->draw(*this->_joinText);
     this->_app->draw(*this->_newText);
+    this->_app->draw(*this->_settingsText);
     this->_app->draw(*this->_quitText);
 }
 
@@ -143,8 +144,8 @@ void RType::MainMenu::initGUI() {
     this->_newText->setPosition(linePos(screenSize, this->_newText->getGlobalBounds().height, this->_newText->getPosition(), 4, 1));
     this->_joinText->setPosition(centerX(screenSize, this->_joinText->getGlobalBounds().width, this->_joinText->getPosition()));
     this->_joinText->setPosition(linePos(screenSize, this->_joinText->getGlobalBounds().height, this->_joinText->getPosition(), 4, 2));
-    this->_quitText->setPosition(centerX(screenSize, this->_quitText->getGlobalBounds().width, this->_quitText->getPosition()));
-    this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 4, 3));
+    this->_settingsText->setPosition(centerX(screenSize, this->_settingsText->getGlobalBounds().width, this->_settingsText->getPosition()));
+    this->_settingsText->setPosition(linePos(screenSize, this->_settingsText->getGlobalBounds().height, this->_settingsText->getPosition(), 4, 3));
     this->_quitText->setPosition(centerX(screenSize, this->_quitText->getGlobalBounds().width, this->_quitText->getPosition()));
     this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 4, 4));
 }
