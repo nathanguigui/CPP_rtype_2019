@@ -23,7 +23,8 @@ namespace RType {
     enum MainMenuItemStatus {
         MAIN_MENU_NEW_GAME,
         MAIN_MENU_JOIN_GAME,
-        MAIN_MENU_QUIT_GAME
+        MAIN_MENU_QUIT_GAME,
+        MAIN_MENU_SETTINGS
     };
     class MainMenu : public IMenu, public ITcpReceiver {
     public:
@@ -51,10 +52,15 @@ namespace RType {
         sf::Text *_joinText;
         sf::Text *_newText;
         sf::Text *_quitText;
+        sf::Text *_settingsText;
         MainMenuItemStatus _itemStatus;
         bool keyReleased;
         bool _disabled = false;
+
+        /// WindowState
         WindowState *_state;
+
+        /// Parent MenuManager
         IMenuManager *_parent;
     };
 }

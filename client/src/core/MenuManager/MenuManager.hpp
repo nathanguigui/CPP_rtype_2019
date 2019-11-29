@@ -8,6 +8,7 @@
 
 #include <client/src/game/Menus/Lobby/Lobby.hpp>
 #include <client/src/core/LoadScreen/LoadScreen.hpp>
+#include <client/src/game/Menus/SettingsMenu/SettingsMenu.hpp>
 #include "client/src/core/Settings/Settings.hpp"
 #include "client/src/game/Menus/MainMenu/MainMenu.hpp"
 #include "client/src/game/Menus/JoinLobby/JoinLobby.hpp"
@@ -49,6 +50,9 @@ namespace RType {
 
         /// Lobby menu
         Lobby *_lobbyMenu;
+
+        /// Settings menu
+        SettingsMenu *_settingsMenu;
 
         /// window State
         WindowState *_state;

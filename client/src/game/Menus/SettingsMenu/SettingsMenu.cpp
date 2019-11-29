@@ -1,0 +1,156 @@
+//
+// Created by guigui on 11/29/19.
+//
+
+#include "SettingsMenu.hpp"
+
+RType::SettingsMenu::SettingsMenu(sf::RenderWindow *app, RType::IMenuManager *parent, RType::Settings *settings) : _app(
+        app), _parent(parent), _settings(settings) {
+    this->_status = QUIT_BUTTON;
+    this->_backgroundTexture = new sf::Texture();
+    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
+    this->_backgroundSprite = new sf::Sprite();
+    this->_backgroundSprite->setTexture(*this->_backgroundTexture);
+    this->_font = new sf::Font();
+    this->_font->loadFromFile("assets/fonts/ka.ttf");
+    this->_quitText = new sf::Text("QUIT", *this->_font);
+    this->_saveText = new sf::Text("SAVE", *this->_font);
+    for (auto &bar : this->_volumeBar)
+        bar = new sf::Text("I", *this->_font);
+    this->initGUI();
+    this->keyReleased = true;
+}
+
+void RType::SettingsMenu::initGUI() {
+    auto screenSize = this->_app->getSize();
+    this->updateState();
+    this->_quitText->setPosition(colPos(screenSize, this->_quitText->getGlobalBounds().width, this->_quitText->getPosition(), 3, 1));
+    this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 5, 5));
+    this->_saveText->setPosition(colPos(screenSize, this->_saveText->getGlobalBounds().width, this->_saveText->getPosition(), 3, 3));
+    this->_saveText->setPosition(linePos(screenSize, this->_saveText->getGlobalBounds().height, this->_saveText->getPosition(), 5, 5));
+    for (int bar = 0; bar < 100; bar++) {
+        this->_volumeBar[bar]->setPosition(centerY(screenSize, this->_volumeBar[bar]->getGlobalBounds().height, this->_volumeBar[bar]->getPosition()));
+        this->_volumeBar[bar]->setPosition(colPos(screenSize, this->_volumeBar[bar]->getGlobalBounds().width, this->_volumeBar[bar]->getPosition(), 150, bar+25));
+        this->_volumeBar[this->_volume]->setFillColor(sf::Color(sf::Color::White));
+        //this->_volumeBar[this->_volume]->setScale(0.1, 0.1);
+    }
+}
+
+void RType::SettingsMenu::updateState() {
+    switch (this->_status) {
+        case QUIT_BUTTON:
+            this->_saveText->setFillColor(sf::Color(sf::Color::Black));
+            this->_quitText->setFillColor(sf::Color(sf::Color::White));
+            break;
+        case SAVE_BUTTON:
+            this->_saveText->setFillColor(sf::Color(sf::Color::White));
+            this->_quitText->setFillColor(sf::Color(sf::Color::Black));
+            break;
+        case VOLUME_BAR:
+            this->_quitText->setFillColor(sf::Color(sf::Color::Black));
+            this->_saveText->setFillColor(sf::Color(sf::Color::Black));
+            this->_volumeBar[this->_volume - 1]->setFillColor(sf::Color(sf::Color::White));
+            this->_volumeBar[this->_volume]->setFillColor(sf::Color(sf::Color::Black));
+            break;
+    }
+}
+
+void RType::SettingsMenu::handleLeft() {
+    if (this->keyReleased) {
+        switch (this->_status) {
+            case QUIT_BUTTON:
+                break;
+            case SAVE_BUTTON:
+                this->_status = QUIT_BUTTON;
+                this->updateState();
+                break;
+            case VOLUME_BAR:
+                this->_volume = this->_volume != 1 ? this->_volume - 1 : this->_volume;
+                this->updateState();
+                break;
+        }
+        this->keyReleased = false;
+    }
+}
+
+void RType::SettingsMenu::handleRight() {
+    if (this->keyReleased) {
+        switch (this->_status) {
+            case QUIT_BUTTON:
+                this->_status = SAVE_BUTTON;
+                this->updateState();
+                break;
+            case SAVE_BUTTON:
+                break;
+            case VOLUME_BAR:
+                this->_volume = this->_volume != 99 ? this->_volume + 1 : this->_volume;
+                this->updateState();
+                break;
+        }
+    }
+}
+
+void RType::SettingsMenu::handleUp() {
+    if (this->keyReleased) {
+        switch (this->_status) {
+            case QUIT_BUTTON:
+                this->_status = VOLUME_BAR;
+                this->updateState();
+                break;
+            case SAVE_BUTTON:
+                this->_status = VOLUME_BAR;
+                this->updateState();
+                break;
+            case VOLUME_BAR:
+                break;
+        }
+    }
+}
+
+void RType::SettingsMenu::handleDown() {
+    if (this->keyReleased) {
+        switch (this->_status) {
+            case QUIT_BUTTON:
+                break;
+            case SAVE_BUTTON:
+                break;
+            case VOLUME_BAR:
+                this->_status = SAVE_BUTTON;
+                this->updateState();
+                break;
+        }
+    }
+}
+
+void RType::SettingsMenu::handleEnter() {
+    if (this->keyReleased) {
+        switch (this->_status) {
+            case QUIT_BUTTON:
+                this->_parent->switchMenu(MenuType::MENU_MAIN_MENU);
+                break;
+            case SAVE_BUTTON:
+                this->_settings->setSoundVolume(this->_volume);
+                break;
+            case VOLUME_BAR:
+                break;
+        }
+    }
+}
+
+void RType::SettingsMenu::handleKeyReleased() {
+    this->keyReleased = true;
+}
+
+void RType::SettingsMenu::draw() {
+    this->_app->draw(*this->_backgroundSprite);
+    this->_app->draw(*this->_saveText);
+    this->_app->draw(*this->_quitText);
+    for (auto &bar : this->_volumeBar)
+        this->_app->draw(*bar);
+}
+
+void RType::SettingsMenu::handleText(sf::Event &evt) {
+
+}
+
+RType::SettingsMenu::~SettingsMenu() = default;

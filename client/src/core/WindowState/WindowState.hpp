@@ -20,7 +20,8 @@ namespace RType {
     enum MenuType {
         MENU_MAIN_MENU,
         MENU_LOBBY_MENU,
-        MENU_JOIN_LOBBY
+        MENU_JOIN_LOBBY,
+        MENU_SETTINGS
     };
 
     class WindowState: public CoreObject {

@@ -10,6 +10,7 @@ RType::MenuManager::MenuManager(WindowState *state, Event *event, sf::RenderWind
     this->_mainMenu = new MainMenu(this->_app, this->_state, this);
     this->_joinLobby = new JoinLobby(this->_app, this->_state, this);
     this->_lobbyMenu = new Lobby(this->_app, this->_state, this, this->_settings);
+    this->_settingsMenu = new SettingsMenu(this->_app, this, this->_settings);
     this->_menumusic = new MenuMusic();
 }
 
@@ -25,6 +26,9 @@ void RType::MenuManager::draw() {
             break;
         case MENU_JOIN_LOBBY:
             this->_joinLobby->draw();
+            break;
+        case MENU_SETTINGS:
+            this->_settingsMenu->draw();
             break;
     }
 }
@@ -43,6 +47,9 @@ void RType::MenuManager::switchMenu(RType::MenuType menuType) {
         case MENU_JOIN_LOBBY:
             this->_menumusic->stop();
             this->_event->setCurrentMenu((IMenu*)this->_joinLobby);
+            break;
+        case MENU_SETTINGS:
+            this->_event->setCurrentMenu((IMenu*)this->_settingsMenu);
             break;
     }
     this->_state->setMenuType(menuType);
