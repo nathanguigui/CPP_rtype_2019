@@ -4,8 +4,8 @@
 
 #include "JoinLobby.hpp"
 
-RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IMenuManager *parent)
-        : _app(app), _state(state), _parent(parent) {
+RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IMenuManager *parent, SoundManager *soundmanager)
+        : _app(app), _state(state), _parent(parent), _soundmanager(soundmanager) {
     this->_lobbyStatus = JOIN_LOBBY_JOIN;
     this->_backgroundTexture = new sf::Texture();
     this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
@@ -18,7 +18,6 @@ RType::JoinLobby::JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IM
     this->_textField = new sf::Text("Enter player name", *this->_font);
     this->initGUI();
     this->keyReleased = true;
-    this->_sound = new MenuSelectSound();
 }
 
 RType::JoinLobby::~JoinLobby() {
@@ -50,7 +49,7 @@ void RType::JoinLobby::updateState() {
 }
 
 void RType::JoinLobby::handleLeft() {
-    this->_sound->run();
+    this->_soundmanager->play("bubble");
     if (this->keyReleased) {
         switch (this->_lobbyStatus) {
             case JOIN_LOBBY_JOIN:
@@ -65,7 +64,7 @@ void RType::JoinLobby::handleLeft() {
 }
 
 void RType::JoinLobby::handleRight() {
-    this->_sound->run();
+    this->_soundmanager->play("bubble");
     if (this->keyReleased) {
         switch (this->_lobbyStatus) {
             case JOIN_LOBBY_JOIN:

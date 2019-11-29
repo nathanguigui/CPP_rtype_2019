@@ -17,3 +17,7 @@ void RType::MenuSelectSound::run() {
         return;
     }
 }
+
+void RType::MenuSelectSound::setVol(int vol) {
+    this->_sound.setVolume(vol);
+}

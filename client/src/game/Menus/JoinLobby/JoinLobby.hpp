@@ -11,6 +11,7 @@
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
+#include "client/src/core/SoundManager/SoundManager.hpp"
 #include <iostream>
 
 namespace RType {
@@ -25,7 +26,7 @@ namespace RType {
     public:
 
         /// Default ctor
-        JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IMenuManager *parent);
+        JoinLobby(sf::RenderWindow *app, RType::WindowState *state, IMenuManager *parent, SoundManager *SoundManager);
 
         /// Default dtor
         virtual ~JoinLobby();
@@ -46,7 +47,8 @@ namespace RType {
         void handleText(sf::Event &evt) override;
     private:
 
-        MenuSelectSound *_sound;
+        /// SoundManager
+        SoundManager *_soundmanager;
 
         /// SFML Window
         sf::RenderWindow *_app;

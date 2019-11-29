@@ -7,10 +7,11 @@
 RType::MenuManager::MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,
                                 Settings *settings, LoadScreen *loadScreen)
         : _state(state), _event(event), _app(app), _network(network), _settings(settings), _loadScreen(loadScreen) {
-    this->_mainMenu = new MainMenu(this->_app, this->_state, this);
-    this->_joinLobby = new JoinLobby(this->_app, this->_state, this);
+    this->_soundmanager = new SoundManager(settings);    
+    this->_mainMenu = new MainMenu(this->_app, this->_state, this, this->_soundmanager);
+    this->_joinLobby = new JoinLobby(this->_app, this->_state, this, this->_soundmanager);
     this->_lobbyMenu = new Lobby(this->_app, this->_state, this, this->_settings);
-    this->_menumusic = new MenuMusic();
+    //this->_menumusic = new MenuMusic();
 }
 
 RType::MenuManager::~MenuManager() = default;
@@ -32,16 +33,16 @@ void RType::MenuManager::draw() {
 void RType::MenuManager::switchMenu(RType::MenuType menuType) {
     switch (menuType) {
         case MENU_MAIN_MENU:
-            this->_menumusic->run();
+            this->_soundmanager->play("menumusic");
             this->_event->setCurrentMenu((IMenu*)this->_mainMenu);
             break;
         case MENU_LOBBY_MENU:
-            this->_menumusic->stop();
+            this->_soundmanager->play("menumusic");
             this->_lobbyMenu->updateCode();
             this->_event->setCurrentMenu((IMenu*)this->_lobbyMenu);
             break;
         case MENU_JOIN_LOBBY:
-            this->_menumusic->stop();
+            this->_soundmanager->stop("menumusic");
             this->_event->setCurrentMenu((IMenu*)this->_joinLobby);
             break;
     }

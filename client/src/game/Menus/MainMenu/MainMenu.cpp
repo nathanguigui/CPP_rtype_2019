@@ -4,8 +4,8 @@
 
 #include "MainMenu.hpp"
 
-RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent) :
-            _app(app), _state(state), _parent(parent) {
+RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManager *parent, SoundManager *soundmanager) :
+            _app(app), _state(state), _parent(parent), _soundmanager(soundmanager) {
     this->_itemStatus = MAIN_MENU_JOIN_GAME;
     this->_backgroundTexture = new sf::Texture();
     this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
@@ -17,9 +17,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManage
     this->_newText = new sf::Text("CREATE A GAME", *this->_font);
     this->_quitText = new sf::Text("QUIT", *this->_font);
     this->initGUI();
-    this->keyReleased = true;
-    this->_sound = new MenuSelectSound();
-    this->_quitsound = new QuitSound();
+    this->keyReleased = true;    
 }
 
 RType::MainMenu::~MainMenu() = default;
@@ -31,7 +29,7 @@ void RType::MainMenu::handleRight() {
 }
 
 void RType::MainMenu::handleUp() {
-    this->_sound->run();
+    this->_soundmanager->play("bubble");
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
@@ -51,7 +49,7 @@ void RType::MainMenu::handleUp() {
 }
 
 void RType::MainMenu::handleDown() {
-    this->_sound->run();
+    this->_soundmanager->play("bubble");
     if (this->keyReleased && !this->_disabled) {
         switch (this->_itemStatus) {
             case MAIN_MENU_NEW_GAME:
@@ -82,7 +80,8 @@ void RType::MainMenu::handleEnter() {
                 this->_parent->switchMenu(MENU_JOIN_LOBBY);
                 break;
             case MAIN_MENU_QUIT_GAME:
-                this->_quitsound->run();
+                this->_soundmanager->stop("menumusic");
+                this->_soundmanager->play("quit");
                 sleep(3);
                 exit(0);
         }

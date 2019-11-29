@@ -14,6 +14,7 @@ namespace RType {
         QuitSound();
         ~QuitSound();
         void run();
+        void setVol(int vol);
 
     private:
         sf::SoundBuffer _buffer;
