@@ -11,6 +11,7 @@
 #include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/Gui/Tools.hpp"
+#include "../../../core/SoundManager/SoundManager.hpp"
 
 namespace RType {
     using namespace RType;
@@ -34,9 +35,10 @@ namespace RType {
 
     private:
 
+        SoundManager *_soundmanager;
+
         enum SettingsMenuStatus {
             QUIT_BUTTON,
-            SAVE_BUTTON,
             VOLUME_BAR
         };
 
@@ -56,8 +58,6 @@ namespace RType {
         sf::Text *_volumeBar[100]{};
 
         sf::Text *_quitText;
-
-        sf::Text *_saveText;
 
         int _volume = 100;
 
