@@ -25,13 +25,13 @@ void RType::TcpNetwork::createLobby() {
     auto ss = std::stringstream();
     ss << "LOBBY CREATE;\n€\n";
     this->sendData(ss.str());
-    
+
     char data[1000];
     std::size_t recieved;
     if (this->_tcpSocket->receive(data, 100, recieved) != sf::Socket::Done) {
         std::cout << "error" << std::endl;
     } else {
-        std::cout << data << std::endl;
+        std::cout << "\n Recieved data :\n" << data << std::endl;
     }
 }
 

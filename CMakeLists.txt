@@ -108,7 +108,12 @@ set(CLIENT_SRC
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.cpp
         client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h
         client/src/core/Sounds/QuitSound/QuitSound.cpp
-        client/src/core/Sounds/QuitSound/QuitSound.h)
+        client/src/core/Sounds/QuitSound/QuitSound.h
+        client/src/game/enemies/LittleRed/LittleRed.cpp
+        client/src/game/enemies/LittleRed/LittleRed.h
+        client/src/game/AnimateSprite/AnimateSprite.cpp
+        client/src/game/AnimateSprite/AnimateSprite.hpp)
+
 
 include_directories("${PROJECT_BINARY_DIR}")
 
@@ -117,6 +122,9 @@ add_custom_target(copy-files ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/client/src/assets/
         ${CMAKE_BINARY_DIR}/assets/
+        COMMAND ${CMAKE_COMMAND} -E copy
+        ${CMAKE_SOURCE_DIR}/build/bin/rtype_client
+        ${CMAKE_BINARY_DIR}/
 )
 target_link_libraries(rtype_client ${CONAN_LIBS})
 

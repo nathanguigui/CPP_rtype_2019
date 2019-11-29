@@ -3,26 +3,26 @@
 //
 
 #include <client/src/core/Gui/Tools.hpp>
-#include "SplashScreen.hpp"
 
-RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _app(app), _windowState(state) {
+#include "AnimateSprite.hpp"
+
+RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) : _app(app), _windowState(state) {
+    
+    /// texture for sprite
     this->_splashTexture = new sf::Texture();
     this->_backgroundTexture = new sf::Texture();
+    
+    /// sprites
     this->_splash = new sf::Sprite();
     this->_background = new sf::Sprite();
-    //this->_rectSourceSprite = new sf::IntRect(0,0,128,127);
-    this->_splashTexture->loadFromFile("assets/MainMenu/logo.png");
-    this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
-    this->_lastFrame = 100000;
-    this->_currentFrame = 0;
-    this->_done = false;
-    this->_background->setTexture(*this->_backgroundTexture);
-    this->_splash->setTexture(*this->_splashTexture);
+
+    /// touch and kill
     this->boum = new SimpleExplosion();
     this->kill = new SimpleKill();
     this->touch = new SuperTouch();
     this->simpleTouch = new SimpleTouch();
 
+    /// enemies
     this->redenemy = new LittleRed();
 
     this->bullet = new SimpleBullet();
@@ -31,15 +31,20 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
+    
+    this->_splashTexture->loadFromFile("assets/uncut_sprites/r-typesheet5.gif");
+    this->_lastFrame = 100000;
+    this->_currentFrame = 0;
+    this->_done = false;
+    this->_background->setTexture(*this->_backgroundTexture);
+    this->_splash->setTexture(*this->_splashTexture);
 
-    //this->_splash->setTextureRect(*this->_rectSourceSprite);
-
-    this->_buffer.loadFromFile("assets/music/splashscreen.wav");    
-    this->_sound.setBuffer(this->_buffer);
-    this->_sound.play();
+    //this->_buffer.loadFromFile("assets/music/splashscreen.wav");    
+    //this->_sound.setBuffer(this->_buffer);
+    //this->_sound.play();
 }
 
-void RType::SplashScreen::run() {
+void RType::AnimateSprite::run() {
 
     auto screenSize = this->_app->getSize();
     this->_splash->setPosition(centerX(screenSize, this->_splash->getGlobalBounds().width, this->_splash->getPosition()));
@@ -49,7 +54,7 @@ void RType::SplashScreen::run() {
     if (this->_currentFrame == 0) {
         this->_clock = new sf::Clock();
         this->_splashClock = new sf::Clock();
-        //this->_splash->setTextureRect(this->boum->run());
+        this->_splash->setTextureRect(this->redenemy->run());
     }
 
     if (this->_clock->getElapsedTime().asSeconds() > 7) {
@@ -61,16 +66,13 @@ void RType::SplashScreen::run() {
     if (this->_clock->getElapsedTime().asSeconds() < 10) {
         if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
         {
-            //this->_splash->setTextureRect(this->boum->run());
-            this->_splash->scale(1.003f, 1.003f);
+            this->_splash->setTextureRect(this->redenemy->run());
             this->_splashClock->restart();
         }
         _app->draw(*this->_background);
         _app->draw(*this->_splash);
         this->_currentFrame += 1;
-    } else if (this->_clock->getElapsedTime().asSeconds() > 10) {
-        this->_sound.stop();
     }
 }
 
-RType::SplashScreen::~SplashScreen() = default;
+RType::AnimateSprite::~AnimateSprite() = default;

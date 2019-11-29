@@ -2,13 +2,16 @@
 // Created by guigui on 11/13/19.
 //
 
-#ifndef CPP_RTYPE_2019_SPLASHSCREEN_HPP
-#define CPP_RTYPE_2019_SPLASHSCREEN_HPP
+#ifndef CPP_RTYPE_2019_ANIMATESPRITE_HPP
+#define CPP_RTYPE_2019_ANIMATESPRITE_HPP
+
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
+
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
 
+/// bullets sprites
 #include "../../game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h"
 #include "../../game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h"
 #include "../../game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.h"
@@ -16,20 +19,22 @@
 #include "../../game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h"
 #include "../../game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h"
 
+/// kill or touch sprites
 #include "../../game/Bullets/BulletTouch/SimpleKill/SimpleKill.h"
 #include "../../game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.h"
 #include "../../game/Bullets/BulletTouch/SuperTouch/SuperTouch.h"
 #include "../../game/Bullets/BulletTouch/SimpleTouch/SimpleTouch.h"
 
+/// enemies sprites
 #include "../../game/enemies/LittleRed/LittleRed.h"
 
 namespace RType {
     using namespace RType;
-    class SplashScreen: public CoreObject {
+    class AnimateSprite: public CoreObject {
     public:
-        SplashScreen(sf::RenderWindow *app, WindowState *state);
+        AnimateSprite(sf::RenderWindow *app, WindowState *state);
         void run();
-        ~SplashScreen();
+        ~AnimateSprite();
 
 
     private:
