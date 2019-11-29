@@ -57,6 +57,18 @@ namespace RType {
         /// Code text
         sf::Text *_codeText;
 
+        /// Player one text
+        sf::Text *_playerOneText;
+
+        /// Player two text
+        sf::Text *_playerTwoText;
+
+        /// Player three text
+        sf::Text *_playerThreeText;
+
+        /// Player four text
+        sf::Text *_playerFourText;
+
         bool keyReleased;
 
         /// Window state
