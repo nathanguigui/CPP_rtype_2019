@@ -6,10 +6,12 @@
 #define CPP_RTYPE_2019_TIMER_HPP
 
 #include <SFML/Graphics.hpp>
-#include <client/src/core/SplashScreen/SplashScreen.hpp>
-#include <client/src/core/TcpNetwork/TcpNetwork.hpp>
-#include <client/src/core/MenuManager/MenuManager.hpp>
-#include <client/src/core/SceneManager/SceneManager.hpp>
+#include "client/src/core/SplashScreen/SplashScreen.hpp"
+#include "client/src/core/TcpNetwork/TcpNetwork.hpp"
+#include "client/src/core/MenuManager/MenuManager.hpp"
+#include "client/src/core/SceneManager/SceneManager.hpp"
+#include "client/src/core/UdpNetwork/UdpNetwork.hpp"
+#include "client/src/core/WindowManager/IWindowManager.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 
 
@@ -18,10 +20,13 @@ namespace RType {
 
     class Timer : public CoreObject {
     public:
-        /// Default ctor
+        /// Old ctor deprecated
         Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuManager *menuManager, WindowState *state,
               Event *eventManager, Loading *loadingScreen, LoadScreen *loadScreen, sf::RenderWindow *app,
               SceneManager *sceneManager);
+
+        /// Default ctor
+        explicit Timer(IWindowManager *parent, sf::RenderWindow *app);
 
         /// Default dtor
         virtual ~Timer();
@@ -65,6 +70,9 @@ namespace RType {
         /// TcpNetwork
         TcpNetwork *_tcpNetwork;
 
+        /// UdpNetwork
+        UdpNetwork *_udpNetwork;
+
         /// MenuManager
         MenuManager *_menuManager;
 
@@ -94,6 +102,9 @@ namespace RType {
 
         /// SFML event clock
         sf::Clock *_eventClock;
+
+        /// Parent WindowManager
+        IWindowManager *_parent;
     };
 }
 

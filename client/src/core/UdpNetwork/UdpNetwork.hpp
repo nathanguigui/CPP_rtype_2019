@@ -22,7 +22,7 @@ namespace RType {
     class UdpNetwork : public CoreObject {
     public:
         /// Default ctor
-        UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, const unsigned short destPort,
+        UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
                    Settings *settings);
 
         /// Default dtor
@@ -42,9 +42,9 @@ namespace RType {
 
         void setDestPort(unsigned short destPort);
 
-    private:
         /// Send Data to socket
         void sendData(const std::string &data);
+    private:
 
         /// Parse multiple packet
         void parseMultiplePacket(char *packet, std::size_t packetSize);

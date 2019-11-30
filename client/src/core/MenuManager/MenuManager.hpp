@@ -17,7 +17,7 @@
 #include "IMenuManager.hpp"
 
 namespace RType {
-    class MenuManager : public IMenuManager {
+    class MenuManager : public IMenuManager, public CoreObject {
     public:
         /// Default ctor
         MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,

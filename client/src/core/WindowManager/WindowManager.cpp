@@ -39,8 +39,7 @@ void RType::WindowManager::init() {
 
 void RType::WindowManager::gameLoop() {
     this->_menuManager->switchMenu(MENU_MAIN_MENU);
-    this->_gameTimer = new Timer(this->_splashScreen, this->_tcpNetwork, this->_menuManager, this->_state,
-                                 this->_eventManager, this->_loadingScreen, this->_loadScreen, this->_app, nullptr);
+    this->_gameTimer = new Timer(this, this->_app);
     while (_app->isOpen())
         this->_gameTimer->refresh();
 }
@@ -57,6 +56,8 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
                                          this->_settings, this->_loadScreen);
     this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567, this->_settings);
+    auto tmp = new std::string("it works!\r\n");
+    this->_udpNetwork->sendData(*tmp);
     this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
@@ -71,7 +72,7 @@ RType::CoreObject *RType::WindowManager::getLoading() {
 }
 
 RType::CoreObject *RType::WindowManager::getLoadScreen() {
-    return this->_loadingScreen;
+    return this->_loadScreen;
 }
 
 RType::CoreObject *RType::WindowManager::getLogger() {
@@ -110,5 +111,9 @@ RType::CoreObject *RType::WindowManager::getUdpNetwork() {
 
 RType::CoreObject *RType::WindowManager::getTcpNetwork() {
     return this->_tcpNetwork;
+}
+
+RType::CoreObject *RType::WindowManager::getMenuManager() {
+    return this->_menuManager;
 }
 

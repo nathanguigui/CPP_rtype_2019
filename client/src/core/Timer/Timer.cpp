@@ -94,3 +94,18 @@ void RType::Timer::refreshNetwork() {
     std::cout << "Network is refreshing\r\n";
     this->_networkClock->restart();
 }
+
+RType::Timer::Timer(IWindowManager *parent, sf::RenderWindow *app) : _parent(parent), _app(app) {
+    this->_splashScreen = (SplashScreen*)_parent->getSplashScreen();
+    this->_tcpNetwork = (TcpNetwork*)_parent->getTcpNetwork();
+    this->_udpNetwork = (UdpNetwork*)_parent->getUdpNetwork();
+    this->_menuManager = (MenuManager*)_parent->getMenuManager();
+    this->_state = (WindowState*)_parent->getWindowState();
+    this->_eventManager = (Event*)_parent->getEvent();
+    this->_sceneManager = (SceneManager*)_parent->getSceneManager();
+    this->_loadingScreen = (Loading*)_parent->getLoading();
+    this->_loadScreen = (LoadScreen*)_parent->getLoadScreen();
+    this->_graphicsClock = new sf::Clock();
+    this->_eventClock = new sf::Clock();
+    this->_networkClock = new sf::Clock();
+}

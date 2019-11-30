@@ -49,6 +49,9 @@ namespace RType {
         /// get TcpNetwork from WindowManager
         virtual CoreObject *getTcpNetwork() = 0;
 
+        /// get MenuManager from WindowManager
+        virtual CoreObject *getMenuManager() = 0;
+
     private:
 
     };
