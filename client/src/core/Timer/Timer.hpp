@@ -16,7 +16,7 @@
 namespace RType {
     using namespace RType;
 
-    class Timer {
+    class Timer : public CoreObject {
     public:
         /// Default ctor
         Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuManager *menuManager, WindowState *state,
