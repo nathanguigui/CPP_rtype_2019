@@ -10,12 +10,14 @@
 #include <sstream>
 #include <iostream>
 #include <client/src/core/Settings/Settings.hpp>
+#include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "client/src/core/core.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/TcpNetwork/ITcpNetwork.hpp"
+#include "client/src/core/UdpNetwork/UdpNetwork.hpp"
 
 namespace RType {
     using namespace RType;
@@ -24,7 +26,7 @@ namespace RType {
     public:
         /// Default ctor
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
-                   Loading *loading, Settings *settings);
+                   Loading *loading, Settings *settings, IWindowManager *parent);
 
         /// Default dtor
         virtual ~TcpNetwork();
@@ -42,7 +44,7 @@ namespace RType {
         void lobbyReady(std::string code, std::string playerName);
 
         /// Get Lobby infos
-        void lobbyInfo(std::string code);
+        void lobbyUpdate();
 
         /// Start Lobby
         void lobbyStart(std::string code);
@@ -53,6 +55,9 @@ namespace RType {
         /// Set current menu manager to send callback
         void setMenuManager(IMenuManager *menuManager);
 
+        /// Periodic update
+        void update();
+
     private:
         /// Send Data to socket
         void sendData(const std::string& data);
@@ -62,6 +67,9 @@ namespace RType {
 
         /// Parse received packet
         void parsePacket(std::string command);
+
+        /// Execute argv
+        void execArgv(std::vector<std::string> argv);
 
         /// SFML app
         sf::RenderWindow *_app;
@@ -89,6 +97,13 @@ namespace RType {
 
         /// Window menu manager
         IMenuManager *_menuManager = nullptr;
+
+        bool _inLobby = false;
+
+        bool _addingPlayer = false;
+
+        /// Parent WindowManager
+        IWindowManager *_parent;
 
     };
 }

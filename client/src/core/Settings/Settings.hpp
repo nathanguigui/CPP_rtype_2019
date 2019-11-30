@@ -46,6 +46,12 @@ namespace RType {
 
         void setSoundVolume(int soundVolume);
 
+        unsigned short getGameServerPort() const;
+
+        void setGameServerPort(unsigned short gameServerPort);
+
+        void setGameServerPort(const char *gameServerPort);
+
     private:
         /// Lobby player username
         std::string *_playerName{};
@@ -55,6 +61,9 @@ namespace RType {
 
         /// Lobby server Port
         unsigned short _lobbyServerPort{};
+
+        /// Game server Port
+        unsigned short _gameServerPort{};
 
         /// Window State
         WindowState *_windowState;

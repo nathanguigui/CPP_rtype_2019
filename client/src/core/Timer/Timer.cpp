@@ -14,19 +14,22 @@ RType::Timer::Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuMana
                                                   _app(app), _sceneManager(sceneManager) {
     this->_graphicsClock = new sf::Clock();
     this->_eventClock = new sf::Clock();
-    this->_networkClock = new sf::Clock();
+    this->_tcpClock = new sf::Clock();
+    this->_udpClock = new sf::Clock();
 }
 
 RType::Timer::~Timer() = default;
 
 void RType::Timer::refresh() {
     /// 60 FPS refresh
-    if (needRefresh(30, TimersType::GRAPHICS))
+    if (needRefresh(20, TimersType::GRAPHICS))
         this->refreshGraphics();
-    if (needRefresh(120, TimersType::EVENTS))
+    if (needRefresh(60, TimersType::EVENTS))
         this->refreshEvent();
-    if (needRefresh(1, TimersType::NETWORK))
-        this->refreshNetwork();
+    if (needRefresh(1, TimersType::TCP_NETWORK))
+        this->refreshTcpNetwork();
+    if (needRefresh(1, TimersType::UDP_NETWORK))
+        this->refreshUdpNetwork();
 }
 
 void RType::Timer::refreshGraphics() {
@@ -79,20 +82,23 @@ void RType::Timer::refreshEvent() {
 bool RType::Timer::needRefresh(float FPS, TimersType type) {
     float msWaitTime = 1000 / FPS;
     switch (type) {
-        case NETWORK:
-            return this->_networkClock->getElapsedTime().asMilliseconds() > msWaitTime;
+        case TCP_NETWORK:
+            return this->_tcpClock->getElapsedTime().asMilliseconds() > msWaitTime;
         case GRAPHICS:
             return this->_graphicsClock->getElapsedTime().asMilliseconds() > msWaitTime;
         case EVENTS:
             return this->_eventClock->getElapsedTime().asMilliseconds() > msWaitTime;
+        case UDP_NETWORK:
+            return this->_udpClock->getElapsedTime().asMilliseconds() > msWaitTime;
+            break;
     }
     return false;
 }
 
-void RType::Timer::refreshNetwork() {
+void RType::Timer::refreshTcpNetwork() {
     this->_tcpNetwork->waitForPacket();
-    std::cout << "Network is refreshing\r\n";
-    this->_networkClock->restart();
+    this->_tcpNetwork->update();
+    this->_tcpClock->restart();
 }
 
 RType::Timer::Timer(IWindowManager *parent, sf::RenderWindow *app) : _parent(parent), _app(app) {
@@ -107,5 +113,11 @@ RType::Timer::Timer(IWindowManager *parent, sf::RenderWindow *app) : _parent(par
     this->_loadScreen = (LoadScreen*)_parent->getLoadScreen();
     this->_graphicsClock = new sf::Clock();
     this->_eventClock = new sf::Clock();
-    this->_networkClock = new sf::Clock();
+    this->_tcpClock = new sf::Clock();
+    this->_udpClock = new sf::Clock();
+}
+
+void RType::Timer::refreshUdpNetwork() {
+    this->_udpNetwork->waitForPacket();
+    this->_udpClock->restart();
 }

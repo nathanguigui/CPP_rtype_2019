@@ -2,6 +2,7 @@
 // Created by guigui on 11/30/19.
 //
 
+#include <sstream>
 #include "UdpNetwork.hpp"
 
 RType::UdpNetwork::UdpNetwork(sf::RenderWindow *app, RType::WindowState *state, std::string *destIp,
@@ -21,7 +22,7 @@ bool RType::UdpNetwork::waitForPacket() {
     aSelector.add(*this->_udpSocket);
     if (aSelector.wait(sf::milliseconds(UDP_SOCKET_SELECTOR_TIMEOUT))) {
         if (aSelector.isReady(*this->_udpSocket)) {
-            std::cout << "packet received on tcp";
+            std::cout << "packet received on udp\r\n";
             this->_udpSocket->receive(packet, ipAddress, this->_destPort);
         }
     }
@@ -33,9 +34,7 @@ void RType::UdpNetwork::setMenuManager(RType::IMenuManager *menuManager) {
 
 void RType::UdpNetwork::sendData(const std::string &data) {
     sf::IpAddress destIp(this->_destIp->c_str());
-    sf::Packet packet;
-    packet << data;
-    if (this->_udpSocket->send(packet, destIp, this->_destPort) != sf::Socket::Done)
+    if (this->_udpSocket->send(data.c_str(), data.size(), destIp, this->_destPort) != sf::Socket::Done)
         std::cout << "Udp network sendData error";
 }
 
@@ -61,4 +60,15 @@ unsigned short RType::UdpNetwork::getDestPort() const {
 
 void RType::UdpNetwork::setDestPort(unsigned short destPort) {
     _destPort = destPort;
+}
+
+void RType::UdpNetwork::sayHello() {
+    auto data = new std::string("Hello\r\n");
+    this->sendData(*data);
+}
+
+void RType::UdpNetwork::sayUsername() {
+    std::stringstream ss;
+    ss << "username " << *this->_settings->getPlayerName() << " ;\r\n";
+    this->sendData(ss.str());
 }

@@ -26,9 +26,7 @@ RType::Lobby::Lobby(sf::RenderWindow *app, WindowState *state, IMenuManager *par
     this->keyReleased = true;
 }
 
-RType::Lobby::~Lobby() {
-
-}
+RType::Lobby::~Lobby() = default;
 
 void RType::Lobby::initGUI() {
     auto screenSize = this->_app->getSize();
@@ -64,11 +62,13 @@ void RType::Lobby::handleKeyReleased() {
 
 void RType::Lobby::draw() {
     auto screenSize = this->_app->getSize();
+    this->updatePlayerNames();
     this->_codeText->setString(*this->_settings->getLobbyCode());
     this->_codeText->setPosition(centerX(screenSize, this->_codeText->getGlobalBounds().width, this->_codeText->getPosition()));
     this->_codeText->setPosition(linePos(screenSize, this->_codeText->getGlobalBounds().height, this->_codeText->getPosition(), 5, 1));
     this->_app->draw(*this->_backgroundSprite);
-    this->_app->draw(*this->_startText);
+    if (this->_state->isLobbyAdmin())
+        this->_app->draw(*this->_startText);
     this->_app->draw(*this->_codeText);
     this->_app->draw(*this->_playerOneText);
     this->_app->draw(*this->_playerTwoText);
@@ -92,4 +92,28 @@ void RType::Lobby::updateCode() {
     this->_codeText->setString(*this->_settings->getLobbyCode());
     this->_codeText->setPosition(centerX(screenSize, this->_codeText->getGlobalBounds().width, this->_codeText->getPosition()));
     this->_codeText->setPosition(linePos(screenSize, this->_codeText->getGlobalBounds().height, this->_codeText->getPosition(), 5, 1));
+}
+
+void RType::Lobby::updatePlayerNames() {
+    switch (this->_state->getPlayerCount()) {
+        case 1:
+            this->_playerOneText->setString(this->_state->getPlayerName(0));
+            break;
+        case 2:
+            this->_playerOneText->setString(this->_state->getPlayerName(0));
+            this->_playerTwoText->setString(this->_state->getPlayerName(1));
+            break;
+        case 3:
+            this->_playerOneText->setString(this->_state->getPlayerName(0));
+            this->_playerTwoText->setString(this->_state->getPlayerName(1));
+            this->_playerThreeText->setString(this->_state->getPlayerName(2));
+            break;
+        case 4:
+            this->_playerOneText->setString(this->_state->getPlayerName(0));
+            this->_playerTwoText->setString(this->_state->getPlayerName(1));
+            this->_playerThreeText->setString(this->_state->getPlayerName(2));
+            this->_playerFourText->setString(this->_state->getPlayerName(3));
+            break;
+    }
+    this->initGUI();
 }

@@ -164,7 +164,7 @@ Tell to the client to switch to Game Mode.
 Server will send only one time a game this response.
 
 ```
-    LOBBY START;
+    LOBBY START [PORT];
     €
 ```
 

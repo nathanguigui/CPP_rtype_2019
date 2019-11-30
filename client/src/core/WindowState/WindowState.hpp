@@ -52,6 +52,16 @@ namespace RType {
 
         void setMenuType(MenuType menuType);
 
+        void addPlayer(const std::string& name);
+
+        int getPlayerCount();
+
+        bool isLobbyAdmin() const;
+
+        void setIsLobbyAdmin(bool isLobbyAdmin);
+
+        std::string getPlayerName(int playerNb);
+
     private:
         sf::RenderWindow *_app;
         bool splashDone = false;
@@ -60,6 +70,8 @@ namespace RType {
         WindowMode windowMode{};
         MenuType menuType{};
         bool isRunning{};
+        std::vector<std::string> _playerList;
+        bool lobbyAdmin = false;
     };
 }
 

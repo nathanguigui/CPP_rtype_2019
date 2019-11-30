@@ -66,4 +66,19 @@ void RType::Settings::setSoundVolume(int soundVolume) {
     _soundVolume = soundVolume;
 }
 
+unsigned short RType::Settings::getGameServerPort() const {
+    return _gameServerPort;
+}
+
+void RType::Settings::setGameServerPort(unsigned short gameServerPort) {
+    _gameServerPort = gameServerPort;
+}
+
+void RType::Settings::setGameServerPort(const char *gameServerPort) {
+    auto tmp = std::string(gameServerPort);
+    if (!std::all_of(tmp.begin(), tmp.end(), ::isdigit))
+        std::cout << "UDP received wrong port for game server\r\n";
+    this->_gameServerPort = (unsigned short) strtoul(gameServerPort, nullptr, 0);
+}
+
 RType::Settings::~Settings() = default;

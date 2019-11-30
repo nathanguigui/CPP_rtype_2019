@@ -7,9 +7,14 @@
 
 int main(int argc, char* argv[]) {
 
-    auto game = new RType::WindowManager("test Window");
-
-    game->processParams(argc, argv);
-    int exitStatus = game->run();
+    int exitStatus;
+    try {
+        auto game = new RType::WindowManager("test Window");
+        game->processParams(argc, argv);
+        exitStatus = game->run();
+    } catch (RType::Exception &exception) {
+        std::cout << exception.what();
+        exitStatus = RTYPE_defaultError;
+    }
     return exitStatus;
 }
