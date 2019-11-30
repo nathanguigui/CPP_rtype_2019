@@ -52,12 +52,11 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkPort(av[2]);
     this->_settings->checkUsername(av[3]);
     this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
-                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings);
+                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings,
+                                       this);
     this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
                                          this->_settings, this->_loadScreen);
     this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567, this->_settings);
-    auto tmp = new std::string("it works!\r\n");
-    this->_udpNetwork->sendData(*tmp);
     this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();

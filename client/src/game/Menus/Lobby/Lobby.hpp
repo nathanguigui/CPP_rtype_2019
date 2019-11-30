@@ -31,6 +31,9 @@ namespace RType {
         /// Update code
         void updateCode();
 
+        /// Update player names
+        void updatePlayerNames();
+
         void handleLeft() override;
         void handleRight() override;
         void handleUp() override;

@@ -41,13 +41,17 @@ namespace RType {
         void refreshGraphics();
 
         /// Refresh network
-        void refreshNetwork();
+        void refreshTcpNetwork();
+
+        /// Refresh network
+        void refreshUdpNetwork();
 
     private:
 
         /// Enum for all timers
         enum TimersType {
-            NETWORK,
+            TCP_NETWORK,
+            UDP_NETWORK,
             GRAPHICS,
             EVENTS
         };
@@ -97,8 +101,11 @@ namespace RType {
         /// SFML graphics clock
         sf::Clock *_graphicsClock;
 
-        /// SFML network clock
-        sf::Clock *_networkClock;
+        /// SFML tcp clock
+        sf::Clock *_tcpClock;
+
+        /// SFML udp clock
+        sf::Clock *_udpClock;
 
         /// SFML event clock
         sf::Clock *_eventClock;

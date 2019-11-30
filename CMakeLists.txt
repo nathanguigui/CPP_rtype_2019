@@ -132,7 +132,7 @@ set(CLIENT_SRC
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
         client/src/game/AnimateSprite/AnimateSprite.hpp
-        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp client/src/core/UdpNetwork/UdpNetwork.cpp client/src/core/UdpNetwork/UdpNetwork.hpp client/src/core/WindowManager/IWindowManager.hpp)
+        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp client/src/core/UdpNetwork/UdpNetwork.cpp client/src/core/UdpNetwork/UdpNetwork.hpp client/src/core/WindowManager/IWindowManager.hpp client/src/core/UdpNetwork/IUdpNetwork.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")
 

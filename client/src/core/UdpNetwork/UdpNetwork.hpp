@@ -15,11 +15,12 @@
 #include <SFML/Network/Packet.hpp>
 #include <client/src/core/core.hpp>
 #include <SFML/Network/SocketSelector.hpp>
+#include "IUdpNetwork.hpp"
 
 namespace RType {
     using namespace RType;
 
-    class UdpNetwork : public CoreObject {
+    class UdpNetwork : public IUdpNetwork {
     public:
         /// Default ctor
         UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
@@ -40,10 +41,15 @@ namespace RType {
 
         unsigned short getDestPort() const;
 
-        void setDestPort(unsigned short destPort);
+        void setDestPort(unsigned short destPort) override;
 
         /// Send Data to socket
-        void sendData(const std::string &data);
+        void sendData(const std::string &data) override;
+
+        void sayHello();
+
+        void sayUsername();
+
     private:
 
         /// Parse multiple packet
