@@ -55,6 +55,8 @@ public:
     void bUpdate();
     /// Détruit les monstres
     void bDestroyer();
+    /// Détruit les powerups en dehors de l'écran
+    void puDestroyer();
 
 private:
     int currentMap_;
@@ -70,11 +72,13 @@ private:
     int mUUID;
     int bID_;
     float timeToWait_;
+    std::vector<std::string> data;
 
     std::vector<Player *> playerList_;
     std::vector<Monster *> monsterList;
     std::vector<Map *> mapList_;
     std::vector<Bullet*> bulletList_;
+    std::vector<PowerUp> powerUpList_;
 };
 
 

@@ -43,6 +43,10 @@ public:
     int getScore() const;
     void setScore(int score);
 
+    PowerUpStyle getPowerUpStyle() const;
+
+    int getPuProba() const;
+
 private:
     std::string type_;
     std::string UUID_;
@@ -53,6 +57,8 @@ private:
     Point<float> direction_; // ?????
     MPattern travel_;
     BulletType bulletType_;
+    PowerUpStyle powerUpStyle_;
+    int puProba;
     float speed_;
     float shotSpeed_;
     float timeNextShoot_; // temps avant que le monstre ne commence à tirer quand il apparait

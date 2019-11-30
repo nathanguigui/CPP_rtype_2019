@@ -10,6 +10,8 @@
 #include <iostream>
 #include <boost/algorithm/string.hpp>
 #include <cstdlib>
+#include <time.h>
+#include <stdlib.h>
 
 template <typename T>
 struct Point {
@@ -17,28 +19,34 @@ struct Point {
     T y;
 };
 
-template <typename T>
-bool operator==(Point<T> a, Point<T> b)
+struct MPattern
 {
-    return a.x == b.x && a.y == b.y;
-}
+    std::vector<Point<float> *> move;
+    std::vector<int> speed;
+    std::vector<int> time;
+};
+
+enum PowerUpStyle {
+    HEALTH,
+    SHOTSPEED
+};
+
+struct PowerUp {
+    Point<float> pos;
+    Point<float> size;
+    PowerUpStyle style;
+};
 
 enum GameState {
     CREATION,
     LAUNCHED,
+    BETWEENGAME,
+    ENDGAME,
     FINISHED,
-    BETWEENGAME
+    WINGAME
 };
 
-enum Color {
-    BLUE,
-    RED,
-    YELLOW,
-    GREEN,
-    UNDEFINED
-};
-
-enum PlayerState {
+enum ObjectState {
     ALIVE,
     DEAD
 };
@@ -48,18 +56,10 @@ enum Teams {
     Monsters
 };
 
-enum RocketType {
+enum BulletType {
     NORMAL,
-};
-
-enum Direction {
-    SOUTH,
-    NORTH,
-    EAST,
-    WEST
-};
-enum MonsterType {
-
+    FORCEPODONE,
+    FORCEPODTWO
 };
 
 #endif //CPP_RTYPE_2019_UTILS_HPP

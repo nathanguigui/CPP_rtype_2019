@@ -19,6 +19,8 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         // Type de rocket
         bulletType_ = NORMAL;
         score_ = 200;
+        powerUpStyle_ = HEALTH;
+        puProba = 1;
         // Vecteurs pour le patterne de déplacement
         std::vector<Point<float> *> move;
         std::vector<int> speed;
@@ -167,4 +169,12 @@ int Monster::getScore() const {
 
 void Monster::setScore(int score) {
     score_ = score;
+}
+
+PowerUpStyle Monster::getPowerUpStyle() const {
+    return powerUpStyle_;
+}
+
+int Monster::getPuProba() const {
+    return puProba;
 }

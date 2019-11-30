@@ -89,7 +89,7 @@ bullet :
 #
 powerup :
  ```
- entity:powerup;[type];[posX];[posY];
+ entity:powerup;[type];[posX];[posY]
  ```
 
 - type -> chaine de caractère définissant le type du powerup
