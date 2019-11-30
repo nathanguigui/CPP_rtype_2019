@@ -27,6 +27,7 @@ Game::Game(std::vector<std::string> pseudo) {
         else if (color == "Yellow")
             color = "Green";
     }
+    srand (time(NULL));
 }
 
 Game::~Game() {
@@ -40,9 +41,9 @@ void Game::Launch() {
 
 void Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
     /*
-     * Time since Update en seconde donc à convertir en ms au moment où on connecte avec le serveur
-     */
-    // timeSinceUpdate = timeSinceUpdate / 1000;
+    * Time since Update en seconde donc à convertir en ms au moment où on connecte avec le serveur
+    */
+    timeSinceUpdate = timeSinceUpdate / 1000;
     timeSinceUpdate_ = timeSinceUpdate;
 
     if (!manageGameState()) {
@@ -99,6 +100,8 @@ void Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
 
     // Détruit les balles hits et en dehors de l'écran
     bDestroyer();
+
+    puDestroyer();
 
     // Tue les montres en dehors de l'écran
     mDead();
@@ -261,7 +264,32 @@ void Game::pMove(int i, std::string direction) {
             std::cout << "Ca marche les collisions PVM" << std::endl;
             return;
         }
-
+    }
+    //Check les collisions avec les powerups
+    for (int j = 0; (unsigned long) j < powerUpList_.size(); j++) {
+        posOther = powerUpList_[j].pos;
+        sizeOther = powerUpList_[j].size;
+        if (posWanted.x - (sizeWanted.x / 2) < posOther.x + (sizeOther.x / 2) &&
+            posWanted.x + (sizeWanted.x / 2) > posOther.x - (sizeWanted.x / 2) &&
+            posWanted.y - (sizeWanted.y / 2) < posOther.y + (sizeOther.y / 2) &&
+            posWanted.y + (sizeWanted.y / 2) > posOther.y - (sizeWanted.y / 2)) {
+            std::cout << "Ca marche les collisions PVU" << std::endl;
+            if (powerUpList_[j].style == HEALTH) {
+                if (playerList_[i]->getLife() + 30 > 100) {
+                    playerList_[i]->setLife(100);
+                }
+                else {
+                    playerList_[i]->setLife(playerList_[i]->getLife() + 30);
+                }
+            }
+            else if (powerUpList_[j].style == SHOTSPEED) {
+                if (playerList_[i]->getShotSpeed() - 50 >= 200) {
+                    playerList_[i]->setShotSpeed(playerList_[i]->getShotSpeed() - 50);
+                }
+            }
+            powerUpList_.erase(powerUpList_.begin() + j);
+            j--;
+        }
     }
     //Changer coordonnées
     playerList_[i]->setPos(posWanted);
@@ -476,9 +504,10 @@ void Game::bUpdate() {
                 } else if (playerList_[it]->getScore() > 1500) {
                     playerList_[it]->setBulletType(FORCEPODTWO);
                 }
-                /*
-                 * ICI pour invoquer le powerup quand un monstre meurt
-                 */
+                //Invocation powerup
+                if ((rand() % 10 + 1) <=  monsterList[victime]->getPuProba()) {
+                    powerUpList_.emplace_back( (PowerUp){{(monsterList[victime]->getPos()).x, (monsterList[victime]->getPos()).y}, {1 , 1}, monsterList[victime]->getPowerUpStyle()});
+                }
             }
         }
 
@@ -532,6 +561,15 @@ void Game::bDestroyer() {
     for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
         if (bulletList_[i]->isHit() || (bulletList_[i]->getPos()).x < posx_ || (bulletList_[i]->getPos()).x > (posx_ + 32)) {
             bulletList_.erase(bulletList_.begin() + i);
+            i--;
+        }
+    }
+}
+
+void Game::puDestroyer() {
+    for (int i = 0; (unsigned long)i < powerUpList_.size(); i++) {
+        if (powerUpList_[i].pos.x < posx_) {
+            powerUpList_.erase(powerUpList_.begin() + i);
             i--;
         }
     }
