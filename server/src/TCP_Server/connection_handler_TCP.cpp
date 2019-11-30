@@ -74,27 +74,42 @@ std::string connection_handler_TCP::get_all_name_in_server() {
                 cout << data[j];
                 buffer = buffer + data[j];
             }
+            buffer = buffer + "€";
             return buffer;
         }
     }
     return "NOBODY";
 }
 
+size_t connection_handler_TCP::get_port_from_keypass() {
+    for (int i = 0; i < server_->getServerManager().size(); i++) {
+        if (server_->getServerManager()[i]->getServerKey() == action.keypass) {
+            return server_->getServerManager()[i]->getPort();
+        }
+    }
+}
+
 void connection_handler_TCP::handle_read(const boost::system::error_code &err, size_t bytes_transferred) {
     string new_data;
     if (!err) {
+        cout << data << endl;
         new_data = convertToString(data);
+        cout << new_data << endl;
         if (parse_data(new_data) == true) {
             if (action.type == "CREATE") {
                 std::cout << "Create UDP SERVER";
+                buffer = "CREATE " + action.keypass + " " + server_->getServerIp();
+                buffer = buffer + ":";
+                buffer = buffer + to_string(server_->getPortUdp());
+                buffer = buffer + "€";
                 server_->Create_UDP_server(action.keypass);
-                buffer = "Wait for ping\n";
-                cout << action.type << " " <<action.keypass << endl;
                 add_username_in_server();
                 write_data();
             } else if (action.type == "JOIN") {
-                add_username_in_server();
-                buffer = get_all_name_in_server();
+                buffer = "JOIN" + server_->getServerIp() + ":";
+                buffer = buffer + to_string(get_port_from_keypass()) + "€";
+                //add_username_in_server();
+                //buffer = get_all_name_in_server();
                 cout << action.type << " " << action.keypass << endl;
                 write_data();
             }

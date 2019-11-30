@@ -32,7 +32,9 @@ void Server_TCP::handle_accept(connection_handler_TCP::pointer new_connection, c
 }
 
 void Server_TCP::Create_UDP_server(std::string ServerKey) {
-    auto test = new Server_UDP(io_context_, server_ip_, port_udp, ServerKey);
+    std::vector<std::string> buff;
+    buff.push_back(ServerKey);
+    auto test = new Server_UDP(io_context_, server_ip_, port_udp, ServerKey, buff);
     std::cout << server_ip_ << ":" << port_udp << std::endl;
     port_udp +=1;
     server_manager_.push_back(test);
@@ -70,4 +72,12 @@ const vector<Server_UDP *> &Server_TCP::getServerManager() const {
 
 void Server_TCP::setServerManager(const vector<Server_UDP *> &serverManager) {
     server_manager_ = serverManager;
+}
+
+size_t Server_TCP::getPortUdp() const {
+    return port_udp;
+}
+
+void Server_TCP::setPortUdp(size_t portUdp) {
+    port_udp = portUdp;
 }

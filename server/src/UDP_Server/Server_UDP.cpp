@@ -4,7 +4,7 @@
 
 #include "Server_UDP.hpp"
 
-Server_UDP::Server_UDP(io_service &io_service, string IP_Address, size_t port, std::string keypass) : socket_(io_service, udp::endpoint(boost::asio::ip::address::from_string(IP_Address), port)){
+Server_UDP::Server_UDP(io_service &io_service, string IP_Address, size_t port, std::string keypass, std::vector<std::string> buff) : socket_(io_service, udp::endpoint(boost::asio::ip::address::from_string(IP_Address), port)), game_(buff){
     server_key_ = keypass;
     server_ip_= IP_Address;
     port_ = port;
@@ -21,6 +21,10 @@ void Server_UDP::start_accept() {
     socket_.async_receive(boost::asio::buffer(data, max_length), boost::bind(&Server_UDP::handle_accept, this, new_connection, boost::asio::placeholders::error));
 }
 
+void Server_UDP::start_game() {
+
+}
+
 void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost::system::error_code &err) {
     if (!err) {
         if (session_manager_.sessions_.size() < 4) {
@@ -29,7 +33,9 @@ void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost:
             session_manager_.start(new_connection);
         }
     } if (session_manager_.sessions_.size() >= 4) {
-        cout << "launch game\n";
+        Game game(username_);
+        setGame(game);
+        start_game();
     }
     start_accept();
 }
@@ -72,4 +78,12 @@ std::vector<std::string> Server_UDP::getUsername() {
 
 void Server_UDP::setUsername(const vector<std::string> &username) {
     username_ = username;
+}
+
+const Game &Server_UDP::getGame() const {
+    return game_;
+}
+
+void Server_UDP::setGame(const Game &game) {
+    game_ = game;
 }
