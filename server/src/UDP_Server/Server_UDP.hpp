@@ -25,9 +25,6 @@ using namespace std;
 
 class Server_UDP;
 
-struct action_s {
-    std::string action_type;
-};
 
 class udp_session : public boost::enable_shared_from_this<udp_session> {
 public:
