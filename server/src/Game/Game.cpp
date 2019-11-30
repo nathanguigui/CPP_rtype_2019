@@ -49,6 +49,10 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     data.emplace_back("0x198$");
 
     if (!manageGameState()) {
+        // Ecrit les données return
+        for (int i = 0; (unsigned long)i < data.size(); i++) {
+            std::cout << data[i] << std::endl;
+        }
         return data;
     }
 
@@ -104,17 +108,20 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     // Détruit les balles hits et en dehors de l'écran
     bDestroyer();
 
+    // Détruit les powerups hors de l'écran
     puDestroyer();
 
-    // Tue les montres en dehors de l'écran
+    // Tue les montres
     mDead();
 
     // Ecrit les données à renvoyer
     writeData();
 
+    // Ecrit les données return
     for (int i = 0; (unsigned long)i < data.size(); i++) {
         std::cout << data[i] << std::endl;
     }
+
     return data;
 }
 
@@ -130,20 +137,20 @@ bool Game::manageGameState() {
             std::cout << "C WIN AVEC NIVO APRAIENT" << std::endl;
             gameState_ = BETWEENGAME;
             timeToWait_ = 10000;
-            data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_));
+            data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_) + "$");
             return false;
         } else if (allDead) {
             std::cout << " C LOOSE" << std::endl;
             gameState_ = ENDGAME;
             timeToWait_ = 10000;
-            data.push_back((std::string)"0x498;0x418;" + std::to_string(timeToWait_));
+            data.push_back((std::string)"0x498;0x418;" + std::to_string(timeToWait_) + "$");
 
             return false;
         }  else if (maxPosX_ != 0 && posx_ == maxPosX_ - 32 && monsterList.empty() && currentMap_ >= mapList_.size() - 1) {
             std::cout << "C WIN YA PU DE NIVO DéSO FRAIRE" << std::endl;
             gameState_ = WINGAME;
             timeToWait_ = 10000;
-            data.push_back((std::string)"0x498;0x417;"  + std::to_string(timeToWait_));
+            data.push_back((std::string)"0x498;0x417;"  + std::to_string(timeToWait_) + "$");
             return false;
         } else {
             std::cout << "continue à jouer tranquille" << std::endl;
@@ -153,7 +160,7 @@ bool Game::manageGameState() {
     else if (gameState_ == BETWEENGAME) {
         std::cout << "BetweenGame for " << timeToWait_ << "ms\n";
         timeToWait_ -= timeSinceUpdate_;
-        data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_));
+        data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_) + "$");
         if (timeToWait_ <= 0) {
             gameState_ = LAUNCHED;
         }
