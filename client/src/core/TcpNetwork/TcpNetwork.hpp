@@ -20,7 +20,7 @@
 namespace RType {
     using namespace RType;
 
-    class TcpNetwork : public ITcpNetwork {
+    class TcpNetwork : public ITcpNetwork, public CoreObject {
     public:
         /// Default ctor
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
@@ -80,9 +80,6 @@ namespace RType {
 
         /// SFML socket status
         sf::Socket::Status _status{};
-
-        /// SFML Socket selector
-        sf::SocketSelector *_selector;
 
         /// Loading Screen
         Loading *_loadingScreen;

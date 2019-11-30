@@ -61,9 +61,9 @@ void RType::TcpNetwork::lobbyStart(std::string code) {
 bool RType::TcpNetwork::waitForPacket() {
     sf::SocketSelector aSelector;
     aSelector.add(*this->_tcpSocket);
-    if (aSelector.wait(sf::milliseconds(32))) {
+    if (aSelector.wait(sf::milliseconds(TCP_SOCKET_SELECTOR_TIMEOUT))) {
         if (aSelector.isReady(*this->_tcpSocket)) {
-            std::cout << "packet received";
+            std::cout << "packet received on tcp";
             char data[1000];
             std::size_t received;
             if (this->_tcpSocket->receive(data, 100, received) != sf::Socket::Done)

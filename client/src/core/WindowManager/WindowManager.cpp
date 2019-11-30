@@ -56,8 +56,59 @@ void RType::WindowManager::processParams(int ac, char **av) {
                                        this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings);
     this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
                                          this->_settings, this->_loadScreen);
+    this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567, this->_settings);
     this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
+}
+
+RType::CoreObject *RType::WindowManager::getEvent() {
+    return this->_eventManager;
+}
+
+RType::CoreObject *RType::WindowManager::getLoading() {
+    return this->_loadingScreen;
+}
+
+RType::CoreObject *RType::WindowManager::getLoadScreen() {
+    return this->_loadingScreen;
+}
+
+RType::CoreObject *RType::WindowManager::getLogger() {
+    // TODO add logger
+    return nullptr;
+}
+
+RType::CoreObject *RType::WindowManager::getSceneManager() {
+    return this->_sceneManager;
+}
+
+RType::CoreObject *RType::WindowManager::getSettings() {
+    return this->_settings;
+}
+
+RType::CoreObject *RType::WindowManager::getSoundManager() {
+    // TODO add sound manager
+    return nullptr;
+}
+
+RType::CoreObject *RType::WindowManager::getSplashScreen() {
+    return this->_splashScreen;
+}
+
+RType::CoreObject *RType::WindowManager::getWindowState() {
+    return this->_state;
+}
+
+RType::CoreObject *RType::WindowManager::getTimer() {
+    return this->_gameTimer;
+}
+
+RType::CoreObject *RType::WindowManager::getUdpNetwork() {
+    return this->_udpNetwork;
+}
+
+RType::CoreObject *RType::WindowManager::getTcpNetwork() {
+    return this->_tcpNetwork;
 }
 
