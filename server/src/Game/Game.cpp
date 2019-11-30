@@ -39,18 +39,21 @@ void Game::Launch() {
     setPlayer();
 }
 
-void Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
+std::vector<std::string> Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
     /*
     * Time since Update en seconde donc à convertir en ms au moment où on connecte avec le serveur
     */
-    timeSinceUpdate = timeSinceUpdate / 1000;
+    timeSinceUpdate = timeSinceUpdate * 1000;
     timeSinceUpdate_ = timeSinceUpdate;
+    data.clear();
+    data.emplace_back("0x198$");
 
     if (!manageGameState()) {
-        return;
+        return data;
     }
 
     movePosX();
+    data.emplace_back((std::string) "0x498;0x415;" + std::to_string(currentMap_) + ";" + std::to_string(posx_) + "$");
 
     // Mets à jour le temps de shoot des joueurs et monstres
     updateShotTimer();
@@ -79,7 +82,7 @@ void Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
             }
             else if (playerList_[j]->getPseudo() == res[0] && res[1] == "Shoot" && playerList_[j]->getPlayerState() == ALIVE) {
                 pShoot(i);
-                std::cout << "Shoot"<< std::endl;
+                std::cout << "Shoot" << std::endl;
             }
         }
     }
@@ -105,6 +108,14 @@ void Game::Update(std::vector<std::string> commands, float timeSinceUpdate) {
 
     // Tue les montres en dehors de l'écran
     mDead();
+
+    // Ecrit les données à renvoyer
+    writeData();
+
+    for (int i = 0; (unsigned long)i < data.size(); i++) {
+        std::cout << data[i] << std::endl;
+    }
+    return data;
 }
 
 bool Game::manageGameState() {
@@ -119,16 +130,20 @@ bool Game::manageGameState() {
             std::cout << "C WIN AVEC NIVO APRAIENT" << std::endl;
             gameState_ = BETWEENGAME;
             timeToWait_ = 10000;
+            data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_));
             return false;
         } else if (allDead) {
             std::cout << " C LOOSE" << std::endl;
             gameState_ = ENDGAME;
             timeToWait_ = 10000;
+            data.push_back((std::string)"0x498;0x418;" + std::to_string(timeToWait_));
+
             return false;
         }  else if (maxPosX_ != 0 && posx_ == maxPosX_ - 32 && monsterList.empty() && currentMap_ >= mapList_.size() - 1) {
             std::cout << "C WIN YA PU DE NIVO DéSO FRAIRE" << std::endl;
             gameState_ = WINGAME;
             timeToWait_ = 10000;
+            data.push_back((std::string)"0x498;0x417;"  + std::to_string(timeToWait_));
             return false;
         } else {
             std::cout << "continue à jouer tranquille" << std::endl;
@@ -138,12 +153,14 @@ bool Game::manageGameState() {
     else if (gameState_ == BETWEENGAME) {
         std::cout << "BetweenGame for " << timeToWait_ << "ms\n";
         timeToWait_ -= timeSinceUpdate_;
+        data.push_back((std::string)"0x498;0x416;"  + std::to_string(timeToWait_));
         if (timeToWait_ <= 0) {
             gameState_ = LAUNCHED;
         }
     }
     else if (gameState_ == ENDGAME) {
         timeToWait_ -= timeSinceUpdate_;
+        data.push_back((std::string)"0x498;0x418;" + std::to_string(timeToWait_) + "$");
         std::cout << "Endgame for " << timeToWait_ << "ms\n";
         if (timeToWait_ <= 0) {
             gameState_ = FINISHED;
@@ -152,11 +169,15 @@ bool Game::manageGameState() {
     else if (gameState_ == WINGAME) {
         timeToWait_ -= timeSinceUpdate_;
         std::cout << "Wingame for " << timeToWait_ << "ms\n";
+        data.push_back((std::string)"0x498;0x417;"  + std::to_string(timeToWait_) + "$");
         if (timeToWait_ <= 0) {
             gameState_ = FINISHED;
         }
     }
     else if (gameState_ == FINISHED) {
+        /*
+         * FINISHED to serveur
+         */
         std::cout << "Finished" << std::endl;
     }
     return false;
@@ -451,7 +472,7 @@ void Game::bUpdate() {
     int victime = 0;
     int it = 0;
 
-    for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
+    for (int i = 0; (unsigned long) i < bulletList_.size(); i++) {
         bPos = bulletList_[i]->getPos();
         bSize = bulletList_[i]->getSize();
 
@@ -462,16 +483,16 @@ void Game::bUpdate() {
 
         // Bullets des players, de gauche à droite
         if (bulletList_[i]->getTeam() == Teams::Players) {
-            posWanted = {bPos.x + ((toX - bPos.x) / 2),bPos.y + ((toY - bPos.y) / 2)};
+            posWanted = {bPos.x + ((toX - bPos.x) / 2), bPos.y + ((toY - bPos.y) / 2)};
             sizeWanted = {bSize.x + (toX - bPos.x), bSize.y};
         } //Bullet des monstres, de droite à gauche
         else if (bulletList_[i]->getTeam() == Teams::Monsters) {
-            posWanted = {bPos.x - ((toX - bPos.x) / 2),bPos.y - ((toY - bPos.y) / 2)};
+            posWanted = {bPos.x - ((toX - bPos.x) / 2), bPos.y - ((toY - bPos.y) / 2)};
             sizeWanted = {bSize.x - (toX - bPos.x), bSize.y};
         }
 
         //Collision avec les monstres
-        for (int j = 0; (unsigned long)j < monsterList.size(); j++) {
+        for (int j = 0; (unsigned long) j < monsterList.size(); j++) {
             posOther = monsterList[j]->getPos();
             sizeOther = monsterList[j]->getSize();
             if (posWanted.x - (sizeWanted.x / 2) < posOther.x + (sizeOther.x / 2) &&
@@ -489,7 +510,7 @@ void Game::bUpdate() {
                 bulletList_[i]->setHit(false);
             }
         }
-        //Collision balle tirée par un joueur vers un monstre
+            //Collision balle tirée par un joueur vers un monstre
         else if (bulletList_[i]->isHit() && bulletList_[i]->getTeam() == Teams::Players) {
             monsterList[victime]->setLife(monsterList[victime]->getLife() - bulletList_[i]->getDamage());
 
@@ -505,8 +526,10 @@ void Game::bUpdate() {
                     playerList_[it]->setBulletType(FORCEPODTWO);
                 }
                 //Invocation powerup
-                if ((rand() % 10 + 1) <=  monsterList[victime]->getPuProba()) {
-                    powerUpList_.emplace_back( (PowerUp){{(monsterList[victime]->getPos()).x, (monsterList[victime]->getPos()).y}, {1 , 1}, monsterList[victime]->getPowerUpStyle()});
+                if ((rand() % 10 + 1) <= monsterList[victime]->getPuProba()) {
+                    powerUpList_.emplace_back(
+                            (PowerUp) {{(monsterList[victime]->getPos()).x, (monsterList[victime]->getPos()).y}, {1, 1},
+                                       monsterList[victime]->getPowerUpStyle()});
                 }
             }
         }
@@ -531,9 +554,12 @@ void Game::bUpdate() {
                     bulletList_[i]->setHit(false);
                 }
             }
-            //Collision balle d'un monstre vers un joueur
+                //Collision balle d'un monstre vers un joueur
             else if (bulletList_[i]->isHit() && bulletList_[i]->getTeam() == Teams::Monsters) {
-                std::cout << "Bullet " << bulletList_[i]->getUuid() << "from " << (bulletList_[i]->getPos()).x << ":" << (bulletList_[i]->getPos()).y << " to " << toX << ";" << toY << " touched " << playerList_[victime]->getUuid() << " at " << (playerList_[i]->getPos()).x << ":" << (playerList_[i]->getPos()).y << std::endl;
+                std::cout << "Bullet " << bulletList_[i]->getUuid() << "from " << (bulletList_[i]->getPos()).x << ":"
+                          << (bulletList_[i]->getPos()).y << " to " << toX << ";" << toY << " touched "
+                          << playerList_[victime]->getUuid() << " at " << (playerList_[i]->getPos()).x << ":"
+                          << (playerList_[i]->getPos()).y << std::endl;
                 std::cout << "SizeWanted : " << sizeWanted.x << ":" << sizeWanted.y << std::endl;
                 std::cout << "PosWanted : " << posWanted.x << ":" << posWanted.y << std::endl;
                 std::cout << "Life : " << playerList_[victime]->getLife() << std::endl;
@@ -541,20 +567,22 @@ void Game::bUpdate() {
                 std::cout << "Life : " << playerList_[victime]->getLife() << std::endl;
                 if (playerList_[victime]->getLife() <= 0) {
                     playerList_[victime]->setPlayerState(DEAD);
-                    playerList_[victime]->setPos({0,0});
+                    playerList_[victime]->setPos({0, 0});
                     std::cout << "Nous avons malheureusement perdu un joueur au combat DPL" << std::endl;
                 }
             }
         }
 
         //Setpos
-        std::cout << "Bullet UUID " << bulletList_[i]->getUuid() << " go from " << (bulletList_[i]->getPos()).x << ":" << (bulletList_[i]->getPos()).y << " to " << toX << ";" << toY << std::endl;
+        std::cout << "Bullet UUID " << bulletList_[i]->getUuid() << " go from " << (bulletList_[i]->getPos()).x << ":"
+                  << (bulletList_[i]->getPos()).y << " to " << toX << ";" << toY << std::endl;
         bulletList_[i]->setPos({toX, toY});
     }
-    //Sauvegarder les positions des hits pour le tour présent pour l'envoyer dans update ou il faut mettre des explosions
-    /*
-     *
-     */
+    for (int i = 0; (unsigned long) i < bulletList_.size(); i++) {
+        if (bulletList_[i]->isHit())
+            data.emplace_back((std::string) "0x598;0x515;" + std::to_string((bulletList_[i]->getPos()).x) + ";" +
+                              std::to_string((bulletList_[i]->getPos()).y) + "$");
+    }
 }
 
 void Game::bDestroyer() {
@@ -572,5 +600,32 @@ void Game::puDestroyer() {
             powerUpList_.erase(powerUpList_.begin() + i);
             i--;
         }
+    }
+}
+
+void Game::writeData() {
+    // Player
+    for (int i = 0; (unsigned long)i < playerList_.size(); i++) {
+        if (playerList_[i]->getPlayerState() == DEAD)
+            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x611" + ";" + std::to_string(playerList_[i]->getScore()) + "$");
+        else {
+            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string(playerList_[i]->getScore()) + ";" + std::to_string(playerList_[i]->getLife()) + ";" + std::to_string(playerList_[i]->getShotSpeed()) + ";" + std::to_string((playerList_[i]->getPos()).x - posx_) + ";" + std::to_string((playerList_[i]->getPos()).y) + ";" + playerList_[i]->getForcePod() + "$");
+        }
+    }
+
+    // Monstres
+    for (int i = 0; (unsigned long)i < monsterList.size(); i++) {
+        data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((monsterList[i]->getPos()).x - posx_) + ";" + std::to_string((monsterList[i]->getPos()).y) + "$");
+    }
+
+    // Bullet
+    for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
+        data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((bulletList_[i]->getPos()).x - posx_) + ";" + std::to_string((bulletList_[i]->getPos()).y) + "$");
+    }
+
+    // PowerUp
+    for (int i = 0; (unsigned long)i < powerUpList_.size(); i++) {
+        if (powerUpList_[i].style == HEALTH)
+            data.emplace_back("0x698;0x658;0x640;" + std::to_string(powerUpList_[i].pos.x - posx_) + ";" + std::to_string(powerUpList_[i].pos.y) + "$");
     }
 }

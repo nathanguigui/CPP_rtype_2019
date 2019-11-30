@@ -19,7 +19,7 @@ public:
     /// Lance la partie
     void Launch();
     /// Update la partie en cours
-    void Update(std::vector<std::string> commands, float timeSinceUpdate);
+    std::vector<std::string> Update(std::vector<std::string> commands, float timeSinceUpdate);
 
     /// Update l'état du jeu
     bool manageGameState();
@@ -57,6 +57,8 @@ public:
     void bDestroyer();
     /// Détruit les powerups en dehors de l'écran
     void puDestroyer();
+    /// Write data for the client
+    void writeData();
 
 private:
     int currentMap_;

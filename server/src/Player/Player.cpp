@@ -144,3 +144,12 @@ int Player::getTotalEnemyKilled() const {
 void Player::setTotalEnemyKilled(int totalEnemyKilled) {
     Player::totalEnemyKilled = totalEnemyKilled;
 }
+
+std::string Player::getForcePod() {
+    if (bulletType_ == NORMAL)
+        return "0x615";
+    else if (bulletType_ == FORCEPODONE)
+        return "0x616";
+    else
+        return "0x617";
+}

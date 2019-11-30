@@ -178,3 +178,10 @@ PowerUpStyle Monster::getPowerUpStyle() const {
 int Monster::getPuProba() const {
     return puProba;
 }
+
+std::string Monster::getTypeHexa() {
+    if (type_ == "bédodo") {
+        return "0x620";
+    }
+    return "";
+}

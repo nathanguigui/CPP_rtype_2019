@@ -97,3 +97,16 @@ bool Bullet::isHit() const {
 void Bullet::setHit(bool hit) {
     Bullet::hit = hit;
 }
+
+std::string Bullet::getTypeHexa() {
+    if (type_ == NORMAL && team_ == Players) {
+        return "0x630";
+    } else if (type_ == FORCEPODONE) {
+        return "0x631";
+    } else if (type_ == FORCEPODTWO) {
+        return "0x632";
+    } else if (type_ == NORMAL && team_ == Monsters) {
+        return "0x635";
+    }
+    return "0x630";
+}

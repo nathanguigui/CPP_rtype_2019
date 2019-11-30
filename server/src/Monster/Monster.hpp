@@ -42,10 +42,9 @@ public:
     void setMonsterState(ObjectState monsterState);
     int getScore() const;
     void setScore(int score);
-
     PowerUpStyle getPowerUpStyle() const;
-
     int getPuProba() const;
+    std::string getTypeHexa();
 
 private:
     std::string type_;
