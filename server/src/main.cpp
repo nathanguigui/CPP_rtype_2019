@@ -2,22 +2,10 @@
 // Created by lcomte on 20/11/2019.
 //
 
-#include "Server_TCP.hpp"
-#include "Game/Game.hpp"
-#include <thread>         // std::this_thread::sleep_for
+#include "TCP_Server/Server_TCP.hpp"
 
-int main(int argc, char *argv[]) {
-    /*std::vector<std::string> playerlist;
-    playerlist.emplace_back("Joueur1");
-    playerlist.emplace_back("Joueur2");
-    playerlist.emplace_back("Joueur3");
-    playerlist.emplace_back("Joueur4");
-    Game G = Game(playerlist);
-    //G.launch();
-    //G.update();
-
-}*/
-
+int main(int argc, char *argv[])
+{
     try
     {
         boost::asio::io_service io_service;

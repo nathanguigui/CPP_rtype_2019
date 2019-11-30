@@ -1,0 +1,14 @@
+//
+// Created by lcomte on 21/11/2019.
+//
+
+#ifndef RTYPE_SERVER_TEST_SERVER_UDP_MANAGER_HPP
+#define RTYPE_SERVER_TEST_SERVER_UDP_MANAGER_HPP
+
+
+class Server_UDP_Manager {
+
+};
+
+
+#endif //RTYPE_SERVER_TEST_SERVER_UDP_MANAGER_HPP
