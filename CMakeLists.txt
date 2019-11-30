@@ -132,7 +132,7 @@ set(CLIENT_SRC
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
         client/src/game/AnimateSprite/AnimateSprite.hpp
-        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp)
+        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp client/src/core/UdpNetwork/UdpNetwork.cpp client/src/core/UdpNetwork/UdpNetwork.hpp client/src/core/WindowManager/IWindowManager.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")
 
@@ -146,27 +146,3 @@ add_custom_target(copy-files ALL
         ${CMAKE_BINARY_DIR}/
 )
 target_link_libraries(rtype_client ${CONAN_LIBS})
-
-
-set(SERVER_SRC
-        server/src/main.cpp server/src/Server_TCP.cpp
-        server/src/connection_manager.cpp
-        server/src/connection_handler_TCP.cpp
-        server/src/Game/Game.cpp
-        server/src/Map/Map.cpp
-        server/src/Player/Player.cpp
-        server/src/Monster/Monster.cpp
-        server/src/Bullet/Bullet.cpp)
-
-set (SERVER_HEADERS
-        server/src/connection_handler_TCP.hpp
-        server/src/Server_TCP.hpp
-        server/src/Game/Game.hpp
-        server/src/Map/Map.hpp
-        server/src/Player/Player.hpp
-        server/src/Bullet/Bullet.hpp
-        server/src/Utils/Utils.hpp
-        server/src/Monster/Monster.hpp)
-
-add_executable(rtype_server ${SERVER_SRC})
-target_link_libraries(rtype_server ${CONAN_LIBS})
