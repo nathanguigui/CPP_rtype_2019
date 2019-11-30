@@ -11,6 +11,7 @@ RType::MainMenu::MainMenu(sf::RenderWindow *app, WindowState *state, IMenuManage
     this->_backgroundTexture->loadFromFile("assets/MainMenu/Background.png");
     this->_backgroundSprite = new sf::Sprite();
     this->_backgroundSprite->setTexture(*this->_backgroundTexture);
+    this->_backgroundSprite->setScale(_app->getSize().x/1200,_app->getSize().y/630);
     this->_font = new sf::Font();
     this->_font->loadFromFile("assets/fonts/ka.ttf");
     this->_newText = new sf::Text("CREATE A GAME", *this->_font);

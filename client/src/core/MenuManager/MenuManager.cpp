@@ -75,6 +75,8 @@ void RType::MenuManager::sendTcpCommand(RType::TcpNetwork::Commands commands) {
         case TcpNetwork::INFO_LOBBY:
             break;
         case TcpNetwork::START_LOBBY:
+            if (this->_settings->getLobbyCode() != nullptr)
+                this->_network->lobbyStart();
             break;
     }
 }

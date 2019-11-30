@@ -83,6 +83,8 @@ namespace RType {
 
         /// Window settings
         Settings *_settings;
+
+        sf::Clock *_clock;
     };
 }
 

@@ -23,7 +23,8 @@ RType::Lobby::Lobby(sf::RenderWindow *app, WindowState *state, IMenuManager *par
     this->_playerFourText = new sf::Text("WAITING FOR PLAYER", *this->_font);
     this->_playerFourText->setScale(0.5, 0.5);
     this->initGUI();
-    this->keyReleased = true;
+    this->keyReleased = false;
+    this->_clock = new sf::Clock();
 }
 
 RType::Lobby::~Lobby() = default;
@@ -53,7 +54,8 @@ void RType::Lobby::handleDown() {
 }
 
 void RType::Lobby::handleEnter() {
-
+    if (this->_state->isLobbyAdmin() && this->_clock->getElapsedTime().asSeconds() > 1)
+        this->_parent->sendTcpCommand(ITcpNetwork::START_LOBBY);
 }
 
 void RType::Lobby::handleKeyReleased() {
