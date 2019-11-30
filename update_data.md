@@ -1,61 +1,62 @@
 # Update Data
 
+Tout les paquets ont le code [0x100] devant et [0x101] à la fin de chaque paquet
 
 ## Etat du jeu
 
-gamestate;[type]
+0x400;type
 
 ### Type
 
 launched: Le jeu est lancé rien à signaler
 ```
- gamestate;launched;[posx]
+ 0x400;0x405;[posx]
  ```
  - posx -> position du début de la carte
 #
 between: Le jeu est entre deux maps
 ```
- gamestate;between;[time]
+ 0x400;0x406;[time]
 ```
  - time -> temps en ms qu'il reste avant de lancer la prochaine carte
 #
 win: Les joueurs ont gagné
  ```
-  gamestate;win;[time]
+  0x400;0x407;[time]
   ```
  - time -> temps en ms avant la fin du serveur
  #
  lost: Les joueurs ont perdu
   ```
-  gamestate;lost;[time]
+  0x400;0x408;[time]
   ```
  - time -> temps en ms avant la fin du serveur
  
 ## Evenements
 
-event;[type]
+0x500;type
 
 ### Type
 
 hit:
  ```
-  event;hit;[posX];[posY]
+  0x500;0x505;[posX];[posY]
   ```
   - posX;posY -> Nombres flottant qui indiquent les coordonnées du hit
 
 ## Entités
 
-entity;[type]
+0x600;type
 
 ### Type
 
 player :
  ```
-  entity;player;[pseudo ou  UUID ?];[status];[score];[hp];[as];[posX];[posY];[ForcePodLevel]
+  0x600;0x605;[UUID];[status];[score];[hp];[as];[posX];[posY];[ForcePodLevel]
  ```
- - pseudo ou UUID -> chaine de caractère définissant le joueur
+ - UUID -> chaine de caractère hexa définissant le joueur
  
- - status -> ALIVE ou DEAD, si DEAD alors il n'y a pas les infos qui suivent
+ - status -> ALIVE [0x610] ou DEAD [0x611], si DEAD alors il n'y a pas les infos qui suivent
  
  - score -> Nombre entier définissant le score
  
@@ -65,34 +66,34 @@ player :
  
  - posX;posY -> Nombres flottant qui indiquent les coordonnées du joueur
  
- - ForcedPodLevel -> [0,  1, 2] qui définit le niveau du PodLevel
+ - ForcedPodLevel -> [0x615 0x616 0x617] qui définit le niveau du PodLevel
 #
 monster :
  ```
-  entity;monster;[UUID];[type];[posX];[posY]
+  0x600;0x606;[UUID];[type];[posX];[posY]
   ```
-- UUID -> chaine de caractère définissant le monstre
+- UUID -> chaine de caractère hexa définissant le monstre
 
-- type -> chaine de caractère définissant le type du monstre
+- type -> [0x620 0x621 0x622 0x623] le type du monstre
 
 - posX;posY -> Nombres flottant qui indiquent les coordonnées du monstre
 #
 bullet :
  ```
- entity;bullet;[UUID];[type];[posX];[posY]
+ 0x600;0x607;[UUID];[type];[posX];[posY]
  ```
 - UUID -> chiffre entier définissant la balle
 
-- type -> chaine de caractère définissant le type de la balle
+- type -> [0x630 0x631 0x632 0x635 0x636 0x637 0x638] définissant le type de la balle (de 30 à 32 pour les joueurs / 35 à 38 pour les monstres) 
 
 - posX;posY -> Nombres flottant qui indiquent les coordonnées de la balle
 #
 powerup :
  ```
- entity:powerup;[type];[posX];[posY]
+ 0x600:0x608;[type];[posX];[posY]
  ```
 
-- type -> chaine de caractère définissant le type du powerup
+- type -> Health [0x640] , Attack speed [0x641]
 
  - posX;posY -> Nombres flottant qui indiquent les coordonnées du powerup
 
