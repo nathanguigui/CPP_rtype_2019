@@ -62,23 +62,24 @@ void connection_handler_TCP::add_username_in_server() {
 }
 
 std::string connection_handler_TCP::get_all_name_in_server() {
-    std::string buffer;
+    std::string buffer = "";
     vector<std::string> data;
 
+    buffer = "UPDATE\n";
     for (int i = 0; i < server_->getServerManager().size(); i++) {
-        cout << keypass_server << " " << server_->getServerManager()[i]->getServerKey() << endl;
         if (keypass_server == server_->getServerManager()[i]->getServerKey()) {
             data = server_->getServerManager()[i]->getUsername();
-            buffer = "USER_CONNECTED: ";
             for (int j = 0; j < data.size(); j++){
-                cout << data[j];
                 buffer = buffer + data[j];
             }
+            buffer = buffer + "UPDATE\r\n";
             buffer = buffer + "€";
+
             return buffer;
         }
     }
-    return "NOBODY";
+    buffer = buffer + "NOBODY";
+    return buffer;
 }
 
 size_t connection_handler_TCP::get_port_from_keypass() {
@@ -105,12 +106,15 @@ void connection_handler_TCP::handle_read(const boost::system::error_code &err, s
                 server_->Create_UDP_server(action.keypass);
                 add_username_in_server();
                 write_data();
-            } else if (action.type == "JOIN") {
-                buffer = "JOIN" + server_->getServerIp() + ":";
+            } if (action.type == "JOIN") {
+                buffer = "JOIN " + server_->getServerIp() + ":";
                 buffer = buffer + to_string(get_port_from_keypass()) + "€";
-                //add_username_in_server();
-                //buffer = get_all_name_in_server();
+                add_username_in_server();
                 cout << action.type << " " << action.keypass << endl;
+                write_data();
+            } if (action.type == "UPDATE") {
+                buffer = get_all_name_in_server();
+                cout << buffer << endl;
                 write_data();
             }
         } else {
@@ -120,7 +124,6 @@ void connection_handler_TCP::handle_read(const boost::system::error_code &err, s
 }
 
 void connection_handler_TCP::handle_write(const boost::system::error_code &err, size_t bytes_transferred) {
-    std::cout << buffer << std::endl;
     read_data();
 }
 
@@ -131,10 +134,12 @@ connection_handler_TCP::pointer connection_handler_TCP::create(boost::asio::io_s
 bool connection_handler_TCP::parse_data(string data) {
     vector<string> tab;
     boost::split(tab, data, boost::is_any_of(" "));
+    cout << "tab[1] -> " << tab[1];
     if ((tab[1] == "CREATE") && tab.size() == 3) {
         action.type = tab[1];
         action.keypass = tab[0] + to_string(server_->getServerManager().size());
         keypass_server = action.keypass;
+        cout << "test " << tab[2] << endl;
         setUsername(tab[2]);
         return true;
     }
@@ -143,6 +148,9 @@ bool connection_handler_TCP::parse_data(string data) {
         action.keypass = tab[2];
         keypass_server = tab[2];
         setUsername(tab[3]);
+        return true;
+    } if (tab.size() == 2) {
+        action.type = "UPDATE";
         return true;
     }
     return false;

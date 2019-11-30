@@ -12,6 +12,8 @@
 #include <cstdlib>
 #include <time.h>
 #include <stdlib.h>
+#include <algorithm>
+#include <stdexcept>
 
 template <typename T>
 struct Point {
@@ -61,5 +63,8 @@ enum BulletType {
     FORCEPODONE,
     FORCEPODTWO
 };
+
+std::string string_to_hex(const std::string& input);
+std::string hex_to_string(const std::string& input);
 
 #endif //CPP_RTYPE_2019_UTILS_HPP

@@ -159,7 +159,8 @@ set(SERVER_SRC
         server/src/Map/Map.cpp
         server/src/Player/Player.cpp
         server/src/Monster/Monster.cpp
-        server/src/Bullet/Bullet.cpp)
+        server/src/Bullet/Bullet.cpp
+        server/src/Utils/Utils.cpp)
 
 set (SERVER_HEADERS
         server/src/TCP_Server/Server_TCP.hpp

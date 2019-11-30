@@ -42,6 +42,7 @@ public:
     void setEnemyKilled(int enemyKilled);
     int getTotalEnemyKilled() const;
     void setTotalEnemyKilled(int totalEnemyKilled);
+    std::string getForcePod();
 
 private:
     std::string pseudo_;

@@ -30,6 +30,7 @@ public:
     void setSize(const Point<float> &size);
     bool isHit() const;
     void setHit(bool hit);
+    std::string getTypeHexa();
 
 private:
     BulletType type_;
