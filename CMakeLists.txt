@@ -38,10 +38,10 @@ endif ( MSVC )
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio -lpthread -lboost_system")
 
 include_directories(
-    ${CMAKE_CURRENT_BINARY_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_CURRENT_BINARY_DIR}
+        ${CMAKE_CURRENT_SOURCE_DIR}
 )
-     
+
 
 set(CLIENT_SRC
         client/src/main.cpp
@@ -144,14 +144,17 @@ add_custom_target(copy-files ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/build/bin/
         ${CMAKE_BINARY_DIR}/
-)
+        )
 target_link_libraries(rtype_client ${CONAN_LIBS})
 
-
 set(SERVER_SRC
-        server/src/main.cpp server/src/Server_TCP.cpp
+        server/src/main.cpp
+        server/src/TCP_Server/Server_TCP.cpp
+        server/src/TCP_Server/connection_handler_TCP.cpp
+        server/src/UDP_Server/Server_UDP_Manager.cpp
+        server/src/UDP_Server/Server_UDP.cpp
+        server/src/UDP_Server/udp_session.cpp
         server/src/connection_manager.cpp
-        server/src/connection_handler_TCP.cpp
         server/src/Game/Game.cpp
         server/src/Map/Map.cpp
         server/src/Player/Player.cpp
@@ -159,8 +162,8 @@ set(SERVER_SRC
         server/src/Bullet/Bullet.cpp)
 
 set (SERVER_HEADERS
-        server/src/connection_handler_TCP.hpp
-        server/src/Server_TCP.hpp
+        server/src/TCP_Server/Server_TCP.hpp
+        server/src/UDP_Server/Server_UDP.hpp
         server/src/Game/Game.hpp
         server/src/Map/Map.hpp
         server/src/Player/Player.hpp
