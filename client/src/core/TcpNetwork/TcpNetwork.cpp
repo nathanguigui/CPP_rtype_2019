@@ -3,12 +3,16 @@
 //
 
 #include <client/src/core/UdpNetwork/IUdpNetwork.hpp>
+#include <client/src/core/Event/Event.hpp>
 #include "TcpNetwork.hpp"
 
 RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
                               Loading *loading, Settings *settings, IWindowManager *parent)
         : _app(app), _state(state), _destIp(destIp), _destPort(destPort), _loadingScreen(loading), _settings(settings), _parent(parent) {
     this->_tcpSocket = new sf::TcpSocket();
+    this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
+    this->_event = (Event*)this->_parent->getEvent();
+
 }
 
 void RType::TcpNetwork::connect() {
@@ -51,9 +55,9 @@ void RType::TcpNetwork::lobbyUpdate() {
 
 }
 
-void RType::TcpNetwork::lobbyStart(std::string code) {
+void RType::TcpNetwork::lobbyStart() {
     auto ss = std::stringstream();
-    ss << "LOBBY START " << code << "\n€\n";
+    ss << "LOBBY START " << *this->_settings->getLobbyCode() << "\r\n";
     this->sendData(ss.str());
 }
 
@@ -103,15 +107,17 @@ void RType::TcpNetwork::setMenuManager(RType::IMenuManager *menuManager) {
 }
 
 void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
+    this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
+    this->_event = (Event*)this->_parent->getEvent();
     std::vector<std::string> tmp;
     if (argv[0] == "CREATE" && argv.size() > 2) {
         auto newCode = new::std::string(argv[1]);
         this->_settings->setLobbyCode(newCode);
         boost::split(tmp, argv[2], boost::is_any_of(":"));
         this->_settings->setGameServerPort(tmp[1].c_str());
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->setDestPort(this->_settings->getGameServerPort());
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->sayHello();
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->sayUsername();
+        this->_udpNetwork->setDestPort(this->_settings->getGameServerPort());
+        this->_udpNetwork->sayHello();
+        this->_udpNetwork->sayUsername();
         this->_state->setIsLobbyAdmin(true);
         this->_inLobby = true;
         if (this->_menuManager != nullptr)
@@ -119,9 +125,9 @@ void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
     } if (argv[0] == "JOIN" && argv.size() > 1) {
         boost::split(tmp, argv[1], boost::is_any_of(":"));
         this->_settings->setGameServerPort(tmp[1].c_str());
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->setDestPort(this->_settings->getGameServerPort());
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->sayHello();
-        ((UdpNetwork*)this->_parent->getUdpNetwork())->sayUsername();
+        this->_udpNetwork->setDestPort(this->_settings->getGameServerPort());
+        this->_udpNetwork->sayHello();
+        this->_udpNetwork->sayUsername();
         this->_inLobby = true;
         if (this->_menuManager != nullptr)
             this->_menuManager->switchMenu(MenuType::MENU_LOBBY_MENU);
@@ -132,6 +138,12 @@ void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
                 this->_state->addPlayer(item);
         }
         this->_addingPlayer = !this->_addingPlayer;
+    } if (std::strncmp(argv[0].c_str(), "START", 5) == 0) {
+        if (DEBUG_RTYPE)
+            std::cout << "starting game...\r\n";
+        this->_event->removeCurrentMenu();
+        this->_state->setWindowMode(WindowMode::IN_GAME);
+        this->_inLobby = false;
     }
 }
 

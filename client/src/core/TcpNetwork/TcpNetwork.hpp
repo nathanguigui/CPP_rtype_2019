@@ -18,6 +18,7 @@
 #include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/TcpNetwork/ITcpNetwork.hpp"
 #include "client/src/core/UdpNetwork/UdpNetwork.hpp"
+#include "client/src/core/Event/Event.hpp"
 
 namespace RType {
     using namespace RType;
@@ -47,7 +48,7 @@ namespace RType {
         void lobbyUpdate();
 
         /// Start Lobby
-        void lobbyStart(std::string code);
+        void lobbyStart();
 
         /// Wait for packet and parse it
         bool waitForPacket();
@@ -104,6 +105,10 @@ namespace RType {
 
         /// Parent WindowManager
         IWindowManager *_parent;
+
+        UdpNetwork *_udpNetwork;
+
+        Event *_event;
 
     };
 }
