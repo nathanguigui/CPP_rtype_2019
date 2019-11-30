@@ -14,7 +14,10 @@ Player::Player(std::string pseudo, std::string color): pseudo_(pseudo), color_(c
     playerState_ = ALIVE;
     shotSpeed_ = 500;
     lastShot_ = 0;
-    rocketType_ = NORMAL;
+    bulletType_ = NORMAL;
+    score = 0;
+    enemyKilled = 0;
+    totalEnemyKilled = 0;
 }
 
 Player::~Player() {
@@ -37,7 +40,7 @@ const bool &Player::getMove() const {
     return move_;
 }
 
-PlayerState Player::getPlayerState() const {
+ObjectState Player::getPlayerState() const {
     return playerState_;
 }
 
@@ -77,7 +80,7 @@ void Player::setMove(const bool &move) {
     move_ = move;
 }
 
-void Player::setPlayerState(PlayerState playerState) {
+void Player::setPlayerState(ObjectState playerState) {
     playerState_ = playerState;
 }
 
@@ -102,9 +105,42 @@ void Player::setSpeed(const Point<float> &speed) {
     speed_ = speed;
 }
 
-void Player::move(std::string direction) {
-    if (direction == "NORTH") {
-        std::cout << direction << std::endl;
-    }
+float Player::getLastShot() const {
+    return lastShot_;
+}
 
+void Player::setLastShot(float lastShot) {
+    lastShot_ = lastShot;
+}
+
+BulletType Player::getBulletType() const {
+    return bulletType_;
+}
+
+void Player::setBulletType(BulletType bulletType) {
+    bulletType_ = bulletType;
+}
+
+int Player::getScore() const {
+    return score;
+}
+
+void Player::setScore(int score) {
+    Player::score = score;
+}
+
+int Player::getEnemyKilled() const {
+    return enemyKilled;
+}
+
+void Player::setEnemyKilled(int enemyKilled) {
+    Player::enemyKilled = enemyKilled;
+}
+
+int Player::getTotalEnemyKilled() const {
+    return totalEnemyKilled;
+}
+
+void Player::setTotalEnemyKilled(int totalEnemyKilled) {
+    Player::totalEnemyKilled = totalEnemyKilled;
 }
