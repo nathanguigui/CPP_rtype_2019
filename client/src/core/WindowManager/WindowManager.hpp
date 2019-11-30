@@ -117,6 +117,8 @@ namespace RType {
         /// get TcpNetwork from WindowManager
         CoreObject *getTcpNetwork() override;
 
+        /// get MenuManager from WindowManager
+        CoreObject *getMenuManager() override;
     };
 }
 
