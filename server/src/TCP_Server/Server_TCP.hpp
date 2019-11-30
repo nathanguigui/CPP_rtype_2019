@@ -52,7 +52,7 @@ public:
     void add_username_in_server();
     std::string get_all_name_in_server();
     size_t get_port_from_keypass();
-
+    void launch_game();
 private:
     Server_TCP *server_;
     action_s action;
@@ -63,6 +63,10 @@ private:
     bool create_server;
     std::string username_;
     std::string keypass_server;
+public:
+    const string &getKeypassServer() const;
+
+    void setKeypassServer(const string &keypassServer);
 };
 
 

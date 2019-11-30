@@ -4,6 +4,8 @@
 
 #include "Server_UDP.hpp"
 
+std::string convertToString(char* a);
+
 udp_session::udp_session(Server_UDP *server) : server_(server) {
     data = (char *)malloc(sizeof(char ) * max_length);
 }
@@ -46,10 +48,15 @@ void udp_session::handle_send(const boost::system::error_code &err, size_t bytes
     }
 }
 
+
+
 void udp_session::handle_read(const boost::system::error_code &err, size_t bytes_transferred) {
     if (!err) {
-        cout << "Username in UDP server ->" <<data << endl;
-
+        std::string convert_str = convertToString(data);
+        parse_data(convert_str);
+        cout << username << endl;
+        buff = "Connection accepted\r\n";
+        send_data();
     }
 }
 
@@ -63,4 +70,12 @@ const string &udp_session::getUsername() const {
 
 void udp_session::setUsername(const string &username) {
     udp_session::username = username;
+}
+
+void udp_session::parse_data(std::string data) {
+    vector<string> tab;
+    boost::split(tab, data, boost::is_any_of(" "));
+    if (tab[0] == "username" && tab.size() == 3) {
+        username = tab[1];
+    }
 }

@@ -37,6 +37,7 @@ public:
     void handle_send(const boost::system::error_code &err, size_t bytes_transferred);
     void read_data();
     void handle_read(const boost::system::error_code &err, size_t bytes_transferred);
+    void parse_data(std::string);
     udp::endpoint remote_endpoint_;
 private:
     enum { max_length = 8192};
