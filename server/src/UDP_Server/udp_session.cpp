@@ -48,10 +48,19 @@ void udp_session::handle_send(const boost::system::error_code &err, size_t bytes
 
 void udp_session::handle_read(const boost::system::error_code &err, size_t bytes_transferred) {
     if (!err) {
-        cout << "update\n";
+        cout << "Username in UDP server ->" <<data << endl;
+
     }
 }
 
 void udp_session::start() {
     read_data();
+}
+
+const string &udp_session::getUsername() const {
+    return username;
+}
+
+void udp_session::setUsername(const string &username) {
+    udp_session::username = username;
 }

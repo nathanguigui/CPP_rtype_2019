@@ -93,10 +93,10 @@ size_t connection_handler_TCP::get_port_from_keypass() {
 void connection_handler_TCP::handle_read(const boost::system::error_code &err, size_t bytes_transferred) {
     string new_data;
     if (!err) {
-        cout << data << endl;
         new_data = convertToString(data);
         cout << new_data << endl;
         if (parse_data(new_data) == true) {
+            cout << "action keypass ->" << action.keypass << endl;
             if (action.type == "CREATE") {
                 std::cout << "Create UDP SERVER";
                 buffer = "CREATE " + action.keypass + " " + server_->getServerIp();
@@ -110,9 +110,9 @@ void connection_handler_TCP::handle_read(const boost::system::error_code &err, s
                 buffer = "JOIN " + server_->getServerIp() + ":";
                 buffer = buffer + to_string(get_port_from_keypass()) + "€";
                 add_username_in_server();
-                cout << action.type << " " << action.keypass << endl;
                 write_data();
             } if (action.type == "UPDATE") {
+                cout << "update for " << username_<< endl;
                 buffer = get_all_name_in_server();
                 cout << buffer << endl;
                 write_data();
@@ -134,7 +134,6 @@ connection_handler_TCP::pointer connection_handler_TCP::create(boost::asio::io_s
 bool connection_handler_TCP::parse_data(string data) {
     vector<string> tab;
     boost::split(tab, data, boost::is_any_of(" "));
-    cout << "tab[1] -> " << tab[1];
     if ((tab[1] == "CREATE") && tab.size() == 3) {
         action.type = tab[1];
         action.keypass = tab[0] + to_string(server_->getServerManager().size());
@@ -149,7 +148,7 @@ bool connection_handler_TCP::parse_data(string data) {
         keypass_server = tab[2];
         setUsername(tab[3]);
         return true;
-    } if (tab.size() == 2) {
+    } if (tab[1] == "UPDATE") {
         action.type = "UPDATE";
         return true;
     }
