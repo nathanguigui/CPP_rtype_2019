@@ -61,6 +61,16 @@ void connection_handler_TCP::add_username_in_server() {
     }
 }
 
+
+void connection_handler_TCP::launch_game() {
+    for(auto it:server_->getUsersManager().connections_) {
+        if (it->getKeypassServer() == keypass_server) {
+            it->buffer = "START\r\n";
+            it->write_data();
+        }
+    }
+}
+
 std::string connection_handler_TCP::get_all_name_in_server() {
     std::string buffer = "";
     vector<std::string> data;
@@ -116,6 +126,10 @@ void connection_handler_TCP::handle_read(const boost::system::error_code &err, s
                 buffer = get_all_name_in_server();
                 cout << buffer << endl;
                 write_data();
+            } if (action.type == "START") {
+                buffer = "START";
+                launch_game();
+                write_data();
             }
         } else {
             read_data();
@@ -151,6 +165,9 @@ bool connection_handler_TCP::parse_data(string data) {
     } if (tab[1] == "UPDATE") {
         action.type = "UPDATE";
         return true;
+    } if (tab[1] == "START") {
+        action.type = "START";
+        return true;
     }
     return false;
 }
@@ -178,4 +195,13 @@ const string &connection_handler_TCP::getUsername() const {
 void connection_handler_TCP::setUsername(const string &username) {
     username_ = username;
 }
+
+const string &connection_handler_TCP::getKeypassServer() const {
+    return keypass_server;
+}
+
+void connection_handler_TCP::setKeypassServer(const string &keypassServer) {
+    keypass_server = keypassServer;
+}
+
 

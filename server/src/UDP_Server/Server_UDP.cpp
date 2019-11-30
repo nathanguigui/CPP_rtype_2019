@@ -28,8 +28,6 @@ void Server_UDP::start_game() {
 void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost::system::error_code &err) {
     if (!err) {
         if (session_manager_.sessions_.size() < 4) {
-            cout << data << endl;
-            cout << "new_sessions\n";
             session_manager_.start(new_connection);
         }
     } if (session_manager_.sessions_.size() >= 4) {
