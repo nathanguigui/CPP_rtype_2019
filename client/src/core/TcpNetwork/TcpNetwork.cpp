@@ -109,6 +109,7 @@ void RType::TcpNetwork::setMenuManager(RType::IMenuManager *menuManager) {
 void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
     this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
     this->_event = (Event*)this->_parent->getEvent();
+    this->_menuManager = (IMenuManager*)this->_parent->getMenuManager();
     std::vector<std::string> tmp;
     if (argv[0] == "CREATE" && argv.size() > 2) {
         auto newCode = new::std::string(argv[1]);
@@ -150,6 +151,17 @@ void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
 void RType::TcpNetwork::update() {
     if (this->_inLobby)
         this->lobbyUpdate();
+}
+
+RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, RType::IWindowManager *parent) : _app(app), _parent(parent) {
+    this->_tcpSocket = new sf::TcpSocket();
+    this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
+    this->_state = (WindowState*)this->_parent->getWindowState();
+    this->_loadingScreen = (Loading*)this->_parent->getLoading();
+    this->_settings = (Settings*)this->_parent->getSettings();
+    this->_event = (Event*)this->_parent->getEvent();
+    this->_destIp = this->_settings->getLobbyServerIp();
+    this->_destPort = this->_settings->getLobbyServerPort();
 }
 
 RType::TcpNetwork::~TcpNetwork() = default;

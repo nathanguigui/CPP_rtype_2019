@@ -40,7 +40,6 @@ void RType::Loading::launch() {
     this->_time = this->_clock->getElapsedTime();
     this->_app->draw(this->_backSprite);
     this->_isLaunched = true;
-    std::cout << "LOADING LAUNCHED";
 
 }
 
@@ -52,7 +51,6 @@ void RType::Loading::check() {
         this->_state->setIsLoading(false);
         this->_state->setWindowMode(this->_mode);
         this->_isLaunched = false;
-        std::cout << "END LOADING";
     }
 }
 
