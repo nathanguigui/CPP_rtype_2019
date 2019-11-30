@@ -18,6 +18,7 @@
 #include <boost/asio/basic_stream_socket.hpp>
 #include <boost/asio/ip/address.hpp>
 #include <vector>
+#include "../Game/Game.hpp"
 using namespace boost::asio;
 using boost::asio::ip::udp;
 using namespace std;
@@ -65,11 +66,12 @@ public:
 
 class Server_UDP {
     public:
-        Server_UDP(io_service &io_service, string IP_Address, size_t port, std::string);
+        Server_UDP(io_service &io_service, string IP_Address, size_t port, std::string, std::vector<std::string> buff);
         ~Server_UDP();
         void handle_accept(udp_session::pointer new_connection, const boost::system::error_code& err);
         void send_data(udp_session *player);
         void read_data(udp_session *player);
+        void start_game();
     private:
         void start_accept();
         string server_key_;
@@ -99,6 +101,11 @@ private:
         char *data;
         std::string message;
         std::vector<std::string> username_;
+        Game game_;
+public:
+    const Game &getGame() const;
+
+    void setGame(const Game &game);
 };
 
 

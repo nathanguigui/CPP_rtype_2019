@@ -51,6 +51,7 @@ public:
     void setUsername(const string &username);
     void add_username_in_server();
     std::string get_all_name_in_server();
+    size_t get_port_from_keypass();
 
 private:
     Server_TCP *server_;
@@ -92,7 +93,13 @@ class Server_TCP {
 
     private:
         size_t port_udp;
-        string server_ip_;
+public:
+    size_t getPortUdp() const;
+
+    void setPortUdp(size_t portUdp);
+
+private:
+    string server_ip_;
         tcp::acceptor acceptor_;
         boost::asio::io_context &io_context_;
         void start_accept();
