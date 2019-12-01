@@ -4,7 +4,7 @@
 
 #include "Server_UDP.hpp"
 #include <math.h>
-
+#include <unistd.h>
 std::string hex_to_string(const std::string& input);
 std::string string_to_hex(const std::string& input);
 
@@ -26,6 +26,7 @@ void Server_UDP::start_accept() {
 }
 
 void Server_UDP::start_game() {
+    sleep(1);
     cout << "Start New Game and set game start\n";
     Game game(username_);
     setGame(game);
@@ -44,16 +45,56 @@ void Server_UDP::update_game(std::string received) {
     vector<std::string> snd;
     cout << "time elapsed: " << elapsed_time << endl;
     boost::split(rcv, received, boost::is_any_of(" "));
-    snd = game_.Update(rcv, (float) elapsed_time);
-    for (int i = 0; i < snd.size(); i++) {
-        buffer = buffer + snd[i];
-        cout << "buffer -> " << buffer;
+    if (isStarted1()) {
+        if (rcv[0] == "UPDATE") {
+            rcv.clear();
+            rcv.push_back("");
+            snd = game_.Update(rcv, (float) elapsed_time);
+            if (snd.size() == 1) {
+                setIsStarted(false);
+            }
+            for (int i = 0; i < snd.size(); i++) {
+                buffer = buffer + snd[i];
+            }
+            buffer = buffer + "\r\n";
+            for (auto it:session_manager_.sessions_) {
+                it->setBuff(buffer);
+                start = std::chrono::system_clock::now();
+                it->send_data();
+            }
+        } else {
+            //parse data to transfer different action
+            auto parse_rcv = parse_packages(rcv);
+            snd = game_.Update(parse_rcv, (float) elapsed_time);
+            if (snd.size() == 1) {
+                setIsStarted(false);
+            }
+            for (int i = 0; i < snd.size(); i++) {
+                buffer = buffer + snd[i];
+            }
+            buffer = buffer + "\r\n";
+            for (auto it:session_manager_.sessions_) {
+                it->setBuff(buffer);
+                start = std::chrono::system_clock::now();
+                it->send_data();
+            }
+        }
     }
-    for (auto it:session_manager_.sessions_) {
-        it->setBuff(buffer);
-        it->send_data();
+}
+
+vector<std::string> parse_packages(vector<std::string> recv) {
+    vector<std::string> buff;
+    std::string data;
+    for (int i = 0; i < recv.size(); i++) {
+        if (recv[i] == "Move" && i + 1 < recv.size()) {
+            data = recv[i - 1] + ";" + recv[i] + ";" + recv[i + 1];
+            buff.push_back(data);
+        } if (recv[i] == "Shoot") {
+            data = recv[i - 1] + ";" + recv[i];
+            buff.push_back(data);
+        }
     }
-    start = std::chrono::system_clock::now();
+    return buff;
 }
 
 void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost::system::error_code &err) {
