@@ -73,6 +73,7 @@ private:
     int posAction_;
     int mUUID;
     int bID_;
+    int puID;
     float timeToWait_;
     std::vector<std::string> data;
 
