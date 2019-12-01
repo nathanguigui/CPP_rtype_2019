@@ -59,7 +59,7 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     }
 
     movePosX();
-    data.emplace_back((std::string) "0x498;0x415;" + std::to_string(currentMap_) + ";" + std::to_string(posx_) + "$");
+    data.emplace_back((std::string) "0x498;0x415;" + std::to_string(currentMap_) + ";" + std::to_string((int)(posx_ * 100)) + "$");
 
     // Mets à jour le temps de shoot des joueurs et monstres
     updateShotTimer();
@@ -590,8 +590,8 @@ void Game::bUpdate() {
     }
     for (int i = 0; (unsigned long) i < bulletList_.size(); i++) {
         if (bulletList_[i]->isHit())
-            data.emplace_back((std::string) "0x598;0x515;" + std::to_string((bulletList_[i]->getPos()).x) + ";" +
-                              std::to_string((bulletList_[i]->getPos()).y) + "$");
+            data.emplace_back((std::string) "0x598;0x515;" + std::to_string((int)(bulletList_[i]->getPos()).x * 100)  + ";" +
+                              std::to_string((int)(bulletList_[i]->getPos()).y * 100) + "$");
     }
 }
 
@@ -617,25 +617,25 @@ void Game::writeData() {
     // Player
     for (int i = 0; (unsigned long)i < playerList_.size(); i++) {
         if (playerList_[i]->getPlayerState() == DEAD)
-            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x611" + ";" + std::to_string(playerList_[i]->getScore()) + "$");
+            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x611" + ";" + std::to_string((int)(playerList_[i]->getScore() * 100)) + "$");
         else {
-            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string(playerList_[i]->getScore()) + ";" + std::to_string(playerList_[i]->getLife()) + ";" + std::to_string(playerList_[i]->getShotSpeed()) + ";" + std::to_string((playerList_[i]->getPos()).x - posx_) + ";" + std::to_string((playerList_[i]->getPos()).y) + ";" + playerList_[i]->getForcePod() + "$");
+            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string((int)(playerList_[i]->getScore()* 100)) + ";" + std::to_string((int)(playerList_[i]->getLife() * 100)) + ";" + std::to_string((int)(playerList_[i]->getShotSpeed() * 100)) + ";" + std::to_string((int)((playerList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((playerList_[i]->getPos()).y * 100)) + ";" + playerList_[i]->getForcePod() + "$");
         }
     }
 
     // Monstres
     for (int i = 0; (unsigned long)i < monsterList.size(); i++) {
-        data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((monsterList[i]->getPos()).x - posx_) + ";" + std::to_string((monsterList[i]->getPos()).y) + "$");
+        data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((int)((monsterList[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((monsterList[i]->getPos()).y * 100))  + "$");
     }
 
     // Bullet
     for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
-        data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((bulletList_[i]->getPos()).x - posx_) + ";" + std::to_string((bulletList_[i]->getPos()).y) + "$");
+        data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((int)((bulletList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((bulletList_[i]->getPos()).y * 100)) + "$");
     }
 
     // PowerUp
     for (int i = 0; (unsigned long)i < powerUpList_.size(); i++) {
         if (powerUpList_[i].style == HEALTH)
-            data.emplace_back("0x698;0x658;0x640;" + std::to_string(powerUpList_[i].pos.x - posx_) + ";" + std::to_string(powerUpList_[i].pos.y) + "$");
+            data.emplace_back("0x698;0x658;0x640;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)(powerUpList_[i].pos.y * 100)) + "$");
     }
 }
