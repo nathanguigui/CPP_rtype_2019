@@ -62,6 +62,7 @@ void RType::TcpNetwork::lobbyStart() {
     this->sendData(ss.str());
     this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
     this->_udpNetwork->startGame();
+    this->_udpNetwork->setNeedUpdate(true);
 }
 
 bool RType::TcpNetwork::waitForPacket() {

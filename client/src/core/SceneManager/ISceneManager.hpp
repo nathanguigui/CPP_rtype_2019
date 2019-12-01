@@ -15,7 +15,32 @@ namespace RType {
         /// Update game data from UdpNetwork
         //void updateData();
 
+        enum PlayerStatus {
+            ALIVE,
+            DEAD
+        };
+
+        enum ForcePodLevel {
+            LOW_POWER,
+            MEDIUM_POWER,
+            HIGH_POWER
+        };
+
+        enum EntityType {
+            PLAYER,
+            MONSTER,
+            BULLET,
+            POWERUP
+        };
+
         virtual void updateMap(std::string mapId, std::string mapPosX) = 0;
+
+        /// Update Player Alive
+        virtual void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score, int life,
+                int attackSpeed, int posX, int posY, ForcePodLevel forcePodLevel) = 0;
+
+        /// Update player Dead
+        virtual void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score) = 0;
 
 
 

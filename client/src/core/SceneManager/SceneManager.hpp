@@ -29,6 +29,13 @@ namespace RType {
 
         void updateMap(std::string mapId, std::string mapPosX) override;
 
+        /// Update Player Alive
+        void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score, int life,
+                int attackSpeed, int posX, int posY, ISceneManager::ForcePodLevel forcePodLevel) override;
+
+        /// Update player Dead
+        void updatePlayer(std::string uuid, std::string name, ISceneManager::PlayerStatus status, int score) override;
+
     private:
         std::map<std::string, Scene*> _scenes;
         std::string *_currentScene;

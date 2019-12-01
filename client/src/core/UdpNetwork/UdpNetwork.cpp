@@ -60,6 +60,36 @@ void RType::UdpNetwork::parsePacket(std::string packet) {
             ((ISceneManager*)this->_parent->getSceneManager())->updateMap(argv[2], argv[3]);
         }
     }
+    /// Update entity packet
+    if (std::strncmp(argv[0].c_str(), "0x698", 5) == 0 && argv.size() > 1) {
+        /// Player
+        if (std::strncmp(argv[1].c_str(), "0x655", 5) == 0 && argv.size() > 6) {
+            if (std::strncmp(argv[4].c_str(), "0x610", 5) == 0 && argv.size() > 10) {
+                try {
+                    int score = std::stoi(argv[5]);
+                    int life = std::stoi(argv[6]);
+                    int attackSpeed = std::stoi(argv[7]);
+                    int posX = std::stoi(argv[8]);
+                    int posY = std::stoi(argv[9]);
+                    ISceneManager::ForcePodLevel forcePodLevel = ISceneManager::LOW_POWER;
+                    if (std::strncmp(argv[10].c_str(), "0x615", 5) == 0)
+                        forcePodLevel = ISceneManager::LOW_POWER;
+                    if (std::strncmp(argv[10].c_str(), "0x616", 5) == 0)
+                        forcePodLevel = ISceneManager::MEDIUM_POWER;
+                    if (std::strncmp(argv[10].c_str(), "0x617", 5) == 0)
+                        forcePodLevel = ISceneManager::HIGH_POWER;
+                    ((ISceneManager*)this->_parent->getSceneManager())->updatePlayer(argv[2], argv[3],
+                            ISceneManager::ALIVE, score, life, attackSpeed, posX, posY, forcePodLevel);
+                } catch (std::invalid_argument const &e) {}
+            } else if (std::strncmp(argv[4].c_str(), "0x610", 5) == 0 && argv.size() > 5) {
+                try {
+                    int score = std::stoi(argv[5]);
+                    ((ISceneManager*)this->_parent->getSceneManager())->updatePlayer(argv[2], argv[3],
+                            ISceneManager::DEAD, score);
+                } catch (std::invalid_argument const &e) {}
+            }
+        }
+    }
 }
 
 std::string *RType::UdpNetwork::getDestIp() const {
@@ -93,4 +123,20 @@ void RType::UdpNetwork::startGame() {
     std::stringstream ss;
     ss << "START GAME ;\r\n";
     this->sendData(ss.str());
+}
+
+void RType::UdpNetwork::update() {
+    if (_needUpdate) {
+        std::stringstream ss;
+        ss << "UPDATE ;\r\n";
+        this->sendData(ss.str());
+    }
+}
+
+bool RType::UdpNetwork::isNeedUpdate() const {
+    return _needUpdate;
+}
+
+void RType::UdpNetwork::setNeedUpdate(bool needUpdate) {
+    _needUpdate = needUpdate;
 }

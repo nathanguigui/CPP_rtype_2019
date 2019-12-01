@@ -117,6 +117,7 @@ RType::Timer::Timer(IWindowManager *parent, sf::RenderWindow *app) : _parent(par
 }
 
 void RType::Timer::refreshUdpNetwork() {
+    this->_udpNetwork->update();
     this->_udpNetwork->waitForPacket();
     this->_udpClock->restart();
 }

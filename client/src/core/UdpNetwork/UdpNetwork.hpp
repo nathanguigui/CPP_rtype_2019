@@ -52,7 +52,13 @@ namespace RType {
 
         void sayUsername();
 
+        void update();
+
         void startGame();
+
+        bool isNeedUpdate() const;
+
+        void setNeedUpdate(bool needUpdate);
 
     private:
 
@@ -88,6 +94,8 @@ namespace RType {
 
         /// WindowManager
         IWindowManager *_parent;
+
+        bool _needUpdate = false;
 
     };
 }
