@@ -33,7 +33,7 @@ namespace RType {
     class AnimateSprite: public CoreObject {
     public:
         AnimateSprite(sf::RenderWindow *app, WindowState *state);
-        void run(std::string type);
+        void run(std::string type, sf::Vector2f x, sf::Vector2f y);
         ~AnimateSprite();
 
 

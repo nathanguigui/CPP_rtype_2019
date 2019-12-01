@@ -132,6 +132,17 @@ set(CLIENT_SRC
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
         client/src/game/AnimateSprite/AnimateSprite.hpp
+        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp
+        client/src/game/enemies/GreenBoss/GreenBoss.cpp
+        client/src/game/enemies/GreenBoss/GreenBoss.h
+        client/src/game/enemies/OrangeBoss/OrangeBoss.cpp
+        client/src/game/enemies/OrangeBoss/OrangeBoss.h
+        client/src/game/enemies/LittleBrown/LittleBrown.cpp
+        client/src/game/enemies/LittleBrown/LittleBrown.h
+        client/src/game/PowerUpSprite/Boost/Boost.cpp
+        client/src/game/PowerUpSprite/Boost/Boost.h
+        client/src/game/PowerUpSprite/Heal/Heal.cpp
+        client/src/game/PowerUpSprite/Heal/Heal.h
         client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp client/src/core/UdpNetwork/UdpNetwork.cpp client/src/core/UdpNetwork/UdpNetwork.hpp client/src/core/WindowManager/IWindowManager.hpp client/src/core/UdpNetwork/IUdpNetwork.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")

@@ -26,6 +26,9 @@ namespace RType {
     class TcpNetwork : public ITcpNetwork, public CoreObject {
     public:
         /// Default ctor
+        TcpNetwork(sf::RenderWindow *app, IWindowManager *parent);
+
+        /// Old ctor deprecated
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
                    Loading *loading, Settings *settings, IWindowManager *parent);
 
@@ -82,7 +85,7 @@ namespace RType {
         std::string *_destIp;
 
         /// Destination Port
-        const unsigned short _destPort;
+        unsigned short _destPort;
 
         /// SFML Tcp socket
         sf::TcpSocket *_tcpSocket;

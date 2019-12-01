@@ -46,11 +46,11 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
 
 }
 
-void RType::AnimateSprite::run(std::string type) {
+void RType::AnimateSprite::run(std::string type, sf::Vector2f x, sf::Vector2f y) {
 
-    auto screenSize = this->_app->getSize();
-    this->_splash->setPosition(centerX(screenSize, this->_splash->getGlobalBounds().width, this->_splash->getPosition()));
-    this->_splash->setPosition(centerY(screenSize, this->_splash->getGlobalBounds().height, this->_splash->getPosition()));
+    //auto screenSize = this->_app->getSize();
+    this->_splash->setPosition(x);//(centerX(screenSize, this->_splash->getGlobalBounds().width, this->_splash->getPosition()));
+    this->_splash->setPosition(y);//(centerY(screenSize, this->_splash->getGlobalBounds().height, this->_splash->getPosition()));
 
     if (type == "MasterBullet" || type == "SimpleBullet" || type == "SuperBullet1") {
         this->_buffer.loadFromFile("assets/music/tatata.wav");    
