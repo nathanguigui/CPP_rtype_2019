@@ -3,7 +3,7 @@
 //
 
 #include "Map.hpp"
-//Distance d'affichage
+//Distance d'affichage 24 par 32
 Map::Map(int level): level_(level) {
     if (level == 1) {
         size_ = 100;
@@ -14,12 +14,23 @@ Map::Map(int level): level_(level) {
             collideBot_.push_back(0);
             collideTop_.push_back(0);
         }
-        actionList_.emplace_back("35;ADD;bédodo;3");
-        actionList_.emplace_back("35;ADD;bédodo;1");
-        actionList_.emplace_back("50;ADD;bédodo;2");
-        actionList_.emplace_back("65;ADD;bédodo;4");
-        actionList_.emplace_back("80;ADD;bédodo;6");
-        actionList_.emplace_back("90;ADD;bédodo;1");
+        actionList_.emplace_back("35;ADD;bédodo;10");
+//        actionList_.emplace_back("35;ADD;bédodo;15");
+//        actionList_.emplace_back("35;ADD;bédodo;20");
+        actionList_.emplace_back("100;END");
+    }
+    if (level == 2) {
+        size_ = 100;
+        height_ = 24;
+        speed_ = 1000;
+        currentAction_ = 0;
+        for (int i = 0; i < 100; i++) {
+            collideBot_.push_back(0);
+            collideTop_.push_back(0);
+        }
+        actionList_.emplace_back("35;ADD;bédodo;10");
+//        actionList_.emplace_back("35;ADD;bédodo;15");
+//        actionList_.emplace_back("35;ADD;bédodo;20");
         actionList_.emplace_back("100;END");
     }
 }

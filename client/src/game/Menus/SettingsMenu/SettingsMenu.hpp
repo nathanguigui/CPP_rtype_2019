@@ -59,6 +59,8 @@ namespace RType {
 
         sf::Text *_quitText;
 
+        sf::Text *_soundText;
+
         int _volume = 100;
 
         SettingsMenuStatus _status;

@@ -17,14 +17,18 @@
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include <boost/algorithm/string.hpp>
-#include <client/src/core/TcpNetwork/TcpNetwork.hpp>
-#include <client/src/game/Menus/JoinLobby/JoinLobby.hpp>
+#include <client/src/core/UdpNetwork/UdpNetwork.hpp>
+#include "client/src/core/TcpNetwork/TcpNetwork.hpp"
+#include "client/src/game/Menus/JoinLobby/JoinLobby.hpp"
+#include "client/src/core/Timer/Timer.hpp"
 #include "client/src/core/MenuManager/MenuManager.hpp"
 #include "client/src/core/LoadScreen/LoadScreen.hpp"
+#include "IWindowManager.hpp"
 
 namespace RType {
     using namespace RType;
-    class WindowManager {
+
+    class WindowManager : public IWindowManager {
     public:
         explicit WindowManager(const std::string &name);
         void processParams(int ac, char **av);
@@ -35,18 +39,6 @@ namespace RType {
     private:
         /// Classic Game Loop
         void gameLoop();
-
-        /// Call the good display fc
-        void display();
-
-        /// Display elements in launch
-        void displayInLaunch();
-
-        /// Display elements in menu
-        void displayInMenu();
-
-        /// Display elements in game
-        void displayInGame();
 
         /// Name of window
         const std::string &_name;
@@ -75,11 +67,58 @@ namespace RType {
         /// Tcp Network for lobby
         TcpNetwork *_tcpNetwork{};
 
+        /// Udp Network for lobby
+        UdpNetwork *_udpNetwork{};
+
         /// Menu Manager
         MenuManager *_menuManager{};
 
         /// Load screen simple
         LoadScreen *_loadScreen;
+
+        /// Timer of the game
+        Timer *_gameTimer{};
+
+    public:
+
+        /// get Event from WindowManager
+        CoreObject *getEvent() override;
+
+        /// get Loading from WindowManager
+        CoreObject *getLoading() override;
+
+        /// get LoadScreen from WindowManager
+        CoreObject *getLoadScreen() override;
+
+        /// get Logger from WindowManager
+        CoreObject *getLogger() override;
+
+        /// get SceneManager from WindowManager
+        CoreObject *getSceneManager() override;
+
+        /// get Settings from WindowManager
+        CoreObject *getSettings() override;
+
+        /// get SoundManager from WindowManager
+        CoreObject *getSoundManager() override;
+
+        /// get SplashScreen from WindowManager
+        CoreObject *getSplashScreen() override;
+
+        /// get WindowState from WindowManager
+        CoreObject *getWindowState() override;
+
+        /// get Timer from WindowManager
+        CoreObject *getTimer() override;
+
+        /// get UdpNetwork from WindowManager
+        CoreObject *getUdpNetwork() override;
+
+        /// get TcpNetwork from WindowManager
+        CoreObject *getTcpNetwork() override;
+
+        /// get MenuManager from WindowManager
+        CoreObject *getMenuManager() override;
     };
 }
 

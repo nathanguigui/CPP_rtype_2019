@@ -52,13 +52,13 @@ void RType::SplashScreen::run() {
         //this->_splash->setTextureRect(this->boum->run());
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() > 7) {
+    if (this->_clock->getElapsedTime().asSeconds() > 3) {
         this->_done = true;
         this->_windowState->setSplashDone(true);
         this->_windowState->setIsLoading(true);
     }
 
-    if (this->_clock->getElapsedTime().asSeconds() < 10) {
+    if (this->_clock->getElapsedTime().asSeconds() < 3) {
         if (this->_splashClock->getElapsedTime().asSeconds() > 0.05f)
         {
             //this->_splash->setTextureRect(this->boum->run());
@@ -68,7 +68,7 @@ void RType::SplashScreen::run() {
         _app->draw(*this->_background);
         _app->draw(*this->_splash);
         this->_currentFrame += 1;
-    } else if (this->_clock->getElapsedTime().asSeconds() > 10) {
+    } else if (this->_clock->getElapsedTime().asSeconds() > 3) {
         this->_sound.stop();
     }
 }

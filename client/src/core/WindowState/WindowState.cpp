@@ -2,6 +2,8 @@
 // Created by guigui on 11/13/19.
 //
 
+#include <iostream>
+#include <client/src/core/core.hpp>
 #include "WindowState.hpp"
 
 RType::WindowState::WindowState(sf::RenderWindow *app) : _app(app) {}
@@ -51,6 +53,30 @@ RType::MenuType RType::WindowState::getMenuType() const {
 
 void RType::WindowState::setMenuType(RType::MenuType menuType) {
     WindowState::menuType = menuType;
+}
+
+void RType::WindowState::addPlayer(const std::string& name) {
+    if (std::find(this->_playerList.begin(), this->_playerList.end(),name) == this->_playerList.end()) {
+        if (DEBUG_RTYPE)
+            std::cout << name << " join the lobby\r\n";
+        this->_playerList.push_back(name);
+    }
+}
+
+int RType::WindowState::getPlayerCount() {
+    this->_playerList.size();
+}
+
+bool RType::WindowState::isLobbyAdmin() const {
+    return lobbyAdmin;
+}
+
+void RType::WindowState::setIsLobbyAdmin(bool isLobbyAdmin) {
+    WindowState::lobbyAdmin = isLobbyAdmin;
+}
+
+std::string RType::WindowState::getPlayerName(int playerNb) {
+    return this->_playerList[playerNb];
 }
 
 RType::WindowState::~WindowState() = default;

@@ -92,9 +92,11 @@ void RType::JoinLobby::handleEnter() {
             case JOIN_LOBBY_JOIN:
                 if (this->_textField->getString().getSize() > 0) {
                     auto code = this->_string.toAnsiString();
-                    std::cout << this->_string.toAnsiString();
-                    //this->_parent->setLobbyCode(&code);
-                    //this->_parent->sendTcpCommand(TcpNetwork::Commands::JOIN_LOBBY);
+                    auto newCode = new std::string(code);
+                    for (auto &x : *newCode)
+                        x = std::toupper(x);
+                    this->_parent->setLobbyCode(newCode);
+                    this->_parent->sendTcpCommand(ITcpNetwork::Commands::JOIN_LOBBY);
                 }
                 break;
             case JOIN_LOBBY_EXIT:

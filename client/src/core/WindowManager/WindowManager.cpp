@@ -39,11 +39,9 @@ void RType::WindowManager::init() {
 
 void RType::WindowManager::gameLoop() {
     this->_menuManager->switchMenu(MENU_MAIN_MENU);
-    while (_app->isOpen()) {
-        this->_app->clear();
-        _eventManager->manageEvent();
-        this->display();
-    }
+    this->_gameTimer = new Timer(this, this->_app);
+    while (_app->isOpen())
+        this->_gameTimer->refresh();
 }
 
 void RType::WindowManager::processParams(int ac, char **av) {
@@ -53,51 +51,70 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkIp(av[1]);
     this->_settings->checkPort(av[2]);
     this->_settings->checkUsername(av[3]);
-    this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
-                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings);
-    this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
-                                         this->_settings, this->_loadScreen);
-    this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
+    /*this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
+                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings,
+                                       this);*/
+    this->_tcpNetwork = new TcpNetwork(this->_app, this);
+    /*this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
+                                         this->_settings, this->_loadScreen);*/
+    this->_menuManager = new MenuManager(this->_app, this);
+    this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567, this->_settings);
+    //this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }
 
-void RType::WindowManager::display() {
-    switch (this->_state->getWindowMode()) {
-        case IN_LAUNCH:
-            this->displayInLaunch();
-            break;
-        case IN_MENU:
-            this->displayInMenu();
-            break;
-        case IN_GAME:
-            this->displayInGame();
-            break;
-        case UNDEFINED:
-            break;
-    }
-    _app->display();
+RType::CoreObject *RType::WindowManager::getEvent() {
+    return this->_eventManager;
 }
 
-void RType::WindowManager::displayInLaunch() {
-    if (!this->_state->isSplashDone())
-        this->_splashScreen->run();
-    else if (this->_state->isLoading()) {
-        if (!_loadingScreen->isLaunched()) {
-            this->_loadingScreen->launch();
-            this->_tcpNetwork->connect();
-        } else
-            this->_loadingScreen->check();
-    }
+RType::CoreObject *RType::WindowManager::getLoading() {
+    return this->_loadingScreen;
 }
 
-void RType::WindowManager::displayInMenu() {
-    if (this->_state->isLoading())
-        this->_loadScreen->run();
-    else
-        this->_menuManager->draw();
+RType::CoreObject *RType::WindowManager::getLoadScreen() {
+    return this->_loadScreen;
 }
 
-void RType::WindowManager::displayInGame() {
-    this->_sceneManager->drawCurrentScene();
+RType::CoreObject *RType::WindowManager::getLogger() {
+    // TODO add logger
+    return nullptr;
 }
+
+RType::CoreObject *RType::WindowManager::getSceneManager() {
+    return this->_sceneManager;
+}
+
+RType::CoreObject *RType::WindowManager::getSettings() {
+    return this->_settings;
+}
+
+RType::CoreObject *RType::WindowManager::getSoundManager() {
+    // TODO add sound manager
+    return nullptr;
+}
+
+RType::CoreObject *RType::WindowManager::getSplashScreen() {
+    return this->_splashScreen;
+}
+
+RType::CoreObject *RType::WindowManager::getWindowState() {
+    return this->_state;
+}
+
+RType::CoreObject *RType::WindowManager::getTimer() {
+    return this->_gameTimer;
+}
+
+RType::CoreObject *RType::WindowManager::getUdpNetwork() {
+    return this->_udpNetwork;
+}
+
+RType::CoreObject *RType::WindowManager::getTcpNetwork() {
+    return this->_tcpNetwork;
+}
+
+RType::CoreObject *RType::WindowManager::getMenuManager() {
+    return this->_menuManager;
+}
+

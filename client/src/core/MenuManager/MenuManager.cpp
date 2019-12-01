@@ -58,25 +58,42 @@ void RType::MenuManager::switchMenu(RType::MenuType menuType) {
 void RType::MenuManager::sendTcpCommand(RType::TcpNetwork::Commands commands) {
     switch (commands) {
         case TcpNetwork::CREATE_LOBBY:
-            this->_network->createLobby();
+            this->_network->createLobby(this->_settings->getPlayerName());
             this->_state->setIsLoading(true);
             this->_loadScreen->run();
-            this->_network->waitForPacket();
+            //while (!this->_network->waitForPacket());
             this->_state->setIsLoading(false);
             break;
         case TcpNetwork::JOIN_LOBBY:
-            if (this->_settings->getLobbyCode() != nullptr)
+            if (this->_settings->getLobbyCode() != nullptr) {
                 this->_network->joinLobby(this->_settings->getLobbyCode(), this->_settings->getPlayerName());
+                //while (!this->_network->waitForPacket());
+            }
             break;
         case TcpNetwork::READY_LOBBY:
             break;
         case TcpNetwork::INFO_LOBBY:
             break;
         case TcpNetwork::START_LOBBY:
+            if (this->_settings->getLobbyCode() != nullptr)
+                this->_network->lobbyStart();
             break;
     }
 }
 
 void RType::MenuManager::setLobbyCode(std::string *code) {
     this->_settings->setLobbyCode(code);
+}
+
+RType::MenuManager::MenuManager(sf::RenderWindow *app, RType::IWindowManager *parent) : _app(app), _parent(parent) {
+    this->_state = (WindowState*)this->_parent->getWindowState();
+    this->_network = (TcpNetwork*)this->_parent->getTcpNetwork();
+    this->_event = (Event*)this->_parent->getEvent();
+    this->_settings = (Settings*)this->_parent->getSettings();
+    this->_soundmanager = new SoundManager(this->_settings);
+    this->_loadScreen = (LoadScreen*)this->_parent->getLoadScreen();
+    this->_mainMenu = new MainMenu(this->_app, this->_state, this, this->_soundmanager);
+    this->_joinLobby = new JoinLobby(this->_app, this->_state, this, this->_soundmanager);
+    this->_lobbyMenu = new Lobby(this->_app, this->_state, this, this->_settings);
+    this->_settingsMenu = new SettingsMenu(this->_app, this, this->_settings);
 }

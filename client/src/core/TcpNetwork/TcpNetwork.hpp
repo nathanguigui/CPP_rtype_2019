@@ -10,21 +10,27 @@
 #include <sstream>
 #include <iostream>
 #include <client/src/core/Settings/Settings.hpp>
+#include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "client/src/core/core.hpp"
 #include "client/src/core/Exception/Exception.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Loading/Loading.hpp"
 #include "client/src/core/MenuManager/IMenuManager.hpp"
 #include "client/src/core/TcpNetwork/ITcpNetwork.hpp"
+#include "client/src/core/UdpNetwork/UdpNetwork.hpp"
+#include "client/src/core/Event/Event.hpp"
 
 namespace RType {
     using namespace RType;
 
-    class TcpNetwork : public ITcpNetwork {
+    class TcpNetwork : public ITcpNetwork, public CoreObject {
     public:
         /// Default ctor
+        TcpNetwork(sf::RenderWindow *app, IWindowManager *parent);
+
+        /// Old ctor deprecated
         TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
-                   Loading *loading, Settings *settings);
+                   Loading *loading, Settings *settings, IWindowManager *parent);
 
         /// Default dtor
         virtual ~TcpNetwork();
@@ -33,7 +39,7 @@ namespace RType {
         void connect();
 
         /// Create a Lobby
-        void createLobby();
+        void createLobby(std::string *playerName);
 
         /// Join a Lobby
         void joinLobby(std::string *code, std::string *playerName);
@@ -42,16 +48,19 @@ namespace RType {
         void lobbyReady(std::string code, std::string playerName);
 
         /// Get Lobby infos
-        void lobbyInfo(std::string code);
+        void lobbyUpdate();
 
         /// Start Lobby
-        void lobbyStart(std::string code);
+        void lobbyStart();
 
         /// Wait for packet and parse it
-        void waitForPacket();
+        bool waitForPacket();
 
         /// Set current menu manager to send callback
         void setMenuManager(IMenuManager *menuManager);
+
+        /// Periodic update
+        void update();
 
     private:
         /// Send Data to socket
@@ -63,6 +72,9 @@ namespace RType {
         /// Parse received packet
         void parsePacket(std::string command);
 
+        /// Execute argv
+        void execArgv(std::vector<std::string> argv);
+
         /// SFML app
         sf::RenderWindow *_app;
 
@@ -73,7 +85,7 @@ namespace RType {
         std::string *_destIp;
 
         /// Destination Port
-        const unsigned short _destPort;
+        unsigned short _destPort;
 
         /// SFML Tcp socket
         sf::TcpSocket *_tcpSocket;
@@ -89,6 +101,17 @@ namespace RType {
 
         /// Window menu manager
         IMenuManager *_menuManager = nullptr;
+
+        bool _inLobby = false;
+
+        bool _addingPlayer = false;
+
+        /// Parent WindowManager
+        IWindowManager *_parent;
+
+        UdpNetwork *_udpNetwork;
+
+        Event *_event;
 
     };
 }

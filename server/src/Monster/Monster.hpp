@@ -28,16 +28,42 @@ public:
     void setShotSpeed(float shotSpeed);
     float getTimeNextShoot() const;
     void setTimeNextShoot(float timeNextShoot);
+    const MPattern &getTravel() const;
+    void setTravel(const MPattern &travel);
+    float getTimeLastTravelChanged() const;
+    void setTimeLastTravelChanged(float timeLastTravelChanged);
+    int getCurrentTravel() const;
+    void setCurrentTravel(int currentTravel);
+    const Point<float> &getSize() const;
+    void setSize(const Point<float> &size);
+    BulletType getBulletType() const;
+    void setBulletType(BulletType bulletType);
+    ObjectState getMonsterState() const;
+    void setMonsterState(ObjectState monsterState);
+    int getScore() const;
+    void setScore(int score);
+    PowerUpStyle getPowerUpStyle() const;
+    int getPuProba() const;
+    std::string getTypeHexa();
 
 private:
     std::string type_;
     std::string UUID_;
     float life_;
+    ObjectState monsterState_;
     Point<float> pos_;
-    Point<float> direction_;
+    Point<float> size_;
+    Point<float> direction_; // ?????
+    MPattern travel_;
+    BulletType bulletType_;
+    PowerUpStyle powerUpStyle_;
+    int puProba;
     float speed_;
     float shotSpeed_;
-    float timeNextShoot_;
+    float timeNextShoot_; // temps avant que le monstre ne commence à tirer quand il apparait
+    float timeLastTravelChanged_; // Diminuer à tout les tours, il est égal à travel.time jusqu'a ce qu'il soit a 0
+    int currentTravel_;
+    int score_;
 };
 
 

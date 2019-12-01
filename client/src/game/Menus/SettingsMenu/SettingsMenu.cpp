@@ -14,6 +14,7 @@ RType::SettingsMenu::SettingsMenu(sf::RenderWindow *app, RType::IMenuManager *pa
     this->_font = new sf::Font();
     this->_font->loadFromFile("assets/fonts/ka.ttf");
     this->_quitText = new sf::Text("QUIT", *this->_font);
+    this->_soundText = new sf::Text("VOLUME", *this->_font);
     for (auto &bar : this->_volumeBar) {
         bar = new sf::Text("I", *this->_font);
         bar->setScale(0.4, 0.4);
@@ -28,6 +29,8 @@ void RType::SettingsMenu::initGUI() {
     this->updateState();
     this->_quitText->setPosition(colPos(screenSize, this->_quitText->getGlobalBounds().width, this->_quitText->getPosition(), 3, 2));
     this->_quitText->setPosition(linePos(screenSize, this->_quitText->getGlobalBounds().height, this->_quitText->getPosition(), 5, 5));
+    this->_soundText->setPosition(colPos(screenSize, this->_soundText->getGlobalBounds().width, this->_soundText->getPosition(), 3, 2));
+    this->_soundText->setPosition(linePos(screenSize, this->_soundText->getGlobalBounds().height, this->_soundText->getPosition(), 3, 1));
     for (int bar = 0; bar < 100; bar++) {
         this->_volumeBar[bar]->setPosition(centerY(screenSize, this->_volumeBar[bar]->getGlobalBounds().height, this->_volumeBar[bar]->getPosition()));
         this->_volumeBar[bar]->setPosition(colPos(screenSize, this->_volumeBar[bar]->getGlobalBounds().width, this->_volumeBar[bar]->getPosition(), 150, bar+25));
@@ -39,9 +42,11 @@ void RType::SettingsMenu::updateState() {
     switch (this->_status) {
         case QUIT_BUTTON:
             this->_quitText->setFillColor(sf::Color(sf::Color::White));
+            this->_soundText->setFillColor(sf::Color(sf::Color::Black));
             break;
         case VOLUME_BAR:
             this->_quitText->setFillColor(sf::Color(sf::Color::Black));
+            this->_soundText->setFillColor(sf::Color(sf::Color::White));
             this->_volumeBar[this->_volume - 1]->setFillColor(sf::Color(sf::Color::White));
             this->_volumeBar[this->_volume]->setFillColor(sf::Color(sf::Color::Black));
             break;
@@ -124,6 +129,7 @@ void RType::SettingsMenu::handleKeyReleased() {
 void RType::SettingsMenu::draw() {
     this->_app->draw(*this->_backgroundSprite);
     this->_app->draw(*this->_quitText);
+    this->_app->draw(*this->_soundText);
     for (auto &bar : this->_volumeBar)
         this->_app->draw(*bar);
 }

@@ -17,9 +17,12 @@
 #include "IMenuManager.hpp"
 
 namespace RType {
-    class MenuManager : public IMenuManager {
+    class MenuManager : public IMenuManager, public CoreObject {
     public:
         /// Default ctor
+        MenuManager(sf::RenderWindow *app, IWindowManager *parent);
+
+        /// Old ctor
         MenuManager(WindowState *state, Event *event, sf::RenderWindow *app, TcpNetwork *network,
                     Settings *settings, LoadScreen *loadScreen);
 
@@ -72,6 +75,9 @@ namespace RType {
 
         /// Load Screen
         LoadScreen *_loadScreen;
+
+        /// Parent
+        IWindowManager *_parent;
     };
 }
 

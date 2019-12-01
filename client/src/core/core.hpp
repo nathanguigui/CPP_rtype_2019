@@ -14,6 +14,8 @@ namespace {
     const double NETWORK_TICK_SEC = 1.0;
     const double GRAPHICAL_TICK_SEC = 0.25;
     const double MAP_SQUARE_SIZE = 25.0;
+    const float TCP_SOCKET_SELECTOR_TIMEOUT = 32.0;
+    const float UDP_SOCKET_SELECTOR_TIMEOUT = 32.0;
     const bool DEBUG_RTYPE = true;
 }
 
