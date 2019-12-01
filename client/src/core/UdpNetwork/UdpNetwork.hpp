@@ -56,6 +56,16 @@ namespace RType {
 
         void startGame();
 
+        void moveLeft();
+
+        void moveRight();
+
+        void moveUp();
+
+        void moveDown();
+
+        void shoot();
+
         bool isNeedUpdate() const;
 
         void setNeedUpdate(bool needUpdate);

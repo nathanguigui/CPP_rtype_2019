@@ -4,6 +4,11 @@
 
 #include <sstream>
 #include <client/src/core/WindowManager/IWindowManager.hpp>
+#include <client/src/game/UdpResponse/PlayerResponse/PlayerResponse.hpp>
+#include <client/src/game/UdpResponse/BulletResponse/BulletResponse.hpp>
+#include <client/src/game/UdpResponse/PowerupResponse/PowerupResponse.hpp>
+#include <client/src/game/UdpResponse/MonsterResponse/MonsterResponse.hpp>
+#include <client/src/core/Gui/Tools.hpp>
 #include "UdpNetwork.hpp"
 
 RType::UdpNetwork::UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
@@ -63,7 +68,7 @@ void RType::UdpNetwork::parsePacket(std::string packet) {
     /// Update entity packet
     if (std::strncmp(argv[0].c_str(), "0x698", 5) == 0 && argv.size() > 1) {
         /// Player
-        if (std::strncmp(argv[1].c_str(), "0x655", 5) == 0 && argv.size() > 6) {
+        if (std::strncmp(argv[1].c_str(), "0x655", 5) == 0 && argv.size() > 5) {
             if (std::strncmp(argv[4].c_str(), "0x610", 5) == 0 && argv.size() > 10) {
                 try {
                     int score = std::stoi(argv[5]);
@@ -71,23 +76,43 @@ void RType::UdpNetwork::parsePacket(std::string packet) {
                     int attackSpeed = std::stoi(argv[7]);
                     int posX = std::stoi(argv[8]);
                     int posY = std::stoi(argv[9]);
-                    ISceneManager::ForcePodLevel forcePodLevel = ISceneManager::LOW_POWER;
-                    if (std::strncmp(argv[10].c_str(), "0x615", 5) == 0)
-                        forcePodLevel = ISceneManager::LOW_POWER;
-                    if (std::strncmp(argv[10].c_str(), "0x616", 5) == 0)
-                        forcePodLevel = ISceneManager::MEDIUM_POWER;
-                    if (std::strncmp(argv[10].c_str(), "0x617", 5) == 0)
-                        forcePodLevel = ISceneManager::HIGH_POWER;
-                    ((ISceneManager*)this->_parent->getSceneManager())->updatePlayer(argv[2], argv[3],
-                            ISceneManager::ALIVE, score, life, attackSpeed, posX, posY, forcePodLevel);
+                    auto response = new PlayerResponse(score, life, attackSpeed, posX, posY, argv[10], ISceneManager::ALIVE, argv[2], argv[3]);
+                    ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
                 } catch (std::invalid_argument const &e) {}
             } else if (std::strncmp(argv[4].c_str(), "0x610", 5) == 0 && argv.size() > 5) {
                 try {
                     int score = std::stoi(argv[5]);
-                    ((ISceneManager*)this->_parent->getSceneManager())->updatePlayer(argv[2], argv[3],
-                            ISceneManager::DEAD, score);
+                    auto response = new PlayerResponse(score, ISceneManager::DEAD, argv[3], argv[2]);
+                    ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
                 } catch (std::invalid_argument const &e) {}
             }
+        }
+        /// Monster
+        if (std::strncmp(argv[0].c_str(), "0x656", 5) == 0 && argv.size() > 5) {
+            try {
+                int posX = std::stoi(argv[3]);
+                int posY = std::stoi(argv[4]);
+                auto response = new MonsterResponse(argv[2], posX, posY, argv[3]);
+                ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
+            } catch (std::invalid_argument const &e) {}
+        }
+        /// Bullet
+        if (std::strncmp(argv[0].c_str(), "0x657", 5) == 0 && argv.size() > 5) {
+            try {
+                int posX = std::stoi(argv[3]);
+                int posY = std::stoi(argv[4]);
+                auto response = new BulletResponse(argv[2], posX, posY, argv[3]);
+                ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
+            } catch (std::invalid_argument const &e) {}
+        }
+        /// Powerup
+        if (std::strncmp(argv[0].c_str(), "0x658", 5) == 0 && argv.size() > 5) {
+            try {
+                int posX = std::stoi(argv[3]);
+                int posY = std::stoi(argv[4]);
+                auto response = new PowerupResponse(argv[2], posX, posY, argv[3]);
+                ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
+            } catch (std::invalid_argument const &e) {}
         }
     }
 }
@@ -139,4 +164,34 @@ bool RType::UdpNetwork::isNeedUpdate() const {
 
 void RType::UdpNetwork::setNeedUpdate(bool needUpdate) {
     _needUpdate = needUpdate;
+}
+
+void RType::UdpNetwork::moveLeft() {
+    std::stringstream ss;
+    ss << *this->_settings->getPlayerName() << " Move NORTH ;\r\n";
+    this->sendData(stringToHex(ss.str()));
+}
+
+void RType::UdpNetwork::moveRight() {
+    std::stringstream ss;
+    ss << *this->_settings->getPlayerName() << " Move RIGHT ;\r\n";
+    this->sendData(stringToHex(ss.str()));
+}
+
+void RType::UdpNetwork::moveUp() {
+    std::stringstream ss;
+    ss << *this->_settings->getPlayerName() << " Move UP ;\r\n";
+    this->sendData(stringToHex(ss.str()));
+}
+
+void RType::UdpNetwork::moveDown() {
+    std::stringstream ss;
+    ss << *this->_settings->getPlayerName() << " Move DOWN ;\r\n";
+    this->sendData(stringToHex(ss.str()));
+}
+
+void RType::UdpNetwork::shoot() {
+    std::stringstream ss;
+    ss << *this->_settings->getPlayerName() << " Shoot ;\r\n";
+    this->sendData(stringToHex(ss.str()));
 }

@@ -6,6 +6,7 @@
 #define CPP_RTYPE_2019_ISCENEMANAGER_HPP
 
 #include <string>
+#include <client/src/core/UdpNetwork/UdpResponse/IUdpResponse.hpp>
 #include "client/src/core/CoreObject/CoreObject.hpp"
 
 namespace RType {
@@ -26,23 +27,9 @@ namespace RType {
             HIGH_POWER
         };
 
-        enum EntityType {
-            PLAYER,
-            MONSTER,
-            BULLET,
-            POWERUP
-        };
-
         virtual void updateMap(std::string mapId, std::string mapPosX) = 0;
 
-        /// Update Player Alive
-        virtual void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score, int life,
-                int attackSpeed, int posX, int posY, ForcePodLevel forcePodLevel) = 0;
-
-        /// Update player Dead
-        virtual void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score) = 0;
-
-
+        virtual void updateEntity(IUdpResponse *udpResponse) = 0;
 
     private:
     };

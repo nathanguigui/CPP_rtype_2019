@@ -35,7 +35,7 @@ if ( MSVC )
     #set(CMAKE_C_FLAGS_RELWITHDEBINFO ${CMAKE_C_FLAGS_RELWITHDEBINFO})
 endif ( MSVC )
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio -lpthread -lboost_system")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=native -pipe -std=c++11 -lsfml-graphics -lsfml-window -lsfml-system -lsfml-network -lsfml-audio -lpthread -lboost_system")
 
 include_directories(
         ${CMAKE_CURRENT_BINARY_DIR}
@@ -105,7 +105,7 @@ set(GAME_ENGINE_SRC
         client/src/core/UdpNetwork/UdpNetwork.hpp
         client/src/core/WindowManager/IWindowManager.hpp
         client/src/core/UdpNetwork/IUdpNetwork.hpp
-        client/src/core/SceneManager/ISceneManager.hpp)
+        client/src/core/SceneManager/ISceneManager.hpp client/src/core/UdpNetwork/UdpResponse/IUdpResponse.hpp)
 
 ADD_LIBRARY(GuiGameEngine STATIC ${GAME_ENGINE_SRC})
 target_link_libraries(GuiGameEngine ${CONAN_LIBS})
@@ -139,6 +139,8 @@ set(CLIENT_SRC
         client/src/game/Menus/JoinLobby/JoinLobby.cpp
         client/src/game/Menus/JoinLobby/JoinLobby.hpp
         client/src/game/Menus/Lobby/Lobby.cpp
+        client/src/core/Gui/Tools.cpp
+        client/src/core/Gui/Tools.hpp
         client/src/game/Menus/Lobby/Lobby.hpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
@@ -157,7 +159,7 @@ set(CLIENT_SRC
         client/src/game/PowerUpSprite/Boost/Boost.h
         client/src/game/PowerUpSprite/Heal/Heal.cpp
         client/src/game/PowerUpSprite/Heal/Heal.h
-        )
+        client/src/game/UdpResponse/BulletResponse/BulletResponse.cpp client/src/game/UdpResponse/BulletResponse/BulletResponse.hpp client/src/game/UdpResponse/MonsterResponse/MonsterResponse.cpp client/src/game/UdpResponse/MonsterResponse/MonsterResponse.hpp client/src/game/UdpResponse/PlayerResponse/PlayerResponse.cpp client/src/game/UdpResponse/PlayerResponse/PlayerResponse.hpp client/src/game/UdpResponse/PowerupResponse/PowerupResponse.cpp client/src/game/UdpResponse/PowerupResponse/PowerupResponse.hpp)
 
 include_directories("${PROJECT_BINARY_DIR}")
 

@@ -24,7 +24,7 @@ sf::Vector2f RType::colPos(sf::Vector2u screenSize, int width, sf::Vector2<float
     return initialPos;
 }
 
-std::string string_to_hex(const std::string& input)
+std::string RType::stringToHex(const std::string& input)
 {
     static const char* const lut = "0123456789ABCDEF";
     size_t len = input.length();
@@ -39,7 +39,7 @@ std::string string_to_hex(const std::string& input)
     return output;
 }
 
-std::string hex_to_string(const std::string& input)
+std::string RType::hexToString(const std::string& input)
 {
     static const char* const lut = "0123456789ABCDEF";
     size_t len = input.length();

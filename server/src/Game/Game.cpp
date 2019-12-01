@@ -13,6 +13,7 @@ Game::Game(std::vector<std::string> pseudo) {
     maxPosX_ = 0;
     mUUID = 0;
     bID_= 0;
+    puID = 0;
     posx_ = 0;
     currentMap_ = 0;
     mapList_.push_back(new Map(1));
@@ -538,8 +539,9 @@ void Game::bUpdate() {
                 //Invocation powerup
                 if ((rand() % 10 + 1) <= monsterList[victime]->getPuProba()) {
                     powerUpList_.emplace_back(
-                            (PowerUp) {{(monsterList[victime]->getPos()).x, (monsterList[victime]->getPos()).y}, {1, 1},
+                            (PowerUp) {"powerup" + std::to_string(puID), {(monsterList[victime]->getPos()).x, (monsterList[victime]->getPos()).y}, {1, 1},
                                        monsterList[victime]->getPowerUpStyle()});
+                    puID += 1;
                 }
             }
         }
@@ -619,6 +621,7 @@ void Game::puDestroyer() {
 }
 
 void Game::writeData() {
+    std::string tmp = "0x798;";
     // Player
     for (int i = 0; (unsigned long)i < playerList_.size(); i++) {
         std::cout << "UUID : " << playerList_[i]->getUuid() << std::endl;
@@ -627,25 +630,34 @@ void Game::writeData() {
         if (playerList_[i]->getPlayerState() == DEAD)
             data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x611" + ";" + std::to_string((int)(playerList_[i]->getScore() * 100)) + "$");
         else {
+            tmp.append(string_to_hex(playerList_[i]->getUuid()));
+            tmp.append(";");
             data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string((int)(playerList_[i]->getScore() * 100)) + ";" + std::to_string((int)(playerList_[i]->getLife() * 100)) + ";" + std::to_string((int)(playerList_[i]->getShotSpeed() * 100)) + ";" + std::to_string((int)((playerList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 -(playerList_[i]->getPos()).y) * 100)) + ";" + playerList_[i]->getForcePod() + "$");
         }
     }
 
     // Monstres
     for (int i = 0; (unsigned long)i < monsterList.size(); i++) {
+        tmp.append(string_to_hex(monsterList[i]->getUuid()));
+        tmp.append(";");
         data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((int)((monsterList[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 - (monsterList[i]->getPos()).y) * 100))  + "$");
     }
 
     // Bullet
     for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
+        tmp.append(string_to_hex(std::to_string(bulletList_[i]->getUuid())));
+        tmp.append(";");
         data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((int)((bulletList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 - (bulletList_[i]->getPos()).y) * 100)) + "$");
     }
 
     // PowerUp
     for (int i = 0; (unsigned long)i < powerUpList_.size(); i++) {
+        tmp.append(powerUpList_[i].UUID);
+        tmp.append(";");
         if (powerUpList_[i].style == HEALTH)
-            data.emplace_back("0x698;0x658;0x640;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
+            data.emplace_back("0x698;0x658;" + string_to_hex(powerUpList_[i].UUID)+ ";0x640;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
         else if (powerUpList_[i].style == SHOTSPEED)
-            data.emplace_back("0x698;0x658;0x641;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
+            data.emplace_back("0x698;0x658;" + string_to_hex(powerUpList_[i].UUID) + ";0x641;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
     }
+    data.emplace_back(tmp);
 }

@@ -34,6 +34,7 @@ enum PowerUpStyle {
 };
 
 struct PowerUp {
+    std::string UUID;
     Point<float> pos;
     Point<float> size;
     PowerUpStyle style;

@@ -25,16 +25,11 @@ void RType::WindowManager::init() {
     this->_state = new WindowState(this->_app);
     this->_eventManager = new Event(this, this->_app, this->_state);
     this->_settings = new Settings(this->_state);
-    this->_sceneManager = new SceneManager(this->_app, this->_eventManager);
+    this->_sceneManager = new SceneManager(this->_app, this->_eventManager, this);
     /// Create splash, loading, & menu manager
     this->_splashScreen = new SplashScreen(this->_app, this->_state);
     this->_loadingScreen = new Loading(this->_app, this->_state, 4.0);
     this->_loadScreen = new LoadScreen(this->_app, this->_state);
-
-    auto scene1 = new Scene(this->_app);
-    scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
-    auto sceneName = new std::string("scene1");
-    this->_sceneManager->addSetCurrentScene(sceneName, scene1, true);
 }
 
 void RType::WindowManager::gameLoop() {
@@ -56,6 +51,12 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_menuManager = new MenuManager(this->_app, this);
     this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567,
                                        this->_settings, this);
+
+    auto scene1 = new Scene(this->_app, this);
+    scene1->addPlayer(Player::SkinColours::PLAYER_BLUE);
+    auto sceneName = new std::string("scene1");
+    this->_sceneManager->addSetCurrentScene(sceneName, scene1, true);
+
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }

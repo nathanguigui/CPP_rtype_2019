@@ -25,25 +25,35 @@ RType::Player::~Player() = default;
 
 void RType::Player::handleLeft() {
     this->_sprite->move(-20, 0);
+    if (this->_udpNetwork != nullptr)
+        this->_udpNetwork->moveLeft();
 }
 
 void RType::Player::handleRight() {
     this->_sprite->move(20, 0);
+    if (this->_udpNetwork != nullptr)
+        this->_udpNetwork->moveRight();
 }
 
 void RType::Player::handleUp() {
     this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_UP));
     this->_sprite->move(0, -20);
+    if (this->_udpNetwork != nullptr)
+        this->_udpNetwork->moveUp();
 }
 
 void RType::Player::handleDown() {
     this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_DOWN));
     this->_sprite->move(0, 20);
+    if (this->_udpNetwork != nullptr)
+        this->_udpNetwork->moveDown();
 }
 
 void RType::Player::handleEnter() {
     std::cout << "shoot initiated";
     this->_powerManager->initiateShoot();
+    if (this->_udpNetwork != nullptr)
+        this->_udpNetwork->shoot();
 }
 
 void RType::Player::handleKeyReleased() {
@@ -110,4 +120,8 @@ void RType::Player::setPosition(sf::Vector2f newPos) {
 
 sf::Vector2f RType::Player::getPosition() {
     return this->_sprite->getPosition();
+}
+
+void RType::Player::setUdpNetwork(RType::UdpNetwork *network) {
+    this->_udpNetwork = network;
 }

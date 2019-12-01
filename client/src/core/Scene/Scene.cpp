@@ -2,9 +2,10 @@
 // Created by guigui on 11/13/19.
 //
 
+#include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "Scene.hpp"
 
-RType::Scene::Scene(sf::RenderWindow *app): _app(app) {
+RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent) : _app(app), _parent(parent) {
 
 }
 
@@ -57,6 +58,7 @@ void RType::Scene::addPlayer(RType::Player::SkinColours skinColours) {
     if (this->_player)
         return;
     this->_player = new Player(this->_app, this, skinColours);
+    this->_player->setUdpNetwork((UdpNetwork*)this->_parent->getUdpNetwork());
     this->addEventableSceneObject((EventableSceneObject*)this->_player);
     this->addSceneObject((SceneObject*)this->_player);
 }
