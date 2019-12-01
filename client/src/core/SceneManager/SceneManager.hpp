@@ -8,16 +8,19 @@
 #include <map>
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "client/src/core/Scene/Scene.hpp"
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
+#include <client/src/game/UdpResponse/PlayerResponse/PlayerResponse.hpp>
+#include "client/src/core/Settings/Settings.hpp"
 #include "ISceneManager.hpp"
 
 namespace RType {
     using namespace RType;
     class SceneManager: public ISceneManager {
     public:
-        SceneManager(sf::RenderWindow *app, Event *eventManager);
+        SceneManager(sf::RenderWindow *app, Event *eventManager, IWindowManager *parent);
 
         SceneManager(std::string *currentScene, sf::RenderWindow *app, Event *eventManager, Scene *scene);
 
@@ -29,18 +32,16 @@ namespace RType {
 
         void updateMap(std::string mapId, std::string mapPosX) override;
 
-        /// Update Player Alive
-        void updatePlayer(std::string uuid, std::string name, PlayerStatus status, int score, int life,
-                int attackSpeed, int posX, int posY, ISceneManager::ForcePodLevel forcePodLevel) override;
+        void updatePlayer(PlayerResponse *response);
 
-        /// Update player Dead
-        void updatePlayer(std::string uuid, std::string name, ISceneManager::PlayerStatus status, int score) override;
+        void updateEntity(IUdpResponse *udpResponse) override;
 
     private:
         std::map<std::string, Scene*> _scenes;
         std::string *_currentScene;
         sf::RenderWindow *_app;
         Event *_eventManager;
+        IWindowManager *_parent;
     };
 }
 

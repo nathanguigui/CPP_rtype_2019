@@ -16,7 +16,7 @@ namespace RType {
     using namespace RType;
     class Scene: public IScene, public EventableObject {
     public:
-        explicit Scene(sf::RenderWindow *app);
+        explicit Scene(sf::RenderWindow *app, IWindowManager *parent);
         virtual ~Scene();
 
         /// Relay Event to eventable objects
@@ -79,6 +79,8 @@ namespace RType {
 
         /// Current Player
         Player *_player{nullptr};
+
+        IWindowManager *_parent;
     };
 }
 

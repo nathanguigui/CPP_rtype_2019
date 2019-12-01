@@ -6,6 +6,7 @@
 #define CPP_RTYPE_2019_PLAYER_HPP
 
 #include <SFML/Graphics.hpp>
+#include <client/src/core/UdpNetwork/UdpNetwork.hpp>
 #include "client/src/core/EventableSceneObject/EventableSceneObject.hpp"
 #include "client/src/core/PowerManager/PowerManager.hpp"
 #include "client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp"
@@ -46,6 +47,8 @@ namespace RType{
         void setPosition(sf::Vector2f newPos) override;
         sf::Vector2f getPosition() override;
 
+        void setUdpNetwork(UdpNetwork *network);
+
     private:
         void initPlayer();
         enum SkinSize {
@@ -61,6 +64,7 @@ namespace RType{
         SkinColours _color;
         PowerManager *_powerManager{};
         IScene *_parentScene;
+        UdpNetwork *_udpNetwork = nullptr;
     };
 }
 
