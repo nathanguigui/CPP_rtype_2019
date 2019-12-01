@@ -83,7 +83,7 @@ class Server_UDP {
         void read_data(udp_session *player);
         void start_game();
         void update_game(std::string);
-        vector<std::string> parse_packages(vector<std::string>);
+        std::vector<std::string> parse_packages(std::vector<std::string>);
     private:
         bool isStarted;
 public:

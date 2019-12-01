@@ -41,8 +41,8 @@ void Server_UDP::update_game(std::string received) {
     end = std::chrono::system_clock::now();
     long elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     std::string buffer;
-    vector<std::string> rcv;
-    vector<std::string> snd;
+    std::vector<std::string> rcv;
+    std::vector<std::string> snd;
     cout << "time elapsed: " << elapsed_time << endl;
     boost::split(rcv, received, boost::is_any_of(" "));
     if (isStarted1()) {
@@ -64,7 +64,7 @@ void Server_UDP::update_game(std::string received) {
             }
         } else {
             //parse data to transfer different action
-            auto parse_rcv = parse_packages(rcv);
+            std::vector<std::string> parse_rcv = parse_packages(rcv);
             snd = game_.Update(parse_rcv, (float) elapsed_time);
             if (snd.size() == 1) {
                 setIsStarted(false);
@@ -82,8 +82,8 @@ void Server_UDP::update_game(std::string received) {
     }
 }
 
-vector<std::string> parse_packages(vector<std::string> recv) {
-    vector<std::string> buff;
+std::vector<std::string> Server_UDP::parse_packages(std::vector<std::string> recv) {
+    std::vector<std::string> buff;
     std::string data;
     for (int i = 0; i < recv.size(); i++) {
         if (recv[i] == "Move" && i + 1 < recv.size()) {
