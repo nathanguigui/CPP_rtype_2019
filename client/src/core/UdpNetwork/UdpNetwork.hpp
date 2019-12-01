@@ -15,6 +15,8 @@
 #include <SFML/Network/Packet.hpp>
 #include <client/src/core/core.hpp>
 #include <SFML/Network/SocketSelector.hpp>
+#include <client/src/core/WindowManager/IWindowManager.hpp>
+#include "client/src/core/SceneManager/ISceneManager.hpp"
 #include "IUdpNetwork.hpp"
 
 namespace RType {
@@ -24,7 +26,7 @@ namespace RType {
     public:
         /// Default ctor
         UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
-                   Settings *settings);
+                   Settings *settings, IWindowManager *parent);
 
         /// Default dtor
         virtual ~UdpNetwork();
@@ -58,7 +60,7 @@ namespace RType {
         void parseMultiplePacket(char *packet, std::size_t packetSize);
 
         /// Parse received packet
-        void parsePacket(char *packet);
+        void parsePacket(std::string packet);
 
         /// SFML app
         sf::RenderWindow *_app;
@@ -84,6 +86,8 @@ namespace RType {
         /// Window menu manager
         IMenuManager *_menuManager = nullptr;
 
+        /// WindowManager
+        IWindowManager *_parent;
 
     };
 }

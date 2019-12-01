@@ -6,14 +6,16 @@
 #define CPP_RTYPE_2019_SCENEMANAGER_HPP
 
 #include <map>
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "client/src/core/Scene/Scene.hpp"
 #include "client/src/core/Event/Event.hpp"
 #include "client/src/core/CoreObject/CoreObject.hpp"
+#include "ISceneManager.hpp"
 
 namespace RType {
     using namespace RType;
-    class SceneManager: public CoreObject {
+    class SceneManager: public ISceneManager {
     public:
         SceneManager(sf::RenderWindow *app, Event *eventManager);
 
@@ -24,6 +26,8 @@ namespace RType {
         void drawCurrentScene();
 
         void addSetCurrentScene(std::string *currentScene, Scene *scene, bool thiefEvent);
+
+        void updateMap(std::string mapId, std::string mapPosX) override;
 
     private:
         std::map<std::string, Scene*> _scenes;

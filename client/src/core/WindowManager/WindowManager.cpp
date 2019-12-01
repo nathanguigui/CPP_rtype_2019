@@ -51,15 +51,11 @@ void RType::WindowManager::processParams(int ac, char **av) {
     this->_settings->checkIp(av[1]);
     this->_settings->checkPort(av[2]);
     this->_settings->checkUsername(av[3]);
-    /*this->_tcpNetwork = new TcpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(),
-                                       this->_settings->getLobbyServerPort(), this->_loadingScreen, this->_settings,
-                                       this);*/
     this->_tcpNetwork = new TcpNetwork(this->_app, this);
-    /*this->_menuManager = new MenuManager(this->_state, this->_eventManager, this->_app, this->_tcpNetwork,
-                                         this->_settings, this->_loadScreen);*/
+    this->_soundManager = new SoundManager(this->_settings);
     this->_menuManager = new MenuManager(this->_app, this);
-    this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567, this->_settings);
-    //this->_tcpNetwork->setMenuManager((IMenuManager*)this->_menuManager);
+    this->_udpNetwork = new UdpNetwork(this->_app, this->_state, this->_settings->getLobbyServerIp(), 25567,
+                                       this->_settings, this);
     if (DEBUG_RTYPE)
         this->_settings->debugArgs();
 }
@@ -90,8 +86,7 @@ RType::CoreObject *RType::WindowManager::getSettings() {
 }
 
 RType::CoreObject *RType::WindowManager::getSoundManager() {
-    // TODO add sound manager
-    return nullptr;
+    return this->_soundManager;
 }
 
 RType::CoreObject *RType::WindowManager::getSplashScreen() {

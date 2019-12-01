@@ -28,3 +28,8 @@ RType::SceneManager::~SceneManager() {
 void RType::SceneManager::drawCurrentScene() {
     this->_scenes[*this->_currentScene]->draw();
 }
+
+void RType::SceneManager::updateMap(std::string mapId, std::string mapPosX) {
+    // TODO handle update map
+    std::cout << "update map pos to " << mapId << " pos: " << mapPosX << "\r\n";
+}

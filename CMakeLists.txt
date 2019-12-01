@@ -147,6 +147,16 @@ set(CLIENT_SRC
         client/src/game/AnimateSprite/ISprite.hpp
         client/src/game/Menus/SettingsMenu/SettingsMenu.cpp
         client/src/game/Menus/SettingsMenu/SettingsMenu.hpp
+        client/src/game/enemies/GreenBoss/GreenBoss.cpp
+        client/src/game/enemies/GreenBoss/GreenBoss.h
+        client/src/game/enemies/OrangeBoss/OrangeBoss.cpp
+        client/src/game/enemies/OrangeBoss/OrangeBoss.h
+        client/src/game/enemies/LittleBrown/LittleBrown.cpp
+        client/src/game/enemies/LittleBrown/LittleBrown.h
+        client/src/game/PowerUpSprite/Boost/Boost.cpp
+        client/src/game/PowerUpSprite/Boost/Boost.h
+        client/src/game/PowerUpSprite/Heal/Heal.cpp
+        client/src/game/PowerUpSprite/Heal/Heal.h
         )
 
 include_directories("${PROJECT_BINARY_DIR}")

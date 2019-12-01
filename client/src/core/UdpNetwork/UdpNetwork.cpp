@@ -3,13 +3,15 @@
 //
 
 #include <sstream>
+#include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "UdpNetwork.hpp"
 
-RType::UdpNetwork::UdpNetwork(sf::RenderWindow *app, RType::WindowState *state, std::string *destIp,
-                              const unsigned short destPort, RType::Settings *settings) : _app(app), _state(state),
+RType::UdpNetwork::UdpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
+                              Settings *settings, IWindowManager *parent) : _app(app), _state(state),
                                                                                           _destIp(destIp),
                                                                                           _destPort(destPort),
-                                                                                          _settings(settings) {
+                                                                                          _settings(settings),
+                                                                                          _parent(parent) {
     this->_udpSocket = new sf::UdpSocket();
 }
 
@@ -24,6 +26,7 @@ bool RType::UdpNetwork::waitForPacket() {
         if (aSelector.isReady(*this->_udpSocket)) {
             std::cout << "packet received on udp\r\n";
             this->_udpSocket->receive(packet, ipAddress, this->_destPort);
+            this->parseMultiplePacket((char *)packet.getData(), packet.getDataSize());
         }
     }
 }
@@ -39,11 +42,24 @@ void RType::UdpNetwork::sendData(const std::string &data) {
 }
 
 void RType::UdpNetwork::parseMultiplePacket(char *packet, std::size_t packetSize) {
-
+    std::vector<std::string> packetList;
+    boost::split(packetList, packet, boost::is_any_of("$"));
+    for (auto &parsedPacket : packetList)
+        this->parsePacket(parsedPacket);
 }
 
-void RType::UdpNetwork::parsePacket(char *packet) {
-
+void RType::UdpNetwork::parsePacket(std::string packet) {
+    std::cout << "parsing a packet\r\n";
+    std::vector<std::string> argv;
+    boost::split(argv, packet, boost::is_any_of(";"));
+    if (argv.empty())
+        return;
+    /// Update state packet
+    if (std::strncmp(argv[0].c_str(), "0x498", 5) == 0 && argv.size() > 1) {
+        if (std::strncmp(argv[1].c_str(), "0x415", 5) == 0 && argv.size() > 3) {
+            ((ISceneManager*)this->_parent->getSceneManager())->updateMap(argv[2], argv[3]);
+        }
+    }
 }
 
 std::string *RType::UdpNetwork::getDestIp() const {

@@ -21,14 +21,13 @@ RType::Timer::Timer(SplashScreen *splashScreen, TcpNetwork *tcpNetwork, MenuMana
 RType::Timer::~Timer() = default;
 
 void RType::Timer::refresh() {
-    /// 60 FPS refresh
     if (needRefresh(20, TimersType::GRAPHICS))
         this->refreshGraphics();
     if (needRefresh(60, TimersType::EVENTS))
         this->refreshEvent();
-    if (needRefresh(1, TimersType::TCP_NETWORK))
+    if (needRefresh(2, TimersType::TCP_NETWORK))
         this->refreshTcpNetwork();
-    if (needRefresh(1, TimersType::UDP_NETWORK))
+    if (needRefresh(15, TimersType::UDP_NETWORK))
         this->refreshUdpNetwork();
 }
 
