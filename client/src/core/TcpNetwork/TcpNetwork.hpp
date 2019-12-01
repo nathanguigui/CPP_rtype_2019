@@ -23,7 +23,7 @@
 namespace RType {
     using namespace RType;
 
-    class TcpNetwork : public ITcpNetwork, public CoreObject {
+    class TcpNetwork : public ITcpNetwork {
     public:
         /// Default ctor
         TcpNetwork(sf::RenderWindow *app, IWindowManager *parent);

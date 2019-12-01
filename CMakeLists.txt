@@ -42,9 +42,7 @@ include_directories(
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-
-set(CLIENT_SRC
-        client/src/main.cpp
+set(GAME_ENGINE_SRC
         client/src/core/WindowManager/WindowManager.cpp
         client/src/core/WindowManager/WindowManager.hpp
         client/src/core/Event/Event.cpp client/src/core/Event/Event.hpp
@@ -57,8 +55,6 @@ set(CLIENT_SRC
         client/src/core/Settings/Settings.cpp
         client/src/core/Settings/Settings.hpp
         client/src/core/EventableObject/EventableObject.hpp
-        client/src/game/Menus/MainMenu/MainMenu.cpp
-        client/src/game/Menus/MainMenu/MainMenu.hpp
         client/src/core/Scene/Scene.cpp
         client/src/core/Scene/Scene.hpp
         client/src/core/SceneObject/SceneObject.hpp
@@ -74,12 +70,52 @@ set(CLIENT_SRC
         client/src/core/Power/Power.cpp
         client/src/core/Power/Power.hpp
         client/src/core/PowerUp/PowerUp.hpp
-        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.cpp
-        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp
         client/src/core/PowerManager/PowerManager.cpp
         client/src/core/PowerManager/PowerManager.hpp
         client/src/core/Power/PowerEnum.hpp
         client/src/core/Scene/IScene.hpp
+        client/src/core/PowerManager/PowerManager.hpp
+        client/src/core/Power/PowerEnum.hpp
+        client/src/core/Scene/IScene.hpp
+        client/src/core/Loading/Loading.cpp
+        client/src/core/Loading/Loading.hpp
+        client/src/core/Exception/Exception.cpp
+        client/src/core/Exception/Exception.hpp
+        client/src/core/TcpNetwork/TcpNetwork.cpp
+        client/src/core/TcpNetwork/TcpNetwork.hpp
+        client/src/core/Menus/IMenu/IMenu.hpp
+        client/src/core/MenuManager/MenuManager.cpp
+        client/src/core/MenuManager/MenuManager.hpp
+        client/src/core/MenuManager/IMenuManager.hpp
+        client/src/core/Sounds/MenuSelectSound/MenuSelectSound.cpp
+        client/src/core/Sounds/MenuSelectSound/MenuSelectSound.hpp
+        client/src/core/Sounds/QuitSound/QuitSound.cpp
+        client/src/core/Sounds/QuitSound/QuitSound.hpp
+        client/src/core/Sounds/MenuMusic/MenuMusic.cpp
+        client/src/core/Sounds/MenuMusic/MenuMusic.hpp
+        client/src/core/ITcpReceiver/ITcpReceiver.hpp
+        client/src/core/LoadScreen/LoadScreen.cpp
+        client/src/core/LoadScreen/LoadScreen.hpp
+        client/src/core/SoundManager/SoundManager.cpp
+        client/src/core/SoundManager/SoundManager.hpp
+        client/src/core/TcpNetwork/ITcpNetwork.hpp
+        client/src/core/Timer/Timer.cpp
+        client/src/core/Timer/Timer.hpp
+        client/src/core/UdpNetwork/UdpNetwork.cpp
+        client/src/core/UdpNetwork/UdpNetwork.hpp
+        client/src/core/WindowManager/IWindowManager.hpp
+        client/src/core/UdpNetwork/IUdpNetwork.hpp
+        client/src/core/SceneManager/ISceneManager.hpp)
+
+ADD_LIBRARY(GuiGameEngine STATIC ${GAME_ENGINE_SRC})
+target_link_libraries(GuiGameEngine ${CONAN_LIBS})
+
+set(CLIENT_SRC
+        client/src/main.cpp
+        client/src/game/Menus/MainMenu/MainMenu.cpp
+        client/src/game/Menus/MainMenu/MainMenu.hpp
+        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.cpp
+        client/src/game/PowerUp/DefaultPowerUp/DefaultPowerUp.hpp
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.cpp
         client/src/game/Bullets/BulletTouch/SimpleKill/SimpleKill.h
         client/src/game/Bullets/BulletTouch/SimpleExplosion/SimpleExplosion.cpp
@@ -100,39 +136,17 @@ set(CLIENT_SRC
         client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.cpp
         client/src/game/Bullets/BulletsShoot/SimpleBomb/SimpleBomb.h
-        client/src/core/PowerManager/PowerManager.hpp
-        client/src/core/Power/PowerEnum.hpp
-        client/src/core/Scene/IScene.hpp
-        client/src/core/Loading/Loading.cpp
-        client/src/core/Loading/Loading.hpp
-        client/src/core/Exception/Exception.cpp
-        client/src/core/Exception/Exception.hpp
-        client/src/core/TcpNetwork/TcpNetwork.cpp
-        client/src/core/TcpNetwork/TcpNetwork.hpp
-        client/src/core/Menus/IMenu/IMenu.hpp
         client/src/game/Menus/JoinLobby/JoinLobby.cpp
         client/src/game/Menus/JoinLobby/JoinLobby.hpp
-        client/src/core/MenuManager/MenuManager.cpp
-        client/src/core/MenuManager/MenuManager.hpp
-        client/src/core/MenuManager/IMenuManager.hpp
-        client/src/core/Sounds/MenuSelectSound/MenuSelectSound.cpp
-        client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h
-        client/src/core/Sounds/QuitSound/QuitSound.cpp
-        client/src/core/Sounds/QuitSound/QuitSound.h
-        client/src/core/Sounds/MenuMusic/MenuMusic.cpp
-        client/src/core/Sounds/MenuMusic/MenuMusic.h
-        client/src/core/ITcpReceiver/ITcpReceiver.hpp
         client/src/game/Menus/Lobby/Lobby.cpp
         client/src/game/Menus/Lobby/Lobby.hpp
-        client/src/core/LoadScreen/LoadScreen.cpp
-        client/src/core/LoadScreen/LoadScreen.hpp
-        client/src/core/SoundManager/SoundManager.cpp
-        client/src/core/SoundManager/SoundManager.hpp
-        client/src/game/enemies/LittleRed/LittleRed.cpp
         client/src/game/enemies/LittleRed/LittleRed.h
         client/src/game/AnimateSprite/AnimateSprite.cpp
         client/src/game/AnimateSprite/AnimateSprite.hpp
-        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp
+        client/src/game/enemies/LittleRed/LittleRed.cpp
+        client/src/game/AnimateSprite/ISprite.hpp
+        client/src/game/Menus/SettingsMenu/SettingsMenu.cpp
+        client/src/game/Menus/SettingsMenu/SettingsMenu.hpp
         client/src/game/enemies/GreenBoss/GreenBoss.cpp
         client/src/game/enemies/GreenBoss/GreenBoss.h
         client/src/game/enemies/OrangeBoss/OrangeBoss.cpp
@@ -143,7 +157,7 @@ set(CLIENT_SRC
         client/src/game/PowerUpSprite/Boost/Boost.h
         client/src/game/PowerUpSprite/Heal/Heal.cpp
         client/src/game/PowerUpSprite/Heal/Heal.h
-        client/src/game/AnimateSprite/ISprite.hpp client/src/core/TcpNetwork/ITcpNetwork.hpp client/src/game/Menus/SettingsMenu/SettingsMenu.cpp client/src/game/Menus/SettingsMenu/SettingsMenu.hpp client/src/core/Timer/Timer.cpp client/src/core/Timer/Timer.hpp client/src/core/UdpNetwork/UdpNetwork.cpp client/src/core/UdpNetwork/UdpNetwork.hpp client/src/core/WindowManager/IWindowManager.hpp client/src/core/UdpNetwork/IUdpNetwork.hpp)
+        )
 
 include_directories("${PROJECT_BINARY_DIR}")
 
@@ -156,7 +170,7 @@ add_custom_target(copy-files ALL
         ${CMAKE_SOURCE_DIR}/build/bin/
         ${CMAKE_BINARY_DIR}/
         )
-target_link_libraries(rtype_client ${CONAN_LIBS})
+target_link_libraries(rtype_client ${CONAN_LIBS} GuiGameEngine)
 
 set(SERVER_SRC
         server/src/main.cpp
@@ -185,3 +199,14 @@ set (SERVER_HEADERS
 
 add_executable(rtype_server ${SERVER_SRC})
 target_link_libraries(rtype_server ${CONAN_LIBS})
+
+message("
+            d8P
+         d888888P
+  88bd88b  ?88'  ?88   d8P ?88,.d88b,  d8888b
+  88P'  `  88P   d88   88  `?88'  ?88 d8b_,dP
+ d88       88b   ?8(  d88    88b  d8P 88b
+d88'       `?8b  `?88P'?8b   888888P' `?888P'
+                        )88  88P'
+                       ,d8P d88
+                    `?888P' ?8P             ")

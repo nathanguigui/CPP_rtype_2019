@@ -5,6 +5,7 @@
 #ifndef CPP_RTYPE_2019_SCENE_HPP
 #define CPP_RTYPE_2019_SCENE_HPP
 #include <SFML/Graphics.hpp>
+#include <client/src/core/SceneManager/ISceneManager.hpp>
 #include "client/src/core/SceneObject/SceneObject.hpp"
 #include "client/src/core/EventableObject/EventableObject.hpp"
 #include "client/src/core/EventableSceneObject/EventableSceneObject.hpp"
@@ -48,6 +49,15 @@ namespace RType {
         /// Add object to the list of rendered object
         void addSceneObject(SceneObject *object);
 
+        /// Add or update object
+        void updateObject(const std::string& uuid, SceneObject *object);
+
+        /// Update current player
+        void updateCurrentPlayer(const std::string& uuid, const std::string& name, ISceneManager::PlayerStatus status, int score, int life,
+                int attackSpeed, int posX, int posY, ISceneManager::ForcePodLevel forcePodLevel);
+
+        void updateCurrentPlayer(const std::string& uuid, const std::string& name, ISceneManager::PlayerStatus status, int score);
+
         /// Add object to get event from Scene
         void addEventableSceneObject(EventableSceneObject *eventableSceneObject);
     private:
@@ -56,7 +66,7 @@ namespace RType {
         sf::RenderWindow *_app;
 
         /// Drawable Objects
-        std::vector<SceneObject*> _sceneObjects;
+        std::map<std::string, SceneObject*> _sceneObjects;
 
         /// Eventable Objects
         std::vector<EventableSceneObject*> _eventableObjects;

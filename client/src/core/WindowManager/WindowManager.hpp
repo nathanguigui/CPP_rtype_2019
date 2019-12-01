@@ -79,6 +79,9 @@ namespace RType {
         /// Timer of the game
         Timer *_gameTimer{};
 
+        /// SoundManager
+        SoundManager *_soundManager;
+
     public:
 
         /// get Event from WindowManager

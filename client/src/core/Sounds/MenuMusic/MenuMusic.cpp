@@ -2,7 +2,7 @@
 // Created by luc4s.p on 11/15/19.
 //
 
-#include "MenuMusic.h"
+#include "MenuMusic.hpp"
 
 RType::MenuMusic::MenuMusic() {
     this->_buffer.loadFromFile("assets/music/MainMenu.wav");

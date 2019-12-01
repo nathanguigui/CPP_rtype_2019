@@ -2,18 +2,17 @@
 // Created by luc4s.p on 11/15/19.
 //
 
-#ifndef CPP_RTYPE_2019_MENUSELECTSOUND_H
-#define CPP_RTYPE_2019_MENUSELECTSOUND_H
+#ifndef CPP_RTYPE_2019_QUITSOUND_HPP
+#define CPP_RTYPE_2019_QUITSOUND_HPP
 
 #include <SFML/Audio.hpp>
-#include "../../Settings/Settings.hpp"
 
 namespace RType {
     using namespace RType;
-    class MenuSelectSound {
+    class QuitSound {
     public:
-        MenuSelectSound();
-        ~MenuSelectSound();
+        QuitSound();
+        ~QuitSound();
         void run();
         void setVol(int vol);
 
