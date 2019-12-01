@@ -2,15 +2,15 @@
 // Created by luc4s.p on 11/15/19.
 //
 
-#include "LittleRed.h"
+#include "LittleBrown.h"
 
-RType::LittleRed::LittleRed(): step(0) {
+RType::LittleBrown::LittleBrown(): step(0) {
     this->_bulletTexture = new sf::Texture();
-    this->_bulletTexture->loadFromFile("assets/bullets/r-typesheet1.gif");
+    this->_bulletTexture->loadFromFile("assets/bullets/r-typesheet23.gif");
     this->_rectSourceSprite = new sf::IntRect();
 }
 
-sf::IntRect RType::LittleRed::run() {
+sf::IntRect RType::LittleBrown::run() {
     if (this->step == 0) {
         this->_rectSourceSprite->left = 0;
         this->_rectSourceSprite->width = 33;
@@ -57,6 +57,6 @@ sf::IntRect RType::LittleRed::run() {
     return *this->_rectSourceSprite;
 }
 
-sf::Texture RType::LittleRed::getTexture() {
+sf::Texture RType::LittleBrown::getTexture() {
     return *this->_bulletTexture;
 }
