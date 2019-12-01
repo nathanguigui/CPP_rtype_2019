@@ -2,7 +2,7 @@
 // Created by luc4s.p on 11/15/19.
 //
 
-#include "QuitSound.h"
+#include "QuitSound.hpp"
 
 RType::QuitSound::QuitSound() {
     this->_buffer.loadFromFile("assets/music/Quit.wav");

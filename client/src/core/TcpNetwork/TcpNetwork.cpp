@@ -4,6 +4,7 @@
 
 #include <client/src/core/UdpNetwork/IUdpNetwork.hpp>
 #include <client/src/core/Event/Event.hpp>
+#include <client/src/core/SoundManager/SoundManager.hpp>
 #include "TcpNetwork.hpp"
 
 RType::TcpNetwork::TcpNetwork(sf::RenderWindow *app, WindowState *state, std::string *destIp, unsigned short destPort,
@@ -59,6 +60,9 @@ void RType::TcpNetwork::lobbyStart() {
     auto ss = std::stringstream();
     ss << "LOBBY START " << *this->_settings->getLobbyCode() << "\r\n";
     this->sendData(ss.str());
+    this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
+    this->_udpNetwork->startGame();
+    this->_udpNetwork->setNeedUpdate(true);
 }
 
 bool RType::TcpNetwork::waitForPacket() {
@@ -143,6 +147,7 @@ void RType::TcpNetwork::execArgv(std::vector<std::string> argv) {
         if (DEBUG_RTYPE)
             std::cout << "starting game...\r\n";
         this->_event->removeCurrentMenu();
+        ((SoundManager*)this->_parent->getSoundManager())->stop("menumusic");
         this->_state->setWindowMode(WindowMode::IN_GAME);
         this->_inLobby = false;
     }

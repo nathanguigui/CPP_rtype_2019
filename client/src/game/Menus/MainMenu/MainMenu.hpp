@@ -14,8 +14,8 @@
 #include "client/src/core/Gui/Tools.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Event/Event.hpp"
-#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
-#include "client/src/core/Sounds/QuitSound/QuitSound.h"
+#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.hpp"
+#include "client/src/core/Sounds/QuitSound/QuitSound.hpp"
 #include "client/src/core/ITcpReceiver/ITcpReceiver.hpp"
 #include "client/src/core/SoundManager/SoundManager.hpp"
 

@@ -28,3 +28,19 @@ RType::SceneManager::~SceneManager() {
 void RType::SceneManager::drawCurrentScene() {
     this->_scenes[*this->_currentScene]->draw();
 }
+
+void RType::SceneManager::updateMap(std::string mapId, std::string mapPosX) {
+    // TODO handle update map
+    std::cout << "update map pos to " << mapId << " pos: " << mapPosX << "\r\n";
+}
+
+void RType::SceneManager::updatePlayer(std::string uuid, std::string name, RType::ISceneManager::PlayerStatus status,
+                                       int score, int life, int attackSpeed, int posX, int posY,
+                                       RType::ISceneManager::ForcePodLevel forcePodLevel) {
+    this->_scenes[*this->_currentScene]->updateCurrentPlayer(uuid, name, status, score, life, attackSpeed, posX, posY, forcePodLevel);
+}
+
+void RType::SceneManager::updatePlayer(std::string uuid, std::string name, RType::ISceneManager::PlayerStatus status,
+                                       int score) {
+    this->_scenes[*this->_currentScene]->updateCurrentPlayer(uuid, name, status, score);
+}

@@ -90,7 +90,7 @@ RType::MenuManager::MenuManager(sf::RenderWindow *app, RType::IWindowManager *pa
     this->_network = (TcpNetwork*)this->_parent->getTcpNetwork();
     this->_event = (Event*)this->_parent->getEvent();
     this->_settings = (Settings*)this->_parent->getSettings();
-    this->_soundmanager = new SoundManager(this->_settings);
+    this->_soundmanager = (SoundManager*)this->_parent->getSoundManager();
     this->_loadScreen = (LoadScreen*)this->_parent->getLoadScreen();
     this->_mainMenu = new MainMenu(this->_app, this->_state, this, this->_soundmanager);
     this->_joinLobby = new JoinLobby(this->_app, this->_state, this, this->_soundmanager);
