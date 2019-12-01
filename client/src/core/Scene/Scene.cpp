@@ -5,10 +5,18 @@
 #include "Scene.hpp"
 
 RType::Scene::Scene(sf::RenderWindow *app): _app(app) {
-
+    this->_background = new sf::Sprite();
+    this->_texture = new sf::Texture();
+    this->_texture->loadFromFile("assets/MainMenu/logo.png");
+    this->_background->setTexture(*this->_texture);
+    this->_background->setPosition(0.0, 1.0);
 }
 
 RType::Scene::~Scene() = default;
+
+void RType::Scene::UpdatePosition(float x) {
+    this->_background->setPosition(x, 1.0);
+}
 
 void RType::Scene::draw() {
     for (auto & _object : this->_sceneObjects)

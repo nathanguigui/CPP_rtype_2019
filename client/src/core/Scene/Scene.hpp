@@ -60,7 +60,13 @@ namespace RType {
 
         /// Add object to get event from Scene
         void addEventableSceneObject(EventableSceneObject *eventableSceneObject);
+
+        void UpdatePosition(float x);
     private:
+
+        /// Background
+        sf::Sprite *_background;
+        sf::Texture *_texture;
 
         /// App window
         sf::RenderWindow *_app;
