@@ -3,6 +3,10 @@
 //
 
 #include "Server_UDP.hpp"
+#include <math.h>
+
+std::string hex_to_string(const std::string& input);
+std::string string_to_hex(const std::string& input);
 
 Server_UDP::Server_UDP(io_service &io_service, string IP_Address, size_t port, std::string keypass, std::vector<std::string> buff) : socket_(io_service, udp::endpoint(boost::asio::ip::address::from_string(IP_Address), port)), game_(buff){
     server_key_ = keypass;
@@ -22,17 +26,42 @@ void Server_UDP::start_accept() {
 }
 
 void Server_UDP::start_game() {
+    cout << "Start New Game and set game start\n";
+    Game game(username_);
+    setGame(game);
+    start = std::chrono::system_clock::now();
+    game_.Launch();
+    update_game("");
+}
 
+void Server_UDP::update_game(std::string received) {
+    cout << "i have received that ->" <<received << endl;
+    string new_data = string_to_hex(received);
+    end = std::chrono::system_clock::now();
+    long elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
+    std::string buffer;
+    vector<std::string> rcv;
+    vector<std::string> snd;
+    cout << "time elapsed: " << elapsed_time << endl;
+    boost::split(rcv, received, boost::is_any_of(" "));
+    snd = game_.Update(rcv, (float) elapsed_time);
+    for (int i = 0; i < snd.size(); i++) {
+        buffer = buffer + snd[i];
+        cout << "buffer -> " << buffer;
+    }
+    for (auto it:session_manager_.sessions_) {
+        it->setBuff(buffer);
+        it->send_data();
+    }
+    start = std::chrono::system_clock::now();
 }
 
 void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost::system::error_code &err) {
     if (!err) {
-        if (session_manager_.sessions_.size() < 4) {
+        if (session_manager_.sessions_.size() < 4 && isStarted == false) {
             session_manager_.start(new_connection);
         }
-    } if (session_manager_.sessions_.size() >= 4) {
-        Game game(username_);
-        setGame(game);
+    } if (session_manager_.sessions_.size() >= 4 || isStarted == true) {
         start_game();
     }
     start_accept();
@@ -84,4 +113,12 @@ const Game &Server_UDP::getGame() const {
 
 void Server_UDP::setGame(const Game &game) {
     game_ = game;
+}
+
+bool Server_UDP::isStarted1() const {
+    return isStarted;
+}
+
+void Server_UDP::setIsStarted(bool isStarted) {
+    Server_UDP::isStarted = isStarted;
 }

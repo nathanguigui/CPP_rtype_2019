@@ -13,6 +13,7 @@ Game::Game(std::vector<std::string> pseudo) {
     maxPosX_ = 0;
     mUUID = 0;
     bID_= 0;
+    posx_ = 0;
     currentMap_ = 0;
     mapList_.push_back(new Map(1));
     mapList_.push_back(new Map(2));
@@ -43,8 +44,9 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     /*
     * Time since Update en seconde donc à convertir en ms au moment où on connecte avec le serveur
     */
-    timeSinceUpdate = timeSinceUpdate * 1000;
+    std::cout << "Posx au début: " << posx_ << std::endl;
     timeSinceUpdate_ = timeSinceUpdate;
+    std::cout << "TimeSinceUpdate : " << timeSinceUpdate_ << std::endl;
     data.clear();
     data.emplace_back("0x198$");
 
@@ -121,6 +123,7 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     for (int i = 0; (unsigned long)i < data.size(); i++) {
         std::cout << data[i] << std::endl;
     }
+    std::cout << "End of update" << std::endl;
 
     return data;
 }

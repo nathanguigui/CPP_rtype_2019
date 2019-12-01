@@ -52,11 +52,15 @@ void udp_session::handle_send(const boost::system::error_code &err, size_t bytes
 
 void udp_session::handle_read(const boost::system::error_code &err, size_t bytes_transferred) {
     if (!err) {
-        std::string convert_str = convertToString(data);
-        parse_data(convert_str);
-        cout << username << endl;
-        buff = "Connection accepted\r\n";
-        send_data();
+        if (!server_->isStarted1()) {
+            std::string convert_str = convertToString(data);
+            parse_data(convert_str);
+            cout << username << endl;
+            buff = "Connection accepted\r\n";
+            send_data();
+        } else {
+            server_->update_game(data);
+        }
     }
 }
 
@@ -74,8 +78,12 @@ void udp_session::setUsername(const string &username) {
 
 void udp_session::parse_data(std::string data) {
     vector<string> tab;
+    const boost::system::error_code err;
     boost::split(tab, data, boost::is_any_of(" "));
     if (tab[0] == "username" && tab.size() == 3) {
         username = tab[1];
+    } if (tab[0] == "START") {
+        server_->setIsStarted(true);
+        server_->start_game();
     }
 }
