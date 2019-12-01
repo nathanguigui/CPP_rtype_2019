@@ -46,6 +46,12 @@ hit:
   ```
   - posX;posY -> Nombres flottant qui indiquent les coordonnées du hit
 
+## UUID Des unités présentes
+```
+    0x798;[UUID List]
+```
+
+ - UUID List -> Liste des UUID des entités à afficher séparé par des ;
 ## Entités
 
 0x698;type
@@ -94,8 +100,9 @@ bullet :
 #
 powerup :
  ```
- 0x698;0x658;[type];[posX];[posY]
+ 0x698;0x658;[UUID];[type];[posX];[posY]
  ```
+- UUID -> chaine hexa définissant l'objet
 
 - type -> Health [0x640] , Attack speed [0x641]
 

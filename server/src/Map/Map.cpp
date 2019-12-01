@@ -15,8 +15,19 @@ Map::Map(int level): level_(level) {
             collideTop_.push_back(0);
         }
         actionList_.emplace_back("35;ADD;bédodo;10");
-//        actionList_.emplace_back("35;ADD;bédodo;15");
-//        actionList_.emplace_back("35;ADD;bédodo;20");
+        actionList_.emplace_back("35;ADD;bédodo;15");
+        actionList_.emplace_back("35;ADD;bédodo;20");
+        actionList_.emplace_back("40;ADD;bédodo;10");
+        actionList_.emplace_back("40;ADD;bédodo;15");
+        actionList_.emplace_back("40;ADD;bédodo;20");
+        actionList_.emplace_back("45;ADD;bédodo;10");
+        actionList_.emplace_back("45;ADD;bédodo;15");
+        actionList_.emplace_back("45;ADD;bédodo;20");
+        actionList_.emplace_back("65;ADD;bédodo;10");
+        actionList_.emplace_back("65;ADD;bédodo;15");
+        actionList_.emplace_back("65;ADD;bédodo;20");
+        actionList_.emplace_back("95;ADD;Boss1;20");
+        actionList_.emplace_back("97;ADD;Boss1;15");
         actionList_.emplace_back("100;END");
     }
     if (level == 2) {
