@@ -26,7 +26,6 @@ void Server_UDP::start_accept() {
 }
 
 void Server_UDP::start_game() {
-    sleep(1);
     cout << "Start New Game and set game start\n";
     Game game(username_);
     setGame(game);
@@ -36,8 +35,13 @@ void Server_UDP::start_game() {
 }
 
 void Server_UDP::update_game(std::string received) {
-    cout << "i have received that ->" <<received << endl;
-    string new_data = string_to_hex(received);
+    std::string new_data;
+    cout << "WHat i have received-> "<< received << endl;
+    if (received != " ") {
+        cout << data << " <- my data\n";
+        new_data = hex_to_string(received);
+        cout << new_data << " <- my data\n";
+    }
     end = std::chrono::system_clock::now();
     long elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     std::string buffer;
@@ -63,8 +67,16 @@ void Server_UDP::update_game(std::string received) {
                 it->send_data();
             }
         } else {
+            for (int i = 0; i< rcv.size(); i++) {
+                cout << "data received ->";
+                cout << rcv[i] << endl;
+            }
             //parse data to transfer different action
             std::vector<std::string> parse_rcv = parse_packages(rcv);
+            for (int i = 0; i< parse_rcv.size(); i++) {
+                cout << "data received ->";
+                cout << parse_rcv[i] << endl;
+            }
             snd = game_.Update(parse_rcv, (float) elapsed_time);
             if (snd.size() == 1) {
                 setIsStarted(false);
