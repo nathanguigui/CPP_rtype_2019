@@ -63,6 +63,11 @@ void connection_handler_TCP::add_username_in_server() {
 
 
 void connection_handler_TCP::launch_game() {
+    for (int i = 0; i < server_->getServerManager().size(); i++) {
+        if (server_->getServerManager()[i]->getServerKey() == keypass_server) {
+            server_->getServerManager()[i]->setIsStarted(true);
+        }
+    }
     for(auto it:server_->getUsersManager().connections_) {
         if (it->getKeypassServer() == keypass_server) {
             it->buffer = "START\r\n";

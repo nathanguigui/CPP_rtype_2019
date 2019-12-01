@@ -19,6 +19,8 @@
 #include <boost/asio/ip/address.hpp>
 #include <vector>
 #include "../Game/Game.hpp"
+#include <chrono>
+#include <ctime>
 using namespace boost::asio;
 using boost::asio::ip::udp;
 using namespace std;
@@ -80,8 +82,16 @@ class Server_UDP {
         void send_data(udp_session *player);
         void read_data(udp_session *player);
         void start_game();
+        void update_game(std::string);
     private:
-        void start_accept();
+        bool isStarted;
+public:
+    bool isStarted1() const;
+
+    void setIsStarted(bool isStarted);
+
+private:
+    void start_accept();
         string server_key_;
 public:
     const string &getServerKey() const;
@@ -109,6 +119,8 @@ private:
         char *data;
         std::string message;
         std::vector<std::string> username_;
+        std::vector<std::string> command_launch;
+        std::chrono::time_point<std::chrono::system_clock> start, end;
         Game game_;
 public:
     const Game &getGame() const;
