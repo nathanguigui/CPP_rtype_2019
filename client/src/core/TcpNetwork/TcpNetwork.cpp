@@ -59,6 +59,8 @@ void RType::TcpNetwork::lobbyStart() {
     auto ss = std::stringstream();
     ss << "LOBBY START " << *this->_settings->getLobbyCode() << "\r\n";
     this->sendData(ss.str());
+    this->_udpNetwork = (UdpNetwork*)this->_parent->getUdpNetwork();
+    this->_udpNetwork->startGame();
 }
 
 bool RType::TcpNetwork::waitForPacket() {

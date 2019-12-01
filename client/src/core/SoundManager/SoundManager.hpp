@@ -1,9 +1,9 @@
 #ifndef CPP_RTYPE_2019_SOUNDMANAGER_HPP
 #define CPP_RTYPE_2019_SOUNDMANAGER_HPP
 
-#include "../Sounds/MenuSelectSound/MenuSelectSound.h"
-#include "../Sounds/QuitSound/QuitSound.h"
-#include "../Sounds/MenuMusic/MenuMusic.h"
+#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.hpp"
+#include "client/src/core/Sounds/QuitSound/QuitSound.hpp"
+#include "client/src/core/Sounds/MenuMusic/MenuMusic.hpp"
 #include "../Settings/Settings.hpp"
 
 namespace RType {

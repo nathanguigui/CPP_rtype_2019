@@ -50,6 +50,8 @@ namespace RType {
 
         void sayUsername();
 
+        void startGame();
+
     private:
 
         /// Parse multiple packet

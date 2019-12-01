@@ -6,7 +6,7 @@
 #define CPP_RTYPE_2019_ITCPNETWORK_HPP
 
 namespace RType {
-    class ITcpNetwork {
+    class ITcpNetwork : public CoreObject {
 
     public:
     /// Enum for all tcp command

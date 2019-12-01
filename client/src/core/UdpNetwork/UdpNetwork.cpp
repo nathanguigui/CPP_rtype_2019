@@ -72,3 +72,9 @@ void RType::UdpNetwork::sayUsername() {
     ss << "username " << *this->_settings->getPlayerName() << " ;\r\n";
     this->sendData(ss.str());
 }
+
+void RType::UdpNetwork::startGame() {
+    std::stringstream ss;
+    ss << "START GAME ;\r\n";
+    this->sendData(ss.str());
+}

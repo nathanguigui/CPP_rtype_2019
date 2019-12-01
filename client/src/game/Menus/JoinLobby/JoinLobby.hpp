@@ -10,7 +10,7 @@
 #include "client/src/core/Menus/IMenu/IMenu.hpp"
 #include "client/src/core/WindowState/WindowState.hpp"
 #include "client/src/core/Gui/Tools.hpp"
-#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.h"
+#include "client/src/core/Sounds/MenuSelectSound/MenuSelectSound.hpp"
 #include "client/src/core/SoundManager/SoundManager.hpp"
 #include <iostream>
 
