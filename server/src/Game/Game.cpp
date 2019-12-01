@@ -555,11 +555,16 @@ void Game::bUpdate() {
                     posWanted.y + (sizeWanted.y / 2) > posOther.y - (sizeWanted.y / 2)) {
                     victime = j;
                     bulletList_[i]->setHit(true);
+                    std::cout << playerList_[j]->getUuid() << std::endl;
+                    std::cout << playerList_[j]->getLife() << std::endl;
+
                     std::cout << "Ca marche les collisions BVP" << std::endl;
                 }
             }
+            std::cout << "2\n";
             //Collision balle d'un joueur vers un joueur
             if (bulletList_[i]->isHit() && bulletList_[i]->getTeam() == Teams::Players) {
+                std::cout << "1\n";
                 if (bulletList_[i]->getFrom() == playerList_[victime]->getUuid()) {
                     bulletList_[i]->setHit(false);
                 }
@@ -568,8 +573,8 @@ void Game::bUpdate() {
             else if (bulletList_[i]->isHit() && bulletList_[i]->getTeam() == Teams::Monsters) {
                 std::cout << "Bullet " << bulletList_[i]->getUuid() << "from " << (bulletList_[i]->getPos()).x << ":"
                           << (bulletList_[i]->getPos()).y << " to " << toX << ";" << toY << " touched "
-                          << playerList_[victime]->getUuid() << " at " << (playerList_[i]->getPos()).x << ":"
-                          << (playerList_[i]->getPos()).y << std::endl;
+                          << playerList_[victime]->getUuid() << " at " << (playerList_[victime]->getPos()).x << ":"
+                          << (playerList_[victime]->getPos()).y << std::endl;
                 std::cout << "SizeWanted : " << sizeWanted.x << ":" << sizeWanted.y << std::endl;
                 std::cout << "PosWanted : " << posWanted.x << ":" << posWanted.y << std::endl;
                 std::cout << "Life : " << playerList_[victime]->getLife() << std::endl;
@@ -590,8 +595,8 @@ void Game::bUpdate() {
     }
     for (int i = 0; (unsigned long) i < bulletList_.size(); i++) {
         if (bulletList_[i]->isHit())
-            data.emplace_back((std::string) "0x598;0x515;" + std::to_string((int)(bulletList_[i]->getPos()).x * 100)  + ";" +
-                              std::to_string((int)(bulletList_[i]->getPos()).y * 100) + "$");
+            data.emplace_back((std::string) "0x598;0x515;" + std::to_string((int)((bulletList_[i]->getPos()).x - posx_) * 100)  + ";" +
+                              std::to_string((int)((24 - (bulletList_[i]->getPos()).y) * 100)) + "$");
     }
 }
 
@@ -616,26 +621,31 @@ void Game::puDestroyer() {
 void Game::writeData() {
     // Player
     for (int i = 0; (unsigned long)i < playerList_.size(); i++) {
+        std::cout << "UUID : " << playerList_[i]->getUuid() << std::endl;
+        std::cout <<  string_to_hex(playerList_[i]->getPseudo()) << std::endl;
+        std::cout << "pseudo : " << playerList_[i]->getPseudo() << std::endl;
         if (playerList_[i]->getPlayerState() == DEAD)
             data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x611" + ";" + std::to_string((int)(playerList_[i]->getScore() * 100)) + "$");
         else {
-            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string((int)(playerList_[i]->getScore()* 100)) + ";" + std::to_string((int)(playerList_[i]->getLife() * 100)) + ";" + std::to_string((int)(playerList_[i]->getShotSpeed() * 100)) + ";" + std::to_string((int)((playerList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((playerList_[i]->getPos()).y * 100)) + ";" + playerList_[i]->getForcePod() + "$");
+            data.emplace_back("0x698;0x655;" + string_to_hex(playerList_[i]->getUuid()) + ";" + string_to_hex(playerList_[i]->getPseudo()) + ";" + "0x610" + ";" + std::to_string((int)(playerList_[i]->getScore() * 100)) + ";" + std::to_string((int)(playerList_[i]->getLife() * 100)) + ";" + std::to_string((int)(playerList_[i]->getShotSpeed() * 100)) + ";" + std::to_string((int)((playerList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 -(playerList_[i]->getPos()).y) * 100)) + ";" + playerList_[i]->getForcePod() + "$");
         }
     }
 
     // Monstres
     for (int i = 0; (unsigned long)i < monsterList.size(); i++) {
-        data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((int)((monsterList[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((monsterList[i]->getPos()).y * 100))  + "$");
+        data.emplace_back("0x698;0x656;" + string_to_hex(monsterList[i]->getUuid()) + ";" + monsterList[i]->getTypeHexa() + ";" + std::to_string((int)((monsterList[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 - (monsterList[i]->getPos()).y) * 100))  + "$");
     }
 
     // Bullet
     for (int i = 0; (unsigned long)i < bulletList_.size(); i++) {
-        data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((int)((bulletList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((bulletList_[i]->getPos()).y * 100)) + "$");
+        data.emplace_back("0x698;0x657;" + string_to_hex(std::to_string(bulletList_[i]->getUuid()))  + ";" + bulletList_[i]->getTypeHexa() + ";" + std::to_string((int)((bulletList_[i]->getPos()).x - posx_) * 100) + ";" + std::to_string((int)((24 - (bulletList_[i]->getPos()).y) * 100)) + "$");
     }
 
     // PowerUp
     for (int i = 0; (unsigned long)i < powerUpList_.size(); i++) {
         if (powerUpList_[i].style == HEALTH)
-            data.emplace_back("0x698;0x658;0x640;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)(powerUpList_[i].pos.y * 100)) + "$");
+            data.emplace_back("0x698;0x658;0x640;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
+        else if (powerUpList_[i].style == SHOTSPEED)
+            data.emplace_back("0x698;0x658;0x641;" + std::to_string((int)(powerUpList_[i].pos.x - posx_) * 100) + ";" + std::to_string((int)((24 - powerUpList_[i].pos.y) * 100)) + "$");
     }
 }

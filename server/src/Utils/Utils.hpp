@@ -61,7 +61,8 @@ enum Teams {
 enum BulletType {
     NORMAL,
     FORCEPODONE,
-    FORCEPODTWO
+    FORCEPODTWO,
+    BOSSONE
 };
 
 std::string string_to_hex(const std::string& input);

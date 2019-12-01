@@ -22,6 +22,10 @@ Bullet::Bullet(BulletType type, int UUID, std::string from, Teams teams, Point<f
         damage_ = 60;
         direction_ = {4,0};
         size_ = {0.5, 0.5};
+    } else if (type == BOSSONE && teams == Monsters) {
+        damage_ = 60;
+        direction_ = {4.5, 0};
+        size_ = {0.6, 0.6};
     }
     hit = false;
 }
@@ -107,6 +111,8 @@ std::string Bullet::getTypeHexa() {
         return "0x632";
     } else if (type_ == NORMAL && team_ == Monsters) {
         return "0x635";
+    } else if (type_ == BOSSONE && team_ == Monsters) {
+        return "0x636";
     }
     return "0x630";
 }

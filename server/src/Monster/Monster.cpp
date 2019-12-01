@@ -45,6 +45,44 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         shotSpeed_ = 700;
         timeNextShoot_ = 3000;
     }
+    if (type == "Boss1") {
+        // Initialisation de la vie
+        life_ = 400;
+        // Initialisation du compteur du patterne de déplacement
+        currentTravel_ = 0;
+        // Poisiton du montre
+        pos_ = {x, y};
+        // Taille du monstre
+        size_ = {1,1};
+        // Type de rocket
+        bulletType_ = BOSSONE;
+        score_ = 400;
+        powerUpStyle_ = SHOTSPEED;
+        puProba = 6;
+        // Vecteurs pour le patterne de déplacement
+        std::vector<Point<float> *> move;
+        std::vector<int> speed;
+        std::vector<int> time;
+        // Remplissage patterne de déplacement : move qui correspond à la direction
+        move.emplace_back(new Point<float>({-0.0, -3}));
+        move.emplace_back(new Point<float>({-0.0,3}));
+        move.emplace_back(new Point<float>({-0.0, -3}));
+        move.emplace_back(new Point<float>({-0.0,3}));
+        speed.emplace_back(1000);
+        speed.emplace_back(1000);
+        speed.emplace_back(1000);
+        speed.emplace_back(1000);
+        time.emplace_back(5000);
+        time.emplace_back(5000);
+        time.emplace_back(5000);
+        time.emplace_back(5000);
+        travel_.move = move;
+        travel_.speed = speed;
+        travel_.time = time;
+        timeLastTravelChanged_ = travel_.time[currentTravel_];
+        shotSpeed_ = 400;
+        timeNextShoot_ = 1000;
+    }
 }
 
 const std::string &Monster::getType() const {
@@ -182,6 +220,8 @@ int Monster::getPuProba() const {
 std::string Monster::getTypeHexa() {
     if (type_ == "bédodo") {
         return "0x620";
+    } else if (type_ == "Boss1") {
+        return "0x621";
     }
     return "";
 }
