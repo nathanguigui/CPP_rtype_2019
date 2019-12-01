@@ -170,7 +170,7 @@ add_custom_target(copy-files ALL
         ${CMAKE_BINARY_DIR}/assets/
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/build/bin/
-        ${CMAKE_BINARY_DIR}/
+        ${CMAKE_BINARY_DIR}/../
         )
 target_link_libraries(rtype_client ${CONAN_LIBS} GuiGameEngine)
 
