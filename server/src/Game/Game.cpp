@@ -256,16 +256,16 @@ void Game::pMove(int i, std::string direction) {
     Point<float> posWanted = playerList_[i]->getPos();
     Point<float> sizeWanted = playerList_[i]->getSize();
     if (direction == "SOUTH") {
-        posWanted.y += 0.5;
+        posWanted.y += 1;
     }
     if (direction == "NORTH") {
-        posWanted.y -= 0.5;
+        posWanted.y -= 1;
     }
     if (direction == "EAST") {
-        posWanted.x += 0.5;
+        posWanted.x += 1;
     }
     if (direction == "WEST") {
-        posWanted.x -= 0.5;
+        posWanted.x -= 1;
     }
     std::cout << "At X : " << posWanted.x << " Y : " << posWanted.y << std::endl;
 
