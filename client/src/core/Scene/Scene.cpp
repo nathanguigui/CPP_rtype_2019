@@ -6,8 +6,12 @@
 #include <client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h>
 #include "Scene.hpp"
 
-RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent) : _app(app), _parent(parent) {
-
+RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent): _app(app), _parent(parent) {
+    this->_background = new sf::Sprite();
+    this->_texture = new sf::Texture();
+    this->_texture->loadFromFile("assets/MainMenu/logo.png");
+    this->_background->setTexture(*this->_texture);
+    this->_background->setPosition(0.0, 1.0);
 }
 
 RType::Scene::~Scene() = default;
@@ -86,13 +90,18 @@ void RType::Scene::updateEntity(RType::IUdpResponse *udpResponse) {
     if (this->_sceneObjects.find(udpResponse->getUuid()) != this->_sceneObjects.end())
         this->_sceneObjects[udpResponse->getUuid()]->setPosition(sf::Vector2f(udpResponse->getPosX() / 4,udpResponse->getPosY() / 4));
     else { /// Entity doesn't exist
+        SimpleBullet *bull = nullptr;
+        std::cout << "creating entity\r\n";
         switch (udpResponse->getType()) {
             case IUdpResponse::PLAYER:
                 break;
             case IUdpResponse::MONSTER:
                 break;
             case IUdpResponse::BULLET:
-                auto bull = new SimpleBullet
+                std::cout << "creating bullet\r\n";
+                bull = new SimpleBullet(this->_app);
+                bull->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                this->_sceneObjects.insert({udpResponse->getUuid(), bull});
                 break;
             case IUdpResponse::POWERUP:
                 break;

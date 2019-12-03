@@ -84,7 +84,9 @@ class Server_UDP {
         void start_game();
         void update_game(std::string);
         std::vector<std::string> parse_packages(std::vector<std::string>);
+        std::vector<std::string> remove_endline_on_all_line();
     private:
+        bool inGame;
         bool isStarted;
 public:
     bool isStarted1() const;

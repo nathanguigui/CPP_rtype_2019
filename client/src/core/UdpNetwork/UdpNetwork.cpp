@@ -96,12 +96,12 @@ void RType::UdpNetwork::parsePacket(std::string packet) {
             } catch (std::invalid_argument const &e) {}
         }
         /// Bullet
-        if (std::strncmp(argv[1].c_str(), "0x657", 5) == 0 && argv.size() > 5) {
+        if (std::strncmp(argv[1].c_str(), "0x657", 5) == 0) {
             try {
                 int posX = std::stoi(argv[4]);
                 int posY = std::stoi(argv[5]);
                 auto response = new BulletResponse(argv[2], posX, posY, argv[3]);
-                ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
+                ((ISceneManager*)this->_parent->getSceneManager())->updateEntity((IUdpResponse*)response);
             } catch (std::invalid_argument const &e) {}
         }
         /// Powerup

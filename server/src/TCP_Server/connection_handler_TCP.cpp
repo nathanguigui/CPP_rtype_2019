@@ -21,6 +21,7 @@ connection_handler_TCP::connection_handler_TCP(boost::asio::io_service &io_servi
     boost::asio::ip::tcp::no_delay option(true);
     boost::system::error_code ec;
     sock.set_option(option, ec);
+    hascreated =false;
     if (ec)
     {
         // An error occurred.
@@ -131,8 +132,9 @@ void connection_handler_TCP::handle_read(const boost::system::error_code &err, s
                 buffer = get_all_name_in_server();
                 cout << buffer << endl;
                 write_data();
-            } if (action.type == "START") {
+            } if (action.type == "START" && hascreated != true) {
                 buffer = "START";
+                hascreated = true;
                 launch_game();
                 write_data();
             }

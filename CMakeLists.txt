@@ -163,16 +163,18 @@ set(CLIENT_SRC
 
 include_directories("${PROJECT_BINARY_DIR}")
 
-add_executable(rtype_client ${CLIENT_SRC})
 add_custom_target(copy-files ALL
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/client/src/assets/
         ${CMAKE_BINARY_DIR}/assets/
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/build/bin/
-        ${CMAKE_BINARY_DIR}/
+        ${CMAKE_BINARY_DIR}/../
         )
-target_link_libraries(rtype_client ${CONAN_LIBS} GuiGameEngine)
+
+add_executable(r-type_client ${CLIENT_SRC})
+target_link_libraries(r-type_client ${CONAN_LIBS} GuiGameEngine)
+
 
 set(SERVER_SRC
         server/src/main.cpp
@@ -199,8 +201,8 @@ set (SERVER_HEADERS
         server/src/Utils/Utils.hpp
         server/src/Monster/Monster.hpp)
 
-add_executable(rtype_server ${SERVER_SRC})
-target_link_libraries(rtype_server ${CONAN_LIBS})
+add_executable(r-type_server ${SERVER_SRC})
+target_link_libraries(r-type_server ${CONAN_LIBS})
 
 message("
             d8P

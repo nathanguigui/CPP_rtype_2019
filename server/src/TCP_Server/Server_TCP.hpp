@@ -63,6 +63,7 @@ private:
     bool create_server;
     std::string username_;
     std::string keypass_server;
+    bool hascreated;
 public:
     const string &getKeypassServer() const;
 

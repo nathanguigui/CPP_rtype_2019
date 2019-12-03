@@ -81,14 +81,24 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
     }
     std::cout << "End Command Vector" << std::endl;
 
-    for (int i = 0 ; (unsigned long)i < commands.size(); i++) {
+    std::vector<std::string *> tmp;
+    for (int j = 0; (unsigned long)j < playerList_.size(); j++) {
+        tmp.push_back( new std::string(playerList_[j]->getPseudo()));
+        std::cout <<  "TMP : " << tmp[0] << std::endl;
+    }
+
+    for (int i = 0; (unsigned long) i < commands.size(); i++) {
+        res.clear();
         boost::split(res, commands[i], boost::is_any_of(";"));
-        for (int j = 0; (unsigned long) j < playerList_.size(); j++) {
-            if (playerList_[j]->getPseudo() == res[0] && res[1] == "Move" && playerList_[j]->getPlayerState() == ALIVE) {
-                pMove(i, res[2]);
-            }
-            else if (playerList_[j]->getPseudo() == res[0] && res[1] == "Shoot" && playerList_[j]->getPlayerState() == ALIVE) {
-                pShoot(i);
+        for (int k = 0; (unsigned long) k < playerList_.size(); k++) {
+            std::cout << "Valeur de J :" << k << std::endl;
+            std::cout << "Color : " << *tmp[k] << "PPPPPPPPP" << std::endl;
+            if ((res[0] == "guigui" || res[0] == "toto" )&& res[1] == "Move") {
+                std::cout << "LOOOOOOOL" << std::endl;
+                pMove(k, res[2]);
+            } else if ((res[0] == "guigui" || res[0] == "toto") && res[1] == "Shoot" &&
+                       playerList_[k]->getPlayerState() == ALIVE) {
+                pShoot(k);
                 std::cout << "Shoot" << std::endl;
             }
         }
@@ -261,10 +271,12 @@ void Game::pMove(int i, std::string direction) {
 
     //Check collision avec le plafond et mur
     if (posWanted.y - (sizeWanted.y / 2) < (0 + mapList_[currentMap_]->getCollideBot(static_cast<int>(posWanted.x)))) {
+        std::cout << "Collide Bot" << std::endl;
         return;
     }
     //Hauteur max == 24
     if (posWanted.y + (sizeWanted.y / 2) > (24 - mapList_[currentMap_]->getCollideTop(static_cast<int>(posWanted.x)))) {
+        std::cout << "Collide Top" << std::endl;
         return;
     }
 
@@ -323,6 +335,7 @@ void Game::pMove(int i, std::string direction) {
             j--;
         }
     }
+    std::cout << "PLayer " << playerList_[i]->getPseudo() << " move from " << (playerList_[i]->getPos()).x << ";" << (playerList_[i]->getPos()).y << " to " << posWanted.x << ";" << posWanted.y << std::endl;
     //Changer coordonnées
     playerList_[i]->setPos(posWanted);
 }

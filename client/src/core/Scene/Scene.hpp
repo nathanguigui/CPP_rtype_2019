@@ -59,11 +59,14 @@ namespace RType {
         void updateCurrentPlayer(const std::string& uuid, const std::string& name, ISceneManager::PlayerStatus status, int score);
 
         /// Add object to get event from Scene
-        void addEventableSceneObject(EventableSceneObject *eventableSceneObject);
-
+        void addEventableSceneObject(EventableSceneObject *eventableSceneObject) override;
 
         void updateEntity(IUdpResponse *udpResponse) override;
     private:
+
+        /// Background
+        sf::Sprite *_background;
+        sf::Texture *_texture;
 
         /// App window
         sf::RenderWindow *_app;
