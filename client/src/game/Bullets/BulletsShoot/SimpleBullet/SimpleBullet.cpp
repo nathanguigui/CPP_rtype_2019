@@ -16,7 +16,7 @@ RType::SimpleBullet::~SimpleBullet() {
 
 }
 
-sf::IntRect RType::SimpleBullet::run() {
+void RType::SimpleBullet::run() {
     if (this->step == 0) {
         this->_rectSourceSprite->left = 214;
         this->_rectSourceSprite->width = 16;
@@ -40,7 +40,6 @@ sf::IntRect RType::SimpleBullet::run() {
         _app->draw(*this->_sprite);
     }
     this->step += 1;
-    return *this->_rectSourceSprite;
 }
 
 void RType::SimpleBullet::setPosition(float x, float y) {
@@ -49,8 +48,4 @@ void RType::SimpleBullet::setPosition(float x, float y) {
 
 void RType::SimpleBullet::destroy() {
     this->~SimpleBullet();
-}
-
-sf::Texture RType::SimpleBullet::getTexture() {
-    return *this->_bulletTexture;
 }
