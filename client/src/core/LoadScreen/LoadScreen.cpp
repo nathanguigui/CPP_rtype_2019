@@ -23,7 +23,7 @@ RType::LoadScreen::LoadScreen(sf::RenderWindow *app, WindowState *state) : _app(
 
     this->redenemy = new LittleRed();
 
-    this->bullet = new SimpleBullet();
+    //this->bullet = new SimpleBullet();
     this->master = new MasterBullet();
     this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();

@@ -20,7 +20,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     this->simpleTouch = new SimpleTouch();
     this->touch = new SuperTouch();
     this->master = new MasterBullet();
-    this->bullet = new SimpleBullet();
+    //this->bullet = new SimpleBullet();
     this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();

@@ -14,6 +14,7 @@ namespace RType {
         SimpleKill();
         ~SimpleKill();
         sf::IntRect run();
+        std::string _texture = "assets/bullets/r-typesheet44.gif";
 
     private:
         int step;
