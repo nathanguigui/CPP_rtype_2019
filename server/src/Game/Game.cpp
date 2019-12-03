@@ -369,7 +369,7 @@ int Game::findMe(std::string UUID) {
 void Game::makeAction() {
     if (typeAction_ == "ADD") {
         monsterList.emplace_back(new Monster(typeActionMonster_, mUUID, posAction_, actionY_));
-        std::cout << "Monster of type " << monsterList[mUUID]->getType() << " spawned at x : " << (monsterList[mUUID]->getPos()).x << " and y : " << (monsterList[mUUID]->getPos()).y << std::endl;
+        //std::cout << "Monster of type " << monsterList[mUUID]->getType() << " spawned at x : " << (monsterList[mUUID]->getPos()).x << " and y : " << (monsterList[mUUID]->getPos()).y << std::endl;
         mUUID++;
     }
     action_ = mapList_[currentMap_]->getNextAction();

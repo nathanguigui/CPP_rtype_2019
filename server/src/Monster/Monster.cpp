@@ -43,7 +43,7 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         travel_.speed = speed;
         travel_.time = time;
         timeLastTravelChanged_ = travel_.time[currentTravel_];
-        shotSpeed_ = 700;
+        shotSpeed_ = 2000;
         timeNextShoot_ = 3000;
     }
     //BOSS ORANGE
@@ -82,7 +82,7 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         travel_.speed = speed;
         travel_.time = time;
         timeLastTravelChanged_ = travel_.time[currentTravel_];
-        shotSpeed_ = 400;
+        shotSpeed_ = 2000;
         timeNextShoot_ = 1000;
     }
     // Little Brown
@@ -121,7 +121,7 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         travel_.speed = speed;
         travel_.time = time;
         timeLastTravelChanged_ = travel_.time[currentTravel_];
-        shotSpeed_ = 400;
+        shotSpeed_ = 2000;
         timeNextShoot_ = 1000;
     }
     //BOSS VERT
@@ -160,7 +160,7 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         travel_.speed = speed;
         travel_.time = time;
         timeLastTravelChanged_ = travel_.time[currentTravel_];
-        shotSpeed_ = 400;
+        shotSpeed_ = 2000;
         timeNextShoot_ = 1000;
     }
 }
