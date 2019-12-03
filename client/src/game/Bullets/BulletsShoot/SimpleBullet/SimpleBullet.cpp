@@ -38,6 +38,7 @@ void RType::SimpleBullet::run() {
         this->_rectSourceSprite->height = 12;
         this->_sprite->setTextureRect(*this->_rectSourceSprite);
         _app->draw(*this->_sprite);
+        this->step = 1;
     }
     this->step += 1;
 }
