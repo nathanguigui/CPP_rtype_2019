@@ -304,7 +304,7 @@ std::string Monster::getTypeHexa() {
         return "0x621";
     } else if (type_ == "Grey") {
         return "0x622";
-    } else if (type == "Green") {
+    } else if (type_ == "Green") {
         return "0x623";
     }
     return "";
