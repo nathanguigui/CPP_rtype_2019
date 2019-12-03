@@ -5,17 +5,12 @@
 #include <client/src/core/WindowManager/IWindowManager.hpp>
 #include "Scene.hpp"
 
-<<<<<<< HEAD
 RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent): _app(app), _parent(parent) {
     this->_background = new sf::Sprite();
     this->_texture = new sf::Texture();
     this->_texture->loadFromFile("assets/MainMenu/logo.png");
     this->_background->setTexture(*this->_texture);
     this->_background->setPosition(0.0, 1.0);
-=======
-RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent) : _app(app), _parent(parent) {
-
->>>>>>> 2d99e34cfae4b0664ecf773a378a166c8e19b5d3
 }
 
 RType::Scene::~Scene() = default;

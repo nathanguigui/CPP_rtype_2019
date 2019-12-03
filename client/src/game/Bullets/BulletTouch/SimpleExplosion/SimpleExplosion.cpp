@@ -14,28 +14,28 @@ sf::IntRect RType::SimpleExplosion::run() {
     if (this->step == 0) {
         this->_rectSourceSprite->left = 247;
         this->_rectSourceSprite->width = 18;
-        this->_rectSourceSprite->top = 304;
-        this->_rectSourceSprite->height = 15;
+        this->_rectSourceSprite->top = 296;
+        this->_rectSourceSprite->height = 31;
     } else if (this->step == 1) {
         this->_rectSourceSprite->left = 217;
         this->_rectSourceSprite->width = 27;
-        this->_rectSourceSprite->top = 300;
-        this->_rectSourceSprite->height = 20;
+        this->_rectSourceSprite->top = 296;
+        this->_rectSourceSprite->height = 31;
     } else if (this->step == 2) {
         this->_rectSourceSprite->left = 182;
         this->_rectSourceSprite->width = 32;
         this->_rectSourceSprite->top = 296;
-        this->_rectSourceSprite->height = 28;
+        this->_rectSourceSprite->height = 31;
     } else if (this->step == 3) {
         this->_rectSourceSprite->left = 146;
         this->_rectSourceSprite->width = 32;
         this->_rectSourceSprite->top = 296;
-        this->_rectSourceSprite->height = 29;
+        this->_rectSourceSprite->height = 31;
     } else if (this->step == 4) {
         this->_rectSourceSprite->left = 72;
         this->_rectSourceSprite->width = 32;
         this->_rectSourceSprite->top = 296;
-        this->_rectSourceSprite->height = 30;
+        this->_rectSourceSprite->height = 31;
         this->step = -1;
     }
     this->step += 1;

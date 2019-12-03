@@ -12,16 +12,21 @@ namespace RType {
     using namespace RType;
     class SimpleBullet : public ISprite{
     public:
-        SimpleBullet();
+        SimpleBullet(sf::RenderWindow *app);
         ~SimpleBullet();
+        void setPosition(float x, float y);
+        sf::Vector2f getPosition() {return _sprite->getPosition();};
         sf::IntRect run();
         sf::Texture getTexture();
+        void destroy();
         std::string _texture = "assets/bullets/r-typesheet1.gif";
 
     private:
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_bulletTexture;
         int step;
+        sf::RenderWindow *_app;
+        sf::Sprite *_sprite;
     };
 }
 

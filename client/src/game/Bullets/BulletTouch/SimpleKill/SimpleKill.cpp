@@ -15,7 +15,7 @@ sf::IntRect RType::SimpleKill::run() {
             this->_rectSourceSprite->left = 129;
             this->_rectSourceSprite->width = 31;
             this->_rectSourceSprite->top = 2;
-            this->_rectSourceSprite->height = 29;
+            this->_rectSourceSprite->height = 32;
     } else if (this->step == 1) {
             this->_rectSourceSprite->left = 161;
             this->_rectSourceSprite->width = 32;
@@ -30,17 +30,17 @@ sf::IntRect RType::SimpleKill::run() {
             this->_rectSourceSprite->left = 228;
             this->_rectSourceSprite->width = 31;
             this->_rectSourceSprite->top = 2;
-            this->_rectSourceSprite->height = 30;
+            this->_rectSourceSprite->height = 32;
     } else if (this->step == 4) {
             this->_rectSourceSprite->left = 261;
             this->_rectSourceSprite->width = 31;
             this->_rectSourceSprite->top = 2;
-            this->_rectSourceSprite->height = 30;
+            this->_rectSourceSprite->height = 32;
     } else if (this->step == 5) {
             this->_rectSourceSprite->left = 294;
             this->_rectSourceSprite->width = 31;
             this->_rectSourceSprite->top = 1;
-            this->_rectSourceSprite->height = 31;
+            this->_rectSourceSprite->height = 32;
             this->step = -1;
     }
     this->step += 1;
