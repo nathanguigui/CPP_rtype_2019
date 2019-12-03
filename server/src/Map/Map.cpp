@@ -26,6 +26,15 @@ Map::Map(int level): level_(level) {
         actionList_.emplace_back("65;ADD;bédodo;10");
         actionList_.emplace_back("65;ADD;bédodo;15");
         actionList_.emplace_back("65;ADD;bédodo;20");
+        actionList_.emplace_back("75;ADD;bédodo;15");
+        actionList_.emplace_back("75;ADD;bédodo;20");
+        actionList_.emplace_back("76;ADD;bédodo;15");
+        actionList_.emplace_back("76;ADD;bédodo;10");
+        actionList_.emplace_back("77;ADD;bédodo;10");
+        actionList_.emplace_back("77;ADD;bédodo;15");
+        actionList_.emplace_back("78;ADD;bédodo;10");
+        actionList_.emplace_back("78;ADD;bédodo;15");
+        actionList_.emplace_back("85;ADD;bédodo;20");
         actionList_.emplace_back("95;ADD;Boss1;20");
         actionList_.emplace_back("97;ADD;Boss1;15");
         actionList_.emplace_back("100;END");
@@ -39,9 +48,20 @@ Map::Map(int level): level_(level) {
             collideBot_.push_back(0);
             collideTop_.push_back(0);
         }
-        actionList_.emplace_back("35;ADD;bédodo;10");
-//        actionList_.emplace_back("35;ADD;bédodo;15");
-//        actionList_.emplace_back("35;ADD;bédodo;20");
+        actionList_.emplace_back("35;ADD;Grey;10");
+        actionList_.emplace_back("35;ADD;Grey;15");
+        actionList_.emplace_back("35;ADD;Grey;20");
+        actionList_.emplace_back("40;ADD;Grey;10");
+        actionList_.emplace_back("40;ADD;Grey;15");
+        actionList_.emplace_back("40;ADD;Grey;20");
+        actionList_.emplace_back("45;ADD;Grey;10");
+        actionList_.emplace_back("45;ADD;Grey;15");
+        actionList_.emplace_back("45;ADD;Grey;20");
+        actionList_.emplace_back("65;ADD;Grey;10");
+        actionList_.emplace_back("65;ADD;Grey;15");
+        actionList_.emplace_back("65;ADD;Grey;20");
+        actionList_.emplace_back("95;ADD;Green;20");
+        actionList_.emplace_back("97;ADD;Green;15");
         actionList_.emplace_back("100;END");
     }
 }
