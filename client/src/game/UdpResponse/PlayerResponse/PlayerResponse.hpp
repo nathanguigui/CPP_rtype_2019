@@ -19,7 +19,7 @@ namespace RType {
 
         EntityType getType() override;
 
-        std::string getUuid() const;
+        std::string getUuid() const override;
 
         std::string getName() const;
 
@@ -29,9 +29,9 @@ namespace RType {
 
         int getAttackSpeed() const;
 
-        int getPosX() const;
+        int getPosX() const override;
 
-        int getPosY() const;
+        int getPosY() const override;
 
         ISceneManager::ForcePodLevel getForcePodLevel() const;
 

@@ -24,27 +24,27 @@ void RType::Player::initPlayer() {
 RType::Player::~Player() = default;
 
 void RType::Player::handleLeft() {
-    this->_sprite->move(-20, 0);
+    this->_sprite->move(-12.5, 0);
     if (this->_udpNetwork != nullptr)
         this->_udpNetwork->moveLeft();
 }
 
 void RType::Player::handleRight() {
-    this->_sprite->move(20, 0);
+    this->_sprite->move(12.5, 0);
     if (this->_udpNetwork != nullptr)
         this->_udpNetwork->moveRight();
 }
 
 void RType::Player::handleUp() {
     this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_UP));
-    this->_sprite->move(0, -20);
+    this->_sprite->move(0, -12.5);
     if (this->_udpNetwork != nullptr)
         this->_udpNetwork->moveUp();
 }
 
 void RType::Player::handleDown() {
     this->_sprite->setTextureRect(Player::getSkinRect(PLAYER_PINK, PLAYER_MAX_DOWN));
-    this->_sprite->move(0, 20);
+    this->_sprite->move(0, 12.5);
     if (this->_udpNetwork != nullptr)
         this->_udpNetwork->moveDown();
 }

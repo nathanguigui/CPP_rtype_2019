@@ -60,6 +60,9 @@ namespace RType {
 
         /// Add object to get event from Scene
         void addEventableSceneObject(EventableSceneObject *eventableSceneObject);
+
+
+        void updateEntity(IUdpResponse *udpResponse) override;
     private:
 
         /// App window

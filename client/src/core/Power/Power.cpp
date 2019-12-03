@@ -2,7 +2,7 @@
 // Created by guigui on 11/14/19.
 //
 
-#include <tgmath.h>
+#include <ctgmath>
 #include "Power.hpp"
 #include "PowerEnum.hpp"
 

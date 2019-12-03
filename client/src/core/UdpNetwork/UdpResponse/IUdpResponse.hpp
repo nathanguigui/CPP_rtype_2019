@@ -22,6 +22,12 @@ namespace RType {
 
         virtual EntityType getType() = 0;
 
+        virtual std::string getUuid() const = 0;
+
+        virtual int getPosX() const = 0;
+
+        virtual int getPosY() const = 0;
+
     };
 }
 

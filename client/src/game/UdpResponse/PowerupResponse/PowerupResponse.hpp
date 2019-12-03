@@ -18,13 +18,13 @@ namespace RType {
 
         PowerupResponse(std::string uuid, int posX, int posY, std::string powType);
 
-        const std::string &getUuid() const;
+        std::string getUuid() const override;
 
         PowerupType getType1() const;
 
-        int getPosX() const;
+        int getPosX() const override;
 
-        int getPosY() const;
+        int getPosY() const override;
 
         EntityType getType() override;
 

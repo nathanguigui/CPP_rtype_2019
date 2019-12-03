@@ -14,7 +14,7 @@ RType::PowerupResponse::PowerupResponse(std::string uuid, int posX, int posY, st
         _type = PowerupResponse::ATTACK_POW;
 }
 
-const std::string &RType::PowerupResponse::getUuid() const {
+std::string RType::PowerupResponse::getUuid() const {
     return _uuid;
 }
 

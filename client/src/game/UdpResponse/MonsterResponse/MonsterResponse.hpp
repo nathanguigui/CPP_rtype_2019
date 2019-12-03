@@ -21,15 +21,13 @@ namespace RType {
             DELTA
         };
 
-        const std::string &getUuid() const;
-
-        const std::string &getName() const;
+        std::string getUuid() const override;
 
         MonsterType getMonsterType() const;
 
-        int getPosX() const;
+        int getPosX() const override;
 
-        int getPosY() const;
+        int getPosY() const override;
 
         EntityType getType() override;
 

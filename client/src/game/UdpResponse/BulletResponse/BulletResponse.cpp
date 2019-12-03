@@ -23,7 +23,7 @@ RType::BulletResponse::BulletResponse(std::string uuid, int posX, int posY, std:
         _type = BulletResponse::BULL_SEVEN;
 }
 
-const std::string &RType::BulletResponse::getUuid() const {
+std::string RType::BulletResponse::getUuid() const {
     return _uuid;
 }
 

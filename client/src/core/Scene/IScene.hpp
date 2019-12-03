@@ -7,6 +7,7 @@
 
 #include <client/src/core/SceneObject/SceneObject.hpp>
 #include <client/src/core/EventableSceneObject/EventableSceneObject.hpp>
+#include "client/src/core/UdpNetwork/UdpResponse/IUdpResponse.hpp"
 
 namespace RType {
     using namespace RType;
@@ -17,6 +18,8 @@ namespace RType {
 
         /// Add object to get event from Scene
         virtual void addEventableSceneObject(EventableSceneObject *eventableSceneObject) = 0;
+
+        virtual void updateEntity(IUdpResponse *udpResponse) = 0;
     };
 }
 

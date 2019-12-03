@@ -36,8 +36,10 @@ void RType::SceneManager::updateMap(std::string mapId, std::string mapPosX) {
 }
 
 void RType::SceneManager::updateEntity(RType::IUdpResponse *udpResponse) {
+    std::cout << "update entity \r\n";
     if (udpResponse->getType() == IUdpResponse::EntityType::PLAYER)
         this->updatePlayer((PlayerResponse*)udpResponse);
+
 }
 
 void RType::SceneManager::updatePlayer(RType::PlayerResponse *response) {

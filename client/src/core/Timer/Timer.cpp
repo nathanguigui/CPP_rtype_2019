@@ -27,7 +27,7 @@ void RType::Timer::refresh() {
         this->refreshEvent();
     if (needRefresh(2, TimersType::TCP_NETWORK))
         this->refreshTcpNetwork();
-    if (needRefresh(15, TimersType::UDP_NETWORK))
+    if (needRefresh(40, TimersType::UDP_NETWORK))
         this->refreshUdpNetwork();
 }
 

@@ -3,6 +3,7 @@
 //
 
 #include <client/src/core/WindowManager/IWindowManager.hpp>
+#include <client/src/game/Bullets/BulletsShoot/SimpleBullet/SimpleBullet.h>
 #include "Scene.hpp"
 
 RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent) : _app(app), _parent(parent) {
@@ -78,4 +79,23 @@ void RType::Scene::updateCurrentPlayer(const std::string& uuid, const std::strin
 void RType::Scene::updateCurrentPlayer(const std::string& uuid, const std::string& name, RType::ISceneManager::PlayerStatus status,
                                        int score) {
 
+}
+
+void RType::Scene::updateEntity(RType::IUdpResponse *udpResponse) {
+    /// Entity exist
+    if (this->_sceneObjects.find(udpResponse->getUuid()) != this->_sceneObjects.end())
+        this->_sceneObjects[udpResponse->getUuid()]->setPosition(sf::Vector2f(udpResponse->getPosX() / 4,udpResponse->getPosY() / 4));
+    else { /// Entity doesn't exist
+        switch (udpResponse->getType()) {
+            case IUdpResponse::PLAYER:
+                break;
+            case IUdpResponse::MONSTER:
+                break;
+            case IUdpResponse::BULLET:
+                auto bull = new SimpleBullet
+                break;
+            case IUdpResponse::POWERUP:
+                break;
+        }
+    }
 }

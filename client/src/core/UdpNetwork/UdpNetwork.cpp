@@ -54,7 +54,6 @@ void RType::UdpNetwork::parseMultiplePacket(char *packet, std::size_t packetSize
 }
 
 void RType::UdpNetwork::parsePacket(std::string packet) {
-    std::cout << "parsing a packet\r\n";
     std::vector<std::string> argv;
     boost::split(argv, packet, boost::is_any_of(";"));
     if (argv.empty())
@@ -88,28 +87,28 @@ void RType::UdpNetwork::parsePacket(std::string packet) {
             }
         }
         /// Monster
-        if (std::strncmp(argv[0].c_str(), "0x656", 5) == 0 && argv.size() > 5) {
+        if (std::strncmp(argv[1].c_str(), "0x656", 5) == 0 && argv.size() > 5) {
             try {
-                int posX = std::stoi(argv[3]);
-                int posY = std::stoi(argv[4]);
+                int posX = std::stoi(argv[4]);
+                int posY = std::stoi(argv[5]);
                 auto response = new MonsterResponse(argv[2], posX, posY, argv[3]);
                 ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
             } catch (std::invalid_argument const &e) {}
         }
         /// Bullet
-        if (std::strncmp(argv[0].c_str(), "0x657", 5) == 0 && argv.size() > 5) {
+        if (std::strncmp(argv[1].c_str(), "0x657", 5) == 0 && argv.size() > 5) {
             try {
-                int posX = std::stoi(argv[3]);
-                int posY = std::stoi(argv[4]);
+                int posX = std::stoi(argv[4]);
+                int posY = std::stoi(argv[5]);
                 auto response = new BulletResponse(argv[2], posX, posY, argv[3]);
                 ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
             } catch (std::invalid_argument const &e) {}
         }
         /// Powerup
-        if (std::strncmp(argv[0].c_str(), "0x658", 5) == 0 && argv.size() > 5) {
+        if (std::strncmp(argv[1].c_str(), "0x658", 5) == 0 && argv.size() > 5) {
             try {
-                int posX = std::stoi(argv[3]);
-                int posY = std::stoi(argv[4]);
+                int posX = std::stoi(argv[4]);
+                int posY = std::stoi(argv[5]);
                 auto response = new PowerupResponse(argv[2], posX, posY, argv[3]);
                 ((ISceneManager*)this->_parent->getSceneManager())->updateEntity(response);
             } catch (std::invalid_argument const &e) {}
@@ -168,30 +167,30 @@ void RType::UdpNetwork::setNeedUpdate(bool needUpdate) {
 
 void RType::UdpNetwork::moveLeft() {
     std::stringstream ss;
-    ss << *this->_settings->getPlayerName() << " Move NORTH ;\r\n";
-    this->sendData(stringToHex(ss.str()));
+    ss << *this->_settings->getPlayerName() << " Move WEST ;\r\n";
+    this->sendData(ss.str());
 }
 
 void RType::UdpNetwork::moveRight() {
     std::stringstream ss;
-    ss << *this->_settings->getPlayerName() << " Move RIGHT ;\r\n";
-    this->sendData(stringToHex(ss.str()));
+    ss << *this->_settings->getPlayerName() << " Move EAST ;\r\n";
+    this->sendData(ss.str());
 }
 
 void RType::UdpNetwork::moveUp() {
     std::stringstream ss;
-    ss << *this->_settings->getPlayerName() << " Move UP ;\r\n";
-    this->sendData(stringToHex(ss.str()));
+    ss << *this->_settings->getPlayerName() << " Move SOUTH ;\r\n";
+    this->sendData(ss.str());
 }
 
 void RType::UdpNetwork::moveDown() {
     std::stringstream ss;
-    ss << *this->_settings->getPlayerName() << " Move DOWN ;\r\n";
-    this->sendData(stringToHex(ss.str()));
+    ss << *this->_settings->getPlayerName() << " Move NORTH ;\r\n";
+    this->sendData(ss.str());
 }
 
 void RType::UdpNetwork::shoot() {
     std::stringstream ss;
     ss << *this->_settings->getPlayerName() << " Shoot ;\r\n";
-    this->sendData(stringToHex(ss.str()));
+    this->sendData(ss.str());
 }

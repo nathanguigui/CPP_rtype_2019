@@ -17,7 +17,7 @@ RType::MonsterResponse::MonsterResponse(std::string uuid, int posX, int posY, st
         _type = MonsterResponse::DELTA;
 }
 
-const std::string &RType::MonsterResponse::getUuid() const {
+std::string RType::MonsterResponse::getUuid() const {
     return _uuid;
 }
 
