@@ -25,7 +25,17 @@ void Server_UDP::start_accept() {
     socket_.async_receive(boost::asio::buffer(data, max_length), boost::bind(&Server_UDP::handle_accept, this, new_connection, boost::asio::placeholders::error));
 }
 
+std::vector<std::string> Server_UDP::remove_endline_on_all_line() {
+    std::vector<std::string> buff;
+    for (int i = 0; i < username_.size(); i++) {
+        buff.push_back(username_[i].erase(username_[i].size() - 1));
+    }
+    return buff;
+}
+
 void Server_UDP::start_game() {
+    inGame = true;
+    username_ = remove_endline_on_all_line();
     cout << "Start New Game and set game start\n";
     Game game(username_);
     setGame(game);
@@ -37,11 +47,6 @@ void Server_UDP::start_game() {
 void Server_UDP::update_game(std::string received) {
     std::string new_data;
     cout << "WHat i have received-> "<< received << endl;
-    if (received != " ") {
-        cout << data << " <- my data\n";
-        new_data = hex_to_string(received);
-        cout << new_data << " <- my data\n";
-    }
     end = std::chrono::system_clock::now();
     long elapsed_time = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     std::string buffer;
@@ -114,7 +119,7 @@ void Server_UDP::handle_accept(udp_session::pointer new_connection, const boost:
         if (session_manager_.sessions_.size() < 4 && isStarted == false) {
             session_manager_.start(new_connection);
         }
-    } if (session_manager_.sessions_.size() >= 4 || isStarted == true) {
+    } if (session_manager_.sessions_.size() >= 4 || (isStarted == true && inGame != true)) {
         start_game();
     }
     start_accept();
