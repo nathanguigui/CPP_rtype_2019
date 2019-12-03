@@ -27,7 +27,7 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
 
     //this->bullet = new SimpleBullet();
     this->master = new MasterBullet();
-    this->super1 = new SuperBullet1();
+    //this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
