@@ -8,10 +8,10 @@
 #include <SFML/Graphics.hpp>
 #include <client/src/core/SceneObject/SceneObject.hpp>
 #include "../../../AnimateSprite/ISprite.hpp"
-
+ 
 namespace RType {
     using namespace RType;
-    class SimpleBullet : public SceneObject, public ISprite{
+    class SimpleBullet : public SceneObject {
     public:
         explicit SimpleBullet(sf::RenderWindow *app);
         ~SimpleBullet();
@@ -20,22 +20,18 @@ namespace RType {
 
         sf::Vector2f getPosition() override {return _sprite->getPosition();};
 
-        sf::IntRect run();
-
-        sf::Texture getTexture();
+        void run();
 
         void draw() override ;
 
         void destroy() override;
 
-        std::string _texture = "assets/bullets/r-typesheet1.gif";
-
     private:
-        sf::IntRect *_rectSourceSprite;
+        sf::IntRect *_rectSourceSprite{};
         sf::Texture *_bulletTexture;
-        int step;
         sf::RenderWindow *_app;
         sf::Sprite *_sprite;
+        int step;
     };
 }
 

@@ -3,3 +3,8 @@ build
 html
 latex
 stats
+rtype-client
+rtype_server
+r-type_client
+r-type_server
+rtype_client

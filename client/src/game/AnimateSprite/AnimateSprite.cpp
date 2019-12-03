@@ -36,7 +36,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
 
     /// bullets
     this->sprites["MasterBullet"] = this->master;
-    this->sprites["SimpleBullet"] = this->bullet;
+    //this->sprites["SimpleBullet"] = this->bullet;
     this->sprites["SuperBullet1"] = this->super1;
     this->sprites["SuperBullet2"] = this->super2;
     this->sprites["SuperBullet3"] = this->super3;

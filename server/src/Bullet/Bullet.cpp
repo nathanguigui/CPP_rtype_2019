@@ -6,26 +6,29 @@
 
 Bullet::Bullet(BulletType type, int UUID, std::string from, Teams teams, Point<float> pos): type_(type), UUID_(UUID), from_(from), team_(teams), pos_(pos) {
     if (type == NORMAL && teams == Players) {
+        //Simple Bullet
         damage_ = 20;
         direction_ = {3,0};
-        size_ = {0.3, 0.3};
+        size_ = {0.64, 0.48};
     }
     else if (type == NORMAL && teams == Monsters) {
+        //Simple Bullet
         damage_ = 30;
         direction_ = {-3,0};
-        size_ = {0.3, 0.2};
+        size_ = {0.64, 0.48};
     } else if (type == FORCEPODONE && teams == Players) {
+        // bullet2
         damage_ = 40;
         direction_ = {4,0};
-        size_ = {0.4, 0.4};
+        size_ = {1.92, 0.56};
     } else if (type == FORCEPODTWO && teams == Players) {
         damage_ = 60;
         direction_ = {4,0};
-        size_ = {0.5, 0.5};
+        size_ = {3.2, 0.64};
     } else if (type == BOSSONE && teams == Monsters) {
         damage_ = 60;
         direction_ = {4.5, 0};
-        size_ = {0.6, 0.6};
+        size_ = {2.46, 0.56};
     }
     hit = false;
 }
