@@ -342,7 +342,7 @@ void Game::pMove(int i, std::string direction) {
 
 void Game::pShoot(int i) {
     if (playerList_[i]->getLastShot() >= playerList_[i]->getShotSpeed()) {
-        bulletList_.emplace_back(new Bullet(playerList_[i]->getBulletType(), bID_,playerList_[i]->getPseudo() , Teams::Players, {(playerList_[i]->getPos()).x + ((playerList_[i]->getSize()).x / 2) + 0.6f,(playerList_[i]->getPos()).y}));
+        bulletList_.emplace_back(new Bullet(playerList_[i]->getBulletType(), bID_,playerList_[i]->getPseudo() , Teams::Players, {(playerList_[i]->getPos()).x + ((playerList_[i]->getSize()).x) + 1.0f,(playerList_[i]->getPos()).y}));
         bID_++;
         playerList_[i]->setLastShot(0);
     }
