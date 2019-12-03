@@ -21,7 +21,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     this->touch = new SuperTouch();
     this->master = new MasterBullet();
     //this->bullet = new SimpleBullet();
-    this->super1 = new SuperBullet1();
+    //this->super1 = new SuperBullet1();
     this->super2 = new SuperBullet2();
     this->super3 = new SuperBullet3();
     this->bomb = new SimpleBomb();
@@ -37,7 +37,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     /// bullets
     this->sprites["MasterBullet"] = this->master;
     //this->sprites["SimpleBullet"] = this->bullet;
-    this->sprites["SuperBullet1"] = this->super1;
+    //this->sprites["SuperBullet1"] = this->super1;
     this->sprites["SuperBullet2"] = this->super2;
     this->sprites["SuperBullet3"] = this->super3;
 
