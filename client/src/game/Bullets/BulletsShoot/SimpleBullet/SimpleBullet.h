@@ -7,7 +7,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "../../../AnimateSprite/ISprite.hpp"
-
+ 
 namespace RType {
     using namespace RType;
     class SimpleBullet : public ISprite{

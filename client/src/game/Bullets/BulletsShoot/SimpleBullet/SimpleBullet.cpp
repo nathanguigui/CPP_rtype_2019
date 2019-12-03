@@ -7,12 +7,13 @@
 RType::SimpleBullet::SimpleBullet(sf::RenderWindow *app): step(0), _app(app) {
     this->_bulletTexture = new sf::Texture();
     this->_bulletTexture->loadFromFile("assets/bullets/r-typesheet1.gif");
+    this->_sprite = new sf::Sprite();
     this->_sprite->setTexture(*this->_bulletTexture);
     this->_rectSourceSprite = new sf::IntRect();
 }
 
 RType::SimpleBullet::~SimpleBullet() {
-    
+
 }
 
 sf::IntRect RType::SimpleBullet::run() {
