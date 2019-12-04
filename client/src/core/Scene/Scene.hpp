@@ -62,6 +62,9 @@ namespace RType {
         void addEventableSceneObject(EventableSceneObject *eventableSceneObject) override;
 
         void updateEntity(IUdpResponse *udpResponse) override;
+
+        void updateBackgroundPos(int posX);
+
     private:
 
         /// Background
@@ -81,6 +84,16 @@ namespace RType {
         Player *_player{nullptr};
 
         IWindowManager *_parent;
+
+        sf::Font *_font;
+
+        sf::Text *_playerLife;
+
+        sf::Text *_playerScore;
+
+        sf::Texture *_backgroundTexture;
+
+        sf::Sprite *_backgroundSprite;
     };
 }
 

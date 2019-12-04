@@ -31,7 +31,9 @@ void RType::SceneManager::drawCurrentScene() {
 }
 
 void RType::SceneManager::updateMap(std::string mapId, std::string mapPosX) {
-    // TODO handle update map
+    try {
+        this->_scenes[*this->_currentScene]->updateBackgroundPos(std::stoi(mapPosX));
+    } catch (std::invalid_argument const &e) {}
     std::cout << "update map pos to " << mapId << " pos: " << mapPosX << "\r\n";
 }
 
