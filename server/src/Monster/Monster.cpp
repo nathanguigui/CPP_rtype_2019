@@ -21,7 +21,7 @@ Monster::Monster(std::string type, int nbID, float x, float y): type_(type) {
         bulletType_ = NORMAL;
         score_ = 200;
         powerUpStyle_ = HEALTH;
-        puProba = 1;
+        puProba = 7;
         // Vecteurs pour le patterne de déplacement
         std::vector<Point<float> *> move;
         std::vector<int> speed;

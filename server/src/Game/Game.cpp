@@ -91,12 +91,9 @@ std::vector<std::string> Game::Update(std::vector<std::string> commands, float t
         res.clear();
         boost::split(res, commands[i], boost::is_any_of(";"));
         for (int k = 0; (unsigned long) k < playerList_.size(); k++) {
-            std::cout << "Valeur de J :" << k << std::endl;
-            std::cout << "Color : " << *tmp[k] << "PPPPPPPPP" << std::endl;
-            if ((res[0] == "guigui" || res[0] == "toto" )&& res[1] == "Move") {
-                std::cout << "LOOOOOOOL" << std::endl;
+            if ((res[0] == "guigui" || res[0] == "toto" || res[0] == "perceval" || res[0] == "comte")&& res[1] == "Move") {
                 pMove(k, res[2]);
-            } else if ((res[0] == "guigui" || res[0] == "toto") && res[1] == "Shoot" &&
+            } else if ((res[0] == "guigui" || res[0] == "toto" || res[0] == "perceval" || res[0] == "comte") && res[1] == "Shoot" &&
                        playerList_[k]->getPlayerState() == ALIVE) {
                 pShoot(k);
                 std::cout << "Shoot" << std::endl;
