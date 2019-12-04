@@ -6,7 +6,7 @@
 
 RType::OrangeBoss::OrangeBoss(sf::RenderWindow *app): step(0), _app(app) {
     this->_bulletTexture = new sf::Texture();
-    this->_bulletTexture->loadFromFile("assets/bullets/r-typesheet23.gif");
+    this->_bulletTexture->loadFromFile("assets/uncut_sprites:r-typesheet14.gif");
     this->_sprite = new sf::Sprite();
     this->_sprite->setTexture(*this->_bulletTexture);
     this->_rectSourceSprite = new sf::IntRect();
