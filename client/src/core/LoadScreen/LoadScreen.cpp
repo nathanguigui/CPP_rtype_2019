@@ -17,18 +17,18 @@ RType::LoadScreen::LoadScreen(sf::RenderWindow *app, WindowState *state) : _app(
     this->_splash->setTexture(*this->_splashTexture);
 
     this->boum = new SimpleExplosion();
-    this->kill = new SimpleKill();
+    //this->kill = new SimpleKill();
     this->touch = new SuperTouch();
     this->simpleTouch = new SimpleTouch();
 
-    this->redenemy = new LittleRed();
+    //this->redenemy = new LittleRed();
 
     //this->bullet = new SimpleBullet();
-    this->master = new MasterBullet();
+    //this->master = new MasterBullet();
     //this->super1 = new SuperBullet1();
-    this->super2 = new SuperBullet2();
-    this->super3 = new SuperBullet3();
-    this->bomb = new SimpleBomb();
+    //this->super2 = new SuperBullet2();
+    //this->super3 = new SuperBullet3();
+    //this->bomb = new SimpleBomb();
 
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
 

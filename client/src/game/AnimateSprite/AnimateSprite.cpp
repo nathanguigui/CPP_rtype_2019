@@ -26,7 +26,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     //this->super3 = new SuperBullet3();
     //this->bomb = new SimpleBomb();
 
-    this->redenemy = new LittleRed();
+    //this->redenemy = new LittleRed();
 
     /// touch and kill
     this->sprites["SimpleExplosion"] = this->boum;
@@ -42,7 +42,7 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     //this->sprites["SuperBullet3"] = this->super3;
 
     /// enemies
-    this->sprites["LittleRed"] = this->redenemy;
+    //this->sprites["LittleRed"] = this->redenemy;
 
 }
 

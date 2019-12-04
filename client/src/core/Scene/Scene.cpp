@@ -8,6 +8,17 @@
 #include <client/src/game/Bullets/BulletsShoot/SuperBullet1/SuperBullet1.h>
 #include <client/src/core/Gui/Tools.hpp>
 #include <sstream>
+#include <client/src/game/UdpResponse/MonsterResponse/MonsterResponse.hpp>
+#include <client/src/game/enemies/GreenBoss/GreenBoss.h>
+#include <client/src/game/enemies/LittleBrown/LittleBrown.h>
+#include <client/src/game/enemies/LittleRed/LittleRed.h>
+#include <client/src/game/enemies/OrangeBoss/OrangeBoss.h>
+#include <client/src/game/Bullets/BulletsShoot/SuperBullet2/SuperBullet2.h>
+#include <client/src/game/Bullets/BulletsShoot/SuperBullet3/SuperBullet3.h>
+#include <client/src/game/Bullets/BulletsShoot/MasterBullet/MasterBullet.h>
+#include <client/src/game/PowerUpSprite/Boost/Boost.h>
+#include <client/src/game/UdpResponse/PowerupResponse/PowerupResponse.hpp>
+#include <client/src/game/PowerUpSprite/Heal/Heal.h>
 #include "Scene.hpp"
 
 RType::Scene::Scene(sf::RenderWindow *app, IWindowManager *parent): _app(app), _parent(parent) {
@@ -120,13 +131,44 @@ void RType::Scene::updateEntity(RType::IUdpResponse *udpResponse) {
         std::cout << "creating entity\r\n";
         SimpleBullet *pSimpleBullet = nullptr;
         SuperBullet1 *superBullet1 = nullptr;
+        SuperBullet2 *superBullet2 = nullptr;
+        SuperBullet3 *superBullet3 = nullptr;
+        MasterBullet *masterBullet = nullptr;
+        Boost *boost1 = nullptr;
+        Heal *heal = nullptr;
+        GreenBoss *greenBoss = nullptr;
+        LittleBrown *littleBrown = nullptr;
+        LittleRed *littleRed = nullptr;
+        OrangeBoss *orangeBoss = nullptr;
+
         switch (udpResponse->getType()) {
             case IUdpResponse::PLAYER:
                 break;
             case IUdpResponse::MONSTER:
+                switch (((MonsterResponse*)udpResponse)->getMonsterType()) {
+                    case MonsterResponse::ALPHA:
+                        littleRed = new LittleRed(this->_app);
+                        littleRed->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), littleRed});
+                        break;
+                    case MonsterResponse::BETTA:
+                        littleBrown = new LittleBrown(this->_app);
+                        littleBrown->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), littleBrown});
+                        break;
+                    case MonsterResponse::GAMMA:
+                        orangeBoss = new OrangeBoss(this->_app);
+                        orangeBoss->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), orangeBoss});
+                        break;
+                    case MonsterResponse::DELTA:
+                        greenBoss = new GreenBoss(this->_app);
+                        greenBoss->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), greenBoss});
+                        break;
+                }
                 break;
             case IUdpResponse::BULLET:
-                std::cout << "creating bullet\r\n";
                 switch (((BulletResponse*)udpResponse)->getBulletType()) {
                     case BulletResponse::BULL_ONE:
                         pSimpleBullet = new SimpleBullet(this->_app);
@@ -134,38 +176,50 @@ void RType::Scene::updateEntity(RType::IUdpResponse *udpResponse) {
                         this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
                         break;
                     case BulletResponse::BULL_TWO:
+                        pSimpleBullet = new SimpleBullet(this->_app);
+                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
+                        break;
+                    case BulletResponse::BULL_THREE:
                         superBullet1 = new SuperBullet1(this->_app);
                         superBullet1->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
                         this->_sceneObjects.insert({udpResponse->getUuid(), superBullet1});
                         break;
-                    case BulletResponse::BULL_THREE:
-                        pSimpleBullet = new SimpleBullet(this->_app);
-                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
-                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
-                        break;
                     case BulletResponse::BULL_FOUR:
-                        pSimpleBullet = new SimpleBullet(this->_app);
-                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
-                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
+                        superBullet2 = new SuperBullet2(this->_app);
+                        superBullet2->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), superBullet2});
                         break;
                     case BulletResponse::BULL_FIVE:
-                        pSimpleBullet = new SimpleBullet(this->_app);
-                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
-                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
+                        superBullet3 = new SuperBullet3(this->_app);
+                        superBullet3->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), superBullet3});
                         break;
                     case BulletResponse::BULL_SIX:
-                        pSimpleBullet = new SimpleBullet(this->_app);
-                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
-                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
+                        superBullet2 = new SuperBullet2(this->_app);
+                        superBullet2->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), superBullet2});
                         break;
                     case BulletResponse::BULL_SEVEN:
-                        pSimpleBullet = new SimpleBullet(this->_app);
-                        pSimpleBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
-                        this->_sceneObjects.insert({udpResponse->getUuid(), pSimpleBullet});
+                        masterBullet = new MasterBullet(this->_app);
+                        masterBullet->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), masterBullet});
                         break;
                 }
                 break;
             case IUdpResponse::POWERUP:
+                switch (((PowerupResponse *)udpResponse)->getType1()) {
+                    case PowerupResponse::HEALTH_POW:
+                        heal = new Heal(this->_app);
+                        heal->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), heal});
+                        break;
+                    case PowerupResponse::ATTACK_POW:
+                        boost1 = new Boost(this->_app);
+                        boost1->setPosition({static_cast<float>(udpResponse->getPosX() / 4), static_cast<float>(udpResponse->getPosY() / 4)});
+                        this->_sceneObjects.insert({udpResponse->getUuid(), boost1});
+                        break;
+                }
                 break;
         }
     }
