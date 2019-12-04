@@ -14,14 +14,14 @@ RType::SuperBullet3::SuperBullet3(sf::RenderWindow *app): step(0), _app(app) {
 
 void RType::SuperBullet3::run() {
     if (this->step == 0) {
-        this->_rectSourceSprite->left = 136;
+        this->_rectSourceSprite->left = 267;
         this->_rectSourceSprite->width = 64;
         this->_rectSourceSprite->top = 154;
         this->_rectSourceSprite->height = 14;
         this->_sprite->setTextureRect(*this->_rectSourceSprite);
         _app->draw(*this->_sprite);
     } else if (this->step == 1) {
-        this->_rectSourceSprite->left = 201;
+        this->_rectSourceSprite->left = 332;
         this->_rectSourceSprite->width = 64;
         this->_rectSourceSprite->top = 154;
         this->_rectSourceSprite->height = 14;

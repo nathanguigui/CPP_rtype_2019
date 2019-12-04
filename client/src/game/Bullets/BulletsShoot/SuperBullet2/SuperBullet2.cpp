@@ -18,14 +18,14 @@ RType::SuperBullet2::~SuperBullet2() {
 
 void RType::SuperBullet2::run() {
     if (this->step == 0) {
-        this->_rectSourceSprite->left = 232;
+        this->_rectSourceSprite->left = 267;
         this->_rectSourceSprite->width = 48;
         this->_rectSourceSprite->top = 136;
         this->_rectSourceSprite->height = 14;
         this->_sprite->setTextureRect(*this->_rectSourceSprite);
         _app->draw(*this->_sprite);
     } else if (this->step == 1) {
-        this->_rectSourceSprite->left = 168;
+        this->_rectSourceSprite->left = 317;
         this->_rectSourceSprite->width = 48;
         this->_rectSourceSprite->top = 136;
         this->_rectSourceSprite->height = 14;

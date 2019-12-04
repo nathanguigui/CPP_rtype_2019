@@ -18,14 +18,14 @@ RType::MasterBullet::~MasterBullet() {
 
 void RType::MasterBullet::run() {
     if (this->step == 0) {
-        this->_rectSourceSprite->left = 104;
+        this->_rectSourceSprite->left = 267;
         this->_rectSourceSprite->width = 80;
         this->_rectSourceSprite->top = 170;
         this->_rectSourceSprite->height = 16;
         this->_sprite->setTextureRect(*this->_rectSourceSprite);
         _app->draw(*this->_sprite);
     } else if (this->step == 1) {
-        this->_rectSourceSprite->left = 185;
+        this->_rectSourceSprite->left = 348;
         this->_rectSourceSprite->width = 80;
         this->_rectSourceSprite->top = 170;
         this->_rectSourceSprite->height = 16;
