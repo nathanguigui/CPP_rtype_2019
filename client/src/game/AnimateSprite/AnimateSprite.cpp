@@ -16,15 +16,15 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
 
     /// sprites
     this->boum = new SimpleExplosion();
-    this->kill = new SimpleKill();
+    //this->kill = new SimpleKill();
     this->simpleTouch = new SimpleTouch();
     this->touch = new SuperTouch();
-    this->master = new MasterBullet();
+    //this->master = new MasterBullet();
     //this->bullet = new SimpleBullet();
     //this->super1 = new SuperBullet1();
-    this->super2 = new SuperBullet2();
-    this->super3 = new SuperBullet3();
-    this->bomb = new SimpleBomb();
+    //this->super2 = new SuperBullet2();
+    //this->super3 = new SuperBullet3();
+    //this->bomb = new SimpleBomb();
 
     this->redenemy = new LittleRed();
 
@@ -32,14 +32,14 @@ RType::AnimateSprite::AnimateSprite(sf::RenderWindow *app, WindowState *state) :
     this->sprites["SimpleExplosion"] = this->boum;
     this->sprites["SimpleTouch"] = this->simpleTouch;
     this->sprites["SuperTouch"] = this->touch;
-    this->sprites["SimpleBomb"] = this->bomb;
+    //this->sprites["SimpleBomb"] = this->bomb;
 
     /// bullets
-    this->sprites["MasterBullet"] = this->master;
+    //this->sprites["MasterBullet"] = this->master;
     //this->sprites["SimpleBullet"] = this->bullet;
     //this->sprites["SuperBullet1"] = this->super1;
-    this->sprites["SuperBullet2"] = this->super2;
-    this->sprites["SuperBullet3"] = this->super3;
+    //this->sprites["SuperBullet2"] = this->super2;
+    //this->sprites["SuperBullet3"] = this->super3;
 
     /// enemies
     this->sprites["LittleRed"] = this->redenemy;

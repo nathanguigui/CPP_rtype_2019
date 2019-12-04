@@ -6,21 +6,26 @@
 #define CPP_RTYPE_2019_HEAL_H
 
 #include <SFML/Graphics.hpp>
+#include <client/src/core/SceneObject/SceneObject.hpp>
 #include "../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class Heal : public ISprite {
+    class Heal : public SceneObject {
     public:
-        Heal();
+        explicit Heal(sf::RenderWindow *app);
         ~Heal();
-        sf::IntRect run();
-        sf::Texture getTexture();
-        std::string _texture = "assets/uncun_sprites/r-typesheet2.gif";
+        void setPosition(sf::Vector2f pos) override;
+        sf::Vector2f getPosition() override {return _sprite->getPosition();};
+        void run();
+        void draw() override;
+        void destroy() override;
 
     private:
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_bulletTexture;
+        sf::RenderWindow *_app;
+        sf::Sprite *_sprite;
         int step;
     };
 }

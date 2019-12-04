@@ -6,21 +6,26 @@
 #define CPP_RTYPE_2019_SUPERBULLET2_H
 
 #include <SFML/Graphics.hpp>
+#include <client/src/core/SceneObject/SceneObject.hpp>
 #include "../../../AnimateSprite/ISprite.hpp"
 
 namespace RType {
     using namespace RType;
-    class SuperBullet2 : public ISprite {
+    class SuperBullet2 : public SceneObject {
     public:
-        SuperBullet2();
+        explicit SuperBullet2(sf::RenderWindow *app);
         ~SuperBullet2();
-        sf::IntRect run();
-        sf::Texture getTexture();
-        std::string _texture = "assets/bullets/r-typesheet1.gif";
+        void setPosition(sf::Vector2f pos) override;
+        sf::Vector2f getPosition() override {return _sprite->getPosition();};
+        void run();
+        void draw() override;
+        void destroy() override;
 
     private:
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_bulletTexture;
+        sf::RenderWindow *_app;
+        sf::Sprite *_sprite;
         int step;
     };
 }

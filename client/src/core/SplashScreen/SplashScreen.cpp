@@ -19,7 +19,7 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     this->_background->setTexture(*this->_backgroundTexture);
     this->_splash->setTexture(*this->_splashTexture);
     this->boum = new SimpleExplosion();
-    this->kill = new SimpleKill();
+    //this->kill = new SimpleKill();
     this->touch = new SuperTouch();
     this->simpleTouch = new SimpleTouch();
 
@@ -28,9 +28,9 @@ RType::SplashScreen::SplashScreen(sf::RenderWindow *app, WindowState *state) : _
     //this->bullet = new SimpleBullet();
     this->master = new MasterBullet();
     //this->super1 = new SuperBullet1();
-    this->super2 = new SuperBullet2();
-    this->super3 = new SuperBullet3();
-    this->bomb = new SimpleBomb();
+    //this->super2 = new SuperBullet2();
+    //this->super3 = new SuperBullet3();
+    //this->bomb = new SimpleBomb();
 
     //this->_splash->setTextureRect(*this->_rectSourceSprite);
 

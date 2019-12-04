@@ -6,20 +6,27 @@
 #define CPP_RTYPE_2019_SIMPLEKILL_H
 
 #include <SFML/Graphics.hpp>
+#include <client/src/core/SceneObject/SceneObject.hpp>
+
 
 namespace RType {
     using namespace RType;
-    class SimpleKill {
+    class SimpleKill : public SceneObject {
     public:
-        SimpleKill();
+        explicit SimpleKill(sf::RenderWindow *app);
         ~SimpleKill();
-        sf::IntRect run();
-        std::string _texture = "assets/bullets/r-typesheet44.gif";
+        void setPosition(sf::Vector2f pos) override;
+        sf::Vector2f getPosition() override {return _sprite->getPosition();};
+        void run();
+        void draw() override;
+        void destroy() override;
 
     private:
         int step;
         sf::IntRect *_rectSourceSprite;
         sf::Texture *_killTexture;
+        sf::RenderWindow *_app;
+        sf::Sprite *_sprite;
     };
 }
 
